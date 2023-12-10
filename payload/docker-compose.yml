@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  payload:
+    image: node:18-alpine
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    working_dir: /home/node/app/
+    command: sh -c "yarn install && yarn dev"
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'postgres'  # Replace with your desired user name
+      POSTGRES_PASSWORD: 'postgres'  # Replace with your desired password
+      POSTGRES_DB: 'astrowind'  # Replace with your desired database name
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  pgdata:
+  node_modules:
