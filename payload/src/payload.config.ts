@@ -6,14 +6,15 @@ import { payloadCloud } from '@payloadcms/plugin-cloud'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import { buildConfig } from 'payload/config'
 
+import formBuilder from "@payloadcms/plugin-form-builder"
 import { Events } from './collections/Events'
-import { FormSubmissions } from './collections/FormSubmissions'
-import { Forms } from './collections/Forms'
 import { Media } from './collections/Media'
 import { PostCategories } from './collections/PostCategories'
 import { Posts } from './collections/Posts'
 import SEO from './collections/SEO'
 import Users from './collections/Users'
+import formBuilderConfig from './formBuilder.config'
+
 
 export default buildConfig({
   admin: {
@@ -26,14 +27,14 @@ export default buildConfig({
     // },
   },
   editor: slateEditor({}),
-  collections: [Users, Media, Posts, PostCategories, Events, Forms, FormSubmissions, SEO],
+  collections: [Users, Media, Posts, PostCategories, Events, SEO],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud()],
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig)],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,
