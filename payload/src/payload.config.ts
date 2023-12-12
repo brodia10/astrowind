@@ -15,7 +15,7 @@ import { Media } from './collections/Media'
 import { PostCategories } from './collections/PostCategories'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
-import formBuilderConfig from './plugins/formBuilder'
+import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
