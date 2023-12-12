@@ -1580,6 +1580,11 @@
     deepmerge "^4.2.2"
     escape-html "^1.0.3"
 
+"@payloadcms/plugin-seo@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@payloadcms/plugin-seo/-/plugin-seo-1.0.15.tgz#ca794897d1e8c3291a8dd74339b7f28f10bba815"
+  integrity sha512-7nU0DD3UZOOHsV2UIkOWL2JNCX+u1WNbEvZOiGpO6lB6YekuVIMqxHKbTdVR73UeW44lApvS9LTgif3XLQ5HDA==
+
 "@payloadcms/richtext-slate@^1.0.0":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@payloadcms/richtext-slate/-/richtext-slate-1.3.1.tgz#049468143845fb0dd0aafaeb428bbb1d8a863e70"

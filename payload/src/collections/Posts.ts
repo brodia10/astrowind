@@ -24,11 +24,5 @@ export const Posts: CollectionConfig = {
             type: 'relationship',
             relationTo: 'postCategories',
         },
-        {
-            name: 'seo',
-            type: 'relationship',
-            relationTo: 'seo',
-            label: 'SEO',
-        },
     ],
 };
