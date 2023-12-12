@@ -26,6 +26,10 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    livePreview: {
+      url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
+      collections: ['pages', 'posts'], // The collections to enable Live Preview on (globals are also possible)
+    },
     // meta: {
     //   titleSuffix: '',
     //   favicon: '/assets/favicon.svg',
