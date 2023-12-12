@@ -8,13 +8,15 @@ import { buildConfig } from 'payload/config'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 // import { postgresAdapter } from '@payloadcms/db-postgres'
 import formBuilder from "@payloadcms/plugin-form-builder"
+import search from "@payloadcms/plugin-search"
 import seo from '@payloadcms/plugin-seo'
 import { Events } from './collections/Events'
 import { Media } from './collections/Media'
 import { PostCategories } from './collections/PostCategories'
 import { Posts } from './collections/Posts'
 import Users from './collections/Users'
-import formBuilderConfig from './plugins/formBuilder.config'
+import formBuilderConfig from './plugins/formBuilder'
+import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
 console.log('process.env.DATABASE_URI', process.env.DATABASE_URI)
@@ -38,7 +40,7 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator)],
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions)],
   // Configure the Mongoose adapter here
   db: mongooseAdapter({
     // Mongoose-specific arguments go here.
