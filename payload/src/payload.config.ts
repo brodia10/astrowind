@@ -1,11 +1,12 @@
 import path from 'path'
 
 import { webpackBundler } from '@payloadcms/bundler-webpack'
-import { postgresAdapter } from '@payloadcms/db-postgres'
 import { payloadCloud } from '@payloadcms/plugin-cloud'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import { buildConfig } from 'payload/config'
 
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+// import { postgresAdapter } from '@payloadcms/db-postgres'
 import formBuilder from "@payloadcms/plugin-form-builder"
 import { Events } from './collections/Events'
 import { Media } from './collections/Media'
@@ -14,6 +15,8 @@ import { Posts } from './collections/Posts'
 import SEO from './collections/SEO'
 import Users from './collections/Users'
 import formBuilderConfig from './formBuilder.config'
+
+console.log('process.env.DATABASE_URI', process.env.DATABASE_URI)
 
 
 export default buildConfig({
@@ -35,9 +38,17 @@ export default buildConfig({
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
   plugins: [payloadCloud(), formBuilder(formBuilderConfig)],
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI,
-    },
+  // Configure the Mongoose adapter here
+  db: mongooseAdapter({
+    // Mongoose-specific arguments go here.
+    // URL is required.
+    url: process.env.DATABASE_URI,
   }),
+  // db: postgresAdapter({
+  //   pool: {
+  //     connectionString: process.env.DATABASE_URI,
+  //   },
+  // }),
 })
+
+
