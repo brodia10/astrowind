@@ -1,3 +1,4 @@
+import dotenv from 'dotenv'
 import path from 'path'
 
 import { webpackBundler } from '@payloadcms/bundler-webpack'
@@ -12,20 +13,37 @@ import search from "@payloadcms/plugin-search"
 import seo from '@payloadcms/plugin-seo'
 import { Events } from './collections/Events'
 import { Media } from './collections/Media'
+import Pages from './collections/Pages'
 import { PostCategories } from './collections/PostCategories'
 import { Posts } from './collections/Posts'
-import Users from './collections/Users'
+import { Tenants } from './collections/Tenants'
+import { Users } from './collections/Users'
+
+// Plugin Imports
 import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
 console.log('process.env.DATABASE_URI', process.env.DATABASE_URI)
 
+dotenv.config({
+  path: path.resolve(__dirname, '../.env'),
+})
 
 export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    webpack: config => ({
+      ...config,
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...config.resolve.alias,
+          dotenv: path.resolve(__dirname, './dotenv.js'),
+        },
+      },
+    }),
     livePreview: {
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
       collections: ['pages', 'posts', 'events'], // The collections to enable Live Preview on (globals are also possible)
@@ -36,8 +54,9 @@ export default buildConfig({
     //   ogImage: '/assets/logo.svg',
     // },
   },
+
   editor: slateEditor({}),
-  collections: [Users, Media, Posts, PostCategories, Events],
+  collections: [Users, Tenants, Media, Posts, Pages, PostCategories, Events],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
@@ -56,6 +75,8 @@ export default buildConfig({
   //     connectionString: process.env.DATABASE_URI,
   //   },
   // }),
+
+
 })
 
 
