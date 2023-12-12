@@ -9,20 +9,33 @@
 export interface Config {
   collections: {
     users: User;
+    tenants: Tenant;
     media: Media;
     posts: Post;
+    pages: Page;
     postCategories: PostCategory;
     events: Event;
-    seo: Seo;
     customForms: CustomForm;
     'custom-submissions': CustomSubmission;
+    search: Search;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   globals: {};
 }
 export interface User {
-  id: number;
+  id: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  roles: ('super-admin' | 'user')[];
+  tenants?:
+    | {
+        tenant: string | Tenant;
+        roles: ('admin' | 'user')[];
+        id?: string | null;
+      }[]
+    | null;
+  lastLoggedInTenant?: (string | null) | Tenant;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -34,8 +47,20 @@ export interface User {
   lockUntil?: string | null;
   password: string | null;
 }
+export interface Tenant {
+  id: string;
+  name: string;
+  domains?:
+    | {
+        domain: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
 export interface Media {
-  id: number;
+  id: string;
   alt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -73,48 +98,66 @@ export interface Media {
   };
 }
 export interface Post {
-  id: number;
+  id: string;
   title: string;
   content: {
     [k: string]: unknown;
   }[];
-  image: number | Media;
-  category?: (number | null) | PostCategory;
-  seo?: (number | null) | Seo;
+  image: string | Media;
+  category?: (string | null) | PostCategory;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
 export interface PostCategory {
-  id: number;
+  id: string;
   name: string;
   description?: string | null;
-  seo?: (number | null) | Seo;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
-export interface Seo {
-  id: number;
-  metaTitle?: string | null;
-  metaDescription?: string | null;
-  keywords?: string | null;
-  ogTitle?: string | null;
-  ogDescription?: string | null;
-  ogImage?: string | null;
+export interface Page {
+  id: string;
+  title: string;
+  slug: string;
+  content?:
+    | {
+        [k: string]: unknown;
+      }[]
+    | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
 export interface Event {
-  id: number;
+  id: string;
   title: string;
   description?: string | null;
   date: string;
-  image: number | Media;
-  seo?: (number | null) | Seo;
+  image: string | Media;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
 export interface CustomForm {
-  id: number;
+  id: string;
   title: string;
   fields?:
     | (
@@ -266,8 +309,8 @@ export interface CustomForm {
   createdAt: string;
 }
 export interface CustomSubmission {
-  id: number;
-  form: number | CustomForm;
+  id: string;
+  form: string | CustomForm;
   submissionData?:
     | {
         field: string;
@@ -289,11 +332,31 @@ export interface CustomSubmission {
   updatedAt: string;
   createdAt: string;
 }
+export interface Search {
+  id: string;
+  title?: string | null;
+  priority?: number | null;
+  doc:
+    | {
+        relationTo: 'posts';
+        value: string | Post;
+      }
+    | {
+        relationTo: 'postCategories';
+        value: string | PostCategory;
+      }
+    | {
+        relationTo: 'events';
+        value: string | Event;
+      };
+  updatedAt: string;
+  createdAt: string;
+}
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -309,7 +372,7 @@ export interface PayloadPreference {
   createdAt: string;
 }
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
