@@ -28,7 +28,7 @@ export default buildConfig({
     bundler: webpackBundler(),
     livePreview: {
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
-      collections: ['pages', 'posts'], // The collections to enable Live Preview on (globals are also possible)
+      collections: ['pages', 'posts', 'events'], // The collections to enable Live Preview on (globals are also possible)
     },
     // meta: {
     //   titleSuffix: '',
