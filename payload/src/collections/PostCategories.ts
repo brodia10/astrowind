@@ -13,11 +13,5 @@ export const PostCategories: CollectionConfig = {
             name: 'description',
             type: 'textarea',
         },
-        {
-            name: 'seo',
-            type: 'relationship',
-            relationTo: 'seo',
-            label: 'SEO',
-        },
     ],
 };

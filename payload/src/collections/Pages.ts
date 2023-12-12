@@ -28,12 +28,6 @@ const Pages: CollectionConfig = {
             type: 'richText',
             label: 'Content',
         },
-        {
-            name: 'seo',
-            type: 'relationship',
-            relationTo: 'seo',
-            label: 'SEO',
-        },
     ],
 };
 

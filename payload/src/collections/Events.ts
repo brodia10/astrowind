@@ -23,11 +23,5 @@ export const Events: CollectionConfig = {
             relationTo: 'media',
             required: true,
         },
-        {
-            name: 'seo',
-            type: 'relationship',
-            relationTo: 'seo',
-            label: 'SEO',
-        },
     ],
 };
