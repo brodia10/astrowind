@@ -1,3 +1,4 @@
+
 const seoGenerator = {
     collections: [
         'pages',

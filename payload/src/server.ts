@@ -1,8 +1,12 @@
 import express from 'express'
+import path from 'path'
 import payload from 'payload'
 
 require('dotenv').config()
 const app = express()
+
+// Serve static assets - white label admin
+app.use('/assets', express.static(path.resolve(__dirname, './assets')));
 
 // Redirect root to Admin panel
 app.get('/', (_, res) => {

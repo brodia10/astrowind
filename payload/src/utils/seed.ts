@@ -1,3 +1,7 @@
+// @ts-nocheck
+/* eslint-disable */
+
+
 import fs from 'fs';
 import mime from 'mime-types';
 import path from 'path';
