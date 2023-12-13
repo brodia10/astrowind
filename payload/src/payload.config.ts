@@ -24,6 +24,11 @@ import { Posts } from './collections/Posts'
 import { Tenants } from './collections/Tenants'
 import { Users } from './collections/Users'
 
+// Branding Imports
+import { Icon } from './components/icon'
+import { Logo } from './components/logo'
+//
+
 // Plugin Imports
 import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
@@ -53,11 +58,17 @@ export default buildConfig({
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
       collections: ['pages', 'posts', 'events'], // The collections to enable Live Preview on (globals are also possible)
     },
-    // meta: {
-    //   titleSuffix: '',
-    //   favicon: '/assets/favicon.svg',
-    //   ogImage: '/assets/logo.svg',
-    // },
+    meta: {
+      titleSuffix: '- Custom Title',
+      favicon: '/assets/favicon.svg',
+      ogImage: '/assets/logo.svg',
+    },
+    components: {
+      graphics: {
+        Logo,
+        Icon,
+      },
+    },
   },
 
   editor: slateEditor({}),
