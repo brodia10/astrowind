@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "name": "mycms",
+    "build-command": "yarn build",
+    "dev-command": "yarn dev",
+    "output-directory": "build",
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
+    ],
+    "cleanUrls": true
+  }
