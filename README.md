@@ -21,7 +21,6 @@ Eunoia, embodying "beautiful thinking," is a revolutionary blend of Payload CMS 
 
 ## Conclusion
 Eunoia is not just a tool; it's a unique dev-first CMS that revolutionizes both developer and user experiences. Perfect for those who value functionality without complexity.
-
-<img width="1434" alt="Screenshot 2023-12-13 at 21 46 08" src="https://github.com/brodia10/astrowind/assets/29584063/3d7c6518-df12-481e-8020-88d9542feef6">
+<img width="1434" alt="Screenshot 2023-12-13 at 21 48 31" src="https://github.com/brodia10/astrowind/assets/29584063/a671af63-7c05-4663-8b76-fa3313148cf9">
 
 using https://github.com/payloadcms/plugin-form-builder
