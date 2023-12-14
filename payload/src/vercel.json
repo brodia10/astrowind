@@ -3,7 +3,7 @@
     "name": "mycms",
     "buildCommand": "yarn build && yarn serve",
     "devCommand": "yarn dev",
-    "outputDirectory": "dist",
+    "outputDirectory": "build",
     "builds": [
       {
         "src": "package.json",
