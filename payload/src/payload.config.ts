@@ -16,6 +16,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import formBuilder from "@payloadcms/plugin-form-builder"
 import search from "@payloadcms/plugin-search"
 import seo from '@payloadcms/plugin-seo'
+import comments from 'payload-plugin-comments'
 import { Events } from './collections/Events'
 import { Media } from './collections/Media'
 import Pages from './collections/Pages'
@@ -27,12 +28,13 @@ import { Users } from './collections/Users'
 // Branding Imports
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
-//
 
 // Plugin Imports
+import commentsConfig from './plugins/comments'
 import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
+
 
 console.log('process.env.DATABASE_URI', process.env.DATABASE_URI)
 
@@ -56,7 +58,7 @@ export default buildConfig({
     }),
     livePreview: {
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
-      collections: ['pages', 'posts', 'events'], // The collections to enable Live Preview on (globals are also possible)
+      collections: ['pages', 'posts', 'events', 'comments', 'customForms'], // The collections to enable Live Preview on (globals are also possible)
     },
     meta: {
       titleSuffix: '- Custom Title',
@@ -79,7 +81,7 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions)],
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), comments(commentsConfig),],
   // Configure the Mongoose adapter here
   db: mongooseAdapter({
     // Mongoose-specific arguments go here.

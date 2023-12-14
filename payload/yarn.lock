@@ -6219,6 +6219,11 @@ pause@0.0.1:
   resolved "https://registry.yarnpkg.com/pause/-/pause-0.0.1.tgz#1d408b3fdb76923b9543d96fb4c9dfd535d9cb5d"
   integrity sha512-KG8UEiEVkR3wGEb4m5yZkVCzigAD+cVEJck2CzYZO37ZGJfctvVptVO192MwrtPhzONn6go8ylnOdMhKqi4nfg==
 
+payload-plugin-comments@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/payload-plugin-comments/-/payload-plugin-comments-1.0.2.tgz#a46c867e79351d7c424c5f0e7e4096df83d52741"
+  integrity sha512-lqU8VhAJB0PrTeIRiWPsK+MqZeynEPWucUuV8cPmffyu5s6dFKn+MkXIn+WxE/Y2g1nQavdNmyOCvdNBv6GDmQ==
+
 payload@^2.0.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/payload/-/payload-2.4.0.tgz#bb443560bccee7ea5e0695eb360b8520e4af62b8"
