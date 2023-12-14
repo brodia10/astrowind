@@ -28,4 +28,3 @@ Admin:
 <img width="1434" alt="Screenshot 2023-12-13 at 21 48 31" src="https://github.com/brodia10/astrowind/assets/29584063/a671af63-7c05-4663-8b76-fa3313148cf9">
 
 using https://github.com/payloadcms/plugin-form-builder
-

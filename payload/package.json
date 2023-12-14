@@ -28,7 +28,8 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
     "express": "^4.17.1",
-    "payload": "^2.0.0"
+    "payload": "^2.0.0",
+    "payload-plugin-comments": "^1.0.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
