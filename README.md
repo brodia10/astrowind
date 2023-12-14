@@ -1,10 +1,9 @@
 # Eunoia: A One-of-a-Kind Dev-First CMS with Superior User Experience
 
 ## Introduction
-Eunoia, embodying "beautiful thinking," is a revolutionary blend of Payload CMS and Astro.js, designed for simplicity, elegance, and power. Eunoia is the good will that speakers cultivate between themselves and their audiences, a condition of receptivity.
+Eunoia, embodying "beautiful thinking," is a revolutionary blend of Payload Headless CMS and Astro.js, designed for simplicity, elegance, and power.
 
 ## Why Eunoia?
-
 ### Astro.js: Peak Performance
 - **Impressive Speed**: Scores 100 on Page Speed Insights.
 - **SEO Excellence**: Tailored for content-driven sites, ensuring top SEO performance.
