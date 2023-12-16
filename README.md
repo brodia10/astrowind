@@ -1,10 +1,14 @@
-# Eunoia: A One-of-a-Kind Dev-First Multi Tenant CMS with Superior User Experience
+# Bloom: A One-of-a-Kind Dev-First Multi Tenant CMS with Superior User Experience
 ## Introduction
-Eunoia, embodying "beautiful thinking," is a revolutionary blend of Payload Headless CMS and Astro.js, designed for simplicity, elegance, and power.
+Bloom, embodying "beautiful thinking," is a revolutionary blend of Payload Headless CMS and Astro.js, designed for simplicity, elegance, and power.
 
-## Why Eunoia?
+## Why Bloom?
 
 The Ideal Product: Easy to Use, Powerful, and Unique
+
+- Allows freelancers to develop e-commerce, blogs, or sites 100x faster and more enjoyable then on wordpress or other cms
+- Allows agencies to be 100x faster while increasing performance, speed, seo, and ease of use
+- Your clients will love it, nothing to learn.
 
 Achieving a balance between user-friendliness and robust functionality is a key goal in product design, especially in the SaaS and CMS domain. A product that meets these criteria excels in several areas:
 
