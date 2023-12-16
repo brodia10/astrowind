@@ -2,6 +2,9 @@
 ## Introduction
 Bloom, embodying "beautiful thinking," is a revolutionary blend of Payload Headless CMS and Astro.js, designed for simplicity, elegance, and power.
 
+## Why is it relevant?
+- Wordpress powers 42% of the web - that's our market.
+
 ## Why Bloom?
 
 The Ideal Product: Easy to Use, Powerful, and Unique
