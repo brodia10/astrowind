@@ -61,9 +61,9 @@ export default buildConfig({
       collections: ['pages', 'posts', 'events', 'comments', 'customForms'], // The collections to enable Live Preview on (globals are also possible)
     },
     meta: {
-      titleSuffix: '- Custom Title',
-      favicon: '/assets/favicon.svg',
-      ogImage: '/assets/logo.svg',
+      titleSuffix: '- Bloom CMS',
+      favicon: '/assets/icon.png',
+      ogImage: '/assets/logo-with-image.png',
     },
     components: {
       graphics: {
