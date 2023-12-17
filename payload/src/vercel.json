@@ -1,9 +1,9 @@
 {
     "version": 2,
     "name": "mycms",
-    "buildCommand": "yarn build && yarn serve",
-    "devCommand": "yarn dev",
-    "outputDirectory": "build",
+    "installCommand": "yarn",
+    "buildCommand": "yarn build",
+    "outputDirectory": "dist",
     "builds": [
       {
         "src": "package.json",
