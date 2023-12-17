@@ -1,6 +1,8 @@
 # Bloom: A One-of-a-Kind Dev-First Multi Tenant CMS with Superior User Experience
 ## Introduction
-Bloom, embodying "beautiful thinking," is a revolutionary blend of Payload Headless CMS and Astro.js, designed for simplicity, elegance, and power.
+Bloom, "the peak or ideal moment for something" is a revolutionary blend of Payload Headless CMS and Astro.js, designed for simplicity, elegance, and power.
+
+A unique, dev-first CMS that leverages the strengths of Payload CMS and Astro.js. This CMS, named Bloom, is designed for superior user experience and targets a market currently dominated by WordPress. All aimed at making web development and content management more efficient and enjoyable for freelancers, agencies, and their clients.
 
 ## Why is it relevant?
 - Wordpress powers 42% of the web - that's our market.
