@@ -5,16 +5,14 @@ services:
     image: mongo:4.4.6
     ports:
       - '27017:27017'
+    command:
+      - --storageEngine=wiredTiger
     volumes:
-      - mongodbdata:/data/db
+      - data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    healthcheck:
-      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
-      interval: 10s
-      timeout: 30s
-      retries: 10
+      # provide your credentials here
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
 
   payload:
     image: node:18-alpine
@@ -26,11 +24,10 @@ services:
     working_dir: /home/node/app/
     command: sh -c "yarn install && yarn dev"
     depends_on:
-      mongodb:
-        condition: service_healthy
+      - mongodb
     env_file:
       - .env
 
 volumes:
-  mongodbdata:
+  data:
   node_modules:
