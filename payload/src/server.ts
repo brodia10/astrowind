@@ -23,9 +23,9 @@ const start = async () => {
     },
   })
 
-  // Add your own express routes here
 
-  app.listen(3000)
+  // used to check the port set by heroku in prod or port 3000 for local
+  app.listen(process.env.PORT || 3000)
 }
 
 start()

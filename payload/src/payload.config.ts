@@ -41,6 +41,11 @@ dotenv.config({
 })
 
 export default buildConfig({
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  cors: "*",
+  rateLimit: {
+    trustProxy: true
+  },
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
