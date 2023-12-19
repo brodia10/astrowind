@@ -42,7 +42,7 @@ dotenv.config({
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
-  cors: "*",
+  cors: process.env.CORS_DOMAINS ? process.env.CORS_DOMAINS.split(',') : "*",
   rateLimit: {
     trustProxy: true
   },
