@@ -36,8 +36,6 @@ import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
 
-console.log('process.env.DATABASE_URI', process.env.DATABASE_URI)
-
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 })
