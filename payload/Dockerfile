@@ -22,6 +22,6 @@ RUN yarn install --production
 COPY --from=builder /home/node/app/dist ./dist
 COPY --from=builder /home/node/app/build ./build
 
-EXPOSE 3000
+EXPOSE $PORT
 
 CMD ["node", "dist/server.js"]
