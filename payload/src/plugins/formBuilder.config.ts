@@ -1,6 +1,6 @@
 
 // formBuilderConfig.js
-// DATABASE_URI=postgresql://postgres:postgres@postgres:5432/postgres
+
 const formBuilderConfig = {
     fields: {
         text: true,
@@ -14,6 +14,7 @@ const formBuilderConfig = {
         message: true,
         payment: true
     },
+    redirectRelationships: ['pages', 'posts', 'events',], // Redirect options 
     handlePayment: async ({ form, submissionData }) => {
         // Payment handling logic here
         // Example: calculate the total cost, integrate third-party payment processing API
