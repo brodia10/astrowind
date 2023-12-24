@@ -58,6 +58,8 @@ Public Site:
 <img width="1434" alt="Screenshot 2023-12-13 at 22 01 49" src="https://github.com/brodia10/astrowind/assets/29584063/888145a8-7eec-4166-a6ea-19b63c5d8a62">
 
 Admin:
-<img width="1434" alt="Screenshot 2023-12-13 at 21 48 31" src="https://github.com/brodia10/astrowind/assets/29584063/a671af63-7c05-4663-8b76-fa3313148cf9">
+<img width="1434" alt="Screenshot 2023-12-23 at 23 49 40" src="https://github.com/brodia10/bloomcms/assets/29584063/f7d0eda8-7532-4c9f-8850-787719ff3454">
+<img width="1434" alt="Screenshot 2023-12-23 at 23 48 27" src="https://github.com/brodia10/bloomcms/assets/29584063/8d091b78-a818-4c54-ac42-3439bd3f006e">
+
 
 using https://github.com/payloadcms/plugin-form-builder
