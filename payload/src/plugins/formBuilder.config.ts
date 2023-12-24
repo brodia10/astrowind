@@ -24,7 +24,7 @@ const formBuilderConfig = {
         // Example: modify the emails in any way before they are sent
     },
     formOverrides: {
-        slug: "customForms", // Custom slug for forms
+        slug: "forms", // Custom slug for forms
         access: {
             read: () => true,
             update: () => true,
@@ -38,7 +38,7 @@ const formBuilderConfig = {
         ]
     },
     formSubmissionOverrides: {
-        slug: "custom-submissions", // Custom slug for form submissions
+        slug: "form-submissions", // Custom slug for form submissions
         // Other custom settings for form submissions
     }
 };

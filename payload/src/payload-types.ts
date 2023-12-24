@@ -16,8 +16,8 @@ export interface Config {
     pages: Page;
     postCategories: PostCategory;
     events: Event;
-    customForms: CustomForm;
-    'custom-submissions': CustomSubmission;
+    forms: Form;
+    'form-submissions': FormSubmission;
     search: Search;
     comments: Comment;
     'payload-preferences': PayloadPreference;
@@ -174,7 +174,7 @@ export interface Event {
   updatedAt: string;
   createdAt: string;
 }
-export interface CustomForm {
+export interface Form {
   id: string;
   title: string;
   fields?:
@@ -340,9 +340,9 @@ export interface CustomForm {
   updatedAt: string;
   createdAt: string;
 }
-export interface CustomSubmission {
+export interface FormSubmission {
   id: string;
-  form: string | CustomForm;
+  form: string | Form;
   submissionData?:
     | {
         field: string;

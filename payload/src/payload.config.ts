@@ -62,7 +62,7 @@ export default buildConfig({
     }),
     livePreview: {
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
-      collections: ['pages', 'posts', 'events', 'comments', 'customForms'], // The collections to enable Live Preview on (globals are also possible)
+      collections: ['pages', 'posts', 'events', 'comments', 'forms'], // The collections to enable Live Preview on (globals are also possible)
     },
     meta: {
       titleSuffix: '- Bloom CMS',
