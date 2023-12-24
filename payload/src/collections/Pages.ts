@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload/types';
+import { FormBlock } from '../blocks/FormBlock';
 
 const Pages: CollectionConfig = {
     slug: 'pages',
@@ -13,20 +14,25 @@ const Pages: CollectionConfig = {
         {
             name: 'title',
             type: 'text',
-            label: 'Title',
             required: true,
         },
         {
-            name: 'slug',
-            type: 'text',
-            label: 'Slug',
-            required: true,
-            unique: true,
-        },
-        {
-            name: 'content',
-            type: 'richText',
-            label: 'Content',
+            type: 'tabs',
+            tabs: [
+                {
+                    label: 'Content',
+                    fields: [
+                        {
+                            name: 'layout',
+                            type: 'blocks',
+                            required: true,
+                            blocks: [
+                                FormBlock,
+                            ],
+                        },
+                    ],
+                },
+            ],
         },
     ],
 };
