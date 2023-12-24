@@ -9,6 +9,7 @@
 export interface Config {
   collections: {
     users: User;
+    'email-providers': EmailProvider;
     tenants: Tenant;
     media: Media;
     posts: Post;
@@ -18,6 +19,7 @@ export interface Config {
     customForms: CustomForm;
     'custom-submissions': CustomSubmission;
     search: Search;
+    comments: Comment;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -56,6 +58,22 @@ export interface Tenant {
         id?: string | null;
       }[]
     | null;
+  emailProvider?: (string | null) | EmailProvider;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface EmailProvider {
+  id: string;
+  configType: 'smtp' | 'apiKey';
+  provider?: ('gmail' | 'outlook' | 'sendgrid' | 'hubspot') | null;
+  fromAddress: string;
+  fromName: string;
+  apiKey?: string | null;
+  smtpHost?: string | null;
+  smtpPort?: number | null;
+  username?: string | null;
+  password?: string | null;
+  secure?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -286,7 +304,21 @@ export interface CustomForm {
       }[]
     | null;
   redirect?: {
-    url: string;
+    type?: ('reference' | 'custom') | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'events';
+          value: string | Event;
+        } | null);
+    url?: string | null;
   };
   emails?:
     | {
@@ -349,6 +381,17 @@ export interface Search {
         relationTo: 'events';
         value: string | Event;
       };
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Comment {
+  id: string;
+  author?: string | null;
+  email?: string | null;
+  content?: string | null;
+  replyPost?: (string | null) | Post;
+  replyComment?: (string | null) | Comment;
+  isApproved?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
