@@ -32,5 +32,15 @@ export const Tenants: CollectionConfig = {
         },
       ],
     },
+    {
+      name: 'emailProvider',
+      label: 'Email Provider',
+      type: 'relationship',
+      relationTo: 'email-providers',
+      required: false,
+      admin: {
+        description: 'Select the email provider configuration for this tenant',
+      },
+    },
   ],
 }

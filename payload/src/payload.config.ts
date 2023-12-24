@@ -30,6 +30,7 @@ import { Icon } from './components/icon'
 import { Logo } from './components/logo'
 
 // Plugin Imports
+import { EmailProviders } from './collections/Emails'
 import commentsConfig from './plugins/comments'
 import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
@@ -77,7 +78,7 @@ export default buildConfig({
   },
 
   editor: slateEditor({}),
-  collections: [Users, Tenants, Media, Posts, Pages, PostCategories, Events],
+  collections: [Users, EmailProviders, Tenants, Media, Posts, Pages, PostCategories, Events],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
