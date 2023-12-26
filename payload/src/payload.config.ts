@@ -8,7 +8,6 @@ import path from 'path'
 
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { payloadCloud } from '@payloadcms/plugin-cloud'
-import { slateEditor } from '@payloadcms/richtext-slate'
 import { buildConfig } from 'payload/config'
 
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
@@ -31,6 +30,8 @@ import { Logo } from './components/logo'
 
 // Plugin Imports
 import { EmailProviders } from './collections/Emails'
+import GlobalPlans from './collections/GlobalPlans'
+import TenantPlans from './collections/TenantPlans'
 import commentsConfig from './plugins/comments'
 import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
@@ -42,7 +43,7 @@ dotenv.config({
 })
 
 export default buildConfig({
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
+  // serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
   cors: process.env.CORS_DOMAINS ? process.env.CORS_DOMAINS.split(',') : "*",
   rateLimit: {
     trustProxy: true
@@ -74,11 +75,13 @@ export default buildConfig({
         Logo,
         Icon,
       },
+      // afterNavLinks: [SiteLink],
+      // afterDashboard: [SiteLink],
     },
   },
 
-  editor: slateEditor({}),
-  collections: [Users, EmailProviders, Tenants, Media, Posts, Pages, PostCategories, Events],
+  editor: ,
+  collections: [Users, EmailProviders, GlobalPlans, TenantPlans, Tenants, Media, Posts, Pages, PostCategories, Events],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
