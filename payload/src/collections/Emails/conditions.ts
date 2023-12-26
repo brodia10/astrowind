@@ -1,15 +1,15 @@
 import { Condition } from 'payload/types';
 
 /**
- * Check if the configuration type is SMTP
+ * Check if the email integration is via SMTP
  */
 export const isSMTP: Condition = (_, siblingData) => {
-    return siblingData.configType === 'smtp';
+    return siblingData.emailIntegrationMethod === 'smtp';
 };
 
 /**
- * Check if the configuration type is API Key
+ * Check if the email integration is via API Key
  */
 export const isAPIKey: Condition = (_, siblingData) => {
-    return siblingData.configType === 'apiKey';
+    return siblingData.emailIntegrationMethod === 'apiKey';
 };
