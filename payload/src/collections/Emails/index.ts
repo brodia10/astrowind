@@ -8,9 +8,9 @@ import { isAPIKey, isSMTP } from './conditions';
 export const EmailProviders: CollectionConfig = {
     slug: 'email-providers',
     admin: {
-        useAsTitle: 'fromName',
-        defaultColumns: ['fromName', 'provider', 'configType', 'updatedAt'],
-        description: "Configure the SMTP settings for your email service provider here. Ensure that you have the correct SMTP host, port, and credentials as provided by your email service.",
+        useAsTitle: 'fromEmailAddress',
+        defaultColumns: ['fromName', 'fromEmailAddress', 'provider', 'emailIntegrationMethod', 'updatedAt'],
+        description: "Configure the Email Integration for your email service provider here. Ensure that you have the correct SMTP host, port, and credentials or API key as provided by your email service.",
     },
     access: {
         read: tenants,
@@ -20,33 +20,34 @@ export const EmailProviders: CollectionConfig = {
     },
     fields: [
         {
-            name: 'configType',
-            type: 'select',
-            required: true,
-            options: [
-                { value: 'smtp', label: 'SMTP' },
-                { value: 'apiKey', label: 'API Key' },
-            ],
-            admin: {
-                description: 'Choose the configuration type for your email provider',
-            },
-        },
-        {
             name: 'provider',
-            type: 'select',
+            type: 'radio',
             required: false,
             options: [
                 { value: 'gmail', label: 'Gmail' },
                 { value: 'outlook', label: 'Outlook' },
                 { value: 'sendgrid', label: 'Sendgrid' },
                 { value: 'hubspot', label: 'Hubspot' },
+                { value: 'other', label: 'Other' },
             ],
             admin: {
                 description: 'Choose your email service provider.',
             },
         },
         {
-            name: 'fromAddress',
+            name: 'emailIntegrationMethod',
+            type: 'radio',
+            required: true,
+            options: [
+                { value: 'smtp', label: 'SMTP - Standard email sending protocol' },
+                { value: 'apiKey', label: 'API Key - For providers with an API for sending emails' },
+            ],
+            admin: {
+                description: 'Select how you want to integrate with your email service provider. Choose SMTP for traditional email servers or API Key for providers that offer an API to send emails.',
+            },
+        },
+        {
+            name: 'fromEmailAddress',
             type: 'text',
             required: true,
             admin: {
@@ -76,7 +77,7 @@ export const EmailProviders: CollectionConfig = {
             name: 'smtpHost',
             label: 'SMTP Host',
             type: 'text',
-            required: true,
+            required: isSMTP ? true : false,
             admin: {
                 description: 'ex: smtp.gmail.com',
                 position: 'sidebar',
@@ -87,7 +88,7 @@ export const EmailProviders: CollectionConfig = {
             name: 'smtpPort',
             label: 'SMTP Port',
             type: 'number',
-            required: true,
+            required: isSMTP ? true : false,
             admin: {
                 description: 'ex: 587',
                 position: 'sidebar',
@@ -98,7 +99,7 @@ export const EmailProviders: CollectionConfig = {
             name: 'username',
             label: 'SMTP Username',
             type: 'text',
-            required: true,
+            required: isSMTP ? true : false,
             admin: {
                 description: 'ex: myusername',
                 position: 'sidebar',
@@ -109,7 +110,7 @@ export const EmailProviders: CollectionConfig = {
             name: 'password',
             label: 'SMTP Password',
             type: 'text',
-            required: true,
+            required: isSMTP ? true : false,
             admin: {
                 description: 'ex: mypassword',
                 position: 'sidebar',
@@ -119,10 +120,13 @@ export const EmailProviders: CollectionConfig = {
         {
             name: 'secure',
             type: 'checkbox',
+            defaultValue: true,
+            required: isSMTP ? true : false,
             admin: {
                 description: 'Use TLS/SSL for a secure connection',
                 position: 'sidebar',
                 condition: isSMTP,
+                readOnly: true,
             },
         },
     ],
