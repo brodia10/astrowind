@@ -69,12 +69,13 @@ export const Tenants: CollectionConfig = {
           label: 'Email',
           fields: [
             {
-              name: 'emailProvider',
-              label: 'Email Provider',
+              name: 'emailConfig',
+              label: 'Email Integration',
               type: 'relationship',
-              relationTo: 'email-providers',
+              relationTo: 'tenant-email-configs',
+              required: false,
               admin: {
-                description: 'Setup your email.',
+                description: 'Manage your email integration here. Bloom provides email through resend by default. This includes SMTP and API keys for sending transactional emails.',
               },
             },
           ],
@@ -84,19 +85,13 @@ export const Tenants: CollectionConfig = {
           description: 'Easily accept payments from your customers',
           fields: [
             {
-              name: 'stripeAccountId',
-              label: 'Stripe Account ID',
-              type: 'text',
+              name: 'stripeConfig',
+              label: 'Stripe Configuration',
+              type: 'relationship',
+              relationTo: 'tenant-stripe-configs', // Ensure this matches the slug of your Stripe Config collection
+              required: false,
               admin: {
-                placeholder: '853c3c38-64fc-4f2b-bbf8-abd38f141a89',
-              },
-            },
-            {
-              name: 'stripeApiKey',
-              label: 'Stripe API Key',
-              type: 'text',
-              admin: {
-                placeholder: '08b18f51-2151-48a5-b501-fd27545c837f',
+                description: 'Select the Stripe configuration for this tenant. This contains all the necessary Stripe details.',
               },
             },
           ],

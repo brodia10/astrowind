@@ -10,12 +10,17 @@ import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { payloadCloud } from '@payloadcms/plugin-cloud'
 import { buildConfig } from 'payload/config'
 
+// Stripe Imports
+
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 // import { postgresAdapter } from '@payloadcms/db-postgres'
+
+// Plugin Imports
 import formBuilder from "@payloadcms/plugin-form-builder"
 import search from "@payloadcms/plugin-search"
 import seo from '@payloadcms/plugin-seo'
 import comments from 'payload-plugin-comments'
+
 import { Events } from './collections/Events'
 import { Media } from './collections/Media'
 import Pages from './collections/Pages'
@@ -29,9 +34,11 @@ import { Icon } from './components/icon'
 import { Logo } from './components/logo'
 
 // Plugin Imports
-import { EmailProviders } from './collections/Emails'
+import { slateEditor } from '@payloadcms/richtext-slate'
 import GlobalPlans from './collections/GlobalPlans'
+import { TenantEmailConfigs } from './collections/TenantEmailConfigs'
 import TenantPlans from './collections/TenantPlans'
+import { TenantStripeConfigs } from './collections/TenantStripeConfigs'
 import commentsConfig from './plugins/comments'
 import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
@@ -79,16 +86,15 @@ export default buildConfig({
       // afterDashboard: [SiteLink],
     },
   },
-
-  editor: ,
-  collections: [Users, EmailProviders, GlobalPlans, TenantPlans, Tenants, Media, Posts, Pages, PostCategories, Events],
+  editor: slateEditor({}),
+  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, GlobalPlans, TenantPlans, Tenants, Media, Posts, Pages, PostCategories, Events],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), comments(commentsConfig),],
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), comments(commentsConfig),], // pass the stripe config to the stripe plugin
   // Configure the Mongoose adapter here
   db: mongooseAdapter({
     // Mongoose-specific arguments go here.
@@ -100,8 +106,6 @@ export default buildConfig({
   //     connectionString: process.env.DATABASE_URI,
   //   },
   // }),
-
-
 })
 
 
