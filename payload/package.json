@@ -15,7 +15,7 @@
     "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
     "generate:graphQLSchema": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:graphQLSchema",
     "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload",
-    "seed": "ts-node ./src/utils/seed.ts"
+    "seed": "rm -rf media && cross-env PAYLOAD_SEED=true PAYLOAD_DROP_DATABASE=true PAYLOAD_CONFIG_PATH=src/payload.config.ts ts-node src/server.ts"
   },
   "dependencies": {
     "@payloadcms/bundler-webpack": "^1.0.0",
@@ -32,7 +32,8 @@
     "dotenv": "^16.3.1",
     "express": "^4.17.1",
     "payload": "^2.0.0",
-    "payload-plugin-comments": "^1.0.2"
+    "payload-plugin-comments": "^1.0.2",
+    "stripe": "^14.10.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
