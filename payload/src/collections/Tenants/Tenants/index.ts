@@ -216,19 +216,6 @@ export const Tenants: CollectionConfig = {
           ],
         },
         {
-          label: 'Plan',
-          description: 'Your Bloom plan and billing',
-          fields: [
-            {
-              name: 'globalPlan',
-              type: 'relationship',
-              relationTo: 'global-plans',
-              required: true,
-              hasMany: false,
-            },
-          ],
-        },
-        {
           label: 'Domains',
           description: 'Manage your domains. All domains, including your automatically assigned Bloom subdomain and any custom domains, come with free SSL certificates for security.',
           fields: [
@@ -295,6 +282,19 @@ export const Tenants: CollectionConfig = {
               admin: {
                 description: 'Select the Stripe configuration for this tenant. This contains all the necessary Stripe details.',
               },
+            },
+          ],
+        },
+        {
+          label: 'Plan',
+          description: 'Your Bloom plan and billing',
+          fields: [
+            {
+              name: 'globalPlan',
+              type: 'relationship',
+              relationTo: 'global-plans',
+              required: true,
+              hasMany: false,
             },
           ],
         },
