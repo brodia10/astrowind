@@ -8,7 +8,6 @@ export class TenantResolutionService {
     async resolveTenant(req: Request): Promise<Tenant | null> {
         try {
             const domain = req.hostname;
-            payload.logger.info(`Request: ${req}`);
             payload.logger.info(`Domain: ${domain}`);
 
             const tenants = await payload.find({
