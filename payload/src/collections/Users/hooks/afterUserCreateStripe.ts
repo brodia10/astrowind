@@ -3,10 +3,10 @@ import type { AfterChangeHook } from 'payload/dist/collections/config/types';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-    apiVersion: '2020-08-27',
+    apiVersion: '2023-10-16',
 });
 
-export const afterUserCreateStripeSetup: AfterChangeHook = async ({
+export const afterUserCreateStripe: AfterChangeHook = async ({
     doc,
     operation,
 }) => {
