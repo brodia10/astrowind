@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload/types';
-import { superAdmins } from '../../access/superAdmins';
+import { superAdmins } from '../../../access/superAdmins';
 import { tenantAdmins } from '../Tenants/access/tenantAdmins';
 import { isAPIKey, isSMTP } from './conditions';
 
@@ -18,6 +18,17 @@ export const TenantEmailConfigs: CollectionConfig = {
         delete: superAdmins,
     },
     fields: [
+        {
+            name: 'tenant',
+            type: 'relationship',
+            relationTo: 'tenants',
+            required: true,
+            unique: true,
+            index: true,
+            admin: {
+                description: 'Reference to the tenant this Email configuration belongs to. Each tenant can have only one Email configuration.',
+            },
+        },
         {
             name: 'provider',
             type: 'radio',
