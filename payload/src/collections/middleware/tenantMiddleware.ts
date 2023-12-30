@@ -11,7 +11,7 @@ import { TenantResolutionService } from '../../services/tenant/TenantResolutionS
  * @param {Response} _res
  * @param {NextFunction} next
  */
-async function logRequest(req: Request, _res: Response, next: NextFunction): Promise<void> {
+function logRequest(req: Request, _res: Response, next: NextFunction): void {
     payload.logger.info(`Request URL: ${req.url}`);
     next();
 }
@@ -30,7 +30,7 @@ async function handleNoTenantFound(_req: Request, _res: Response, next: NextFunc
     payload.logger.warn('No tenant found.');
     if (process.env.SEED === 'true') {
         try {
-            payload.logger.info(`Environment is ${process.env.NODE_ENV}. Seeding database...`);
+            payload.logger.info(`Seeding database...`);
             await seed(payload);
             payload.logger.info('Database seeding successful.');
             next(); // Proceed or redirect as needed after seeding
@@ -51,11 +51,11 @@ async function handleNoTenantFound(_req: Request, _res: Response, next: NextFunc
  * If no tenant is found, it calls handleNoTenantFound.
  *  
  * @param {Request} req
- * @param {Response} res
+ * @param {Response} _res
  * @param {NextFunction} next
  * @returns {Promise<void>}
  */
-async function resolveAndConfigureTenant(req: Request, res: Response, next: NextFunction): Promise<void> {
+async function resolveAndConfigureTenant(req: Request, _res: Response, next: NextFunction): Promise<void> {
     const tenantResolutionService = new TenantResolutionService();
     const tenantConfigurationService = TenantConfigurationService.getInstance();
 
@@ -66,7 +66,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
             await tenantConfigurationService.configureTenantContext(tenant);
             next();
         } else {
-            await handleNoTenantFound(req, res, next);
+            await handleNoTenantFound(req, _res, next);
         }
     } catch (error) {
         payload.logger.error('Error resolving or configuring tenant:', error);
@@ -85,7 +85,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
  */
 async function tenantMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-        await logRequest(req, res, next);
+        logRequest(req, res, next);
         await resolveAndConfigureTenant(req, res, next);
     } catch (error) {
         payload.logger.error('Error in Tenant middleware:', error);
