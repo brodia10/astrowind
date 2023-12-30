@@ -1,4 +1,3 @@
-import payload from 'payload';
 import type { AfterChangeHook } from 'payload/dist/collections/config/types';
 import Stripe from 'stripe';
 
@@ -13,13 +12,13 @@ export const afterUserCreateStripe: AfterChangeHook = async ({
     if (operation === 'create' && doc.email) {
         try {
             // Step 1: Create Tenant
-            const tenant = await payload.create({
-                collection: 'tenants',
-                data: {
-                    name: `${doc.username}'s Tenant`, // Customize as needed
-                    // ... other tenant details
-                },
-            });
+            // const tenant = await payload.create({
+            //     collection: 'tenants',
+            //     data: {
+            //         name: `${doc.username}'s Tenant`, // Customize as needed
+            //         // ... other tenant details
+            //     },
+            // });
 
             // Step 2: Create Stripe Customer
             const stripeCustomer = await stripe.customers.create({
@@ -27,25 +26,25 @@ export const afterUserCreateStripe: AfterChangeHook = async ({
             });
 
             // Step 3: Save Stripe Customer ID in tenantStripeConfigs collection
-            const tenantStripeConfig = await payload.create({
-                collection: 'tenantStripeConfigs',
-                data: {
-                    tenantId: tenant.id, // Associate with the newly created tenant
-                    stripeCustomerId: stripeCustomer.id,
-                },
-            });
+            // const tenantStripeConfig = await payload.create({
+            //     collection: 'tenantStripeConfigs',
+            //     data: {
+            //         tenantId: tenant.id, // Associate with the newly created tenant
+            //         stripeCustomerId: stripeCustomer.id,
+            //     },
+            // });
 
             // Step 4: Associate User with Tenant and Role
             // Update the user with tenant and role information
-            await payload.update({
-                collection: 'users',
-                id: doc.id,
-                data: {
-                    tenants: tenant.id,
-                    // role: "roleID or roleName", // Assign the role to the user as needed
-                    // ... any additional user details
-                },
-            });
+            // await payload.update({
+            //     collection: 'users',
+            //     id: doc.id,
+            //     data: {
+            //         tenants: tenant.id,
+            //         // role: "roleID or roleName", // Assign the role to the user as needed
+            //         // ... any additional user details
+            //     },
+            // });
 
 
         } catch (error) {
