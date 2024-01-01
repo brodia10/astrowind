@@ -27,7 +27,7 @@ export const Tenants: CollectionConfig = {
           description: 'Manage your general settings here.',
           fields: [
             {
-              name: 'appName',
+              name: 'name',
               type: 'text',
               required: true,
               label: 'App Name',
@@ -270,7 +270,7 @@ export const Tenants: CollectionConfig = {
           ],
         },
         {
-          label: 'Payment',
+          label: 'Payments',
           description: 'Easily accept payments from your customers',
           fields: [
             {
