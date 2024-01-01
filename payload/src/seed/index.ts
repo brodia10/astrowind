@@ -71,6 +71,8 @@ export const seed = async (payload: Payload): Promise<void> => {
             data: {
                 email: 'admin@bloom.com',
                 password: 'test',
+                firstName: 'Admin Bloom',
+                lastName: 'User',
                 roles: ['user'],
                 tenants: [
                     {
@@ -85,6 +87,8 @@ export const seed = async (payload: Payload): Promise<void> => {
             data: {
                 email: 'user@bloom.com',
                 password: 'test',
+                firstName: 'User Bloom',
+                lastName: 'User',
                 roles: ['user'],
                 tenants: [
                     {
@@ -99,6 +103,8 @@ export const seed = async (payload: Payload): Promise<void> => {
             data: {
                 email: 'admin@client.com',
                 password: 'test',
+                firstName: 'Admin Client',
+                lastName: 'User',
                 roles: ['user'],
                 tenants: [
                     {
@@ -114,6 +120,8 @@ export const seed = async (payload: Payload): Promise<void> => {
                 email: 'user@client.com',
                 password: 'test',
                 roles: ['user'],
+                firstName: 'User Client',
+                lastName: 'User',
                 tenants: [
                     {
                         tenant: client.id,
