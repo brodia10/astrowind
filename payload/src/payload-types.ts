@@ -55,15 +55,14 @@ export interface User {
 export interface Tenant {
   id: string;
   name: string;
-  freeBloomSubdomain?: string | null;
-  domains?:
-    | {
-        domain: string;
-        id?: string | null;
-      }[]
-    | null;
-  emailConfig?: (string | null) | TenantEmailConfig;
-  stripeConfig?: (string | null) | TenantStripeConfig;
+  streetAddress?: string | null;
+  city?: string | null;
+  state?: string | null;
+  postalCode?: string | null;
+  country?: string | null;
+  contactEmail?: string | null;
+  telephone?: string | null;
+  businessHours?: string | null;
   brand_assets?: {
     logo?: string | Media | null;
     icon?: string | Media | null;
@@ -114,57 +113,16 @@ export interface Tenant {
     github?: string | null;
     threads?: string | null;
   };
-  streetAddress?: string | null;
-  city?: string | null;
-  state?: string | null;
-  postalCode?: string | null;
-  country?: string | null;
-  contactEmail?: string | null;
-  telephone?: string | null;
-  businessHours?: string | null;
+  freeBloomSubdomain?: string | null;
+  domains?:
+    | {
+        domain: string;
+        id?: string | null;
+      }[]
+    | null;
+  emailConfig?: (string | null) | TenantEmailConfig;
+  stripeConfig?: (string | null) | TenantStripeConfig;
   globalPlan: string | GlobalPlan;
-  updatedAt: string;
-  createdAt: string;
-}
-export interface TenantEmailConfig {
-  id: string;
-  provider?: ('resend' | 'mailgun' | 'sendgrid' | 'gmail' | 'outlook' | 'hubspot') | null;
-  emailIntegrationMethod: 'smtp' | 'apiKey';
-  fromEmailAddress: string;
-  fromName: string;
-  apiKey?: string | null;
-  smtpHost?: string | null;
-  smtpPort?: number | null;
-  username?: string | null;
-  password?: string | null;
-  secure?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-export interface TenantStripeConfig {
-  id: string;
-  tenant: string | Tenant;
-  stripeKeys: {
-    stripeSecretKey: string;
-    stripePublishableKey: string;
-  };
-  additionalStripeSettings?: {
-    stripeAccountId?: string | null;
-    stripeWebhookSecret?: string | null;
-  };
-  paymentSettings?: {
-    defaultCurrency?: string | null;
-    paymentMethods?:
-      | {
-          method: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  redirectUrls?: {
-    successUrl?: string | null;
-    cancelUrl?: string | null;
-  };
   updatedAt: string;
   createdAt: string;
 }
@@ -205,6 +163,51 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+export interface TenantEmailConfig {
+  id: string;
+  tenant: string | Tenant;
+  provider?: ('resend' | 'mailgun' | 'sendgrid' | 'gmail' | 'outlook' | 'hubspot') | null;
+  emailIntegrationMethod: 'smtp' | 'apiKey';
+  fromEmailAddress: string;
+  fromName: string;
+  apiKey?: string | null;
+  smtpHost?: string | null;
+  smtpPort?: number | null;
+  username?: string | null;
+  password?: string | null;
+  secure?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface TenantStripeConfig {
+  id: string;
+  tenant: string | Tenant;
+  stripeSecretKey: string;
+  stripePublishableKey: string;
+  stripeAccountId: string;
+  stripeWebhookSecret: string;
+  defaultCurrency: 'US' | 'EU' | 'GB' | 'CA' | 'AF' | 'AX' | 'AL' | 'DZ' | 'AS' | 'AD' | 'AO';
+  paymentMethods:
+    | 'american_express'
+    | 'diners_club'
+    | 'mastercard'
+    | 'visa'
+    | 'apple_pay'
+    | 'google_pay'
+    | 'microsoft_pay'
+    | 'paypal'
+    | 'alipay'
+    | 'wechat_pay'
+    | 'unionpay'
+    | 'jcb'
+    | 'klarna'
+    | 'afterpay'
+    | 'ideal';
+  successUrl: string;
+  cancelUrl: string;
+  updatedAt: string;
+  createdAt: string;
 }
 export interface GlobalPlan {
   id: string;
