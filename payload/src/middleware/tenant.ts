@@ -1,20 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import payload from 'payload';
-import { seed } from '../../seed';
-import { TenantConfigurationService } from '../../services/tenant/TenantConfigurationService';
-import { TenantResolutionService } from '../../services/tenant/TenantResolutionService';
-
-/**
- * Logs the request URL
- *
- * @param {Request} req
- * @param {Response} _res
- * @param {NextFunction} next
- */
-function logRequest(req: Request, _res: Response, next: NextFunction): void {
-    payload.logger.info(`Request URL: ${req.url}`);
-    next();
-}
+import { seed } from '../seed';
+import { TenantConfigurationService } from '../services/tenant/TenantConfigurationService';
+import { TenantResolutionService } from '../services/tenant/TenantResolutionService';
 
 /**
  * Handle no tenant found
@@ -22,13 +10,13 @@ function logRequest(req: Request, _res: Response, next: NextFunction): void {
  * In this example, we seed the database if the environment is set to seed.
  * Otherwise, we log an error.
  *
- * @param {Request} _req
- * @param {Response} _res
+ * @param {Request} req
+ * @param {Response} res
  * @param {NextFunction} next
  */
-async function handleNoTenantFound(_req: Request, _res: Response, next: NextFunction): Promise<void> {
+async function handleNoTenantFound(req: Request, res: Response, next: NextFunction): Promise<void> {
     payload.logger.warn('No tenant found.');
-    if (process.env.SEED === 'true') {
+    if (process.env.SEED_DB === 'true') {
         try {
             payload.logger.info(`Seeding database...`);
             await seed(payload);
@@ -36,11 +24,11 @@ async function handleNoTenantFound(_req: Request, _res: Response, next: NextFunc
             next(); // Proceed or redirect as needed after seeding
         } catch (error) {
             payload.logger.error('Error seeding database:', error);
-            next(error);
+            next(error); // Ensure errors are passed to error handling middleware
         }
     } else {
         payload.logger.error('No Tenants in non-seed mode. Ensure manual configuration.');
-        // You might want to call next() or send a response here depending on your application's needs
+        res.status(404).send('Tenant not found and database seeding is not enabled.'); // Send a response or consider redirecting
     }
 }
 
@@ -51,11 +39,11 @@ async function handleNoTenantFound(_req: Request, _res: Response, next: NextFunc
  * If no tenant is found, it calls handleNoTenantFound.
  *  
  * @param {Request} req
- * @param {Response} _res
+ * @param {Response} res
  * @param {NextFunction} next
  * @returns {Promise<void>}
  */
-async function resolveAndConfigureTenant(req: Request, _res: Response, next: NextFunction): Promise<void> {
+async function resolveAndConfigureTenant(req: Request, res: Response, next: NextFunction): Promise<void> {
     const tenantResolutionService = new TenantResolutionService();
     const tenantConfigurationService = TenantConfigurationService.getInstance();
 
@@ -66,13 +54,14 @@ async function resolveAndConfigureTenant(req: Request, _res: Response, next: Nex
             await tenantConfigurationService.configureTenantContext(tenant);
             next();
         } else {
-            await handleNoTenantFound(req, _res, next);
+            await handleNoTenantFound(req, res, next); // Ensure response is handled in all paths
         }
     } catch (error) {
         payload.logger.error('Error resolving or configuring tenant:', error);
-        next(error);
+        next(error); // Pass the error to error handling middleware
     }
 }
+
 
 /**
  * Tenant middleware
@@ -85,7 +74,6 @@ async function resolveAndConfigureTenant(req: Request, _res: Response, next: Nex
  */
 async function tenantMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-        logRequest(req, res, next);
         await resolveAndConfigureTenant(req, res, next);
     } catch (error) {
         payload.logger.error('Error in Tenant middleware:', error);
