@@ -1,43 +1,57 @@
 import type { CollectionConfig } from 'payload/types';
-import { loggedIn } from '../Pages/access/loggedIn';
-import { tenants } from '../Pages/access/tenants';
+import { superAdmins } from '../../../access/superAdmins';
 import { tenantAdmins } from '../Tenants/access/tenantAdmins';
 import { isAPIKey, isSMTP } from './conditions';
 
 
-export const EmailProviders: CollectionConfig = {
-    slug: 'email-providers',
+export const TenantEmailConfigs: CollectionConfig = {
+    slug: 'tenant-email-configs',
     admin: {
         useAsTitle: 'fromEmailAddress',
         defaultColumns: ['fromName', 'fromEmailAddress', 'provider', 'emailIntegrationMethod', 'updatedAt'],
         description: "Configure the Email Integration for your email service provider here. Ensure that you have the correct SMTP host, port, and credentials or API key as provided by your email service.",
     },
     access: {
-        read: tenants,
-        create: loggedIn,
+        read: tenantAdmins,
+        create: superAdmins,
         update: tenantAdmins,
-        delete: tenantAdmins,
+        delete: superAdmins,
     },
     fields: [
+        {
+            name: 'tenant',
+            type: 'relationship',
+            relationTo: 'tenants',
+            required: true,
+            unique: true,
+            index: true,
+            admin: {
+                description: 'Reference to the tenant this Email configuration belongs to. Each tenant can have only one Email configuration.',
+            },
+        },
         {
             name: 'provider',
             type: 'radio',
             required: false,
+            defaultValue: 'resend',
+            label: 'Email Provider',
             options: [
+                { value: 'resend', label: 'Resend (default)' },
+                { value: 'mailgun', label: 'Mailgun' },
+                { value: 'sendgrid', label: 'Sendgrid' },
                 { value: 'gmail', label: 'Gmail' },
                 { value: 'outlook', label: 'Outlook' },
-                { value: 'sendgrid', label: 'Sendgrid' },
                 { value: 'hubspot', label: 'Hubspot' },
-                { value: 'other', label: 'Other' },
             ],
             admin: {
-                description: 'Choose your email service provider.',
+                description: 'By default, Bloom creates a free account for you on Resend.io which offers 1000. You can also choose to integrate with your own email service provider.',
             },
         },
         {
             name: 'emailIntegrationMethod',
             type: 'radio',
             required: true,
+            defaultValue: 'apiKey',
             options: [
                 { value: 'smtp', label: 'SMTP - Standard email sending protocol' },
                 { value: 'apiKey', label: 'API Key - For providers with an API for sending emails' },

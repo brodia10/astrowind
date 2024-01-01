@@ -9,7 +9,10 @@
 export interface Config {
   collections: {
     users: User;
-    'email-providers': EmailProvider;
+    'tenant-stripe-configs': TenantStripeConfig;
+    'tenant-email-configs': TenantEmailConfig;
+    'global-plans': GlobalPlan;
+    'tenant-plans': TenantPlan;
     tenants: Tenant;
     media: Media;
     posts: Post;
@@ -52,28 +55,74 @@ export interface User {
 export interface Tenant {
   id: string;
   name: string;
+  streetAddress?: string | null;
+  city?: string | null;
+  state?: string | null;
+  postalCode?: string | null;
+  country?: string | null;
+  contactEmail?: string | null;
+  telephone?: string | null;
+  businessHours?: string | null;
+  brand_assets?: {
+    logo?: string | Media | null;
+    icon?: string | Media | null;
+  };
+  social_networks?: {
+    instagram?: string | null;
+    facebook?: string | null;
+    youtube?: string | null;
+    twitter?: string | null;
+    linkedin?: string | null;
+    pinterest?: string | null;
+    snapchat?: string | null;
+    reddit?: string | null;
+    tiktok?: string | null;
+    tumblr?: string | null;
+  };
+  financial_platforms?: {
+    venmo?: string | null;
+    paypal?: string | null;
+    patreon?: string | null;
+    cashapp?: string | null;
+  };
+  professional_networks?: {
+    linkedin?: string | null;
+    behance?: string | null;
+    dribbble?: string | null;
+  };
+  messaging_platforms?: {
+    whatsapp?: string | null;
+    telegram?: string | null;
+    signal?: string | null;
+    wechat?: string | null;
+    line?: string | null;
+    discord?: string | null;
+    slack?: string | null;
+  };
+  content_platforms?: {
+    medium?: string | null;
+    spotify?: string | null;
+    twitch?: string | null;
+    vimeo?: string | null;
+    soundcloud?: string | null;
+    bandcamp?: string | null;
+    mixcloud?: string | null;
+    flickr?: string | null;
+  };
+  developer_platforms?: {
+    github?: string | null;
+    threads?: string | null;
+  };
+  freeBloomSubdomain?: string | null;
   domains?:
     | {
         domain: string;
         id?: string | null;
       }[]
     | null;
-  emailProvider?: (string | null) | EmailProvider;
-  updatedAt: string;
-  createdAt: string;
-}
-export interface EmailProvider {
-  id: string;
-  configType: 'smtp' | 'apiKey';
-  provider?: ('gmail' | 'outlook' | 'sendgrid' | 'hubspot') | null;
-  fromAddress: string;
-  fromName: string;
-  apiKey?: string | null;
-  smtpHost?: string | null;
-  smtpPort?: number | null;
-  username?: string | null;
-  password?: string | null;
-  secure?: boolean | null;
+  emailConfig?: (string | null) | TenantEmailConfig;
+  stripeConfig?: (string | null) | TenantStripeConfig;
+  globalPlan: string | GlobalPlan;
   updatedAt: string;
   createdAt: string;
 }
@@ -115,6 +164,68 @@ export interface Media {
     };
   };
 }
+export interface TenantEmailConfig {
+  id: string;
+  tenant: string | Tenant;
+  provider?: ('resend' | 'mailgun' | 'sendgrid' | 'gmail' | 'outlook' | 'hubspot') | null;
+  emailIntegrationMethod: 'smtp' | 'apiKey';
+  fromEmailAddress: string;
+  fromName: string;
+  apiKey?: string | null;
+  smtpHost?: string | null;
+  smtpPort?: number | null;
+  username?: string | null;
+  password?: string | null;
+  secure?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface TenantStripeConfig {
+  id: string;
+  tenant: string | Tenant;
+  stripeSecretKey: string;
+  stripePublishableKey: string;
+  stripeAccountId: string;
+  stripeWebhookSecret: string;
+  defaultCurrency: 'US' | 'EU' | 'GB' | 'CA' | 'AF' | 'AX' | 'AL' | 'DZ' | 'AS' | 'AD' | 'AO';
+  paymentMethods:
+    | 'american_express'
+    | 'diners_club'
+    | 'mastercard'
+    | 'visa'
+    | 'apple_pay'
+    | 'google_pay'
+    | 'microsoft_pay'
+    | 'paypal'
+    | 'alipay'
+    | 'wechat_pay'
+    | 'unionpay'
+    | 'jcb'
+    | 'klarna'
+    | 'afterpay'
+    | 'ideal';
+  successUrl: string;
+  cancelUrl: string;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface GlobalPlan {
+  id: string;
+  planGroup: {
+    globalPlan: 'free' | 'mini' | 'pro' | 'enterprise';
+  };
+  paymentGroup: {
+    paymentMethod: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+export interface TenantPlan {
+  id: string;
+  tenant?: (string | null) | Tenant;
+  updatedAt: string;
+  createdAt: string;
+}
 export interface Post {
   id: string;
   title: string;
@@ -146,26 +257,18 @@ export interface PostCategory {
 export interface Page {
   id: string;
   title: string;
-  slug: string;
-  content?:
-    | {
-        [k: string]: unknown;
-      }[]
-    | null;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    image?: string | Media | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-export interface Event {
-  id: string;
-  title: string;
-  description?: string | null;
-  date: string;
-  image: string | Media;
+  layout: {
+    form: string | Form;
+    enableIntro?: boolean | null;
+    introContent?:
+      | {
+          [k: string]: unknown;
+        }[]
+      | null;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'formBlock';
+  }[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -337,6 +440,20 @@ export interface Form {
       }[]
     | null;
   customField?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Event {
+  id: string;
+  title: string;
+  description?: string | null;
+  date: string;
+  image: string | Media;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: string | Media | null;
+  };
   updatedAt: string;
   createdAt: string;
 }

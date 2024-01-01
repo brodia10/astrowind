@@ -13,22 +13,23 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
 
-  payload:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    image: node:18-alpine
-    ports:
-      - '3000:3000'
-    volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
-    working_dir: /home/node/app/
-    command: sh -c "yarn install && yarn dev"
-    depends_on:
-      - mongodb
-    env_file:
-      - .env
+  # It's actually much slower reloading than not using docker.
+  # payload:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile.dev
+  #   image: node:18-alpine
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - .:/home/node/app
+  #     - node_modules:/home/node/app/node_modules
+  #   working_dir: /home/node/app/
+  #   command: sh -c "yarn install && yarn dev"
+  #   depends_on:
+  #     - mongodb
+  #   env_file:
+  #     - .env
 
 volumes:
   data:

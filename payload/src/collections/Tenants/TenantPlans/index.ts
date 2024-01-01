@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload/types';
-import { tenants } from '../Pages/access/tenants';
+import { tenants } from '../../Pages/access/tenants';
 import { tenantAdmins } from '../Tenants/access/tenantAdmins';
 
 const TenantPlans: CollectionConfig = {
