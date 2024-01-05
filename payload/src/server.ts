@@ -49,8 +49,14 @@ const start = async () => {
     },
   })
 
-  // Used to check the port set by heroku in prod or port 3000 for local
-  app.listen(process.env.PORT || 3000)
+  // Use PORT provided in environment or default to 3000
+  const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+
+  // Listen on `port` and 0.0.0.0
+  app.listen(port, "0.0.0.0", function () {
+    payload.logger.info(`App listening on port ${port}`)
+  });
+
 }
 
 start()
