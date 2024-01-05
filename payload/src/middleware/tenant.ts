@@ -3,6 +3,7 @@ import payload from 'payload';
 import { seed } from '../seed';
 import { TenantConfigurationService } from '../services/tenant/TenantConfigurationService';
 import { TenantResolutionService } from '../services/tenant/TenantResolutionService';
+import { EmailConfigurationService } from '../services/tenant/email/EmailConfigurationService';
 
 /**
  * Handle no tenant found
@@ -50,8 +51,18 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
     try {
         const tenant = await tenantResolutionService.resolveTenant(req);
         if (tenant) {
-            payload.logger.info(`Tenant: ${tenant.name}`);
+            payload.logger.info(`Tenant Email Config: ${tenant.emailConfig}`);
             await tenantConfigurationService.configureTenantContext(tenant);
+
+            // Store the tenant in res.locals for use in other middleware
+            res.locals.tenant = tenant;
+
+            const transport = EmailConfigurationService.getInstance().getTransport();
+
+            // Store the email transport in res.locals for use in other middleware
+            res.locals.emailTransport = transport;
+            payload.logger.info(`emailTransport: ${transport}`)
+            payload.logger.info(`tenant: ${tenant}`)
             next();
         } else {
             await handleNoTenantFound(req, res, next); // Ensure response is handled in all paths
@@ -61,7 +72,6 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
         next(error); // Pass the error to error handling middleware
     }
 }
-
 
 /**
  * Tenant middleware

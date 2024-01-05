@@ -12,7 +12,7 @@ export const Tenants: CollectionConfig = {
     delete: superAdmins,
   },
   admin: {
-    useAsTitle: 'appName',
+    useAsTitle: 'name',
   },
   labels: {
     singular: 'Tenant',
@@ -261,10 +261,9 @@ export const Tenants: CollectionConfig = {
               type: 'relationship',
               relationTo: 'tenant-email-configs',
               required: false,
+              hasMany: false,
               admin: {
                 description: 'Manage your email integration here. Bloom provides email through resend by default. This includes SMTP and API keys for sending transactional emails.',
-                allowCreate: true,
-                readOnly: false,
               },
             },
           ],
@@ -277,7 +276,8 @@ export const Tenants: CollectionConfig = {
               name: 'stripeConfig',
               label: 'Stripe Configuration',
               type: 'relationship',
-              relationTo: 'tenant-stripe-configs', // Ensure this matches the slug of your Stripe Config collection
+              relationTo: 'tenant-stripe-configs',
+              hasMany: false,
               required: false,
               admin: {
                 description: 'Select the Stripe configuration for this tenant. This contains all the necessary Stripe details.',

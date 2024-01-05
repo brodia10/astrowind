@@ -22,16 +22,41 @@ app.get('/', (_, res) => {
 })
 
 const start = async () => {
+
+  let emailConfig;
+
+  if (process.env.NODE_ENV === 'development') {
+    emailConfig = {
+      fromName: 'Admin',
+      fromAddress: 'admin@example.com',
+      logMockEmails: true,
+    };
+  } else {
+    emailConfig = {
+      transport: app.locals.emailTransport,
+      fromAddress: app.locals.tenantEmailConfig?.fromEmailAddress,
+      fromName: app.locals.tenantEmailConfig?.fromName,
+    };
+  }
+
   // Initialize Payload
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
     express: app,
+    email: emailConfig,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL:  ${payload.getAdminURL()}`)
     },
   })
-  // Used to check the port set by heroku in prod or port 3000 for local
-  app.listen(process.env.PORT || 3000)
+
+  // Use PORT provided in environment or default to 3000
+  const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+
+  // Listen on `port` and 0.0.0.0
+  app.listen(port, "0.0.0.0", function () {
+    payload.logger.info(`App listening on port ${port}`)
+  });
+
 }
 
 start()
