@@ -50,7 +50,7 @@ export const seed = async (payload: Payload): Promise<void> => {
             collection: 'tenants',
             data: {
                 name: 'bloom',
-                domains: [{ domain: 'localhost' },],
+                domains: [{ domain: process.env.BLOOM_DOMAIN }],
                 globalPlan: freePlanId,
             },
         }),
