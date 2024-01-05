@@ -167,16 +167,19 @@ export interface Media {
 export interface TenantEmailConfig {
   id: string;
   tenant: string | Tenant;
-  provider?: ('resend' | 'mailgun' | 'sendgrid' | 'gmail' | 'outlook' | 'hubspot') | null;
-  emailIntegrationMethod: 'smtp' | 'apiKey';
-  fromEmailAddress: string;
-  fromName: string;
-  apiKey?: string | null;
-  smtpHost?: string | null;
-  smtpPort?: number | null;
-  username?: string | null;
-  password?: string | null;
-  secure?: boolean | null;
+  senderInfo: {
+    fromEmailAddress: string;
+    fromName: string;
+  };
+  provider: 'resend' | 'sendgrid' | 'gmail' | 'outlook' | 'customSMTP';
+  auth?: {
+    apiKey?: string | null;
+    smtpHost?: string | null;
+    smtpPort?: number | null;
+    smtpUsername?: string | null;
+    smtpPassword?: string | null;
+    secure?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
