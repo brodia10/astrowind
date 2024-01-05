@@ -132,6 +132,35 @@ export const seed = async (payload: Payload): Promise<void> => {
         }),
     ])
 
+    // const emailConfig = await payload.create({
+    //     collection: 'tenant-email-configs',
+    //     data: {
+    //         tenant: bloom.id,
+    //         senderInfo: {
+    //             fromEmailAddress: process.env.RESEND_EMAIL_FROM_ADDRESS,
+    //             fromName: process.env.RESEND_EMAIL_FROM_NAME,
+    //         },
+    //         provider: 'resend',
+    //         auth: {
+    //             smtpHost: 'smtp.resend.com',
+    //             smtpPort: 465,
+    //             smtpUsername: 'resend',
+    //             smtpPassword: process.env.RESEND_API_KEY,
+    //         },
+    //     },
+    // });
+
+    // await Promise.all([
+    //     await payload.update({
+    //         collection: 'tenants',
+    //         id: bloom.id,
+    //         data: {
+    //             emailConfig: emailConfig.id,
+    //         },
+    //     }),
+    // ]);
+
+
     // create tenant-scoped pages
     // await Promise.all([
     //     await payload.create({
