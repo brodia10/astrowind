@@ -1,8 +1,9 @@
-import express from 'express'
-import path from 'path'
-import payload from 'payload'
-import logRequest from './middleware/logger'
-import { tenantMiddleware } from './middleware/tenant'
+import express from 'express';
+import httpProxy from 'http-proxy'; // You might use a proxy for redirecting requests
+import path from 'path';
+import payload from 'payload';
+import logRequest from './middleware/logger';
+import { tenantMiddleware } from './middleware/tenant';
 
 require('dotenv').config()
 const app = express()
@@ -20,6 +21,33 @@ app.use('/assets', express.static(path.resolve(__dirname, './assets')));
 app.get('/', (_, res) => {
   res.redirect('/admin')
 })
+
+// Create a proxy server for forwarding requests
+const proxy = httpProxy.createProxyServer({});
+
+
+app.use((req, res, next) => {
+  const subdomain = req.headers.host?.split('.')[0] || '';
+
+  // Forwarding logic based on subdomain
+  if (subdomain.endsWith('-site')) {
+    // Forward to Netlify
+    proxy.web(req, res, { target: process.env.FRONTEND_URL || 'http://localhost:4321' });
+  } else if (subdomain.endsWith('-dashboard')) {
+    // Forward to Railway
+    proxy.web(req, res, { target: process.env.BACKEND_URL || 'http://localhost:3000' });
+  } else {
+    // Handle unknown subdomains or pass to next middleware
+    next();
+    payload.logger.warn(`Subdomain not recognized: ${subdomain}`);
+  }
+});
+
+// Default route if no subdomains matched or if it's the root domain
+// app.get('*', (req, res) => {
+//   res.status(404).send('Subdomain not recognized or root domain!');
+// });
+
 
 const start = async () => {
 
