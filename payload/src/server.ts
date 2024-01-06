@@ -22,8 +22,6 @@ app.get('/', (_, res) => {
 })
 
 
-
-
 const start = async () => {
 
   let emailConfig;
