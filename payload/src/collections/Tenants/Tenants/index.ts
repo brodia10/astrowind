@@ -143,7 +143,6 @@ export const Tenants: CollectionConfig = {
               label: "Domains",
               type: "array",
               index: true,
-              unique: true,
               fields: [
                 {
                   name: "domain",
