@@ -5,6 +5,20 @@ import { TenantConfigurationService } from '../services/tenant/TenantConfigurati
 import { TenantResolutionService } from '../services/tenant/TenantResolutionService';
 import { EmailConfigurationService } from '../services/tenant/email/EmailConfigurationService';
 
+export function safeStringify(obj: any) {
+    const cache = new Set();
+    return JSON.stringify(obj, (key, value) => {
+        if (typeof value === 'object' && value !== null) {
+            if (cache.has(value)) {
+                // Duplicate reference found, discard key
+                return;
+            }
+            // Store value in our set
+            cache.add(value);
+        }
+        return value;
+    });
+}
 /**
  * Handle no tenant found
  * This function is called when no tenant is found for the request.
@@ -51,7 +65,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
     try {
         const tenant = await tenantResolutionService.resolveTenant(req);
         if (tenant) {
-            payload.logger.info(`Tenant Email Config: ${tenant.emailConfig}`);
+            payload.logger.info(`Tenant Email Config: ${safeStringify(tenant.emailConfig)}`);
             await tenantConfigurationService.configureTenantContext(tenant);
 
             // Store the tenant in res.locals for use in other middleware
@@ -61,8 +75,10 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
 
             // Store the email transport in res.locals for use in other middleware
             res.locals.emailTransport = transport;
-            payload.logger.info(`emailTransport: ${transport}`)
-            payload.logger.info(`tenant: ${tenant}`)
+            // Use safeStringify instead of JSON.stringify
+            payload.logger.info(`TenantConfigService: Tenant Email Transport: ${safeStringify(transport)}`);
+            payload.logger.info(`Tenant Email Transport in Middleware Locals: ${safeStringify(res.locals.emailTransport)}`);
+            payload.logger.info(`tenant: ${safeStringify(res.locals.tenant)}`);
             next();
         } else {
             await handleNoTenantFound(req, res, next); // Ensure response is handled in all paths
@@ -82,7 +98,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
  * @param {NextFunction} next
  * @returns {Promise<void>}
  */
-async function tenantMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
+export async function tenantMiddleware(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
         await resolveAndConfigureTenant(req, res, next);
     } catch (error) {
@@ -91,4 +107,4 @@ async function tenantMiddleware(req: Request, res: Response, next: NextFunction)
     }
 }
 
-export default tenantMiddleware;
+

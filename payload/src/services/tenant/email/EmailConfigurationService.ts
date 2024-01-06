@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 import nodemailerSendgrid from 'nodemailer-sendgrid';
 import payload from 'payload';
 import { TenantEmailConfig } from 'payload/generated-types';
+import { safeStringify } from '../../../middleware/tenant';
 
 enum Provider {
     Resend = 'resend',
@@ -76,7 +77,7 @@ export class EmailConfigurationService {
      * @return {TenantEmailConfig} 
      * @memberof EmailConfigurationService
      */
-    public getConfig() {
+    public getConfig(): TenantEmailConfig {
         return this.emailConfig;
     }
 
@@ -143,19 +144,19 @@ export class EmailConfigurationService {
                 break;
             default:
                 transportOptions = null;
-                throw new Error(`Invalid email provider: ${config?.provider}`);
+                throw new Error(`Invalid email provider: ${safeStringify(config?.provider)}`);
         }
 
         // Create transport with options
         const transport = nodemailer.createTransport(transportOptions);
-        payload.logger.info(`Email Transport: ${transport}`);
+        payload.logger.info(`EmailConfigService - Email Transport: ${safeStringify(transport)}`);
 
         // Verify connection configuration
         transport.verify(function (error, success) {
             if (error) {
-                console.log(error);
+                payload.logger.warn("Problem with transport, Email server is not ready to take our messages:", error);
             } else {
-                console.log("Email server is ready to take our messages");
+                payload.logger.info("Email server is ready to take our messages");
             }
         });
 

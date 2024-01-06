@@ -23,91 +23,6 @@ export const Tenants: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: 'General',
-          description: 'Manage your general settings here.',
-          fields: [
-            {
-              name: 'name',
-              type: 'text',
-              required: true,
-              label: 'App Name',
-              admin: { placeholder: 'Bloom', width: '25%', position: 'sidebar', description: 'The name of your app.' },
-            },
-
-            {
-              name: 'streetAddress',
-              label: 'Street Address',
-              type: 'text',
-              admin: {
-                placeholder: '123 Main St.',
-                width: '50%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'city',
-              label: 'City',
-              type: 'text',
-              admin: {
-                placeholder: 'Naples',
-                width: '25%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'state',
-              label: 'State/Province',
-              type: 'text',
-              admin: {
-                placeholder: 'Campania',
-                width: '25%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'postalCode',
-              label: 'Postal Code',
-              type: 'text',
-              admin: {
-                placeholder: '80100',
-                width: '25%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'country',
-              label: 'Country',
-              type: 'text',
-              admin: {
-                placeholder: 'Italy',
-                width: '25%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'contactEmail',
-              label: 'Contact Email',
-              type: 'email',
-              admin: {
-                placeholder: 'help@mycompany.com',
-                width: '50%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'telephone',
-              label: 'Telephone Number',
-              type: 'text',
-              admin: {
-                placeholder: '+39 081 123 4567',
-                width: '50%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'businessHours',
-              label: 'Business Hours',
-              type: 'text',
-              admin: {
-                width: '100%', // This field will take the full width of the row
-              },
-            },
-          ],
-        },
-        {
           label: 'Brand',
           description: 'Manage your social media links and brand assets',
           fields: [
@@ -137,16 +52,16 @@ export const Tenants: CollectionConfig = {
               label: 'Social Networks',
               type: 'group',
               fields: [
-                { name: 'instagram', label: 'Instagram', type: 'text' },
-                { name: 'facebook', label: 'Facebook', type: 'text' },
-                { name: 'youtube', label: 'YouTube', type: 'text' },
-                { name: 'twitter', label: 'Twitter', type: 'text' },
-                { name: 'linkedin', label: 'LinkedIn', type: 'text' },
-                { name: 'pinterest', label: 'Pinterest', type: 'text' },
-                { name: 'snapchat', label: 'Snapchat', type: 'text' },
-                { name: 'reddit', label: 'Reddit', type: 'text' },
-                { name: 'tiktok', label: 'TikTok', type: 'text' },
-                { name: 'tumblr', label: 'Tumblr', type: 'text' },
+                { name: 'instagram', label: 'Instagram', type: 'text', defaultValue: 'https://www.instagram.com/' },
+                { name: 'facebook', label: 'Facebook', type: 'text', defaultValue: 'https://www.facebook.com/' },
+                { name: 'youtube', label: 'YouTube', type: 'text', defaultValue: 'https://www.youtube.com/' },
+                { name: 'twitter', label: 'Twitter', type: 'text', defaultValue: 'https://www.twitter.com/' },
+                { name: 'linkedin', label: 'LinkedIn', type: 'text', defaultValue: 'https://www.linkedin.com/' },
+                { name: 'pinterest', label: 'Pinterest', type: 'text', defaultValue: 'https://www.pinterest.com/' },
+                { name: 'snapchat', label: 'Snapchat', type: 'text', defaultValue: 'https://www.snapchat.com/' },
+                { name: 'reddit', label: 'Reddit', type: 'text', defaultValue: 'https://www.reddit.com/' },
+                { name: 'tiktok', label: 'TikTok', type: 'text', defaultValue: 'https://www.tiktok.com/' },
+                { name: 'tumblr', label: 'Tumblr', type: 'text', defaultValue: 'https://www.tumblr.com/' },
               ],
             },
             // Financial Platforms
@@ -295,6 +210,91 @@ export const Tenants: CollectionConfig = {
               relationTo: 'global-plans',
               required: true,
               hasMany: false,
+            },
+          ],
+        },
+        {
+          label: 'General',
+          description: 'Manage your general settings here.',
+          fields: [
+            {
+              name: 'name',
+              type: 'text',
+              required: true,
+              label: 'App Name',
+              admin: { placeholder: 'Bloom', width: '25%', position: 'sidebar', description: 'The name of your app.' },
+            },
+
+            {
+              name: 'streetAddress',
+              label: 'Street Address',
+              type: 'text',
+              admin: {
+                placeholder: '123 Main St.',
+                width: '50%', // Adjust width as necessary
+              },
+            },
+            {
+              name: 'city',
+              label: 'City',
+              type: 'text',
+              admin: {
+                placeholder: 'Naples',
+                width: '25%', // Adjust width as necessary
+              },
+            },
+            {
+              name: 'state',
+              label: 'State/Province',
+              type: 'text',
+              admin: {
+                placeholder: 'Campania',
+                width: '25%', // Adjust width as necessary
+              },
+            },
+            {
+              name: 'postalCode',
+              label: 'Postal Code',
+              type: 'text',
+              admin: {
+                placeholder: '80100',
+                width: '25%', // Adjust width as necessary
+              },
+            },
+            {
+              name: 'country',
+              label: 'Country',
+              type: 'text',
+              admin: {
+                placeholder: 'Italy',
+                width: '25%', // Adjust width as necessary
+              },
+            },
+            {
+              name: 'contactEmail',
+              label: 'Contact Email',
+              type: 'email',
+              admin: {
+                placeholder: 'help@mycompany.com',
+                width: '50%', // Adjust width as necessary
+              },
+            },
+            {
+              name: 'telephone',
+              label: 'Telephone Number',
+              type: 'text',
+              admin: {
+                placeholder: '+39 081 123 4567',
+                width: '50%', // Adjust width as necessary
+              },
+            },
+            {
+              name: 'businessHours',
+              label: 'Business Hours',
+              type: 'text',
+              admin: {
+                width: '100%', // This field will take the full width of the row
+              },
             },
           ],
         },

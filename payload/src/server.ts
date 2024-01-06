@@ -2,7 +2,7 @@ import express from 'express'
 import path from 'path'
 import payload from 'payload'
 import logRequest from './middleware/logger'
-import tenantMiddleware from './middleware/tenant'
+import { tenantMiddleware } from './middleware/tenant'
 
 require('dotenv').config()
 const app = express()
@@ -45,7 +45,7 @@ const start = async () => {
     express: app,
     email: emailConfig,
     onInit: async () => {
-      payload.logger.info(`Payload Admin URL:  ${payload.getAdminURL()}`)
+      payload.logger.info(`Bloom Admin URL:  ${payload.getAdminURL()}`)
     },
   })
 
@@ -54,7 +54,7 @@ const start = async () => {
 
   // Listen on `port` and 0.0.0.0
   app.listen(port, "0.0.0.0", function () {
-    payload.logger.info(`App listening on port ${port}`)
+    payload.logger.info(`Bloom is listening on ${port}`)
   });
 
 }

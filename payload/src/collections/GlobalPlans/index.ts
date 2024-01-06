@@ -5,7 +5,7 @@ import { superAdmins } from '../../access/superAdmins';
 const GlobalPlans: CollectionConfig = {
     slug: 'global-plans',
     admin: {
-        useAsTitle: 'title',
+        useAsTitle: 'planGroup.globalPlan',
     },
     access: {
         create: superAdmins,

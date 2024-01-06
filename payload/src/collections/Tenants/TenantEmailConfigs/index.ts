@@ -61,7 +61,7 @@ const isAPIKeyMethod = (siblingData: any): boolean => {
 export const TenantEmailConfigs: CollectionConfig = {
     slug: 'tenant-email-configs',
     admin: {
-        useAsTitle: 'fromEmailAddress',
+        useAsTitle: 'provider',
         defaultColumns: ['fromName', 'fromEmailAddress', 'provider', 'updatedAt'],
         description: "Configure the Email Integration for your email service provider here. Ensure that you have the correct SMTP host, port, and credentials or API key as provided by your email service.",
     },
