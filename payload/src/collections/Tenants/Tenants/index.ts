@@ -148,13 +148,6 @@ export const Tenants: CollectionConfig = {
                   name: "domain",
                   type: "text",
                   required: true,
-                  hooks: {
-                    afterRead: [
-                      async ({ data }) => {
-                        return `<a href="https://${data.domain}" target="_blank">${data.domain}</a>`
-                      }
-                    ]
-                  },
                   admin: {
                     placeholder: "example.com",
                     description: "Enter your custom domain (e.g., yourdomain.com) and configure it by adding a CNAME record pointing to your Bloom subdomain. Detailed instructions and links to popular domain registrars' documentation are provided below.",
