@@ -3,7 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Function to generate a UUID for the subdomain
 function generateUniqueId(): string {
-    return uuidv4();
+    // Generate a UUID, remove all non-numeric characters, take the first 6 characters
+    return uuidv4().split('-').join('') // Remove '-' from UUID
+        .replace(/\D/g, '') // Remove all non-numeric characters
+        .slice(0, 6); // Take the first 6 characters
 }
 
 // Function to generate the subdomain string
