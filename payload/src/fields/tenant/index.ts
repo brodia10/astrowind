@@ -1,7 +1,7 @@
 import type { Field } from 'payload/types'
 
 import { superAdminFieldAccess } from '../../access/superAdmins'
-import { isSuperAdmin } from '../../utils/isSuperAdmin'
+import { isSuperAdmin } from '../../utilities/isSuperAdmin'
 import { tenantAdminFieldAccess } from './access/tenantAdmins'
 
 export const tenant: Field = {

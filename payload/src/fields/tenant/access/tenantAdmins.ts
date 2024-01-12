@@ -1,6 +1,6 @@
 import type { FieldAccess } from 'payload/types'
 
-import { checkUserRoles } from '../../../utils/checkUserRoles'
+import { checkUserRoles } from '../../../utilities/checkUserRoles'
 
 export const tenantAdminFieldAccess: FieldAccess = ({ req: { user }, doc }) => {
   return (

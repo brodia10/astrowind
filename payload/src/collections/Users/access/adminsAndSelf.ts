@@ -1,7 +1,7 @@
 import type { Access } from 'payload/config'
 
 import { User } from '../../../payload-types'
-import { isSuperAdmin } from '../../../utils/isSuperAdmin'
+import { isSuperAdmin } from '../../../utilities/isSuperAdmin'
 
 export const adminsAndSelf: Access<any, User> = async ({ req: { user } }) => {
   if (user) {

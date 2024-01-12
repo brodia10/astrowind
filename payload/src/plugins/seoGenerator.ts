@@ -4,7 +4,7 @@ const seoGenerator = {
         'pages',
         'posts',
         'events',
-        'postCategories'
+        'categories'
     ],
     uploadsCollection: 'media',
     // these should be updated.

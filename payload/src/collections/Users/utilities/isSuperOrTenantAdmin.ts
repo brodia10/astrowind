@@ -1,6 +1,6 @@
 import type { PayloadRequest } from 'payload/dist/types'
 
-import { isSuperAdmin } from '../../../utils/isSuperAdmin'
+import { isSuperAdmin } from '../../../utilities/isSuperAdmin'
 
 const logs = false
 

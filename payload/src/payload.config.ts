@@ -15,7 +15,6 @@ import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { payloadCloud } from '@payloadcms/plugin-cloud'
 import formBuilder from "@payloadcms/plugin-form-builder"
 import search from "@payloadcms/plugin-search"
-import seo from '@payloadcms/plugin-seo'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import comments from 'payload-plugin-comments'
 import { buildConfig } from 'payload/config'
@@ -24,14 +23,12 @@ import { buildConfig } from 'payload/config'
 import commentsConfig from './plugins/comments'
 import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
-import seoGenerator from './plugins/seoGenerator'
 
 // Collection Imports
 import { Events } from './collections/Events'
 import GlobalPlans from './collections/GlobalPlans'
 import { Media } from './collections/Media'
 import Pages from './collections/Pages'
-import { PostCategories } from './collections/PostCategories'
 import { Posts } from './collections/Posts'
 import { TenantEmailConfigs } from './collections/Tenants/TenantEmailConfigs'
 import TenantPlans from './collections/Tenants/TenantPlans'
@@ -40,8 +37,16 @@ import { Tenants } from './collections/Tenants/Tenants'
 import { Users } from './collections/Users'
 
 // Branding Imports
+import { ReusableContent } from './blocks/ReusableContent'
+import { CaseStudies } from './collections/CaseStudies'
+import Categories from './collections/Categories'
+import { Docs } from './collections/Docs'
+import BeforeDashboard from './components/BeforeDashboard'
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
+import { Footer } from './globals/Footer'
+import { Header } from './globals/Header'
+import { Settings } from './globals/Settings'
 
 
 dotenv.config({
@@ -81,19 +86,21 @@ export default buildConfig({
         Logo,
         Icon,
       },
+      beforeDashboard: [BeforeDashboard],
       // afterNavLinks: [SiteLink],
       // afterDashboard: [SiteLink],
     },
   },
   editor: slateEditor({}),
-  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, GlobalPlans, TenantPlans, Tenants, Media, Posts, Pages, PostCategories, Events],
+  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, GlobalPlans, TenantPlans, Tenants, Media, Posts, Pages, Categories, Events, CaseStudies, Docs, ReusableContent],
+  globals: [Header, Footer, Settings,],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), comments(commentsConfig),],
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), search(searchOptions), comments(commentsConfig),],
   // Configure the Mongoose adapter here
   db: mongooseAdapter({
     // Mongoose-specific arguments go here.

@@ -47,6 +47,7 @@ const start = async () => {
     email: emailConfig,
     onInit: async () => {
       payload.logger.info(`Bloom Admin URL:  ${payload.getAdminURL()}`)
+      // log the full url to the admin panel
     },
   })
 
