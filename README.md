@@ -1,8 +1,8 @@
-### Bloom CMS: Readme Update
+### Bloom: Readme Update
 
 ---
 
-## Bloom CMS: The Ultimate Dev-First Multi-Tenant CMS with Superior User Experience
+## Bloom: The Ultimate Dev-First Multi-Tenant CMS with Superior User Experience
 
 Bloom represents the pinnacle of content management and development solutions, integrating Payload CMS and Astro.js for unmatched simplicity, elegance, and power. Targeting a market ripe for innovation, Bloom stands out as a compelling alternative to traditional systems like WordPress, providing a unique, developer-first experience that's both intuitive and powerful.
 
