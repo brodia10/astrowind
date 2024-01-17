@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+const allPosts = await getCollection("posts");
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+const pageTitle = "Tag Index";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <section>
+    <div class="max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+      <div class="max-w-2xl">
+        <span class="text-xs font-bold tracking-wide text-blue-600 uppercase"
+          >Find your next read</span
+        ><p
+          class="mt-8 text-4xl font-semibold tracking-tighter md:text-6xl lg:text-5xl text-blue-950"
+        >
+          All tags
+        </p>
+      </div>
+      <ol role="list" class="flex flex-col gap-2 mt-12 ">
+        {
+          tags.map((tag) => (
+            <li class="p-4 bg-white shadow-box shadow-gray-500/20 rounded-lg w-full">
+              <a class="font-mono text-sm tracking-tighter uppercase inline-flex w-full items-center justify-between cursor-pointer hover:text-blue-700 focus:text-blue-950 " href={`/tags/${tag}`}>
+                {tag}
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-chevron-right" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+   <path d="M11 9l3 3l-3 3"></path>
+   <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0z"></path>
+</svg></a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

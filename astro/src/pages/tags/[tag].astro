@@ -1,0 +1,85 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import EntriesOne from "@/components/entries/EntriesOne.astro";
+import { getCollection } from "astro:content";
+export async function getStaticPaths() {
+  const allPosts = await getCollection("posts");
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={tag}>
+  <section>
+    <div class="max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+      <div >
+        <span
+          class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+        >
+        tags
+        </span>
+        <h1
+          class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950 md:text-5xl"
+        >
+        All blog posts tagged with <span
+            class="  md:text-transparent md:bg-clip-text md:bg-gradient-to-r from-blue-500 to-indigo-600 py-2 "
+            > {tag}</span
+          >
+        </h1>
+
+
+        <form
+          class="w-full p-2  mt-8 rounded-2xl lg:rounded-full sm:flex sm:max-w-md bg-white shadow-box shadow-gray-500/20"
+        >
+          <label for="email-address" class="sr-only">Email address</label>
+          <input
+            type="email"
+            name="email-address"
+            id="email-address"
+            autocomplete="email"
+            required=""
+            class="block w-full h-10 px-4 py-2 text-sm text-blue-700 border border-transparent appearance-none rounded-xl lg:rounded-full bg-gray-50 placeholder-gray-700 focus:border-gray-500 focus:bg-transparent focus:outline-none focus:ring-indigo-300 sm:text-sm"
+            placeholder="Enter your email"
+          />
+          <div class="mt-2 sm:ml-2 sm:mt-0 sm:flex-shrink-0">
+            <button
+              type="submit"
+              class="flex items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600 hover:to-indigo-700 shadow-button shadow-blue-600/50 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none lg:w-auto"
+              >Subscribe</button
+            >
+          </div>
+        </form>
+      </div>
+      <ul
+        class="grid grid-cols-1 mt-12 lg:grid-cols-3 sm:grid-cols-2 gap-x-3 gap-y-24 lg:gap-x-6">
+        {
+          posts.map((post) => (
+            <EntriesOne
+              url={"/posts/" + post.slug}
+              title={post.data.title}
+              description={post.data.description}
+              alt={post.data.title}
+              pubDate={post.data.pubDate.toString().slice(0, 10)}
+              author={post.data.author}
+              image={post.data.image.url}
+            />
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,427 @@
+<section>
+  <div
+    class="relative max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32"
+    x-data="{duration: 'monthly'}"
+  >
+    <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end">
+      <div class="lg:col-span-2">
+        <span
+          class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+        >
+          we are very cheap
+        </span>
+        <p class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950">
+          Equip your business
+          <span
+            class="md:block md:text-transparent md:bg-clip-text md:bg-gradient-to-r from-blue-500 to-indigo-600 py-2"
+            >with world class software
+          </span>
+        </p>
+        <p class="max-w-sm mt-4 text-base text-gray-700 lg:text-base">
+          Every plan includes every feature, and can scale as your team does.
+        </p>
+      </div>
+      <div class="lg:ml-auto">
+        <div
+          class="w-full border bg-white overflow-hidden inline-flex mt-6 p-0.5 rounded-full max-w-xs shadow-button shadow-white/20 z-0"
+        >
+          <button
+            id="monthly-pricing-button"
+            class="block w-full px-8 py-2 text-xs font-medium text-blue-900 transition border border-transparent rounded-full"
+            @click="duration = 'monthly'"
+            :class="duration == 'monthly' ? 'bg-gray-100 border text-blue-900 ' : ''"
+            type="button">Monthly</button
+          ><button
+            id="annual-pricing-button"
+            class="block w-full px-8 py-2 text-xs font-medium text-blue-900 transition border border-transparent rounded-full"
+            @click="duration = 'annual'"
+            :class="duration == 'annual' ? 'bg-gray-100 border text-blue-900 ' : ''"
+            type="button">Annual</button
+          >
+        </div>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-1 gap-4 mt-12 md:grid-cols-2 sm:mx-auto xl:grid-cols-3"
+    >
+      <section
+        class="flex flex-col p-8 bg-white rounded-3xl shadow-box shadow-gray-500/20"
+      >
+        <div class="flex flex-col gap-2">
+          <div>
+            <span
+              class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-gray-600 rounded-md bg-gray-50 ring-1 ring-inset ring-gray-500/10"
+              >Monthly <span
+                x-show="duration === 'annual'"
+                style="display: none;">billed annually</span
+              ></span
+            >
+          </div>
+          <div class="flex flex-col justify-between gap-2 lg:flex-row ">
+            <div>
+              <p
+                class="font-mono text-base font-medium tracking-tighter uppercase text-blue-950"
+              >
+                Starter Pack
+              </p>
+              <p class="text-xs font-medium text-gray-700">For individuals</p>
+            </div>
+            <p
+              class="font-mono text-2xl font-semibold tracking-tighter lg:text-4xl text-blue-950"
+            >
+              <span
+                data-monthly="$9"
+                data-annual="$5"
+                x-text="$el.dataset[duration]"></span>
+            </p>
+          </div>
+        </div>
+        <ul
+          class="flex flex-col mt-10 text-sm text-gray-700 gap-y-3"
+          role="list"
+        >
+          <li class="flex flex-row items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 text-blue-500 icon icon-tabler icon-tabler-circle-check-filled"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                stroke-width="0"
+                fill="currentColor"></path>
+            </svg>
+            <span>Limited number of users</span>
+          </li>
+          <li class="flex flex-row items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 text-blue-500 icon icon-tabler icon-tabler-circle-check-filled"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                stroke-width="0"
+                fill="currentColor"></path>
+            </svg>
+            <span>Limited storage (1 GB)</span>
+          </li>
+          <li class="flex flex-row items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 text-blue-500 icon icon-tabler icon-tabler-circle-check-filled"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                stroke-width="0"
+                fill="currentColor"></path>
+            </svg>
+            <span>Basic support (email only)</span>
+          </li>
+          <li class="flex flex-row items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 text-blue-500 icon icon-tabler icon-tabler-circle-check-filled"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                stroke-width="0"
+                fill="currentColor"></path>
+            </svg>
+            <span>Basic analytics</span>
+          </li>
+          <li class="flex flex-row items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 text-blue-500 icon icon-tabler icon-tabler-circle-check-filled"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                stroke-width="0"
+                fill="currentColor"></path>
+            </svg>
+            <span>Limited integrations</span>
+          </li>
+        </ul>
+        <div class="w-full mt-8">
+          <a
+            class="flex items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-gray-500 transition-all duration-200 bg-white border border-gray-300 rounded-full hover:text-blue-700 focus:ring-2 shadow-button shadow-gray-500/5 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"
+            href="#">Get started</a
+          >
+        </div>
+      </section>
+      <section
+        class="flex flex-col justify-between order-first h-full p-8 xl:col-span-2 just shadow-box shadow-blue-500/30 rounded-3xl bg-gradient-to-b from-blue-500 to-indigo-600 lg:order-none"
+      >
+        <div>
+          <div class="flex flex-col gap-2">
+            <div>
+              <span
+              class="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-white bg-blue-800 rounded-md ring-1 ring-inset ring-gray-500/10"
+              >Monthly <span
+                x-show="duration === 'annual'"
+                style="display: none;">billed annually</span
+              ></span
+            >
+            </div>
+            <div class="flex flex-col justify-between gap-2 lg:flex-row">
+              <div >
+                <p
+                  class="font-mono text-base font-medium tracking-tighter text-white uppercase "
+                >
+                  Golden Unicorn
+                </p>
+                <p class="text-xs font-medium text-white">For big companies</p>
+              </div>
+              <p
+                class="font-mono text-2xl font-semibold tracking-tighter text-white lg:text-4xl"
+              >
+                <span
+                  data-monthly="$49"
+                  data-annual="$39"
+                  x-text="$el.dataset[duration]"></span>
+
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="grid justify-between gap-4 mt-10 gird-cols-1 xl:grid-cols-2">
+          <ul class="flex flex-col text-sm text-white gap-y-3" role="list">
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Unlimited number of users</span>
+            </li>
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Unlimited storage</span>
+            </li>
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Advanced support</span>
+            </li>
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Advanced analytics</span>
+            </li>
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Multiple integrations</span>
+            </li>
+          </ul>
+          <ul class="flex flex-col text-sm text-white gap-y-3" role="list">
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Unlimited number of users</span>
+            </li>
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Unlimited storage</span>
+            </li>
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Advanced support</span>
+            </li>
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Advanced analytics</span>
+            </li>
+            <li class="flex flex-row items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-4 h-4 icon icon-tabler icon-tabler-circle-check-filled"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"></path>
+              </svg>
+              <span>Multiple integrations</span>
+            </li>
+          </ul>
+
+        </div>
+        <div class="w-full mt-8">
+          <a
+            class="flex items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-gray-500 transition-all duration-200 bg-white border border-gray-300 rounded-full hover:text-blue-700 focus:ring-2 shadow-button shadow-gray-500/5 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"
+            href="#">Get started</a
+          >
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
