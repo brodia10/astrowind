@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings:
+  "liga" 1,
+  "calt" 1, /* Contextual Alternates */
+  "dlig" 1, /* Discretionary Ligatures */
+  "ss07" 1, /* fSquare punctuation */
+  "ss08" 1, /* Square quotes */
+  "zero" 1, /* Slashed zero */
+  "tnum" 1, /* Tabular numbers */
+    "cv03" 1, /* Open six */
+    "cv04" 1, /* Open nine */
+    "cv01" 1, /* Alternate one */
+    "cv09", /* Flat-top three */
+    "cv02" 1; /* Open 4 */
+}
+@supports (font-variation-settings: normal) {
+  /* Use variable font if supported */
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+:root {
+  --astro-code-color-text: #000067;
+  --astro-code-color-background: #fff;
+  --astro-code-token-constant: #4e6bef;
+  --astro-code-token-string: ##0B9395;
+  --astro-code-token-comment: #70779d;
+  --astro-code-token-keyword: #7E83B3;
+  --astro-code-token-parameter: #ffffff;
+  --astro-code-token-function: #0092FC;
+  --astro-code-token-string-expression: #5871CD;
+  --astro-code-token-punctuation: #ffffff;
+  --astro-code-token-link: #ffffff;
+}
+
+/* Transition on the summary tag by faking the bottom maring*/
+details summary {
+  cursor: pointer;
+  transition: margin 150ms ease-out !important;
+}
+details[open] summary {
+  margin-bottom: 10px;
+}
+
+
+.prose-styles {
+  @apply prose  max-w-none  prose-headings:uppercase  prose-li:marker:text-blue-700 prose-pre:shadow-box prose-pre:shadow-gray-500/20 prose-pre:rounded-2xl     prose-headings:font-semibold prose-headings:text-blue-950 prose-h1:text-2xl prose-headings:tracking-tighter text-sm prose-p:text-gray-700 prose-pre:bg-blue-900 prose-img:rounded-md prose-blockquote:border-blue-600;
+}
+
+
+
+
+

@@ -1,0 +1,88 @@
+---
+import CtaThree from "../ctas/CtaThree.astro";
+import { Code } from "astro/components";
+
+---
+<section>
+  <div class="max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+    <div class="max-w-3xl mx-auto">
+      <span
+        class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+      >
+        all customers
+      </span>
+      <p
+        class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950 md:text-6xl"
+      >
+        Our valued customers
+      </p>
+      <p class="max-w-sm mt-4 text-base text-gray-700 lg:text-base">
+        A community of trust and partnership
+      </p>
+      <div class="flex items-center gap-1.5 md:gap-2 mt-8">
+        <img
+          alt="#"
+          loading="lazy"
+          class="h-6 w-6 rounded-full border border-slate-6 object-cover"
+          src="/avatar2.png"
+          style="color: transparent;"
+        />
+        <div class="flex gap-1">
+          <span
+            class="font-mono text-base font-medium tracking-tighter uppercase"
+            >Jonny Pot</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-3xl mx-auto mt-24">
+      <div class="prose-styles">
+        <p>
+          Domains already in use can now be transferred directly to a new
+          project on Semplice.
+        </p>
+
+        <p>
+          Previously, domains had to be removed from a project before being
+          added to a new one. With this update, if you attempt to move a live
+          domain to a new project, a prompt will appear offering to move the
+          in-use domain and all associated redirects to the selected project.
+        </p>
+        <p>Check out the documentation as well.</p>
+        <p>
+          In the dynamic landscape of fintech startups, the developer's
+          experience with SDKs hinges on their flexibility to customize and
+          extend existing features to align with their unique needs. The greater
+          the scope for creative adaptation, the more satisfying the journey.
+        </p>
+
+        <p>
+          With this in mind, we've developed a Java SDK tailored to the specific
+          demands of the fintech sector, leveraging the Java Virtual Machine
+          (JVM). This SDK empowers you to enhance your capabilities and features
+          for seamless financial operations, setting your fintech startup apart
+          in delivering a distinctive user experience.
+        </p>
+       <section class="mt-12">
+          <Code code={`  import { defineConfig } from 'astro/config';
+  import sitemap from "@astrojs/sitemap";
+  import tailwind from "@astrojs/tailwind";
+  import image from "@astrojs/image";
+  import compress from "astro-compress";
+  import partytown from "@astrojs/partytown";
+  import sitemap from "@astrojs/sitemap";
+  // https://astro.build/config
+  export default defineConfig({
+     site: 'https://lexingtonthemes.com',
+    integrations: [tailwind(), image(), sitemap()]
+  });}'`}
+                      lang="js"
+                      theme="css-variables"
+                    />
+       </section>
+      </div>
+    </div>
+  </div>
+</section>
+<CtaThree/>

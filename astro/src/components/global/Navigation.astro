@@ -1,0 +1,176 @@
+<div
+  class="justify-center w-full mx-auto bg-gray-100/30 backdrop-blur-3xl border-b text-blue-950 text-xs font-semibold"
+>
+  <div
+    x-cloak
+    x-show="showAlert"
+    x-data="{ showAlert: true }"
+    role="alert"
+    class="flex h-12 items-center justify-center bg-gradient-to-t from-blue-500 to-indigo-600 text-white "
+  >
+    <div class="flex items-center justify-between gap-4 w-full px-8 py-24 mx-auto md:px-12 lg:px-32 max-w-screen-xl">
+      <div class="text-xs font-medium">
+        This is a dismissible banner to anounce features
+      </div>
+      <button  @click="showAlert = false" class="underline bg-white/10 ring-1 ring-white/50 text-white focus:bg-white focus:text-blue-700 hover:bg-white hover:text-blue-950 rounded-full p-0.5"
+        >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-x w-4 h-4"
+
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M18 6l-12 12"></path>
+          <path d="M6 6l12 12"></path>
+        </svg></button
+      >
+    </div>
+  </div>
+  <div
+    x-data="{ open: false }"
+    class="flex flex-col w-full px-8 py-2 mx-auto m md:items-center md:justify-between md:flex-row md:px-12 lg:px-32 max-w-screen-xl"
+  >
+    <div class="flex flex-row items-center justify-between">
+      <a
+        class="inline-flex font-mono uppercase items-center gap-2 text-base font-bold"
+        href="/"
+      >
+        <span>
+          <svg
+            class="h-4"
+            viewBox="0 0 400 403"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_1984_346)">
+              <rect
+                x="156.024"
+                y="157.229"
+                width="87.9518"
+                height="87.9518"
+                fill="#4d59ee"
+                stroke="currentColor"
+                stroke-width="1.20482"></rect>
+              <rect
+                x="89.759"
+                y="0.60241"
+                width="87.9518"
+                height="87.9518"
+                fill="#4d59ee"
+                stroke="currentColor"
+                stroke-width="1.20482"></rect>
+              <rect
+                x="0.60241"
+                y="89.759"
+                width="87.9518"
+                height="87.9518"
+                fill="#4d59ee"
+                stroke="currentColor"
+                stroke-width="1.20482"></rect>
+              <rect
+                x="311.446"
+                y="89.759"
+                width="87.9518"
+                height="87.9518"
+                fill="#4d59ee"
+                stroke="currentColor"
+                stroke-width="1.20482"></rect>
+              <rect
+                x="311.446"
+                y="224.699"
+                width="87.9518"
+                height="87.9518"
+                fill="#4d59ee"
+                stroke="currentColor"
+                stroke-width="1.20482"></rect>
+              <rect
+                x="222.289"
+                y="313.855"
+                width="87.9518"
+                height="87.9518"
+                fill="#4d59ee"
+                stroke="currentColor"
+                stroke-width="1.20482"></rect>
+              <rect
+                x="89.759"
+                y="313.855"
+                width="87.9518"
+                height="87.9518"
+                fill="#4d59ee"
+                stroke="currentColor"
+                stroke-width="1.20482"></rect>
+              <rect
+                x="0.60241"
+                y="224.699"
+                width="87.9518"
+                height="87.9518"
+                fill="#4d59ee"
+                stroke="currentColor"
+                stroke-width="1.20482"></rect>
+              <rect
+                x="222.289"
+                y="0.60241"
+                width="87.9518"
+                height="87.9518"
+                fill="#4d59ee"
+                stroke="currentColor"
+                stroke-width="1.20482"></rect>
+            </g>
+            <defs>
+              <clipPath id="clip0_1984_346">
+                <rect width="400" height="402.41" fill="white"></rect>
+              </clipPath>
+            </defs>
+          </svg>
+        </span>
+         Alfred</a
+      ><button
+        class="rounded-lg md:hidden focus:outline-none focus:shadow-outline"
+        @click="open = !open"
+        ><svg
+          class="w-6 h-6"
+          stroke="currentColor"
+          fill="none"
+          viewBox="0 0 24 24"
+          ><path
+            :class="{'hidden': open, 'inline-flex': !open }"
+            class="inline-flex"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path><path
+            :class="{'hidden': !open, 'inline-flex': open }"
+            class="hidden"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path></svg
+        ></button
+      >
+    </div>
+    <nav
+      :class="{'flex': open, 'hidden': !open}"
+      class="flex-col items-center flex-grow hidden p-4 px-5 opacity-100 md:px-0 md:pb-0 md:flex md:justify-start md:flex-row lg:p-0 md:mt-0"
+    >
+      <a
+        class="px-4 py-2 hover:text-blue-500 focus:outline-none focus:shadow-none focus:text-blue-900/90 md:ml-auto"
+        href="/"
+        >Overview
+      </a><a
+        class="px-4 py-2 hover:text-blue-500 focus:outline-none focus:shadow-none focus:text-blue-900/90"
+        href="/system/style-guide"
+        >Style Guide
+      </a><a
+        class="flex items-center justify-center h-8 px-4 py-2  font-semibold text-white transition-all duration-200 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600 hover:to-indigo-700 shadow-button shadow-blue-600/50 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"
+        href="https://lexingtonthemes.lemonsqueezy.com/checkout/buy/95522c10-eed2-4620-84ab-5cbd34efc225"
+        ><span>Buy Alfred</span></a
+      >
+    </nav>
+  </div>
+</div>

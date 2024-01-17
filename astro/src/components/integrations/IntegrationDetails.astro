@@ -1,0 +1,72 @@
+<div
+  x-show="open"
+  x-on:keydown.escape.prevent.stop="open = false"
+  role="dialog"
+  aria-modal="true"
+  x-id="['modal-title']"
+  :aria-labelledby="$id('modal-title')"
+  class="fixed inset-0 z-10 overflow-y-auto w-full"
+  aria-labelledby="modal-title-1"
+  style="display: none;"
+>
+  <!-- Overlay -->
+  <div
+    x-show="open"
+    x-transition.opacity=""
+    class="fixed inset-0 bg-regent-200 bg-opacity-50 w-full"
+    style="display: none;"
+  >
+  </div>
+  <!-- Panel -->
+  <div
+    x-show="open"
+    x-transition=""
+    x-on:click="open = false"
+    class="relative flex min-h-screen items-center justify-center p-4 w-full"
+    style="display: none;"
+  >
+    <div
+      x-on:click.stop=""
+      x-trap.noscroll.inert="open"
+      class="relative w-full max-w-xl text-center overflow-y-auto rounded-3xl shadow-box shadow-gray-500/20 bg-white p-12"
+    >
+      <div class="inline-flex gap-2 items-center">
+        <img class="h-8" src="/assets/integrations/template.svg" alt="" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-arrows-left-right"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M21 17l-18 0"></path>
+          <path d="M6 10l-3 -3l3 -3"></path>
+          <path d="M3 7l18 0"></path>
+          <path d="M18 20l3 -3l-3 -3"></path>
+        </svg>
+        <img src="/assets/integrations/figma.svg" alt="" />
+      </div>
+      <h2
+        class="text-2xl mt-6 tracking-tighter font-medium text-black"
+        :id="$id('modal-title')"
+        id="modal-title-1"
+      >
+        Connect Alfred to your workspace
+      </h2>
+      <!-- Content -->
+      <p class="mt-6 text-slate-500 text-sm max-w-md mx-auto">
+        Give priority to tasks and projects based on the requirements of your
+        customers, and establish a closer feedback loop with them.
+      </p>
+      <div class="mt-8">
+        <a href="#" class="flex items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-gray-500 transition-all duration-200 bg-white border border-gray-300 rounded-full hover:text-blue-700 focus:ring-2 shadow-button shadow-gray-500/5 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"> Learn how <span>↗</span></a>
+      </div>
+    </div>
+  </div>
+</div>
