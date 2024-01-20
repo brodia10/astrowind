@@ -26,6 +26,7 @@ export class StripeConfigurationService {
     }
 
     public configureService(config: TenantStripeConfig): void {
+        ``
         this.setConfig(config);
     }
 }

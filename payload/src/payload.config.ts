@@ -21,6 +21,7 @@ import comments from 'payload-plugin-comments'
 import { buildConfig } from 'payload/config'
 
 // Plugin Config Imports
+import stripePlugin from '@payloadcms/plugin-stripe'
 import commentsConfig from './plugins/comments'
 import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
@@ -42,6 +43,7 @@ import { Users } from './collections/Users'
 // Branding Imports
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
+import stripeConfig from './plugins/stripe.config'
 
 
 dotenv.config({
@@ -93,7 +95,7 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), comments(commentsConfig),],
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), comments(commentsConfig), stripePlugin(stripeConfig)],
   // Configure the Mongoose adapter here
   db: mongooseAdapter({
     // Mongoose-specific arguments go here.

@@ -1,9 +1,12 @@
 
+// These will be tenants stripe secrets that are created for them. We'll use the strip config service to get and set the stripe config for each tenant.
 const stripeConfig = {
-    stripeSecretKey: 'sk_test_51KrDzFGcfEQQlDX8Fvrxh2oNChaqfmmiRNeSd4lu9b6DdRF4xjOmfyr1rkwyGgvBoXoBOJKIw684aMSnQ04N0fd600OwvB61YU',
-    stripePublishableKey: 'pk_test_51KrDzFGcfEQQlDX8XwBds4zmbG5zfjY6JdSQlPqLyMgv9JOEJyqXit5tft2N7IGyoIvZAx4sikw3OmKqBbou9gSw00LDSynn5o',
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
     stripeAccountId: process.env.STRIPE_ACCOUNT_ID,
     stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+    rest: true, // proxy to the Stripe REST API
+    logs: true, // log information to console
 }
 
-export default stripeConfig;
+export default stripeConfig;    
