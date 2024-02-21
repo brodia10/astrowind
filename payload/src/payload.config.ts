@@ -7,8 +7,7 @@ import dotenv from 'dotenv'
 import path from 'path'
 
 // Adapter Imports
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-// import { postgresAdapter } from '@payloadcms/db-postgres'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 
 // Payload Imports
 import { webpackBundler } from '@payloadcms/bundler-webpack'
@@ -27,9 +26,12 @@ import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
 // Collection Imports
+import Contacts from './collections/Contacts'
+import EmailLists from './collections/EmailLists'
 import { Events } from './collections/Events'
 import GlobalPlans from './collections/GlobalPlans'
 import { Media } from './collections/Media'
+import OptInOptOutHistory from './collections/OptInOptOutHistory'
 import Pages from './collections/Pages'
 import { PostCategories } from './collections/PostCategories'
 import { Posts } from './collections/Posts'
@@ -57,13 +59,29 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
-    webpack: config => ({
+    webpack: (config) => ({
       ...config,
       resolve: {
         ...config.resolve,
         alias: {
           ...config.resolve.alias,
           dotenv: path.resolve(__dirname, './dotenv.js'),
+        },
+        fallback: { // Extend this section with additional polyfills
+          os: require.resolve('os-browserify/browser'),
+          stream: require.resolve('stream-browserify'),
+          http: require.resolve('stream-http'),
+          https: require.resolve('https-browserify'),
+          url: require.resolve('url/'),
+          zlib: require.resolve('browserify-zlib'),
+          crypto: require.resolve('crypto-browserify'),
+          util: require.resolve('util/'),
+          assert: require.resolve('assert/'),
+          fs: false, // fs is typically not needed on the client side
+          net: false, // net is not available on the client side
+          tls: false, // tls is not available on the client side
+          dns: false, // dns is not available on the client side
+          child_process: false, // child_process is not available on the client side
         },
       },
     }),
@@ -86,7 +104,7 @@ export default buildConfig({
     },
   },
   editor: slateEditor({}),
-  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, GlobalPlans, TenantPlans, Tenants, Media, Posts, Pages, PostCategories, Events],
+  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, GlobalPlans, TenantPlans, Contacts, EmailLists, OptInOptOutHistory, Tenants, Media, Posts, Pages, PostCategories, Events,],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
@@ -94,17 +112,11 @@ export default buildConfig({
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
   plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), comments(commentsConfig),],
-  // Configure the Mongoose adapter here
-  db: mongooseAdapter({
-    // Mongoose-specific arguments go here.
-    // URL is required.
-    url: process.env.DATABASE_URI,
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URI,
+    },
   }),
-  // db: postgresAdapter({
-  //   pool: {
-  //     connectionString: process.env.DATABASE_URI,
-  //   },
-  // }),
 })
 
 

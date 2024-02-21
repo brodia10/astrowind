@@ -3,7 +3,7 @@ import payload from 'payload';
 import { seed } from '../seed';
 import { TenantConfigurationService } from '../services/tenant/TenantConfigurationService';
 import { TenantResolutionService } from '../services/tenant/TenantResolutionService';
-import { EmailConfigurationService } from '../services/tenant/email/EmailConfigurationService';
+import { EmailConfigService } from '../services/tenant/email';
 
 export function safeStringify(obj: any) {
     const cache = new Set();
@@ -63,18 +63,31 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
     const tenantConfigurationService = TenantConfigurationService.getInstance();
 
     try {
+        // Try to resolve the tenant
         const tenant = await tenantResolutionService.resolveTenant(req);
+
+        // May need to check if tenant has an email config here and if not, create it.
         if (tenant) {
             payload.logger.info(`Tenant Email Config: ${safeStringify(tenant.emailConfig)}`);
+
+            // Update the tenant config service's context with this tenant's data
             await tenantConfigurationService.configureTenantContext(tenant);
 
-            // Store the tenant in res.locals for use in other middleware
-            res.locals.tenant = tenant;
+            // Email Singleton Service
+            const emailService = EmailConfigService.getInstance()
 
-            const transport = EmailConfigurationService.getInstance().getTransport();
+            // Create transport
+            const transport = emailService.createTransport()
 
-            // Store the email transport in res.locals for use in other middleware
+            // Store Postmark Email Transport for use in other middleware
             res.locals.emailTransport = transport;
+
+            // Store Tenant Email Config for use in other  middleware
+            res.locals.tenantEmailConfig = emailService.getConfig()
+
+            // Store Tenant for use in other middleware
+            res.locals.tenant = tenant
+
             // Use safeStringify instead of JSON.stringify
             payload.logger.info(`TenantConfigService: Tenant Email Transport: ${safeStringify(transport)}`);
             payload.logger.info(`Tenant Email Transport in Middleware Locals: ${safeStringify(res.locals.emailTransport)}`);
