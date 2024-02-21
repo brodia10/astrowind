@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import payload from 'payload';
+
 import logRequest from './middleware/logger';
 import { tenantMiddleware } from './middleware/tenant';
 
@@ -28,8 +29,8 @@ const start = async () => {
 
   if (process.env.NODE_ENV === 'development') {
     emailConfig = {
-      fromName: 'Admin',
-      fromAddress: 'admin@example.com',
+      fromName: process.env.BLOOM_FROM_NAME,
+      fromAddress: process.env.BLOOM_EMAIL,
       logMockEmails: true,
     };
   } else {
