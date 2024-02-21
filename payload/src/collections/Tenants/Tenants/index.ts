@@ -1,16 +1,15 @@
 import type { CollectionConfig } from 'payload/types'
 
-import { superAdmins } from '../../../access/superAdmins'
 import { tenantAdmins } from './access/tenantAdmins'
 import generateTenantSubdomains from './hooks/generateSubdomains'
 
 export const Tenants: CollectionConfig = {
   slug: 'tenants',
   access: {
-    create: superAdmins,
+    create: tenantAdmins,
     read: tenantAdmins,
     update: tenantAdmins,
-    delete: superAdmins,
+    delete: tenantAdmins,
   },
   hooks: {
     beforeChange: [generateTenantSubdomains],
@@ -30,9 +29,22 @@ export const Tenants: CollectionConfig = {
           label: 'Brand',
           description: 'Manage your social media links and brand assets',
           fields: [
+            {
+              name: 'company',
+              label: 'Company',
+              type: 'group',
+              fields: [
+                {
+                  name: 'name',
+                  label: 'Name',
+                  type: 'text',
+                  required: true,
+                },
+              ],
+            },
             // Branding Assets
             {
-              name: 'brand_assets',
+              name: 'brandAssets',
               label: 'Logo & Icon',
               type: 'group',
               fields: [
@@ -48,88 +60,6 @@ export const Tenants: CollectionConfig = {
                   type: 'upload',
                   relationTo: 'media',
                 },
-              ],
-            },
-            // Social Networks
-            {
-              name: 'social_networks',
-              label: 'Social Networks',
-              type: 'group',
-              fields: [
-                { name: 'instagram', label: 'Instagram', type: 'text', defaultValue: 'https://www.instagram.com/' },
-                { name: 'facebook', label: 'Facebook', type: 'text', defaultValue: 'https://www.facebook.com/' },
-                { name: 'youtube', label: 'YouTube', type: 'text', defaultValue: 'https://www.youtube.com/' },
-                { name: 'twitter', label: 'Twitter', type: 'text', defaultValue: 'https://www.twitter.com/' },
-                { name: 'linkedin', label: 'LinkedIn', type: 'text', defaultValue: 'https://www.linkedin.com/' },
-                { name: 'pinterest', label: 'Pinterest', type: 'text', defaultValue: 'https://www.pinterest.com/' },
-                { name: 'snapchat', label: 'Snapchat', type: 'text', defaultValue: 'https://www.snapchat.com/' },
-                { name: 'reddit', label: 'Reddit', type: 'text', defaultValue: 'https://www.reddit.com/' },
-                { name: 'tiktok', label: 'TikTok', type: 'text', defaultValue: 'https://www.tiktok.com/' },
-                { name: 'tumblr', label: 'Tumblr', type: 'text', defaultValue: 'https://www.tumblr.com/' },
-              ],
-            },
-            // Financial Platforms
-            {
-              name: 'financial_platforms',
-              label: 'Financial Platforms',
-              type: 'group',
-              fields: [
-                { name: 'venmo', label: 'Venmo', type: 'text' },
-                { name: 'paypal', label: 'PayPal', type: 'text' },
-                { name: 'patreon', label: 'Patreon', type: 'text' },
-                { name: 'cashapp', label: 'CashApp', type: 'text' },
-              ],
-            },
-            // Professional Networks
-            {
-              name: 'professional_networks',
-              label: 'Professional Networks',
-              type: 'group',
-              fields: [
-                { name: 'linkedin', label: 'LinkedIn', type: 'text' },
-                { name: 'behance', label: 'Behance', type: 'text' },
-                { name: 'dribbble', label: 'Dribbble', type: 'text' },
-              ],
-            },
-            // Messaging Platforms
-            {
-              name: 'messaging_platforms',
-              label: 'Messaging Platforms',
-              type: 'group',
-              fields: [
-                { name: 'whatsapp', label: 'WhatsApp', type: 'text' },
-                { name: 'telegram', label: 'Telegram', type: 'text' },
-                { name: 'signal', label: 'Signal', type: 'text' },
-                { name: 'wechat', label: 'WeChat', type: 'text' },
-                { name: 'line', label: 'Line', type: 'text' },
-                { name: 'discord', label: 'Discord', type: 'text' },
-                { name: 'slack', label: 'Slack', type: 'text' },
-              ],
-            },
-            // Content Platforms
-            {
-              name: 'content_platforms',
-              label: 'Content Platforms',
-              type: 'group',
-              fields: [
-                { name: 'medium', label: 'Medium', type: 'text' },
-                { name: 'spotify', label: 'Spotify', type: 'text' },
-                { name: 'twitch', label: 'Twitch', type: 'text' },
-                { name: 'vimeo', label: 'Vimeo', type: 'text' },
-                { name: 'soundcloud', label: 'SoundCloud', type: 'text' },
-                { name: 'bandcamp', label: 'Bandcamp', type: 'text' },
-                { name: 'mixcloud', label: 'Mixcloud', type: 'text' },
-                { name: 'flickr', label: 'Flickr', type: 'text' },
-              ],
-            },
-            // Developer Platforms
-            {
-              name: 'developer_platforms',
-              label: 'Developer Platforms',
-              type: 'group',
-              fields: [
-                { name: 'github', label: 'GitHub', type: 'text' },
-                { name: 'threads', label: 'Threads', type: 'text' },
               ],
             },
           ],
@@ -179,55 +109,46 @@ export const Tenants: CollectionConfig = {
               type: 'relationship',
               relationTo: 'tenant-email-configs',
               required: false,
-              hasMany: false,
               admin: {
                 description: 'Manage your email integration here. Bloom provides email through resend by default. This includes SMTP and API keys for sending transactional emails.',
               },
             },
           ],
         },
+        // {
+        //   label: 'Payments',
+        //   description: 'Easily accept payments from your customers',
+        //   fields: [
+        //     {
+        //       name: 'stripeConfig',
+        //       label: 'Stripe Configuration',
+        //       type: 'relationship',
+        //       relationTo: 'tenant-stripe-configs',
+        //       hasMany: false,
+        //       required: false,
+        //       admin: {
+        //         description: 'Select the Stripe configuration for this tenant. This contains all the necessary Stripe details.',
+        //       },
+        //     },
+        //   ],
+        // },
+        // {
+        //   label: 'Plan',
+        //   description: 'Your Bloom plan and billing',
+        //   fields: [
+        //     {
+        //       name: 'globalPlan',
+        //       type: 'relationship',
+        //       relationTo: 'global-plans',
+        //       required: true,
+        //       hasMany: false,
+        //     },
+        //   ],
+        // },
         {
-          label: 'Payments',
-          description: 'Easily accept payments from your customers',
-          fields: [
-            {
-              name: 'stripeConfig',
-              label: 'Stripe Configuration',
-              type: 'relationship',
-              relationTo: 'tenant-stripe-configs',
-              hasMany: false,
-              required: false,
-              admin: {
-                description: 'Select the Stripe configuration for this tenant. This contains all the necessary Stripe details.',
-              },
-            },
-          ],
-        },
-        {
-          label: 'Plan',
-          description: 'Your Bloom plan and billing',
-          fields: [
-            {
-              name: 'globalPlan',
-              type: 'relationship',
-              relationTo: 'global-plans',
-              required: true,
-              hasMany: false,
-            },
-          ],
-        },
-        {
-          label: 'General',
+          label: 'Contact',
           description: 'Manage your general settings here.',
           fields: [
-            {
-              name: 'name',
-              type: 'text',
-              required: true,
-              label: 'App Name',
-              admin: { placeholder: 'Bloom', width: '25%', position: 'sidebar', description: 'The name of your app.' },
-            },
-
             {
               name: 'streetAddress',
               label: 'Street Address',

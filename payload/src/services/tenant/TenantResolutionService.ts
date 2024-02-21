@@ -1,4 +1,3 @@
-// TenantResolutionService.ts
 import { Request } from 'express';
 import payload from 'payload';
 import { Tenant } from '../../payload-types';

@@ -28,19 +28,23 @@ export interface Config {
   };
   globals: {};
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
 export interface User {
-  id: string;
+  id: number;
   firstName?: string | null;
   lastName?: string | null;
   roles: ('super-admin' | 'user')[];
   tenants?:
     | {
-        tenant: string | Tenant;
+        tenant: number | Tenant;
         roles: ('admin' | 'user')[];
         id?: string | null;
       }[]
     | null;
-  lastLoggedInTenant?: (string | null) | Tenant;
+  lastLoggedInTenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -52,57 +56,18 @@ export interface User {
   lockUntil?: string | null;
   password: string | null;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tenants".
+ */
 export interface Tenant {
-  id: string;
-  brand_assets?: {
-    logo?: string | Media | null;
-    icon?: string | Media | null;
+  id: number;
+  company: {
+    name: string;
   };
-  social_networks?: {
-    instagram?: string | null;
-    facebook?: string | null;
-    youtube?: string | null;
-    twitter?: string | null;
-    linkedin?: string | null;
-    pinterest?: string | null;
-    snapchat?: string | null;
-    reddit?: string | null;
-    tiktok?: string | null;
-    tumblr?: string | null;
-  };
-  financial_platforms?: {
-    venmo?: string | null;
-    paypal?: string | null;
-    patreon?: string | null;
-    cashapp?: string | null;
-  };
-  professional_networks?: {
-    linkedin?: string | null;
-    behance?: string | null;
-    dribbble?: string | null;
-  };
-  messaging_platforms?: {
-    whatsapp?: string | null;
-    telegram?: string | null;
-    signal?: string | null;
-    wechat?: string | null;
-    line?: string | null;
-    discord?: string | null;
-    slack?: string | null;
-  };
-  content_platforms?: {
-    medium?: string | null;
-    spotify?: string | null;
-    twitch?: string | null;
-    vimeo?: string | null;
-    soundcloud?: string | null;
-    bandcamp?: string | null;
-    mixcloud?: string | null;
-    flickr?: string | null;
-  };
-  developer_platforms?: {
-    github?: string | null;
-    threads?: string | null;
+  brandAssets?: {
+    logo?: number | Media | null;
+    icon?: number | Media | null;
   };
   domains?:
     | {
@@ -111,10 +76,7 @@ export interface Tenant {
         id?: string | null;
       }[]
     | null;
-  emailConfig?: (string | null) | TenantEmailConfig;
-  stripeConfig?: (string | null) | TenantStripeConfig;
-  globalPlan: string | GlobalPlan;
-  name: string;
+  emailConfig?: (number | null) | TenantEmailConfig;
   streetAddress?: string | null;
   city?: string | null;
   state?: string | null;
@@ -126,8 +88,12 @@ export interface Tenant {
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
 export interface Media {
-  id: string;
+  id: number;
   alt?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -164,28 +130,32 @@ export interface Media {
     };
   };
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tenant-email-configs".
+ */
 export interface TenantEmailConfig {
-  id: string;
-  tenant: string | Tenant;
-  senderInfo: {
-    fromEmailAddress: string;
-    fromName: string;
-  };
-  provider: 'resend' | 'sendgrid' | 'gmail' | 'outlook' | 'customSMTP';
-  auth?: {
-    apiKey?: string | null;
-    smtpHost?: string | null;
-    smtpPort?: number | null;
-    smtpUsername?: string | null;
-    smtpPassword?: string | null;
-    secure?: boolean | null;
+  id: number;
+  tenant: number | Tenant;
+  fromEmailAddress: string;
+  fromName: string;
+  postmarkServerId?: number | null;
+  postmarkServerToken?: string | null;
+  messageStreams?: {
+    transactional?: string | null;
+    broadcast?: string | null;
+    inbound?: string | null;
   };
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tenant-stripe-configs".
+ */
 export interface TenantStripeConfig {
-  id: string;
-  tenant: string | Tenant;
+  id: number;
+  tenant: number | Tenant;
   stripeSecretKey: string;
   stripePublishableKey: string;
   stripeAccountId: string;
@@ -212,8 +182,12 @@ export interface TenantStripeConfig {
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "global-plans".
+ */
 export interface GlobalPlan {
-  id: string;
+  id: number;
   planGroup: {
     globalPlan: 'free' | 'mini' | 'pro' | 'enterprise';
   };
@@ -223,45 +197,61 @@ export interface GlobalPlan {
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tenant-plans".
+ */
 export interface TenantPlan {
-  id: string;
-  tenant?: (string | null) | Tenant;
+  id: number;
+  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
 export interface Post {
-  id: string;
+  id: number;
   title: string;
   content: {
     [k: string]: unknown;
   }[];
-  image: string | Media;
-  category?: (string | null) | PostCategory;
+  image: number | Media;
+  category?: (number | null) | PostCategory;
   meta?: {
     title?: string | null;
     description?: string | null;
-    image?: string | Media | null;
+    image?: number | Media | null;
   };
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "postCategories".
+ */
 export interface PostCategory {
-  id: string;
+  id: number;
   name: string;
   description?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
-    image?: string | Media | null;
+    image?: number | Media | null;
   };
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
 export interface Page {
-  id: string;
+  id: number;
   title: string;
   layout: {
-    form: string | Form;
+    form: number | Form;
     enableIntro?: boolean | null;
     introContent?:
       | {
@@ -275,13 +265,17 @@ export interface Page {
   meta?: {
     title?: string | null;
     description?: string | null;
-    image?: string | Media | null;
+    image?: number | Media | null;
   };
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "forms".
+ */
 export interface Form {
-  id: string;
+  id: number;
   title: string;
   fields?:
     | (
@@ -289,21 +283,70 @@ export interface Form {
             name: string;
             label?: string | null;
             width?: number | null;
-            defaultValue?: string | null;
             required?: boolean | null;
+            defaultValue?: boolean | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'text';
+            blockType: 'checkbox';
           }
         | {
             name: string;
             label?: string | null;
             width?: number | null;
-            defaultValue?: string | null;
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'textarea';
+            blockType: 'country';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'email';
+          }
+        | {
+            message?:
+              | {
+                  [k: string]: unknown;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'message';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            defaultValue?: number | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'number';
+          }
+        | {
+            name: string;
+            label?: string | null;
+            width?: number | null;
+            basePrice?: number | null;
+            priceConditions?:
+              | {
+                  fieldToUse?: string | null;
+                  condition?: ('hasValue' | 'equals' | 'notEquals') | null;
+                  valueForCondition?: string | null;
+                  operator?: ('add' | 'subtract' | 'multiply' | 'divide') | null;
+                  valueType?: ('static' | 'valueOfField') | null;
+                  valueForOperator?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            required?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'payment';
           }
         | {
             name: string;
@@ -329,76 +372,27 @@ export interface Form {
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'email';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
             blockType: 'state';
           }
         | {
             name: string;
             label?: string | null;
             width?: number | null;
+            defaultValue?: string | null;
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'country';
+            blockType: 'text';
           }
         | {
             name: string;
             label?: string | null;
             width?: number | null;
-            defaultValue?: number | null;
+            defaultValue?: string | null;
             required?: boolean | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'number';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            required?: boolean | null;
-            defaultValue?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'checkbox';
-          }
-        | {
-            message?:
-              | {
-                  [k: string]: unknown;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'message';
-          }
-        | {
-            name: string;
-            label?: string | null;
-            width?: number | null;
-            basePrice?: number | null;
-            priceConditions?:
-              | {
-                  fieldToUse?: string | null;
-                  condition?: ('hasValue' | 'equals' | 'notEquals') | null;
-                  valueForCondition?: string | null;
-                  operator?: ('add' | 'subtract' | 'multiply' | 'divide') | null;
-                  valueType?: ('static' | 'valueOfField') | null;
-                  valueForOperator?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            required?: boolean | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'payment';
+            blockType: 'textarea';
           }
       )[]
     | null;
@@ -414,15 +408,15 @@ export interface Form {
     reference?:
       | ({
           relationTo: 'pages';
-          value: string | Page;
+          value: number | Page;
         } | null)
       | ({
           relationTo: 'posts';
-          value: string | Post;
+          value: number | Post;
         } | null)
       | ({
           relationTo: 'events';
-          value: string | Event;
+          value: number | Event;
         } | null);
     url?: string | null;
   };
@@ -446,23 +440,31 @@ export interface Form {
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
 export interface Event {
-  id: string;
+  id: number;
   title: string;
   description?: string | null;
   date: string;
-  image: string | Media;
+  image: number | Media;
   meta?: {
     title?: string | null;
     description?: string | null;
-    image?: string | Media | null;
+    image?: number | Media | null;
   };
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
 export interface FormSubmission {
-  id: string;
-  form: string | Form;
+  id: number;
+  form: number | Form;
   submissionData?:
     | {
         field: string;
@@ -484,42 +486,54 @@ export interface FormSubmission {
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "search".
+ */
 export interface Search {
-  id: string;
+  id: number;
   title?: string | null;
   priority?: number | null;
   doc:
     | {
         relationTo: 'posts';
-        value: string | Post;
+        value: number | Post;
       }
     | {
         relationTo: 'postCategories';
-        value: string | PostCategory;
+        value: number | PostCategory;
       }
     | {
         relationTo: 'events';
-        value: string | Event;
+        value: number | Event;
       };
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "comments".
+ */
 export interface Comment {
-  id: string;
+  id: number;
   author?: string | null;
   email?: string | null;
   content?: string | null;
-  replyPost?: (string | null) | Post;
-  replyComment?: (string | null) | Comment;
+  replyPost?: (number | null) | Post;
+  replyComment?: (number | null) | Comment;
   isApproved?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences".
+ */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -534,8 +548,12 @@ export interface PayloadPreference {
   updatedAt: string;
   createdAt: string;
 }
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations".
+ */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;

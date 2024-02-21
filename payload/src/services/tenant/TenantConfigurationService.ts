@@ -1,8 +1,7 @@
 // TenantConfigurationService.ts
 import payload from 'payload';
 import { Tenant } from '../../payload-types';
-import { EmailConfigurationService } from './email/EmailConfigurationService';
-import { StripeConfigurationService } from './stripe/StripeConfigurationService';
+import { EmailConfigService } from './email';
 
 /**
  * 
@@ -53,12 +52,12 @@ export class TenantConfigurationService {
      */
     public async configureTenantContext(tenant: Tenant): Promise<void> {
         payload.logger.info(`Current Tenant:  ${JSON.stringify(tenant.emailConfig)} (${tenant.domains.map(domain => domain?.domain).join(', ')})`);
-        const stripeService = StripeConfigurationService.getInstance();
-        const emailService = EmailConfigurationService.getInstance();
+        // const stripeService = StripeConfigurationService.getInstance();
+        const emailService = EmailConfigService.getInstance();
 
         try {
             // Start Services
-            await this.configureService(stripeService, tenant.stripeConfig, 'stripe');
+            // await this.configureService(stripeService, tenant.stripeConfig, 'stripe');
             await this.configureService(emailService, tenant.emailConfig, 'email');
         } catch (error) {
             console.error("Error configuring tenant context:", error);
