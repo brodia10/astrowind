@@ -6,6 +6,7 @@ const TenantPlans: CollectionConfig = {
     slug: 'tenant-plans',
     admin: {
         useAsTitle: 'title',
+        hidden: true,
     },
     access: {
         create: tenantAdmins,

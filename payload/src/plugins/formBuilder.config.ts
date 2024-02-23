@@ -29,18 +29,18 @@ const formBuilderConfig = {
             read: () => true,
             update: () => true,
         },
-        fields: [
-            {
-                name: "customField",
-                type: "text"
-            }
-            // ... other custom fields if necessary
-        ]
+        admin: {
+            group: 'Content'
+        }
     },
     formSubmissionOverrides: {
         slug: "form-submissions", // Custom slug for form submissions
         // Other custom settings for form submissions
+        admin: {
+            group: 'Admin',
+        }
     }
+
 };
 
 export default formBuilderConfig;

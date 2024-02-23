@@ -8,6 +8,10 @@ const EmailLists: CollectionConfig = {
         // Access control logic for email lists
         create: ({ req }) => !!req.user,
     },
+    admin: {
+        useAsTitle: 'name',
+        group: 'CRM',
+    },
     fields: [
         {
             name: 'name',

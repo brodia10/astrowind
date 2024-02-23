@@ -8,6 +8,10 @@ const Contacts: CollectionConfig = {
         // Define your access control logic here
         create: ({ req }) => !!req.user,
     },
+    admin: {
+        useAsTitle: 'email_address',
+        group: 'CRM',
+    },
     hooks: {
         beforeChange: [
             async ({ req, data }) => {

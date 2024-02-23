@@ -10,6 +10,7 @@ export const TenantStripeConfigs: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'tenant',
+        group: 'Store',
     },
     access: {
         create: superAdmins,

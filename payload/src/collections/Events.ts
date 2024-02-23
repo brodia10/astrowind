@@ -2,6 +2,9 @@ import { CollectionConfig } from 'payload/types';
 
 export const Events: CollectionConfig = {
     slug: 'events',
+    admin: {
+        group: 'Content',
+    },
     fields: [
         {
             name: 'title',

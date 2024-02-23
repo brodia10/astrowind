@@ -8,6 +8,9 @@ const OptInOptOutHistory: CollectionConfig = {
         // Similar access control logic as Contacts
         create: ({ req }) => !!req.user,
     },
+    admin: {
+        hidden: true,
+    },
     fields: [
         {
             name: 'contact',

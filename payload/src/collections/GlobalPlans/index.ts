@@ -6,6 +6,8 @@ const GlobalPlans: CollectionConfig = {
     slug: 'global-plans',
     admin: {
         useAsTitle: 'planGroup.globalPlan',
+        group: 'Admin',
+        hidden: true,
     },
     access: {
         create: superAdmins,

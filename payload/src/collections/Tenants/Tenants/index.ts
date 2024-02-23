@@ -17,6 +17,7 @@ export const Tenants: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'company.name',
+    group: 'Admin'
   },
   labels: {
     singular: 'Tenant',
