@@ -6,9 +6,10 @@ import { tenantAdmins } from '../Tenants/access/tenantAdmins';
 export const TenantEmailConfigs: CollectionConfig = {
     slug: 'tenant-email-configs',
     admin: {
-        useAsTitle: 'tenant.name',
+        useAsTitle: 'fromEmailAddress',
         defaultColumns: ['fromEmailAddress', 'updatedAt'],
         description: "Configure the Email Integration for your email service provider here. Ensure that you have the correct SMTP host, port, and credentials or API key as provided by your email service.",
+        group: 'CRM',
     },
     access: {
         read: tenantAdmins,

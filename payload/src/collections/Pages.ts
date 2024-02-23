@@ -5,6 +5,7 @@ const Pages: CollectionConfig = {
     slug: 'pages',
     admin: {
         useAsTitle: 'title',
+        group: 'Content',
     },
     labels: {
         singular: 'Page',

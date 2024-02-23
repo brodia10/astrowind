@@ -16,11 +16,9 @@ import formBuilder from "@payloadcms/plugin-form-builder"
 import search from "@payloadcms/plugin-search"
 import seo from '@payloadcms/plugin-seo'
 import { slateEditor } from '@payloadcms/richtext-slate'
-import comments from 'payload-plugin-comments'
 import { buildConfig } from 'payload/config'
 
 // Plugin Config Imports
-import commentsConfig from './plugins/comments'
 import formBuilderConfig from './plugins/formBuilder.config'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
@@ -111,7 +109,7 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), comments(commentsConfig),],
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions),],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,

@@ -2,6 +2,9 @@ import { CollectionConfig } from 'payload/types';
 
 export const Posts: CollectionConfig = {
     slug: 'posts',
+    admin: {
+        group: 'Content',
+    },
     fields: [
         {
             name: 'title',

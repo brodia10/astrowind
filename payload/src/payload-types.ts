@@ -25,7 +25,6 @@ export interface Config {
     forms: Form;
     'form-submissions': FormSubmission;
     search: Search;
-    comments: Comment;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -485,7 +484,6 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
-  customField?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -556,21 +554,6 @@ export interface Search {
         relationTo: 'events';
         value: number | Event;
       };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "comments".
- */
-export interface Comment {
-  id: number;
-  author?: string | null;
-  email?: string | null;
-  content?: string | null;
-  replyPost?: (number | null) | Post;
-  replyComment?: (number | null) | Comment;
-  isApproved?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
