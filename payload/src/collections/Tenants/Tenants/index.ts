@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload/types'
 
+import { ColourPickerField, TelephoneField } from '@nouance/payload-better-fields-plugin'
 import { tenantAdmins } from './access/tenantAdmins'
 import generateTenantSubdomains from './hooks/generateSubdomains'
 
@@ -15,7 +16,7 @@ export const Tenants: CollectionConfig = {
     beforeChange: [generateTenantSubdomains],
   },
   admin: {
-    useAsTitle: 'name',
+    useAsTitle: 'company.name',
   },
   labels: {
     singular: 'Tenant',
@@ -30,39 +31,190 @@ export const Tenants: CollectionConfig = {
           description: 'Manage your social media links and brand assets',
           fields: [
             {
-              name: 'company',
-              label: 'Company',
-              type: 'group',
-              fields: [
+              type: 'tabs',
+              tabs: [
                 {
-                  name: 'name',
-                  label: 'Name',
-                  type: 'text',
-                  required: true,
+                  label: 'Brand',
+                  description: 'Manage your company information, brand assets, and theme colors.',
+                  fields: [
+                    {
+                      name: 'brandAssets',
+                      label: 'Brand Assets',
+                      type: 'group',
+                      fields: [
+                        {
+                          type: 'row',
+                          fields: [
+                            {
+                              name: 'logo',
+                              label: 'Logo',
+                              type: 'upload',
+                              relationTo: 'media',
+                              admin: {
+                                width: '50%',
+                                description: 'Upload your company logo.',
+                              },
+                            },
+                            {
+                              name: 'icon',
+                              label: 'Icon',
+                              type: 'upload',
+                              relationTo: 'media',
+                              admin: {
+                                width: '50%',
+                                description: 'Upload your company icon.',
+                              },
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                    // Separate Group for Theme Colors
+                    {
+                      name: 'themeColors',
+                      label: 'Theme Colors',
+                      type: 'group',
+                      fields: [
+                        {
+                          type: 'row',
+                          fields: [
+                            // Assuming ColourPickerField is correctly structured for your setup
+                            ...ColourPickerField(
+                              {
+                                name: 'primaryColor',
+                                defaultValue: 'hsla(54, 100%, 50%, 1)',
+                                admin: {
+                                  width: '50%',
+                                  description: 'Choose the primary color for your brand.',
+                                },
+                              },
+                              {
+                                type: 'hslA',
+                              },
+                            ),
+                            ...ColourPickerField(
+                              {
+                                name: 'secondaryColor',
+                                defaultValue: 'hsla(211, 100%, 50%, 1)',
+                                admin: {
+                                  width: '50%',
+                                  description: 'Choose the secondary color for your brand.',
+                                },
+                              },
+                              {
+                                type: 'hslA',
+                              },
+                            ),
+                          ],
+                        },
+                      ],
+                    },
+                  ],
                 },
               ],
             },
-            // Branding Assets
+          ]
+        },
+        {
+          label: 'Company',
+          name: 'company',
+          description: 'Manage your general settings here.',
+          admin: { position: 'sidebar' },
+          fields: [
+            // Row for Telephone and Business Hours
             {
-              name: 'brandAssets',
-              label: 'Logo & Icon',
+              name: 'name',
+              label: 'Company Name',
+              type: 'text',
+              admin: {
+                placeholder: 'My Company',
+                position: 'sidebar'
+              }
+            },
+            {
+              name: 'telephone',
+              label: 'Contact',
               type: 'group',
               fields: [
+                ...TelephoneField({
+                  name: 'telephone',
+                  admin: {
+                    placeholder: '+1 2133 734 253',
+                    description: "Add your phone number here.",
+                    position: 'sidebar',
+                  },
+                }),
                 {
-                  name: 'logo',
-                  label: 'Logo',
-                  type: 'upload',
-                  relationTo: 'media',
+                  name: 'businessHours',
+                  label: 'Business Hours',
+                  type: 'textarea',
+
+                  admin: {
+                    position: 'sidebar',
+                    description: 'Add your business hours here.'
+                  },
+                },
+              ],
+            },
+            // Row for Address Details: Street Address and City
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'streetAddress',
+                  label: 'Street Address',
+                  type: 'text',
+                  admin: {
+                    placeholder: '123 Main St.',
+                    width: '75%', // Increased width for better alignment
+                  },
                 },
                 {
-                  name: 'icon',
-                  label: 'Icon',
-                  type: 'upload',
-                  relationTo: 'media',
+                  name: 'city',
+                  label: 'City',
+                  type: 'text',
+                  admin: {
+                    placeholder: 'Naples',
+                    width: '25%',
+                  },
+                },
+              ],
+            },
+            // Row for State/Province, Postal Code, and Country
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'state',
+                  label: 'State/Province',
+                  type: 'text',
+                  admin: {
+                    placeholder: 'Campania',
+                    width: '33.33%',
+                  },
+                },
+                {
+                  name: 'postalCode',
+                  label: 'Postal Code',
+                  type: 'text',
+                  admin: {
+                    placeholder: '80100',
+                    width: '33.33%',
+                  },
+                },
+                {
+                  name: 'country',
+                  label: 'Country',
+                  type: 'text',
+                  admin: {
+                    placeholder: 'Italy',
+                    width: '33.33%',
+                  },
                 },
               ],
             },
           ],
+
         },
         {
           label: 'Domains',
@@ -99,128 +251,6 @@ export const Tenants: CollectionConfig = {
               }
             }
           ]
-        },
-        {
-          label: 'Email',
-          fields: [
-            {
-              name: 'emailConfig',
-              label: 'Email Integration',
-              type: 'relationship',
-              relationTo: 'tenant-email-configs',
-              required: false,
-              admin: {
-                description: 'Manage your email integration here. Bloom provides email through resend by default. This includes SMTP and API keys for sending transactional emails.',
-              },
-            },
-          ],
-        },
-        // {
-        //   label: 'Payments',
-        //   description: 'Easily accept payments from your customers',
-        //   fields: [
-        //     {
-        //       name: 'stripeConfig',
-        //       label: 'Stripe Configuration',
-        //       type: 'relationship',
-        //       relationTo: 'tenant-stripe-configs',
-        //       hasMany: false,
-        //       required: false,
-        //       admin: {
-        //         description: 'Select the Stripe configuration for this tenant. This contains all the necessary Stripe details.',
-        //       },
-        //     },
-        //   ],
-        // },
-        // {
-        //   label: 'Plan',
-        //   description: 'Your Bloom plan and billing',
-        //   fields: [
-        //     {
-        //       name: 'globalPlan',
-        //       type: 'relationship',
-        //       relationTo: 'global-plans',
-        //       required: true,
-        //       hasMany: false,
-        //     },
-        //   ],
-        // },
-        {
-          label: 'Contact',
-          description: 'Manage your general settings here.',
-          fields: [
-            {
-              name: 'streetAddress',
-              label: 'Street Address',
-              type: 'text',
-              admin: {
-                placeholder: '123 Main St.',
-                width: '50%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'city',
-              label: 'City',
-              type: 'text',
-              admin: {
-                placeholder: 'Naples',
-                width: '25%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'state',
-              label: 'State/Province',
-              type: 'text',
-              admin: {
-                placeholder: 'Campania',
-                width: '25%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'postalCode',
-              label: 'Postal Code',
-              type: 'text',
-              admin: {
-                placeholder: '80100',
-                width: '25%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'country',
-              label: 'Country',
-              type: 'text',
-              admin: {
-                placeholder: 'Italy',
-                width: '25%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'contactEmail',
-              label: 'Contact Email',
-              type: 'email',
-              admin: {
-                placeholder: 'help@mycompany.com',
-                width: '50%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'telephone',
-              label: 'Telephone Number',
-              type: 'text',
-              admin: {
-                placeholder: '+39 081 123 4567',
-                width: '50%', // Adjust width as necessary
-              },
-            },
-            {
-              name: 'businessHours',
-              label: 'Business Hours',
-              type: 'text',
-              admin: {
-                width: '100%', // This field will take the full width of the row
-              },
-            },
-          ],
         },
       ],
     },

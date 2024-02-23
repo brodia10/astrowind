@@ -1,5 +1,5 @@
 {
-  "id": "1dab7c60-b0e4-4436-b3d0-8053874c61c1",
+  "id": "0a0d48e6-0135-4aca-bac8-d8c66ed53725",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -903,6 +903,499 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
+    "contacts": {
+      "name": "contacts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email_address": {
+          "name": "email_address",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email_status": {
+          "name": "email_status",
+          "type": "enum_contacts_email_status",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email_permission_status": {
+          "name": "email_permission_status",
+          "type": "enum_contacts_email_permission_status",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "contacts_email_address_idx": {
+          "name": "contacts_email_address_idx",
+          "columns": [
+            "email_address"
+          ],
+          "isUnique": true
+        },
+        "contacts_created_at_idx": {
+          "name": "contacts_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "contacts_rels": {
+      "name": "contacts_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tenants_id": {
+          "name": "tenants_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email_lists_id": {
+          "name": "email_lists_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "contacts_rels_order_idx": {
+          "name": "contacts_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "contacts_rels_parent_idx": {
+          "name": "contacts_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "contacts_rels_path_idx": {
+          "name": "contacts_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "contacts_rels_parent_id_contacts_id_fk": {
+          "name": "contacts_rels_parent_id_contacts_id_fk",
+          "tableFrom": "contacts_rels",
+          "tableTo": "contacts",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "contacts_rels_tenants_id_tenants_id_fk": {
+          "name": "contacts_rels_tenants_id_tenants_id_fk",
+          "tableFrom": "contacts_rels",
+          "tableTo": "tenants",
+          "columnsFrom": [
+            "tenants_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "contacts_rels_email_lists_id_email_lists_id_fk": {
+          "name": "contacts_rels_email_lists_id_email_lists_id_fk",
+          "tableFrom": "contacts_rels",
+          "tableTo": "email_lists",
+          "columnsFrom": [
+            "email_lists_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "email_lists": {
+      "name": "email_lists",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "email_lists_name_idx": {
+          "name": "email_lists_name_idx",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        },
+        "email_lists_created_at_idx": {
+          "name": "email_lists_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "email_lists_rels": {
+      "name": "email_lists_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tenants_id": {
+          "name": "tenants_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "email_lists_rels_order_idx": {
+          "name": "email_lists_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "email_lists_rels_parent_idx": {
+          "name": "email_lists_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "email_lists_rels_path_idx": {
+          "name": "email_lists_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "email_lists_rels_parent_id_email_lists_id_fk": {
+          "name": "email_lists_rels_parent_id_email_lists_id_fk",
+          "tableFrom": "email_lists_rels",
+          "tableTo": "email_lists",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "email_lists_rels_tenants_id_tenants_id_fk": {
+          "name": "email_lists_rels_tenants_id_tenants_id_fk",
+          "tableFrom": "email_lists_rels",
+          "tableTo": "tenants",
+          "columnsFrom": [
+            "tenants_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "opt_in_opt_out_history": {
+      "name": "opt_in_opt_out_history",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "opt_type": {
+          "name": "opt_type",
+          "type": "enum_opt_in_opt_out_history_opt_type",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source": {
+          "name": "source",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reason": {
+          "name": "reason",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "opt_in_opt_out_history_created_at_idx": {
+          "name": "opt_in_opt_out_history_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "opt_in_opt_out_history_rels": {
+      "name": "opt_in_opt_out_history_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contacts_id": {
+          "name": "contacts_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tenants_id": {
+          "name": "tenants_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "opt_in_opt_out_history_rels_order_idx": {
+          "name": "opt_in_opt_out_history_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "opt_in_opt_out_history_rels_parent_idx": {
+          "name": "opt_in_opt_out_history_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "opt_in_opt_out_history_rels_path_idx": {
+          "name": "opt_in_opt_out_history_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "opt_in_opt_out_history_rels_parent_id_opt_in_opt_out_history_id_fk": {
+          "name": "opt_in_opt_out_history_rels_parent_id_opt_in_opt_out_history_id_fk",
+          "tableFrom": "opt_in_opt_out_history_rels",
+          "tableTo": "opt_in_opt_out_history",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "opt_in_opt_out_history_rels_contacts_id_contacts_id_fk": {
+          "name": "opt_in_opt_out_history_rels_contacts_id_contacts_id_fk",
+          "tableFrom": "opt_in_opt_out_history_rels",
+          "tableTo": "contacts",
+          "columnsFrom": [
+            "contacts_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "opt_in_opt_out_history_rels_tenants_id_tenants_id_fk": {
+          "name": "opt_in_opt_out_history_rels_tenants_id_tenants_id_fk",
+          "tableFrom": "opt_in_opt_out_history_rels",
+          "tableTo": "tenants",
+          "columnsFrom": [
+            "tenants_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "tenants_domains": {
       "name": "tenants_domains",
       "schema": "",
@@ -982,56 +1475,62 @@
           "primaryKey": true,
           "notNull": true
         },
+        "theme_colors_primary_color": {
+          "name": "theme_colors_primary_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "theme_colors_secondary_color": {
+          "name": "theme_colors_secondary_color",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
         "company_name": {
           "name": "company_name",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "street_address": {
-          "name": "street_address",
+        "company_telephone_telephone": {
+          "name": "company_telephone_telephone",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
-        "city": {
-          "name": "city",
+        "company_telephone_business_hours": {
+          "name": "company_telephone_business_hours",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
-        "state": {
-          "name": "state",
+        "company_street_address": {
+          "name": "company_street_address",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
-        "postal_code": {
-          "name": "postal_code",
+        "company_city": {
+          "name": "company_city",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
-        "country": {
-          "name": "country",
+        "company_state": {
+          "name": "company_state",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
-        "contact_email": {
-          "name": "contact_email",
+        "company_postal_code": {
+          "name": "company_postal_code",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
-        "telephone": {
-          "name": "telephone",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "business_hours": {
-          "name": "business_hours",
+        "company_country": {
+          "name": "company_country",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
@@ -1097,12 +1596,6 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
-        },
-        "tenant_email_configs_id": {
-          "name": "tenant_email_configs_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {
@@ -1148,19 +1641,6 @@
           "tableTo": "media",
           "columnsFrom": [
             "media_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "tenants_rels_tenant_email_configs_id_tenant_email_configs_id_fk": {
-          "name": "tenants_rels_tenant_email_configs_id_tenant_email_configs_id_fk",
-          "tableFrom": "tenants_rels",
-          "tableTo": "tenant_email_configs",
-          "columnsFrom": [
-            "tenant_email_configs_id"
           ],
           "columnsTo": [
             "id"
@@ -4444,6 +4924,27 @@
         "mini": "mini",
         "pro": "pro",
         "enterprise": "enterprise"
+      }
+    },
+    "enum_contacts_email_status": {
+      "name": "enum_contacts_email_status",
+      "values": {
+        "Active": "Active",
+        "Unsubscribed": "Unsubscribed"
+      }
+    },
+    "enum_contacts_email_permission_status": {
+      "name": "enum_contacts_email_permission_status",
+      "values": {
+        "Express": "Express",
+        "Implied": "Implied"
+      }
+    },
+    "enum_opt_in_opt_out_history_opt_type": {
+      "name": "enum_opt_in_opt_out_history_opt_type",
+      "values": {
+        "Opt-In": "Opt-In",
+        "Opt-Out": "Opt-Out"
       }
     },
     "enum_forms_blocks_payment_price_conditions_condition": {
