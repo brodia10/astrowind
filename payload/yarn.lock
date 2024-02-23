@@ -2129,6 +2129,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@nouance/payload-better-fields-plugin@npm:^1.3.5":
+  version: 1.3.5
+  resolution: "@nouance/payload-better-fields-plugin@npm:1.3.5"
+  dependencies:
+    colord: "npm:^2.9.3"
+    react-colorful: "npm:^5.6.1"
+    react-number-format: "npm:^5.3.1"
+    react-phone-number-input: "npm:^3.3.7"
+    slugify: "npm:^1.6.6"
+    validate-color: "npm:^2.2.4"
+  peerDependencies:
+    payload: ^2.0.0
+  checksum: d06083d5ef54bd4a062f2ab2d85ca7253d30860dc8d4a4c437199acf9216e2ecba3eade49705dcc564e88ecf163ed3530c2cf18f5bbb9b6cd372f41406d15486
+  languageName: node
+  linkType: hard
+
 "@npmcli/agent@npm:^2.0.0":
   version: 2.2.1
   resolution: "@npmcli/agent@npm:2.2.1"
@@ -4750,7 +4766,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colord@npm:^2.9.1":
+"colord@npm:^2.9.1, colord@npm:^2.9.3":
   version: 2.9.3
   resolution: "colord@npm:2.9.3"
   checksum: 9699e956894d8996b28c686afe8988720785f476f59335c80ce852ded76ab3ebe252703aec53d9bef54f6219aea6b960fb3d9a8300058a1d0c0d4026460cd110
@@ -4989,6 +5005,13 @@ __metadata:
     path-type: "npm:^4.0.0"
     yaml: "npm:^1.10.0"
   checksum: b923ff6af581638128e5f074a5450ba12c0300b71302398ea38dbeabd33bbcaa0245ca9adbedfcf284a07da50f99ede5658c80bb3e39e2ce770a99d28a21ef03
+  languageName: node
+  linkType: hard
+
+"country-flag-icons@npm:^1.5.4":
+  version: 1.5.9
+  resolution: "country-flag-icons@npm:1.5.9"
+  checksum: dac12299c136d0ca99627375ee602e0bae79f3bd25e25c85c729231bbbaf8c97e777fa2ef74b65b4cf2e17b2c53e094a745a575cbae6fc026b6eaf7b41008c39
   languageName: node
   linkType: hard
 
@@ -7594,6 +7617,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"input-format@npm:^0.3.9":
+  version: 0.3.9
+  resolution: "input-format@npm:0.3.9"
+  dependencies:
+    prop-types: "npm:^15.8.1"
+  checksum: 552d924fc57953b2694afc0b6f8d3bdba9266df149924c4b76b92a9e4a197084fbd48f86f8f894a1751da8b818f51dcb03fa8d299a66f757634343ea6ad9570a
+  languageName: node
+  linkType: hard
+
 "internal-slot@npm:^1.0.4":
   version: 1.0.7
   resolution: "internal-slot@npm:1.0.7"
@@ -8377,6 +8409,13 @@ __metadata:
     libbase64: "npm:1.2.1"
     libqp: "npm:2.0.1"
   checksum: cf91c78a05824f160e45b36850d52eee9e18073bfd4561ace3b3af8e52a8d551eccc0dcef428505e44d1f2146c16cec84e91e17d9489244451c38572862a857a
+  languageName: node
+  linkType: hard
+
+"libphonenumber-js@npm:^1.10.53":
+  version: 1.10.56
+  resolution: "libphonenumber-js@npm:1.10.56"
+  checksum: 1bdef77989ff9b67ca23fa5d2fb5853054a164dd034c80e0feae794b082319bc7078ca1551034e47428886c90ad300b64c055493b950b3292f715a246e7b7a74
   languageName: node
   linkType: hard
 
@@ -9804,6 +9843,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "payload@workspace:."
   dependencies:
+    "@nouance/payload-better-fields-plugin": "npm:^1.3.5"
     "@payloadcms/bundler-webpack": "npm:^1.0.0"
     "@payloadcms/db-postgres": "npm:^0.x"
     "@payloadcms/plugin-cloud": "npm:^2.0.0"
@@ -11219,6 +11259,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-colorful@npm:^5.6.1":
+  version: 5.6.1
+  resolution: "react-colorful@npm:5.6.1"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 48eb73cf71e10841c2a61b6b06ab81da9fffa9876134c239bfdebcf348ce2a47e56b146338e35dfb03512c85966bfc9a53844fc56bc50154e71f8daee59ff6f0
+  languageName: node
+  linkType: hard
+
 "react-datepicker@npm:4.16.0":
   version: 4.16.0
   resolution: "react-datepicker@npm:4.16.0"
@@ -11319,6 +11369,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-number-format@npm:^5.3.1":
+  version: 5.3.1
+  resolution: "react-number-format@npm:5.3.1"
+  dependencies:
+    prop-types: "npm:^15.7.2"
+  peerDependencies:
+    react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 9e37698ab3d8224fd6cf5a69845c0308720d04de8459757031de0304379cfd2c0c897834cc9f62869933c4702a97888ba51abeb6490b7282e237a4c19a5fab04
+  languageName: node
+  linkType: hard
+
 "react-onclickoutside@npm:^6.12.2":
   version: 6.13.0
   resolution: "react-onclickoutside@npm:6.13.0"
@@ -11326,6 +11388,22 @@ __metadata:
     react: ^15.5.x || ^16.x || ^17.x || ^18.x
     react-dom: ^15.5.x || ^16.x || ^17.x || ^18.x
   checksum: 2013471d03965e3c89ead649063bda246a8e9ba72b7be1dbf00642c6c8a34a0142e951b1db3cf73ac53f34f459b772132eff6f7b89f4cde51c35740be6617161
+  languageName: node
+  linkType: hard
+
+"react-phone-number-input@npm:^3.3.7":
+  version: 3.3.9
+  resolution: "react-phone-number-input@npm:3.3.9"
+  dependencies:
+    classnames: "npm:^2.3.1"
+    country-flag-icons: "npm:^1.5.4"
+    input-format: "npm:^0.3.9"
+    libphonenumber-js: "npm:^1.10.53"
+    prop-types: "npm:^15.8.1"
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: b39f7b200e8d8af6469dbf56868d663e9fad00081951547464cfb96ad4f2547c10a68fc0be9ea67b65804d084523b7a349e0d585f96289baade78d589aa115b4
   languageName: node
   linkType: hard
 
@@ -12156,6 +12234,13 @@ __metadata:
     is-plain-object: "npm:^5.0.0"
     tiny-warning: "npm:^1.0.3"
   checksum: ab276dc59cf659a3b6e1e89ee239188d1c5fbe3f6c917325b4a2226fcd87b329b8ac349360289fd395d0ef4d0e916d944d1da1c42d05fcc88bee35d85ce56d00
+  languageName: node
+  linkType: hard
+
+"slugify@npm:^1.6.6":
+  version: 1.6.6
+  resolution: "slugify@npm:1.6.6"
+  checksum: e7e63f08f389a371d6228bc19d64ec84360bf0a538333446cc49dbbf3971751a6d180d2f31551188dd007a65ca771e69f574e0283290a7825a818e90b75ef44d
   languageName: node
   linkType: hard
 
@@ -13212,6 +13297,13 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: bcbb807a917d374a49f475fae2e87fdca7da5e5530820ef53f65ba1d12131bd81a92ecf259cc7ce317cbe0f289e7d79fdfebcef9bfa3087c8c8a2fa304c9be54
+  languageName: node
+  linkType: hard
+
+"validate-color@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "validate-color@npm:2.2.4"
+  checksum: 597a88adff8d1a235e6f2597df3ea5c1aaa1a6b6d3ea725135c6557c55a0960cb022858ecd7b1b53820cb939263fe095fbcc343aec8a2a66a1063a41dc92e23c
   languageName: node
   linkType: hard
 
