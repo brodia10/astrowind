@@ -35,6 +35,24 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
+ CREATE TYPE "enum_contacts_email_status" AS ENUM('Active', 'Unsubscribed');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_contacts_email_permission_status" AS ENUM('Express', 'Implied');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_opt_in_opt_out_history_opt_type" AS ENUM('Opt-In', 'Opt-Out');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
  CREATE TYPE "enum_forms_blocks_payment_price_conditions_condition" AS ENUM('hasValue', 'equals', 'notEquals');
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -172,6 +190,60 @@ CREATE TABLE IF NOT EXISTS "tenant_plans_rels" (
 	"tenants_id" integer
 );
 
+CREATE TABLE IF NOT EXISTS "contacts" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"email_address" varchar NOT NULL,
+	"first_name" varchar,
+	"last_name" varchar,
+	"email_status" "enum_contacts_email_status",
+	"email_permission_status" "enum_contacts_email_permission_status",
+	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "contacts_rels" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"order" integer,
+	"parent_id" integer NOT NULL,
+	"path" varchar NOT NULL,
+	"tenants_id" integer,
+	"email_lists_id" integer
+);
+
+CREATE TABLE IF NOT EXISTS "email_lists" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"name" varchar NOT NULL,
+	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "email_lists_rels" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"order" integer,
+	"parent_id" integer NOT NULL,
+	"path" varchar NOT NULL,
+	"tenants_id" integer
+);
+
+CREATE TABLE IF NOT EXISTS "opt_in_opt_out_history" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"opt_type" "enum_opt_in_opt_out_history_opt_type" NOT NULL,
+	"date" timestamp(3) with time zone NOT NULL,
+	"source" varchar,
+	"reason" varchar,
+	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "opt_in_opt_out_history_rels" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"order" integer,
+	"parent_id" integer NOT NULL,
+	"path" varchar NOT NULL,
+	"contacts_id" integer,
+	"tenants_id" integer
+);
+
 CREATE TABLE IF NOT EXISTS "tenants_domains" (
 	"_order" integer NOT NULL,
 	"_parent_id" integer NOT NULL,
@@ -182,15 +254,16 @@ CREATE TABLE IF NOT EXISTS "tenants_domains" (
 
 CREATE TABLE IF NOT EXISTS "tenants" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"company_name" varchar NOT NULL,
-	"street_address" varchar,
-	"city" varchar,
-	"state" varchar,
-	"postal_code" varchar,
-	"country" varchar,
-	"contact_email" varchar,
-	"telephone" varchar,
-	"business_hours" varchar,
+	"theme_colors_primary_color" varchar,
+	"theme_colors_secondary_color" varchar,
+	"company_name" varchar,
+	"company_telephone_telephone" varchar,
+	"company_telephone_business_hours" varchar,
+	"company_street_address" varchar,
+	"company_city" varchar,
+	"company_state" varchar,
+	"company_postal_code" varchar,
+	"company_country" varchar,
 	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
 	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
 );
@@ -200,8 +273,7 @@ CREATE TABLE IF NOT EXISTS "tenants_rels" (
 	"order" integer,
 	"parent_id" integer NOT NULL,
 	"path" varchar NOT NULL,
-	"media_id" integer,
-	"tenant_email_configs_id" integer
+	"media_id" integer
 );
 
 CREATE TABLE IF NOT EXISTS "media" (
@@ -613,6 +685,20 @@ CREATE INDEX IF NOT EXISTS "tenant_plans_created_at_idx" ON "tenant_plans" ("cre
 CREATE INDEX IF NOT EXISTS "tenant_plans_rels_order_idx" ON "tenant_plans_rels" ("order");
 CREATE INDEX IF NOT EXISTS "tenant_plans_rels_parent_idx" ON "tenant_plans_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "tenant_plans_rels_path_idx" ON "tenant_plans_rels" ("path");
+CREATE UNIQUE INDEX IF NOT EXISTS "contacts_email_address_idx" ON "contacts" ("email_address");
+CREATE INDEX IF NOT EXISTS "contacts_created_at_idx" ON "contacts" ("created_at");
+CREATE INDEX IF NOT EXISTS "contacts_rels_order_idx" ON "contacts_rels" ("order");
+CREATE INDEX IF NOT EXISTS "contacts_rels_parent_idx" ON "contacts_rels" ("parent_id");
+CREATE INDEX IF NOT EXISTS "contacts_rels_path_idx" ON "contacts_rels" ("path");
+CREATE UNIQUE INDEX IF NOT EXISTS "email_lists_name_idx" ON "email_lists" ("name");
+CREATE INDEX IF NOT EXISTS "email_lists_created_at_idx" ON "email_lists" ("created_at");
+CREATE INDEX IF NOT EXISTS "email_lists_rels_order_idx" ON "email_lists_rels" ("order");
+CREATE INDEX IF NOT EXISTS "email_lists_rels_parent_idx" ON "email_lists_rels" ("parent_id");
+CREATE INDEX IF NOT EXISTS "email_lists_rels_path_idx" ON "email_lists_rels" ("path");
+CREATE INDEX IF NOT EXISTS "opt_in_opt_out_history_created_at_idx" ON "opt_in_opt_out_history" ("created_at");
+CREATE INDEX IF NOT EXISTS "opt_in_opt_out_history_rels_order_idx" ON "opt_in_opt_out_history_rels" ("order");
+CREATE INDEX IF NOT EXISTS "opt_in_opt_out_history_rels_parent_idx" ON "opt_in_opt_out_history_rels" ("parent_id");
+CREATE INDEX IF NOT EXISTS "opt_in_opt_out_history_rels_path_idx" ON "opt_in_opt_out_history_rels" ("path");
 CREATE INDEX IF NOT EXISTS "tenants_domains_order_idx" ON "tenants_domains" ("_order");
 CREATE INDEX IF NOT EXISTS "tenants_domains_parent_id_idx" ON "tenants_domains" ("_parent_id");
 CREATE INDEX IF NOT EXISTS "tenants_created_at_idx" ON "tenants" ("created_at");
@@ -770,6 +856,54 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
+ ALTER TABLE "contacts_rels" ADD CONSTRAINT "contacts_rels_parent_id_contacts_id_fk" FOREIGN KEY ("parent_id") REFERENCES "contacts"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "contacts_rels" ADD CONSTRAINT "contacts_rels_tenants_id_tenants_id_fk" FOREIGN KEY ("tenants_id") REFERENCES "tenants"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "contacts_rels" ADD CONSTRAINT "contacts_rels_email_lists_id_email_lists_id_fk" FOREIGN KEY ("email_lists_id") REFERENCES "email_lists"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "email_lists_rels" ADD CONSTRAINT "email_lists_rels_parent_id_email_lists_id_fk" FOREIGN KEY ("parent_id") REFERENCES "email_lists"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "email_lists_rels" ADD CONSTRAINT "email_lists_rels_tenants_id_tenants_id_fk" FOREIGN KEY ("tenants_id") REFERENCES "tenants"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "opt_in_opt_out_history_rels" ADD CONSTRAINT "opt_in_opt_out_history_rels_parent_id_opt_in_opt_out_history_id_fk" FOREIGN KEY ("parent_id") REFERENCES "opt_in_opt_out_history"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "opt_in_opt_out_history_rels" ADD CONSTRAINT "opt_in_opt_out_history_rels_contacts_id_contacts_id_fk" FOREIGN KEY ("contacts_id") REFERENCES "contacts"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "opt_in_opt_out_history_rels" ADD CONSTRAINT "opt_in_opt_out_history_rels_tenants_id_tenants_id_fk" FOREIGN KEY ("tenants_id") REFERENCES "tenants"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
  ALTER TABLE "tenants_domains" ADD CONSTRAINT "tenants_domains__parent_id_tenants_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "tenants"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -783,12 +917,6 @@ END $$;
 
 DO $$ BEGIN
  ALTER TABLE "tenants_rels" ADD CONSTRAINT "tenants_rels_media_id_media_id_fk" FOREIGN KEY ("media_id") REFERENCES "media"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "tenants_rels" ADD CONSTRAINT "tenants_rels_tenant_email_configs_id_tenant_email_configs_id_fk" FOREIGN KEY ("tenant_email_configs_id") REFERENCES "tenant_email_configs"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -1051,6 +1179,12 @@ DROP TABLE "tenant_email_configs_rels";
 DROP TABLE "global_plans";
 DROP TABLE "tenant_plans";
 DROP TABLE "tenant_plans_rels";
+DROP TABLE "contacts";
+DROP TABLE "contacts_rels";
+DROP TABLE "email_lists";
+DROP TABLE "email_lists_rels";
+DROP TABLE "opt_in_opt_out_history";
+DROP TABLE "opt_in_opt_out_history_rels";
 DROP TABLE "tenants_domains";
 DROP TABLE "tenants";
 DROP TABLE "tenants_rels";

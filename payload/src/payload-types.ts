@@ -13,6 +13,9 @@ export interface Config {
     'tenant-email-configs': TenantEmailConfig;
     'global-plans': GlobalPlan;
     'tenant-plans': TenantPlan;
+    contacts: Contact;
+    'email-lists': EmailList;
+    'opt-in-opt-out-history': OptInOptOutHistory;
     tenants: Tenant;
     media: Media;
     posts: Post;
@@ -62,12 +65,25 @@ export interface User {
  */
 export interface Tenant {
   id: number;
-  company: {
-    name: string;
-  };
   brandAssets?: {
     logo?: number | Media | null;
     icon?: number | Media | null;
+  };
+  themeColors?: {
+    primaryColor?: string | null;
+    secondaryColor?: string | null;
+  };
+  company: {
+    name?: string | null;
+    telephone?: {
+      telephone?: string | null;
+      businessHours?: string | null;
+    };
+    streetAddress?: string | null;
+    city?: string | null;
+    state?: string | null;
+    postalCode?: string | null;
+    country?: string | null;
   };
   domains?:
     | {
@@ -76,15 +92,6 @@ export interface Tenant {
         id?: string | null;
       }[]
     | null;
-  emailConfig?: (number | null) | TenantEmailConfig;
-  streetAddress?: string | null;
-  city?: string | null;
-  state?: string | null;
-  postalCode?: string | null;
-  country?: string | null;
-  contactEmail?: string | null;
-  telephone?: string | null;
-  businessHours?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -132,25 +139,6 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tenant-email-configs".
- */
-export interface TenantEmailConfig {
-  id: number;
-  tenant: number | Tenant;
-  fromEmailAddress: string;
-  fromName: string;
-  postmarkServerId?: number | null;
-  postmarkServerToken?: string | null;
-  messageStreams?: {
-    transactional?: string | null;
-    broadcast?: string | null;
-    inbound?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tenant-stripe-configs".
  */
 export interface TenantStripeConfig {
@@ -184,6 +172,25 @@ export interface TenantStripeConfig {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tenant-email-configs".
+ */
+export interface TenantEmailConfig {
+  id: number;
+  tenant: number | Tenant;
+  fromEmailAddress: string;
+  fromName: string;
+  postmarkServerId?: number | null;
+  postmarkServerToken?: string | null;
+  messageStreams?: {
+    transactional?: string | null;
+    broadcast?: string | null;
+    inbound?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "global-plans".
  */
 export interface GlobalPlan {
@@ -204,6 +211,48 @@ export interface GlobalPlan {
 export interface TenantPlan {
   id: number;
   tenant?: (number | null) | Tenant;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts".
+ */
+export interface Contact {
+  id: number;
+  email_address: string;
+  first_name?: string | null;
+  last_name?: string | null;
+  email_status?: ('Active' | 'Unsubscribed') | null;
+  email_permission_status?: ('Express' | 'Implied') | null;
+  tenant: number | Tenant;
+  email_lists?: (number | EmailList)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "email-lists".
+ */
+export interface EmailList {
+  id: number;
+  name: string;
+  tenant: number | Tenant;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "opt-in-opt-out-history".
+ */
+export interface OptInOptOutHistory {
+  id: number;
+  contact: number | Contact;
+  opt_type: 'Opt-In' | 'Opt-Out';
+  date: string;
+  source?: string | null;
+  reason?: string | null;
+  tenant: number | Tenant;
   updatedAt: string;
   createdAt: string;
 }
