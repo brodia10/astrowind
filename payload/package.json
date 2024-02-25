@@ -29,6 +29,7 @@
     "@payloadcms/plugin-seo": "^1.0.15",
     "@payloadcms/plugin-stripe": "^0.0.19",
     "@payloadcms/richtext-lexical": "^0.7.0",
+    "@payloadcms/richtext-slate": "^1.0.0",
     "@types/nodemailer-sendgrid": "^1.0.3",
     "assert": "^2.1.0",
     "browserify-zlib": "^0.2.0",
