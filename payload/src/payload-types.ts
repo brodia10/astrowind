@@ -193,13 +193,17 @@ export interface TenantStripeConfig {
  */
 export interface Contact {
   id: number;
-  email_address: string;
-  first_name?: string | null;
-  last_name?: string | null;
-  email_status?: ('Active' | 'Unsubscribed') | null;
-  email_permission_status?: ('Express' | 'Implied') | null;
+  personal_info: {
+    email_address: string;
+    first_name?: string | null;
+    last_name?: string | null;
+  };
+  subscription_management?: {
+    email_lists?: (number | EmailList)[] | null;
+    email_status?: ('Active' | 'Unsubscribed') | null;
+    email_permission_status?: ('Express' | 'Implied') | null;
+  };
   tenant: number | Tenant;
-  email_lists?: (number | EmailList)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -328,6 +332,7 @@ export interface Post {
   };
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -402,6 +407,7 @@ export interface Page {
   };
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -612,11 +618,6 @@ export interface Event {
   description?: string | null;
   date: string;
   image: number | Media;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    image?: number | Media | null;
-  };
   updatedAt: string;
   createdAt: string;
 }

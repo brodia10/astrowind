@@ -6,6 +6,11 @@ import { MediaBlock } from '../blocks/MediaBlock';
 
 const Pages: CollectionConfig = {
     slug: 'pages',
+    versions: {
+        drafts: {
+            autosave: true,
+        }
+    },
     admin: {
         useAsTitle: 'title',
         group: 'Content',

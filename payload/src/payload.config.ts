@@ -101,7 +101,7 @@ export default buildConfig({
         Logo,
         Icon,
       },
-      // afterNavLinks: [SiteLink],
+      // afterNavLinks: [],
       // afterDashboard: [SiteLink],
     },
   },

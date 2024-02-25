@@ -5,7 +5,7 @@ const searchOptions = ({
     // },
     searchOverrides: {
         admin: {
-            group: 'Admin',
+            group: 'Audience',
         }
     }
 });

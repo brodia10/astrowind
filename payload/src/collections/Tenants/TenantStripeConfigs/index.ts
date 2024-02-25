@@ -5,12 +5,14 @@ import { tenantAdmins } from '../Tenants/access/tenantAdmins';
 export const TenantStripeConfigs: CollectionConfig = {
     slug: 'tenant-stripe-configs',
     labels: {
-        singular: 'Tenant Stripe Configuration',
-        plural: 'Tenant Stripe Configurations',
+        singular: 'Stripe',
+        plural: 'Stripe',
     },
     admin: {
         useAsTitle: 'tenant',
-        group: 'Store',
+        group: 'Payment',
+        // TODO: unhide when we get to ecommerce
+        hidden: true,
     },
     access: {
         create: superAdmins,

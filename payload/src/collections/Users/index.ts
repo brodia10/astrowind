@@ -13,7 +13,7 @@ export const Users: CollectionConfig = {
   auth: true,
   admin: {
     useAsTitle: 'firstName',
-    group: 'Admin',
+    group: 'Team',
   },
   access: {
     read: adminsAndSelf,
