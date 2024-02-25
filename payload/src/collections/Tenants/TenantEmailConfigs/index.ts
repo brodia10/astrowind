@@ -10,6 +10,7 @@ export const TenantEmailConfigs: CollectionConfig = {
         defaultColumns: ['fromEmailAddress', 'updatedAt'],
         description: "Configure the Email Integration for your email service provider here. Ensure that you have the correct SMTP host, port, and credentials or API key as provided by your email service.",
         group: 'CRM',
+        hidden: true,
     },
     access: {
         read: tenantAdmins,

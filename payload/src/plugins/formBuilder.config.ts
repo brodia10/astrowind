@@ -37,7 +37,7 @@ const formBuilderConfig = {
         slug: "form-submissions", // Custom slug for form submissions
         // Other custom settings for form submissions
         admin: {
-            group: 'Admin',
+            group: 'Audience',
         }
     }
 

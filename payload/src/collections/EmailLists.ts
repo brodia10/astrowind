@@ -10,7 +10,9 @@ const EmailLists: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'name',
-        group: 'CRM',
+        group: 'Audience',
+        hidden: true,
+        listSearchableFields: ['name',]
     },
     fields: [
         {

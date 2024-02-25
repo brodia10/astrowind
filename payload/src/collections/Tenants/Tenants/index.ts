@@ -17,11 +17,11 @@ export const Tenants: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'company.name',
-    group: 'Admin'
+    group: 'Team'
   },
   labels: {
-    singular: 'Tenant',
-    plural: 'Tenants',
+    singular: 'Account Settings',
+    plural: 'Account Settings',
   },
   fields: [
     {
@@ -259,6 +259,7 @@ export const Tenants: CollectionConfig = {
           fields: [
             {
               name: 'emailConfig',
+              label: 'Email',
               type: 'relationship',
               relationTo: 'tenant-email-configs',
               required: false,

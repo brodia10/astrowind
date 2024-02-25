@@ -7,6 +7,11 @@ import { MediaBlock } from '../blocks/MediaBlock';
 
 export const Posts: CollectionConfig = {
     slug: 'posts',
+    versions: {
+        drafts: {
+            autosave: true,
+        }
+    },
     admin: {
         group: 'Content',
         useAsTitle: 'title'
@@ -38,11 +43,11 @@ export const Posts: CollectionConfig = {
                         },
                         {
                             name: 'title',
-                            type: 'text',
-                            required: true,
                             admin: {
                                 position: 'sidebar'
-                            }
+                            },
+                            type: 'text',
+                            required: true,
                         },
                         {
                             name: 'image',
@@ -55,6 +60,9 @@ export const Posts: CollectionConfig = {
                             type: 'relationship',
                             relationTo: 'categories',
                             hasMany: true,
+                            admin: {
+                                position: 'sidebar'
+                            }
                         },
                     ],
                 },
