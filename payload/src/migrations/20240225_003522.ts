@@ -29,12 +29,6 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
- CREATE TYPE "enum_global_plans_plan_group_global_plan" AS ENUM('free', 'mini', 'pro', 'enterprise');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
  CREATE TYPE "enum_contacts_email_status" AS ENUM('Active', 'Unsubscribed');
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -48,6 +42,66 @@ END $$;
 
 DO $$ BEGIN
  CREATE TYPE "enum_opt_in_opt_out_history_opt_type" AS ENUM('Opt-In', 'Opt-Out');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_posts_blocks_content_columns_size" AS ENUM('oneThird', 'half', 'twoThirds', 'full');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_posts_blocks_content_columns_type" AS ENUM('reference', 'custom');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_posts_blocks_content_columns_link_appearance" AS ENUM('default', 'primary', 'secondary');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_posts_blocks_media_block_position" AS ENUM('default', 'fullscreen');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_posts_blocks_archive_populate_by" AS ENUM('collection', 'selection');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_pages_blocks_content_columns_size" AS ENUM('oneThird', 'half', 'twoThirds', 'full');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_pages_blocks_content_columns_type" AS ENUM('reference', 'custom');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_pages_blocks_content_columns_link_appearance" AS ENUM('default', 'primary', 'secondary');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_pages_blocks_media_block_position" AS ENUM('default', 'fullscreen');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_pages_blocks_archive_populate_by" AS ENUM('collection', 'selection');
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -168,28 +222,6 @@ CREATE TABLE IF NOT EXISTS "tenant_email_configs_rels" (
 	"tenants_id" integer
 );
 
-CREATE TABLE IF NOT EXISTS "global_plans" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"planGroup_globalPlan" "enum_global_plans_plan_group_global_plan" NOT NULL,
-	"payment_group_payment_method" varchar NOT NULL,
-	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "tenant_plans" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "tenant_plans_rels" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"order" integer,
-	"parent_id" integer NOT NULL,
-	"path" varchar NOT NULL,
-	"tenants_id" integer
-);
-
 CREATE TABLE IF NOT EXISTS "contacts" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"email_address" varchar NOT NULL,
@@ -273,7 +305,8 @@ CREATE TABLE IF NOT EXISTS "tenants_rels" (
 	"order" integer,
 	"parent_id" integer NOT NULL,
 	"path" varchar NOT NULL,
-	"media_id" integer
+	"media_id" integer,
+	"tenant_email_configs_id" integer
 );
 
 CREATE TABLE IF NOT EXISTS "media" (
@@ -307,10 +340,70 @@ CREATE TABLE IF NOT EXISTS "media" (
 	"sizes_tablet_filename" varchar
 );
 
+CREATE TABLE IF NOT EXISTS "categories" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"title" varchar,
+	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "posts_blocks_content_columns" (
+	"_order" integer NOT NULL,
+	"_parent_id" varchar NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"size" "enum_posts_blocks_content_columns_size",
+	"rich_text" jsonb NOT NULL,
+	"enable_link" boolean,
+	"link_type" "enum_posts_blocks_content_columns_type",
+	"link_new_tab" boolean,
+	"link_url" varchar,
+	"link_label" varchar,
+	"link_appearance" "enum_posts_blocks_content_columns_link_appearance"
+);
+
+CREATE TABLE IF NOT EXISTS "posts_blocks_content" (
+	"_order" integer NOT NULL,
+	"_parent_id" integer NOT NULL,
+	"_path" text NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"invert_background" boolean,
+	"block_name" varchar
+);
+
+CREATE TABLE IF NOT EXISTS "posts_blocks_form_block" (
+	"_order" integer NOT NULL,
+	"_parent_id" integer NOT NULL,
+	"_path" text NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"enable_intro" boolean,
+	"intro_content" jsonb,
+	"block_name" varchar
+);
+
+CREATE TABLE IF NOT EXISTS "posts_blocks_media_block" (
+	"_order" integer NOT NULL,
+	"_parent_id" integer NOT NULL,
+	"_path" text NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"invert_background" boolean,
+	"position" "enum_posts_blocks_media_block_position",
+	"block_name" varchar
+);
+
+CREATE TABLE IF NOT EXISTS "posts_blocks_archive" (
+	"_order" integer NOT NULL,
+	"_parent_id" integer NOT NULL,
+	"_path" text NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"intro_content" jsonb NOT NULL,
+	"populateBy" "enum_posts_blocks_archive_populate_by",
+	"block_name" varchar
+);
+
 CREATE TABLE IF NOT EXISTS "posts" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"content" jsonb,
 	"title" varchar NOT NULL,
-	"content" jsonb NOT NULL,
 	"meta_title" varchar,
 	"meta_description" varchar,
 	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
@@ -322,8 +415,33 @@ CREATE TABLE IF NOT EXISTS "posts_rels" (
 	"order" integer,
 	"parent_id" integer NOT NULL,
 	"path" varchar NOT NULL,
+	"pages_id" integer,
+	"forms_id" integer,
 	"media_id" integer,
-	"post_categories_id" integer
+	"categories_id" integer
+);
+
+CREATE TABLE IF NOT EXISTS "pages_blocks_content_columns" (
+	"_order" integer NOT NULL,
+	"_parent_id" varchar NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"size" "enum_pages_blocks_content_columns_size",
+	"rich_text" jsonb NOT NULL,
+	"enable_link" boolean,
+	"link_type" "enum_pages_blocks_content_columns_type",
+	"link_new_tab" boolean,
+	"link_url" varchar,
+	"link_label" varchar,
+	"link_appearance" "enum_pages_blocks_content_columns_link_appearance"
+);
+
+CREATE TABLE IF NOT EXISTS "pages_blocks_content" (
+	"_order" integer NOT NULL,
+	"_parent_id" integer NOT NULL,
+	"_path" text NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"invert_background" boolean,
+	"block_name" varchar
 );
 
 CREATE TABLE IF NOT EXISTS "pages_blocks_form_block" (
@@ -333,6 +451,26 @@ CREATE TABLE IF NOT EXISTS "pages_blocks_form_block" (
 	"id" varchar PRIMARY KEY NOT NULL,
 	"enable_intro" boolean,
 	"intro_content" jsonb,
+	"block_name" varchar
+);
+
+CREATE TABLE IF NOT EXISTS "pages_blocks_media_block" (
+	"_order" integer NOT NULL,
+	"_parent_id" integer NOT NULL,
+	"_path" text NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"invert_background" boolean,
+	"position" "enum_pages_blocks_media_block_position",
+	"block_name" varchar
+);
+
+CREATE TABLE IF NOT EXISTS "pages_blocks_archive" (
+	"_order" integer NOT NULL,
+	"_parent_id" integer NOT NULL,
+	"_path" text NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"intro_content" jsonb NOT NULL,
+	"populateBy" "enum_pages_blocks_archive_populate_by",
 	"block_name" varchar
 );
 
@@ -350,25 +488,9 @@ CREATE TABLE IF NOT EXISTS "pages_rels" (
 	"order" integer,
 	"parent_id" integer NOT NULL,
 	"path" varchar NOT NULL,
+	"categories_id" integer,
+	"pages_id" integer,
 	"forms_id" integer,
-	"media_id" integer
-);
-
-CREATE TABLE IF NOT EXISTS "post_categories" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"name" varchar NOT NULL,
-	"description" varchar,
-	"meta_title" varchar,
-	"meta_description" varchar,
-	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "post_categories_rels" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"order" integer,
-	"parent_id" integer NOT NULL,
-	"path" varchar NOT NULL,
 	"media_id" integer
 );
 
@@ -555,7 +677,6 @@ CREATE TABLE IF NOT EXISTS "forms" (
 	"confirmation_message" jsonb,
 	"redirect_type" "enum_forms_redirect_type",
 	"redirect_url" varchar,
-	"custom_field" varchar,
 	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
 	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
 );
@@ -613,27 +734,8 @@ CREATE TABLE IF NOT EXISTS "search_rels" (
 	"parent_id" integer NOT NULL,
 	"path" varchar NOT NULL,
 	"posts_id" integer,
-	"post_categories_id" integer,
+	"categories_id" integer,
 	"events_id" integer
-);
-
-CREATE TABLE IF NOT EXISTS "comments" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"author" varchar,
-	"email" varchar,
-	"content" varchar,
-	"is_approved" boolean,
-	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "comments_rels" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"order" integer,
-	"parent_id" integer NOT NULL,
-	"path" varchar NOT NULL,
-	"posts_id" integer,
-	"comments_id" integer
 );
 
 CREATE TABLE IF NOT EXISTS "payload_preferences" (
@@ -680,11 +782,6 @@ CREATE INDEX IF NOT EXISTS "tenant_email_configs_created_at_idx" ON "tenant_emai
 CREATE INDEX IF NOT EXISTS "tenant_email_configs_rels_order_idx" ON "tenant_email_configs_rels" ("order");
 CREATE INDEX IF NOT EXISTS "tenant_email_configs_rels_parent_idx" ON "tenant_email_configs_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "tenant_email_configs_rels_path_idx" ON "tenant_email_configs_rels" ("path");
-CREATE INDEX IF NOT EXISTS "global_plans_created_at_idx" ON "global_plans" ("created_at");
-CREATE INDEX IF NOT EXISTS "tenant_plans_created_at_idx" ON "tenant_plans" ("created_at");
-CREATE INDEX IF NOT EXISTS "tenant_plans_rels_order_idx" ON "tenant_plans_rels" ("order");
-CREATE INDEX IF NOT EXISTS "tenant_plans_rels_parent_idx" ON "tenant_plans_rels" ("parent_id");
-CREATE INDEX IF NOT EXISTS "tenant_plans_rels_path_idx" ON "tenant_plans_rels" ("path");
 CREATE UNIQUE INDEX IF NOT EXISTS "contacts_email_address_idx" ON "contacts" ("email_address");
 CREATE INDEX IF NOT EXISTS "contacts_created_at_idx" ON "contacts" ("created_at");
 CREATE INDEX IF NOT EXISTS "contacts_rels_order_idx" ON "contacts_rels" ("order");
@@ -710,21 +807,43 @@ CREATE UNIQUE INDEX IF NOT EXISTS "media_filename_idx" ON "media" ("filename");
 CREATE INDEX IF NOT EXISTS "media_sizes_thumbnail_sizes_thumbnail_filename_idx" ON "media" ("sizes_thumbnail_filename");
 CREATE INDEX IF NOT EXISTS "media_sizes_card_sizes_card_filename_idx" ON "media" ("sizes_card_filename");
 CREATE INDEX IF NOT EXISTS "media_sizes_tablet_sizes_tablet_filename_idx" ON "media" ("sizes_tablet_filename");
+CREATE INDEX IF NOT EXISTS "categories_created_at_idx" ON "categories" ("created_at");
+CREATE INDEX IF NOT EXISTS "posts_blocks_content_columns_order_idx" ON "posts_blocks_content_columns" ("_order");
+CREATE INDEX IF NOT EXISTS "posts_blocks_content_columns_parent_id_idx" ON "posts_blocks_content_columns" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "posts_blocks_content_order_idx" ON "posts_blocks_content" ("_order");
+CREATE INDEX IF NOT EXISTS "posts_blocks_content_parent_id_idx" ON "posts_blocks_content" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "posts_blocks_content_path_idx" ON "posts_blocks_content" ("_path");
+CREATE INDEX IF NOT EXISTS "posts_blocks_form_block_order_idx" ON "posts_blocks_form_block" ("_order");
+CREATE INDEX IF NOT EXISTS "posts_blocks_form_block_parent_id_idx" ON "posts_blocks_form_block" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "posts_blocks_form_block_path_idx" ON "posts_blocks_form_block" ("_path");
+CREATE INDEX IF NOT EXISTS "posts_blocks_media_block_order_idx" ON "posts_blocks_media_block" ("_order");
+CREATE INDEX IF NOT EXISTS "posts_blocks_media_block_parent_id_idx" ON "posts_blocks_media_block" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "posts_blocks_media_block_path_idx" ON "posts_blocks_media_block" ("_path");
+CREATE INDEX IF NOT EXISTS "posts_blocks_archive_order_idx" ON "posts_blocks_archive" ("_order");
+CREATE INDEX IF NOT EXISTS "posts_blocks_archive_parent_id_idx" ON "posts_blocks_archive" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "posts_blocks_archive_path_idx" ON "posts_blocks_archive" ("_path");
 CREATE INDEX IF NOT EXISTS "posts_created_at_idx" ON "posts" ("created_at");
 CREATE INDEX IF NOT EXISTS "posts_rels_order_idx" ON "posts_rels" ("order");
 CREATE INDEX IF NOT EXISTS "posts_rels_parent_idx" ON "posts_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "posts_rels_path_idx" ON "posts_rels" ("path");
+CREATE INDEX IF NOT EXISTS "pages_blocks_content_columns_order_idx" ON "pages_blocks_content_columns" ("_order");
+CREATE INDEX IF NOT EXISTS "pages_blocks_content_columns_parent_id_idx" ON "pages_blocks_content_columns" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "pages_blocks_content_order_idx" ON "pages_blocks_content" ("_order");
+CREATE INDEX IF NOT EXISTS "pages_blocks_content_parent_id_idx" ON "pages_blocks_content" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "pages_blocks_content_path_idx" ON "pages_blocks_content" ("_path");
 CREATE INDEX IF NOT EXISTS "pages_blocks_form_block_order_idx" ON "pages_blocks_form_block" ("_order");
 CREATE INDEX IF NOT EXISTS "pages_blocks_form_block_parent_id_idx" ON "pages_blocks_form_block" ("_parent_id");
 CREATE INDEX IF NOT EXISTS "pages_blocks_form_block_path_idx" ON "pages_blocks_form_block" ("_path");
+CREATE INDEX IF NOT EXISTS "pages_blocks_media_block_order_idx" ON "pages_blocks_media_block" ("_order");
+CREATE INDEX IF NOT EXISTS "pages_blocks_media_block_parent_id_idx" ON "pages_blocks_media_block" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "pages_blocks_media_block_path_idx" ON "pages_blocks_media_block" ("_path");
+CREATE INDEX IF NOT EXISTS "pages_blocks_archive_order_idx" ON "pages_blocks_archive" ("_order");
+CREATE INDEX IF NOT EXISTS "pages_blocks_archive_parent_id_idx" ON "pages_blocks_archive" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "pages_blocks_archive_path_idx" ON "pages_blocks_archive" ("_path");
 CREATE INDEX IF NOT EXISTS "pages_created_at_idx" ON "pages" ("created_at");
 CREATE INDEX IF NOT EXISTS "pages_rels_order_idx" ON "pages_rels" ("order");
 CREATE INDEX IF NOT EXISTS "pages_rels_parent_idx" ON "pages_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "pages_rels_path_idx" ON "pages_rels" ("path");
-CREATE INDEX IF NOT EXISTS "post_categories_created_at_idx" ON "post_categories" ("created_at");
-CREATE INDEX IF NOT EXISTS "post_categories_rels_order_idx" ON "post_categories_rels" ("order");
-CREATE INDEX IF NOT EXISTS "post_categories_rels_parent_idx" ON "post_categories_rels" ("parent_id");
-CREATE INDEX IF NOT EXISTS "post_categories_rels_path_idx" ON "post_categories_rels" ("path");
 CREATE INDEX IF NOT EXISTS "events_created_at_idx" ON "events" ("created_at");
 CREATE INDEX IF NOT EXISTS "events_rels_order_idx" ON "events_rels" ("order");
 CREATE INDEX IF NOT EXISTS "events_rels_parent_idx" ON "events_rels" ("parent_id");
@@ -779,10 +898,6 @@ CREATE INDEX IF NOT EXISTS "search_created_at_idx" ON "search" ("created_at");
 CREATE INDEX IF NOT EXISTS "search_rels_order_idx" ON "search_rels" ("order");
 CREATE INDEX IF NOT EXISTS "search_rels_parent_idx" ON "search_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "search_rels_path_idx" ON "search_rels" ("path");
-CREATE INDEX IF NOT EXISTS "comments_created_at_idx" ON "comments" ("created_at");
-CREATE INDEX IF NOT EXISTS "comments_rels_order_idx" ON "comments_rels" ("order");
-CREATE INDEX IF NOT EXISTS "comments_rels_parent_idx" ON "comments_rels" ("parent_id");
-CREATE INDEX IF NOT EXISTS "comments_rels_path_idx" ON "comments_rels" ("path");
 CREATE INDEX IF NOT EXISTS "payload_preferences_key_idx" ON "payload_preferences" ("key");
 CREATE INDEX IF NOT EXISTS "payload_preferences_created_at_idx" ON "payload_preferences" ("created_at");
 CREATE INDEX IF NOT EXISTS "payload_preferences_rels_order_idx" ON "payload_preferences_rels" ("order");
@@ -839,18 +954,6 @@ END $$;
 
 DO $$ BEGIN
  ALTER TABLE "tenant_email_configs_rels" ADD CONSTRAINT "tenant_email_configs_rels_tenants_id_tenants_id_fk" FOREIGN KEY ("tenants_id") REFERENCES "tenants"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "tenant_plans_rels" ADD CONSTRAINT "tenant_plans_rels_parent_id_tenant_plans_id_fk" FOREIGN KEY ("parent_id") REFERENCES "tenant_plans"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "tenant_plans_rels" ADD CONSTRAINT "tenant_plans_rels_tenants_id_tenants_id_fk" FOREIGN KEY ("tenants_id") REFERENCES "tenants"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -922,7 +1025,55 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
+ ALTER TABLE "tenants_rels" ADD CONSTRAINT "tenants_rels_tenant_email_configs_id_tenant_email_configs_id_fk" FOREIGN KEY ("tenant_email_configs_id") REFERENCES "tenant_email_configs"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "posts_blocks_content_columns" ADD CONSTRAINT "posts_blocks_content_columns__parent_id_posts_blocks_content_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "posts_blocks_content"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "posts_blocks_content" ADD CONSTRAINT "posts_blocks_content__parent_id_posts_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "posts"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "posts_blocks_form_block" ADD CONSTRAINT "posts_blocks_form_block__parent_id_posts_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "posts"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "posts_blocks_media_block" ADD CONSTRAINT "posts_blocks_media_block__parent_id_posts_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "posts"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "posts_blocks_archive" ADD CONSTRAINT "posts_blocks_archive__parent_id_posts_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "posts"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
  ALTER TABLE "posts_rels" ADD CONSTRAINT "posts_rels_parent_id_posts_id_fk" FOREIGN KEY ("parent_id") REFERENCES "posts"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "posts_rels" ADD CONSTRAINT "posts_rels_pages_id_pages_id_fk" FOREIGN KEY ("pages_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "posts_rels" ADD CONSTRAINT "posts_rels_forms_id_forms_id_fk" FOREIGN KEY ("forms_id") REFERENCES "forms"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -934,7 +1085,19 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
- ALTER TABLE "posts_rels" ADD CONSTRAINT "posts_rels_post_categories_id_post_categories_id_fk" FOREIGN KEY ("post_categories_id") REFERENCES "post_categories"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "posts_rels" ADD CONSTRAINT "posts_rels_categories_id_categories_id_fk" FOREIGN KEY ("categories_id") REFERENCES "categories"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "pages_blocks_content_columns" ADD CONSTRAINT "pages_blocks_content_columns__parent_id_pages_blocks_content_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "pages_blocks_content"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "pages_blocks_content" ADD CONSTRAINT "pages_blocks_content__parent_id_pages_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -946,7 +1109,31 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
+ ALTER TABLE "pages_blocks_media_block" ADD CONSTRAINT "pages_blocks_media_block__parent_id_pages_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "pages_blocks_archive" ADD CONSTRAINT "pages_blocks_archive__parent_id_pages_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
  ALTER TABLE "pages_rels" ADD CONSTRAINT "pages_rels_parent_id_pages_id_fk" FOREIGN KEY ("parent_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "pages_rels" ADD CONSTRAINT "pages_rels_categories_id_categories_id_fk" FOREIGN KEY ("categories_id") REFERENCES "categories"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "pages_rels" ADD CONSTRAINT "pages_rels_pages_id_pages_id_fk" FOREIGN KEY ("pages_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -959,18 +1146,6 @@ END $$;
 
 DO $$ BEGIN
  ALTER TABLE "pages_rels" ADD CONSTRAINT "pages_rels_media_id_media_id_fk" FOREIGN KEY ("media_id") REFERENCES "media"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "post_categories_rels" ADD CONSTRAINT "post_categories_rels_parent_id_post_categories_id_fk" FOREIGN KEY ("parent_id") REFERENCES "post_categories"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "post_categories_rels" ADD CONSTRAINT "post_categories_rels_media_id_media_id_fk" FOREIGN KEY ("media_id") REFERENCES "media"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -1120,31 +1295,13 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
- ALTER TABLE "search_rels" ADD CONSTRAINT "search_rels_post_categories_id_post_categories_id_fk" FOREIGN KEY ("post_categories_id") REFERENCES "post_categories"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "search_rels" ADD CONSTRAINT "search_rels_categories_id_categories_id_fk" FOREIGN KEY ("categories_id") REFERENCES "categories"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 
 DO $$ BEGIN
  ALTER TABLE "search_rels" ADD CONSTRAINT "search_rels_events_id_events_id_fk" FOREIGN KEY ("events_id") REFERENCES "events"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "comments_rels" ADD CONSTRAINT "comments_rels_parent_id_comments_id_fk" FOREIGN KEY ("parent_id") REFERENCES "comments"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "comments_rels" ADD CONSTRAINT "comments_rels_posts_id_posts_id_fk" FOREIGN KEY ("posts_id") REFERENCES "posts"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "comments_rels" ADD CONSTRAINT "comments_rels_comments_id_comments_id_fk" FOREIGN KEY ("comments_id") REFERENCES "comments"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -1176,9 +1333,6 @@ DROP TABLE "tenant_stripe_configs";
 DROP TABLE "tenant_stripe_configs_rels";
 DROP TABLE "tenant_email_configs";
 DROP TABLE "tenant_email_configs_rels";
-DROP TABLE "global_plans";
-DROP TABLE "tenant_plans";
-DROP TABLE "tenant_plans_rels";
 DROP TABLE "contacts";
 DROP TABLE "contacts_rels";
 DROP TABLE "email_lists";
@@ -1189,13 +1343,21 @@ DROP TABLE "tenants_domains";
 DROP TABLE "tenants";
 DROP TABLE "tenants_rels";
 DROP TABLE "media";
+DROP TABLE "categories";
+DROP TABLE "posts_blocks_content_columns";
+DROP TABLE "posts_blocks_content";
+DROP TABLE "posts_blocks_form_block";
+DROP TABLE "posts_blocks_media_block";
+DROP TABLE "posts_blocks_archive";
 DROP TABLE "posts";
 DROP TABLE "posts_rels";
+DROP TABLE "pages_blocks_content_columns";
+DROP TABLE "pages_blocks_content";
 DROP TABLE "pages_blocks_form_block";
+DROP TABLE "pages_blocks_media_block";
+DROP TABLE "pages_blocks_archive";
 DROP TABLE "pages";
 DROP TABLE "pages_rels";
-DROP TABLE "post_categories";
-DROP TABLE "post_categories_rels";
 DROP TABLE "events";
 DROP TABLE "events_rels";
 DROP TABLE "forms_blocks_checkbox";
@@ -1218,8 +1380,6 @@ DROP TABLE "form_submissions";
 DROP TABLE "form_submissions_rels";
 DROP TABLE "search";
 DROP TABLE "search_rels";
-DROP TABLE "comments";
-DROP TABLE "comments_rels";
 DROP TABLE "payload_preferences";
 DROP TABLE "payload_preferences_rels";
 DROP TABLE "payload_migrations";`);

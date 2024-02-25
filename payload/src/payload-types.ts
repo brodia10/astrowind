@@ -11,16 +11,14 @@ export interface Config {
     users: User;
     'tenant-stripe-configs': TenantStripeConfig;
     'tenant-email-configs': TenantEmailConfig;
-    'global-plans': GlobalPlan;
-    'tenant-plans': TenantPlan;
     contacts: Contact;
     'email-lists': EmailList;
     'opt-in-opt-out-history': OptInOptOutHistory;
     tenants: Tenant;
     media: Media;
+    categories: Category;
     posts: Post;
     pages: Page;
-    postCategories: PostCategory;
     events: Event;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -91,6 +89,7 @@ export interface Tenant {
         id?: string | null;
       }[]
     | null;
+  emailConfig?: (number | null) | TenantEmailConfig;
   updatedAt: string;
   createdAt: string;
 }
@@ -138,6 +137,25 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tenant-email-configs".
+ */
+export interface TenantEmailConfig {
+  id: number;
+  tenant: number | Tenant;
+  fromEmailAddress: string;
+  fromName: string;
+  postmarkServerId?: number | null;
+  postmarkServerToken?: string | null;
+  messageStreams?: {
+    transactional?: string | null;
+    broadcast?: string | null;
+    inbound?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "tenant-stripe-configs".
  */
 export interface TenantStripeConfig {
@@ -166,50 +184,6 @@ export interface TenantStripeConfig {
     | 'ideal';
   successUrl: string;
   cancelUrl: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tenant-email-configs".
- */
-export interface TenantEmailConfig {
-  id: number;
-  tenant: number | Tenant;
-  fromEmailAddress: string;
-  fromName: string;
-  postmarkServerId?: number | null;
-  postmarkServerToken?: string | null;
-  messageStreams?: {
-    transactional?: string | null;
-    broadcast?: string | null;
-    inbound?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "global-plans".
- */
-export interface GlobalPlan {
-  id: number;
-  planGroup: {
-    globalPlan: 'free' | 'mini' | 'pro' | 'enterprise';
-  };
-  paymentGroup: {
-    paymentMethod: string;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tenant-plans".
- */
-export interface TenantPlan {
-  id: number;
-  tenant?: (number | null) | Tenant;
   updatedAt: string;
   createdAt: string;
 }
@@ -257,32 +231,96 @@ export interface OptInOptOutHistory {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
+ * via the `definition` "categories".
  */
-export interface Post {
+export interface Category {
   id: number;
-  title: string;
-  content: {
-    [k: string]: unknown;
-  }[];
-  image: number | Media;
-  category?: (number | null) | PostCategory;
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    image?: number | Media | null;
-  };
+  title?: string | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "postCategories".
+ * via the `definition` "posts".
  */
-export interface PostCategory {
+export interface Post {
   id: number;
-  name: string;
-  description?: string | null;
+  layout: (
+    | {
+        invertBackground?: boolean | null;
+        columns?:
+          | {
+              size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+              richText: {
+                [k: string]: unknown;
+              }[];
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?: {
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null;
+                url?: string | null;
+                label: string;
+                appearance?: ('default' | 'primary' | 'secondary') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content';
+      }
+    | {
+        form: number | Form;
+        enableIntro?: boolean | null;
+        introContent?:
+          | {
+              [k: string]: unknown;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'formBlock';
+      }
+    | {
+        invertBackground?: boolean | null;
+        position?: ('default' | 'fullscreen') | null;
+        media: number | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaBlock';
+      }
+    | {
+        introContent: {
+          [k: string]: unknown;
+        }[];
+        populateBy?: ('collection' | 'selection') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'archive';
+      }
+  )[];
+  content?: {
+    root: {
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      type: string;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  title: string;
+  image: number | Media;
+  category?: (number | Category)[] | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -298,18 +336,65 @@ export interface PostCategory {
 export interface Page {
   id: number;
   title: string;
-  layout: {
-    form: number | Form;
-    enableIntro?: boolean | null;
-    introContent?:
-      | {
+  category?: (number | Category)[] | null;
+  layout: (
+    | {
+        invertBackground?: boolean | null;
+        columns?:
+          | {
+              size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+              richText: {
+                [k: string]: unknown;
+              }[];
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?: {
+                  relationTo: 'pages';
+                  value: number | Page;
+                } | null;
+                url?: string | null;
+                label: string;
+                appearance?: ('default' | 'primary' | 'secondary') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'content';
+      }
+    | {
+        form: number | Form;
+        enableIntro?: boolean | null;
+        introContent?:
+          | {
+              [k: string]: unknown;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'formBlock';
+      }
+    | {
+        invertBackground?: boolean | null;
+        position?: ('default' | 'fullscreen') | null;
+        media: number | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'mediaBlock';
+      }
+    | {
+        introContent: {
           [k: string]: unknown;
-        }[]
-      | null;
-    id?: string | null;
-    blockName?: string | null;
-    blockType: 'formBlock';
-  }[];
+        }[];
+        populateBy?: ('collection' | 'selection') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'archive';
+      }
+  )[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -356,11 +441,21 @@ export interface Form {
             blockType: 'email';
           }
         | {
-            message?:
-              | {
+            message?: {
+              root: {
+                children: {
+                  type: string;
+                  version: number;
                   [k: string]: unknown;
-                }[]
-              | null;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                type: string;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'message';
@@ -446,11 +541,21 @@ export interface Form {
     | null;
   submitButtonLabel?: string | null;
   confirmationType?: ('message' | 'redirect') | null;
-  confirmationMessage?:
-    | {
+  confirmationMessage?: {
+    root: {
+      children: {
+        type: string;
+        version: number;
         [k: string]: unknown;
-      }[]
-    | null;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      type: string;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   redirect?: {
     type?: ('reference' | 'custom') | null;
     reference?:
@@ -476,11 +581,21 @@ export interface Form {
         replyTo?: string | null;
         emailFrom?: string | null;
         subject: string;
-        message?:
-          | {
+        message?: {
+          root: {
+            children: {
+              type: string;
+              version: number;
               [k: string]: unknown;
-            }[]
-          | null;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            type: string;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
         id?: string | null;
       }[]
     | null;
@@ -547,8 +662,8 @@ export interface Search {
         value: number | Post;
       }
     | {
-        relationTo: 'postCategories';
-        value: number | PostCategory;
+        relationTo: 'categories';
+        value: number | Category;
       }
     | {
         relationTo: 'events';

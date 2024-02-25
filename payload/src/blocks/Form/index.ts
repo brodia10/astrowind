@@ -1,15 +1,12 @@
-import { Block } from 'payload/types';
-import richText from '../fields/richText';
+import type { Block } from 'payload/types'
 
+import richText from '../../fields/richText'
 
 export const FormBlock: Block = {
     slug: 'formBlock',
     labels: {
         singular: 'Form Block',
         plural: 'Form Blocks',
-    },
-    graphQL: {
-        singularName: 'FormBlock',
     },
     fields: [
         {
@@ -31,4 +28,4 @@ export const FormBlock: Block = {
             },
         }),
     ],
-};
+}

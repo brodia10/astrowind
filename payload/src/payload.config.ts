@@ -11,38 +11,42 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 
 // Payload Imports
 import { webpackBundler } from '@payloadcms/bundler-webpack'
-import { payloadCloud } from '@payloadcms/plugin-cloud'
 import formBuilder from "@payloadcms/plugin-form-builder"
-import search from "@payloadcms/plugin-search"
-import seo from '@payloadcms/plugin-seo'
-import { slateEditor } from '@payloadcms/richtext-slate'
+import {
+  BlocksFeature,
+  LinkFeature,
+  UploadFeature, lexicalEditor
+} from '@payloadcms/richtext-lexical'
 import { buildConfig } from 'payload/config'
 
 // Plugin Config Imports
 import formBuilderConfig from './plugins/formBuilder.config'
-import searchOptions from './plugins/search'
-import seoGenerator from './plugins/seoGenerator'
 
 // Collection Imports
 import Contacts from './collections/Contacts'
 import EmailLists from './collections/EmailLists'
 import { Events } from './collections/Events'
-import GlobalPlans from './collections/GlobalPlans'
 import { Media } from './collections/Media'
 import OptInOptOutHistory from './collections/OptInOptOutHistory'
 import Pages from './collections/Pages'
-import { PostCategories } from './collections/PostCategories'
 import { Posts } from './collections/Posts'
 import { TenantEmailConfigs } from './collections/Tenants/TenantEmailConfigs'
-import TenantPlans from './collections/Tenants/TenantPlans'
 import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
 import { Tenants } from './collections/Tenants/Tenants'
 import { Users } from './collections/Users'
 
 // Branding Imports
+import { payloadCloud } from '@payloadcms/plugin-cloud'
+import search from "@payloadcms/plugin-search"
+import seo from '@payloadcms/plugin-seo'
+import { CallToAction } from './blocks/CallToAction'
+import { Content } from './blocks/Content'
+import { FormBlock } from './blocks/Form'
+import Categories from './collections/Categories'
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
-
+import searchOptions from './plugins/search'
+import seoGenerator from './plugins/seoGenerator'
 
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
@@ -101,8 +105,55 @@ export default buildConfig({
       // afterDashboard: [SiteLink],
     },
   },
-  editor: slateEditor({}),
-  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, GlobalPlans, TenantPlans, Contacts, EmailLists, OptInOptOutHistory, Tenants, Media, Posts, Pages, PostCategories, Events,],
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      LinkFeature({
+        // Example showing how to customize the built-in fields
+        // of the Link feature
+        fields: [
+          {
+            name: 'rel',
+            label: 'Rel Attribute',
+            type: 'select',
+            hasMany: true,
+            options: ['noopener', 'noreferrer', 'nofollow'],
+            admin: {
+              description:
+                'The rel attribute defines the relationship between a linked resource and the current document. This is a custom link field.',
+            },
+          },
+        ],
+      }),
+      UploadFeature({
+        collections: {
+          uploads: {
+            // Example showing how to customize the built-in fields
+            // of the Upload feature
+            fields: [
+              {
+                name: 'caption',
+                type: 'richText',
+                editor: lexicalEditor(),
+              },
+            ],
+          },
+        },
+      }),
+      // This is incredibly powerful. You can re-use your Payload blocks
+      // directly in the Lexical editor as follows:
+      BlocksFeature({
+        blocks: [
+          // Banner,
+          CallToAction,
+          Media,
+          FormBlock,
+          Content,
+        ],
+      }),
+    ]
+  }),
+  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Contacts, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events,],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
@@ -116,5 +167,3 @@ export default buildConfig({
     },
   }),
 })
-
-
