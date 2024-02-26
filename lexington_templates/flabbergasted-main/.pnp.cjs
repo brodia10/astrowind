@@ -31,10 +31,11 @@ const RAW_RUNTIME_STATE =
           ["@astrojs/rss", "npm:4.0.5"],\
           ["@astrojs/sitemap", "npm:3.1.1"],\
           ["@astrojs/tailwind", "virtual:72c7223a3e1d03772944f8a6a8248cff6ed5e49271d30f693dd9917d6bcbe1566974e289fb08530a693e0dc89e2b13b7f4aa0e2d2ff2f30311e7a76238c75dfe#npm:5.1.0"],\
-          ["@tailwindcss/forms", "virtual:72c7223a3e1d03772944f8a6a8248cff6ed5e49271d30f693dd9917d6bcbe1566974e289fb08530a693e0dc89e2b13b7f4aa0e2d2ff2f30311e7a76238c75dfe#npm:0.5.7"],\
+          ["@tailwindcss/forms", "virtual:54cafdf8bd6fc2572bf19583dec0fe2f34e2ea4f2805f751c54aca162ab3474d23556409fe449d646ce918fbbf5c83c2b039f632faa7f70ea0bca7cfb0429433#npm:0.5.7"],\
           ["@tailwindcss/typography", "virtual:72c7223a3e1d03772944f8a6a8248cff6ed5e49271d30f693dd9917d6bcbe1566974e289fb08530a693e0dc89e2b13b7f4aa0e2d2ff2f30311e7a76238c75dfe#npm:0.5.10"],\
           ["@types/alpinejs", "npm:3.13.6"],\
           ["astro", "npm:4.4.4"],\
+          ["astro-forms", "npm:1.0.11"],\
           ["tailwind-scrollbar-hide", "npm:1.1.7"],\
           ["tailwindcss", "npm:3.4.1"]\
         ],\
@@ -206,7 +207,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@astrojs/telemetry", "npm:3.0.4"],\
           ["ci-info", "npm:3.9.0"],\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"],\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"],\
           ["dlv", "npm:1.1.3"],\
           ["dset", "npm:3.1.3"],\
           ["is-docker", "npm:3.0.0"],\
@@ -252,7 +253,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/traverse", "npm:7.23.9"],\
           ["@babel/types", "npm:7.23.9"],\
           ["convert-source-map", "npm:2.0.0"],\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"],\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"],\
           ["gensync", "npm:1.0.0-beta.2"],\
           ["json5", "npm:2.2.3"],\
           ["semver", "npm:6.3.1"]\
@@ -529,7 +530,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/helper-split-export-declaration", "npm:7.22.6"],\
           ["@babel/parser", "npm:7.23.9"],\
           ["@babel/types", "npm:7.23.9"],\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"],\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"],\
           ["globals", "npm:11.12.0"]\
         ],\
         "linkType": "HARD"\
@@ -838,10 +839,11 @@ const RAW_RUNTIME_STATE =
           ["@astrojs/rss", "npm:4.0.5"],\
           ["@astrojs/sitemap", "npm:3.1.1"],\
           ["@astrojs/tailwind", "virtual:72c7223a3e1d03772944f8a6a8248cff6ed5e49271d30f693dd9917d6bcbe1566974e289fb08530a693e0dc89e2b13b7f4aa0e2d2ff2f30311e7a76238c75dfe#npm:5.1.0"],\
-          ["@tailwindcss/forms", "virtual:72c7223a3e1d03772944f8a6a8248cff6ed5e49271d30f693dd9917d6bcbe1566974e289fb08530a693e0dc89e2b13b7f4aa0e2d2ff2f30311e7a76238c75dfe#npm:0.5.7"],\
+          ["@tailwindcss/forms", "virtual:54cafdf8bd6fc2572bf19583dec0fe2f34e2ea4f2805f751c54aca162ab3474d23556409fe449d646ce918fbbf5c83c2b039f632faa7f70ea0bca7cfb0429433#npm:0.5.7"],\
           ["@tailwindcss/typography", "virtual:72c7223a3e1d03772944f8a6a8248cff6ed5e49271d30f693dd9917d6bcbe1566974e289fb08530a693e0dc89e2b13b7f4aa0e2d2ff2f30311e7a76238c75dfe#npm:0.5.10"],\
           ["@types/alpinejs", "npm:3.13.6"],\
           ["astro", "npm:4.4.4"],\
+          ["astro-forms", "npm:1.0.11"],\
           ["tailwind-scrollbar-hide", "npm:1.1.7"],\
           ["tailwindcss", "npm:3.4.1"]\
         ],\
@@ -1078,10 +1080,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:72c7223a3e1d03772944f8a6a8248cff6ed5e49271d30f693dd9917d6bcbe1566974e289fb08530a693e0dc89e2b13b7f4aa0e2d2ff2f30311e7a76238c75dfe#npm:0.5.7", {\
-        "packageLocation": "./.yarn/__virtual__/@tailwindcss-forms-virtual-c40644214c/6/.yarn/berry/cache/@tailwindcss-forms-npm-0.5.7-67f8a9f248-10c0.zip/node_modules/@tailwindcss/forms/",\
+      ["virtual:54cafdf8bd6fc2572bf19583dec0fe2f34e2ea4f2805f751c54aca162ab3474d23556409fe449d646ce918fbbf5c83c2b039f632faa7f70ea0bca7cfb0429433#npm:0.5.7", {\
+        "packageLocation": "./.yarn/__virtual__/@tailwindcss-forms-virtual-0a6978568e/6/.yarn/berry/cache/@tailwindcss-forms-npm-0.5.7-67f8a9f248-10c0.zip/node_modules/@tailwindcss/forms/",\
         "packageDependencies": [\
-          ["@tailwindcss/forms", "virtual:72c7223a3e1d03772944f8a6a8248cff6ed5e49271d30f693dd9917d6bcbe1566974e289fb08530a693e0dc89e2b13b7f4aa0e2d2ff2f30311e7a76238c75dfe#npm:0.5.7"],\
+          ["@tailwindcss/forms", "virtual:54cafdf8bd6fc2572bf19583dec0fe2f34e2ea4f2805f751c54aca162ab3474d23556409fe449d646ce918fbbf5c83c2b039f632faa7f70ea0bca7cfb0429433#npm:0.5.7"],\
           ["@types/tailwindcss", null],\
           ["mini-svg-data-uri", "npm:1.4.4"],\
           ["tailwindcss", "npm:3.4.1"]\
@@ -1357,7 +1359,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../../.yarn/berry/cache/agent-base-npm-7.1.0-4b12ba5111-10c0.zip/node_modules/agent-base/",\
         "packageDependencies": [\
           ["agent-base", "npm:7.1.0"],\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"]\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1525,7 +1527,7 @@ const RAW_RUNTIME_STATE =
           ["common-ancestor-path", "npm:1.0.1"],\
           ["cookie", "npm:0.6.0"],\
           ["cssesc", "npm:3.0.0"],\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"],\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"],\
           ["deterministic-object-hash", "npm:2.0.2"],\
           ["devalue", "npm:4.3.2"],\
           ["diff", "npm:5.2.0"],\
@@ -1568,6 +1570,17 @@ const RAW_RUNTIME_STATE =
           ["which-pm", "npm:2.1.1"],\
           ["yargs-parser", "npm:21.1.1"],\
           ["zod", "npm:3.22.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["astro-forms", [\
+      ["npm:1.0.11", {\
+        "packageLocation": "../../../../../.yarn/berry/cache/astro-forms-npm-1.0.11-54cafdf8bd-10c0.zip/node_modules/astro-forms/",\
+        "packageDependencies": [\
+          ["astro-forms", "npm:1.0.11"],\
+          ["@tailwindcss/forms", "virtual:54cafdf8bd6fc2572bf19583dec0fe2f34e2ea4f2805f751c54aca162ab3474d23556409fe449d646ce918fbbf5c83c2b039f632faa7f70ea0bca7cfb0429433#npm:0.5.7"],\
+          ["tailwindcss", "npm:3.4.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -2143,10 +2156,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4", {\
-        "packageLocation": "./.yarn/__virtual__/debug-virtual-5f62bc69ae/6/.yarn/berry/cache/debug-npm-4.3.4-4513954577-10c0.zip/node_modules/debug/",\
+      ["virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4", {\
+        "packageLocation": "./.yarn/__virtual__/debug-virtual-ede24543b9/6/.yarn/berry/cache/debug-npm-4.3.4-4513954577-10c0.zip/node_modules/debug/",\
         "packageDependencies": [\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"],\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"],\
           ["@types/supports-color", null],\
           ["ms", "npm:2.1.2"],\
           ["supports-color", null]\
@@ -3055,7 +3068,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["http-proxy-agent", "npm:7.0.2"],\
           ["agent-base", "npm:7.1.0"],\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"]\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3066,7 +3079,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["https-proxy-agent", "npm:7.0.4"],\
           ["agent-base", "npm:7.1.0"],\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"]\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3943,7 +3956,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["micromark", "npm:4.0.0"],\
           ["@types/debug", "npm:4.1.12"],\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"],\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"],\
           ["decode-named-character-reference", "npm:1.0.2"],\
           ["devlop", "npm:1.1.0"],\
           ["micromark-core-commonmark", "npm:2.0.0"],\
@@ -5796,7 +5809,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["socks-proxy-agent", "npm:8.0.2"],\
           ["agent-base", "npm:7.1.0"],\
-          ["debug", "virtual:ddf83a29ef667ff70930bb2532e0f0943a8a39f9e9a6fd424601e629bc797129f8a3af1697368da69640ebe56f8bc231d6833fb632ec36ef002a424eca53865f#npm:4.3.4"],\
+          ["debug", "virtual:4b12ba5111caf7e8338099bdbc7cb046a9f8e079a44e74d0c03dca469876e3071ebbe671c5e90ae6b78ae33e22c205fa5ed32169a4aabd1404b13c56d09986e1#npm:4.3.4"],\
           ["socks", "npm:2.8.1"]\
         ],\
         "linkType": "HARD"\

@@ -638,6 +638,7 @@ __metadata:
     "@tailwindcss/typography": "npm:^0.5.10"
     "@types/alpinejs": "npm:^3.13.5"
     astro: "npm:^4.0.8"
+    astro-forms: "npm:^1.0.11"
     tailwind-scrollbar-hide: "npm:^1.1.7"
     tailwindcss: "npm:^3.4.1"
   languageName: unknown
@@ -828,7 +829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/forms@npm:^0.5.7":
+"@tailwindcss/forms@npm:^0.5.2, @tailwindcss/forms@npm:^0.5.7":
   version: 0.5.7
   resolution: "@tailwindcss/forms@npm:0.5.7"
   dependencies:
@@ -1176,6 +1177,16 @@ __metadata:
   bin:
     astring: bin/astring
   checksum: 31f09144597048c11072417959a412f208f8f95ba8dce408dfbc3367acb929f31fbcc00ed5eb61ccbf7c2f1173b9ac8bfcaaa37134a9455050c669b2b036ed88
+  languageName: node
+  linkType: hard
+
+"astro-forms@npm:^1.0.11":
+  version: 1.0.11
+  resolution: "astro-forms@npm:1.0.11"
+  dependencies:
+    "@tailwindcss/forms": "npm:^0.5.2"
+    tailwindcss: "npm:^3.1.5"
+  checksum: 3fb67d4fe31c36980423bd1924c2c65abb12eed66d793ac416387e112ce571b548fe21ea508802c8cb060a8035f5b9c122982ea9c6a872099bead23b507f1eba
   languageName: node
   linkType: hard
 
@@ -5334,7 +5345,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.4.1":
+"tailwindcss@npm:^3.1.5, tailwindcss@npm:^3.4.1":
   version: 3.4.1
   resolution: "tailwindcss@npm:3.4.1"
   dependencies:
