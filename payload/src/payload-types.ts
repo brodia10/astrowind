@@ -202,6 +202,11 @@ export interface Contact {
     email_lists?: (number | EmailList)[] | null;
     email_status?: ('Active' | 'Unsubscribed') | null;
     email_permission_status?: ('Express' | 'Implied') | null;
+    confirmed_opt_in_date?: string | null;
+    confirmed_opt_in_source?: string | null;
+    confirmed_opt_out_date?: string | null;
+    confirmed_opt_out_source?: string | null;
+    confirmed_opt_out_reason?: string | null;
   };
   tenant: number | Tenant;
   updatedAt: string;

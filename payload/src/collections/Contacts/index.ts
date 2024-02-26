@@ -103,6 +103,51 @@ const Contacts: CollectionConfig = {
                         description: 'Type of permission granted for email communications.',
                     },
                 },
+                {
+                    name: 'confirmed_opt_in_date',
+                    label: 'Confirmed Opt-In Date',
+                    type: 'date',
+                    admin: {
+                        position: 'sidebar',
+                        description: 'The date when the contact confirmed their opt-in.',
+                    },
+                },
+                {
+                    name: 'confirmed_opt_in_source',
+                    label: 'Confirmed Opt-In Source',
+                    type: 'text',
+                    admin: {
+                        position: 'sidebar',
+                        description: 'The source where the contact confirmed their opt-in.',
+                    },
+                },
+                {
+                    name: 'confirmed_opt_out_date',
+                    label: 'Confirmed Opt-Out Date',
+                    type: 'date',
+                    admin: {
+                        position: 'sidebar',
+                        description: 'The date when the contact confirmed their opt-out.',
+                    },
+                },
+                {
+                    name: 'confirmed_opt_out_source',
+                    label: 'Confirmed Opt-Out Source',
+                    type: 'text',
+                    admin: {
+                        position: 'sidebar',
+                        description: 'The source where the contact confirmed their opt-out.',
+                    },
+                },
+                {
+                    name: 'confirmed_opt_out_reason',
+                    label: 'Confirmed Opt-Out Reason',
+                    type: 'textarea',
+                    admin: {
+                        position: 'sidebar',
+                        description: 'The reason provided by the contact for opting out.',
+                    },
+                },
             ],
         },
         // Tenant Relationship

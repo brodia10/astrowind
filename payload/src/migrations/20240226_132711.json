@@ -1,5 +1,5 @@
 {
-  "id": "612c4f12-884e-4c4b-a8e0-f12689a3f19b",
+  "id": "15659f01-1b66-45a2-b7bd-4950b535e56e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -763,6 +763,36 @@
         "subscription_management_email_permission_status": {
           "name": "subscription_management_email_permission_status",
           "type": "enum_contacts_subscription_management_email_permission_status",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subscription_management_confirmed_opt_in_date": {
+          "name": "subscription_management_confirmed_opt_in_date",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subscription_management_confirmed_opt_in_source": {
+          "name": "subscription_management_confirmed_opt_in_source",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subscription_management_confirmed_opt_out_date": {
+          "name": "subscription_management_confirmed_opt_out_date",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subscription_management_confirmed_opt_out_source": {
+          "name": "subscription_management_confirmed_opt_out_source",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "subscription_management_confirmed_opt_out_reason": {
+          "name": "subscription_management_confirmed_opt_out_reason",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
