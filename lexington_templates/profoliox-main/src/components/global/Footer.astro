@@ -1,0 +1,30 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<footer
+  aria-labelledby="footer-heading"
+  class="border-t dark:border-neutral-700">
+  <div class="mx-auto max-w-3xl px-8 py-12">
+    <div
+      class="flex flex-col gap-y-12 items-start lg:flex-row lg:items-center max-w-2xl mx-auto pb-6">
+      <div>
+        <div class="flex items-center text-black">
+          <div>
+            <p>
+              <Logo />
+            </p>
+            <p
+              class="mt-2 text-sm leading-6 text-neutral-400 dark:text-neutral-200">
+              Designed and built in the Åland Islands by Michael Andreuzza.
+            </p>
+            <p class="text-neutral-400 text-sm mt-6">
+              © Copyright <span x-text="getCurrentYear()"></span>. All rights
+              reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

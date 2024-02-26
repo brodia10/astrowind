@@ -1,0 +1,122 @@
+---
+const features = [
+  {
+    image: "/card1.svg",
+    icon: "transactions",
+    title: "ACH transactions",
+    description:
+    "Initiate ACH credits and debits, verify account numbers through pre-notifications, and securely store frequently accessed account details.",
+
+  },
+  {
+    image: "/card2.svg",
+    icon: "banking",
+    title: "banking solutions",
+    description:
+      "Flexible account structures. Unlimited account numbers. Extended FDIC coverage.",
+
+  },
+  {
+    image: "/card3.svg",
+    icon: "customcards",
+    title: "custom cards",
+    description:
+      "Issue personalized cards for businesses or consumers with the option to approve authorizations in real-time or configure limits programmatically.",
+
+  },
+];
+---
+
+<section>
+  <div class="relative max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+    <div>
+      <span
+        class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+      >
+        important features
+      </span>
+      <p class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950">
+        Comprehensive suite of financial <span
+          class="md:block md:text-transparent md:bg-clip-text md:bg-gradient-to-r from-blue-500 to-indigo-600 py-2"
+          >services and solutions for your needs</span
+        >
+      </p>
+      <p class="max-w-sm mt-4 text-base text-gray-700 lg:text-base">
+        Explore a wide range of financial tools, features, and support for your
+        financial goals and questions
+      </p>
+    </div>
+    <div class="relative z-10 grid gap-12 mt-12 sm:grid-cols-2 xl:grid-cols-3">
+      {
+        features.map((feature) => (
+          <>
+            <div class="flex flex-col justify-between h-full">
+              <img
+                src={feature.image}
+                class="order-last mt-8 rounded-2xl shadow-box shadow-blue-500/50"
+                alt={feature.title}
+              />
+              <div>
+                <div class="inline-flex items-center gap-2  font-mono uppercase tracking-tighter text-xs">
+                  {feature.icon === "transactions" && (
+                    <svg
+                      class="size-4 icon icon-tabler text-blue-700 icon-tabler-send"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M10 14l11 -11" />
+                      <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
+                    </svg>
+                  )}
+                  {feature.icon === "banking" && (
+                    <svg
+                      class="size-4 icon icon-tabler text-blue-700 icon-tabler-wallet"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
+                      <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
+                    </svg>
+                  )}
+                  {feature.icon === "customcards" && (
+                    <svg
+                      class="size-4 icon icon-tabler text-blue-700 icon-tabler-credit-card"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
+                      <path d="M3 10l18 0" />
+                      <path d="M7 15l.01 0" /> <path d="M11 15l2 0" />
+                    </svg>
+                  )}
+                  <div class="font-mono text-base font-medium tracking-tighter uppercase">
+                    {feature.title}
+                  </div>
+                </div>
+              </div>
+              <div class="mt-2 text-sm text-gray-700">
+                <span>{feature.description}</span>
+              </div>
+
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>

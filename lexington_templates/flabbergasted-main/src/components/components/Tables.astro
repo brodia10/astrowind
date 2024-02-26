@@ -1,0 +1,1626 @@
+<section class="overflow-hidden">
+  <div class="relative items-center w-full mx-auto 2xl:max-w-7xl">
+    <div class="divide-y-2 divide-black">
+      <div class="justify-center max-w-3xl p-8 lg:p-20">
+        <p class="text-5xl lg:text-7xl text-black">Tables</p>
+      </div>
+      <div class="divide-y-2 divide-black">
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">Simple</h3>
+          <div class="mt-12 flow-root w-full">
+            <div class="overflow-x-auto lg:overflow-x-visible">
+              <div class="inline-block w-full align-middle">
+                <table class="min-w-full divide-y-2 divide-black w-full">
+                  <thead >
+                    <tr>
+                      <th
+                        scope="col"
+                        class="py-3.5 text-left uppercase text-base font-medium text-black sm:pl-0"
+                        ><span class="hidden md:inline">Application</span> ID</th
+                      >
+                      <th
+                        scope="col"
+                        class="py-3 text-left text-base uppercase font-medium text-black"
+                        >lease <span class="hidden md:inline">principle</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="py-3 text-left text-base uppercase font-medium text-black"
+                        >expired <span class="hidden md:inline">amount</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="py-3 text-left text-base uppercase font-medium text-black"
+                        >Balance</th
+                      >
+                      <th
+                        scope="col"
+                        class="py-3 text-left text-base uppercase font-medium text-black"
+                        >status</th
+                      >
+                      <th scope="col" class="relative py-5">
+                        <span class="sr-only">Menu</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y-2 divide-black">
+                    <tr>
+                      <td
+                        class="whitespace-nowrap py-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">a4489</span>
+                        <span class="hidden lg:block">abz-93847</span>
+                      </td>
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >600.00€</td
+                      >
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >6.002.923€</td
+                      >
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >830.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap py-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#84a3d9"></path>
+                        </svg>
+                        <span>Pending</span>
+                      </td>
+                      <td class="relative whitespace-nowrap py-5 text-right">
+                        <div
+                          @click.away="open = false"
+                          class="relative"
+                          x-data="{ open: false }"
+                        >
+                          <button
+                            @click="open = !open"
+                            class="text-sm text-black transition-all hover:text-lila-800"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="icon icon-tabler icon-tabler-dots w-6 h-6"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                              ></path>
+                              <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                              ></path>
+                              <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                              ></path>
+                            </svg>
+                          </button>
+                          <div
+                            x-show="open"
+                            style="display: none;"
+                            x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="transform opacity-0 scale-95"
+                            x-transition:enter-end="transform opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="transform opacity-100 scale-100"
+                            x-transition:leave-end="transform opacity-0 scale-95"
+                            class="absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black"
+                            role="menu"
+                            aria-orientation="vertical"
+                            aria-labelledby="menu-button"
+                            tabindex="-1"
+                          >
+                            <div class="py-1 bg-white rounded-xl" role="none">
+                              <button
+                                type="button"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-0"
+                                >Overview
+                              </button>
+                              <button
+                                type="button"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-1">Style Guide</button
+                              >
+                              <button
+                                type="button"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-2">Components</button
+                              >
+                              <form
+                                method="POST"
+                                action="#"
+                                role="none"
+                                class="border-t border-white/5"
+                              >
+                                <button
+                                  type="submit"
+                                  class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                  role="menuitem"
+                                  tabindex="-1"
+                                  id="menu-item-3">Sign out</button
+                                >
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="whitespace-nowrap py-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">l2811</span>
+                        <span class="hidden lg:block">lek-93840</span>
+                      </td>
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >1200.00€</td
+                      >
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >12.002.923€</td
+                      >
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >1630.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap py-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#6baca6"></path>
+                        </svg>
+                        <span>Approved</span>
+                      </td>
+                      <td class="relative whitespace-nowrap py-5 text-right">
+                        <div
+                          @click.away="open = false"
+                          class="relative"
+                          x-data="{ open: false }"
+                        >
+                          <button
+                            @click="open = !open"
+                            class="text-sm text-black transition-all hover:text-lila-800"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="icon icon-tabler icon-tabler-dots w-6 h-6"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                              ></path>
+                              <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                              ></path>
+                              <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                              ></path>
+                            </svg>
+                          </button>
+                          <div
+                            x-show="open"
+                            style="display: none;"
+                            x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="transform opacity-0 scale-95"
+                            x-transition:enter-end="transform opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="transform opacity-100 scale-100"
+                            x-transition:leave-end="transform opacity-0 scale-95"
+                            class="absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black"
+                            role="menu"
+                            aria-orientation="vertical"
+                            aria-labelledby="menu-button"
+                            tabindex="-1"
+                          >
+                            <div class="py-1 bg-white rounded-xl" role="none">
+                              <button
+                                type="button"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-0"
+                                >Overview
+                              </button>
+                              <button
+                                type="button"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-1">Style Guide</button
+                              >
+                              <button
+                                type="button"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-2">Components</button
+                              >
+                              <form
+                                method="POST"
+                                action="#"
+                                role="none"
+                                class="border-t border-white/5"
+                              >
+                                <button
+                                  type="submit"
+                                  class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                  role="menuitem"
+                                  tabindex="-1"
+                                  id="menu-item-3">Sign out</button
+                                >
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="whitespace-nowrap py-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">z3726</span>
+                        <span class="hidden lg:block">ncj-02093</span>
+                      </td>
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >100.00€</td
+                      >
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >1.002.923€</td
+                      >
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >130.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap py-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#db649f"></path>
+                        </svg>
+                        <span>Denied</span>
+                      </td>
+                      <td class="relative whitespace-nowrap py-5 text-right">
+                        <div
+                          @click.away="open = false"
+                          class="relative"
+                          x-data="{ open: false }"
+                        >
+                          <button
+                            @click="open = !open"
+                            class="text-sm text-black transition-all hover:text-lila-800"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="icon icon-tabler icon-tabler-dots w-6 h-6"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                              ></path>
+                              <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                              ></path>
+                              <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                              ></path>
+                            </svg>
+                          </button>
+                          <div
+                            x-show="open"
+                            style="display: none;"
+                            x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="transform opacity-0 scale-95"
+                            x-transition:enter-end="transform opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="transform opacity-100 scale-100"
+                            x-transition:leave-end="transform opacity-0 scale-95"
+                            class="absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black"
+                            role="menu"
+                            aria-orientation="vertical"
+                            aria-labelledby="menu-button"
+                            tabindex="-1"
+                          >
+                            <div class="py-1 bg-white rounded-xl" role="none">
+                              <button
+                                type="button"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-0"
+                                >Overview
+                              </button>
+                              <button
+                                type="button"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-1">Style Guide</button
+                              >
+                              <button
+                                type="button"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-2">Components</button
+                              >
+                              <form
+                                method="POST"
+                                action="#"
+                                role="none"
+                                class="border-t border-white/5"
+                              >
+                                <button
+                                  type="submit"
+                                  class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                  role="menuitem"
+                                  tabindex="-1"
+                                  id="menu-item-3">Sign out</button
+                                >
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- More rows  ... -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            Simple full width
+          </h3>
+        </div>
+        <div class="mt-12 flow-root w-full">
+          <div class="overflow-x-auto lg:overflow-x-visible">
+            <div class="inline-block w-full align-middle">
+              <table
+                class="min-w-full divide-y-2 divide-black w-full 2xl:border-2 border-black"
+              >
+                <thead  class="bg-lila-500">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="p-3.5 text-left uppercase text-base font-medium text-black"
+                      ><span class="hidden md:inline">Application</span> ID</th
+                    >
+                    <th
+                      scope="col"
+                      class="py-3 text-left text-base uppercase font-medium text-black"
+                      >lease <span class="hidden md:inline">principle</span></th
+                    >
+                    <th
+                      scope="col"
+                      class="py-3 text-left text-base uppercase font-medium text-black"
+                      >expired <span class="hidden md:inline">amount</span></th
+                    >
+                    <th
+                      scope="col"
+                      class="py-3 text-left text-base uppercase font-medium text-black"
+                      >Balance</th
+                    >
+                    <th
+                      scope="col"
+                      class="pl-3 text-left text-base uppercase font-medium text-black"
+                      >status</th
+                    >
+                    <th scope="col" class="relative py-5">
+                      <span class="sr-only">Menu</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y-2 divide-black">
+                  <tr>
+                    <td
+                      class="whitespace-nowrap pl-5 text-base uppercase text-black"
+                    >
+                      <span class="block text-black">a4489</span>
+                      <span class="hidden lg:block">abz-93847</span>
+                    </td>
+                    <td class="whitespace-nowrap py-5 text-base text-black"
+                      >600.00€</td
+                    >
+                    <td class="whitespace-nowrap py-5 text-base text-black"
+                      >6.002.923€</td
+                    >
+                    <td class="whitespace-nowrap py-5 text-base text-black"
+                      >830.000€</td
+                    >
+                    <td
+                      class="whitespace-nowrap py-5 inline-flex items-center gap-2 text-base text-black"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                        ></path>
+                        <path
+                          d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                          stroke-width="0"
+                          fill="#84a3d9"></path>
+                      </svg>
+                      <span>Pending</span>
+                    </td>
+                    <td class="relative whitespace-nowrap pr-5 text-right">
+                      <div
+                        @click.away="open = false"
+                        class="relative"
+                        x-data="{ open: false }"
+                      >
+                        <button
+                          @click="open = !open"
+                          class="text-sm text-black transition-all hover:text-lila-800"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-dots w-6 h-6"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                            ></path>
+                            <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                            ></path>
+                            <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                            ></path>
+                            <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                            ></path>
+                          </svg>
+                        </button>
+                        <div
+                          x-show="open"
+                          style="display: none;"
+                          x-transition:enter="transition ease-out duration-100"
+                          x-transition:enter-start="transform opacity-0 scale-95"
+                          x-transition:enter-end="transform opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="transform opacity-100 scale-100"
+                          x-transition:leave-end="transform opacity-0 scale-95"
+                          class="absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black"
+                          role="menu"
+                          aria-orientation="vertical"
+                          aria-labelledby="menu-button"
+                          tabindex="-1"
+                        >
+                          <div class="py-1 bg-white rounded-xl" role="none">
+                            <button
+                              type="button"
+                              class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                              role="menuitem"
+                              tabindex="-1"
+                              id="menu-item-0"
+                              >Overview
+                            </button>
+                            <button
+                              type="button"
+                              class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                              role="menuitem"
+                              tabindex="-1"
+                              id="menu-item-1">Style Guide</button
+                            >
+                            <button
+                              type="button"
+                              class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                              role="menuitem"
+                              tabindex="-1"
+                              id="menu-item-2">Components</button
+                            >
+                            <form
+                              method="POST"
+                              action="#"
+                              role="none"
+                              class="border-t border-white/5"
+                            >
+                              <button
+                                type="submit"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-3">Sign out</button
+                              >
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="whitespace-nowrap pl-5 text-base uppercase text-black"
+                    >
+                      <span class="block text-black">l2811</span>
+                      <span class="hidden lg:block">lek-93840</span>
+                    </td>
+                    <td class="whitespace-nowrap py-5 text-base text-black"
+                      >1200.00€</td
+                    >
+                    <td class="whitespace-nowrap py-5 text-base text-black"
+                      >12.002.923€</td
+                    >
+                    <td class="whitespace-nowrap py-5 text-base text-black"
+                      >1630.000€</td
+                    >
+                    <td
+                      class="whitespace-nowrap py-5 inline-flex items-center gap-2 text-base text-black"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                        ></path>
+                        <path
+                          d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                          stroke-width="0"
+                          fill="#6baca6"></path>
+                      </svg>
+                      <span>Approved</span>
+                    </td>
+                    <td class="relative whitespace-nowrap pr-5 text-right">
+                      <div
+                        @click.away="open = false"
+                        class="relative"
+                        x-data="{ open: false }"
+                      >
+                        <button
+                          @click="open = !open"
+                          class="text-sm text-black transition-all hover:text-lila-800"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-dots w-6 h-6"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                            ></path>
+                            <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                            ></path>
+                            <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                            ></path>
+                            <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                            ></path>
+                          </svg>
+                        </button>
+                        <div
+                          x-show="open"
+                          style="display: none;"
+                          x-transition:enter="transition ease-out duration-100"
+                          x-transition:enter-start="transform opacity-0 scale-95"
+                          x-transition:enter-end="transform opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="transform opacity-100 scale-100"
+                          x-transition:leave-end="transform opacity-0 scale-95"
+                          class="absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black"
+                          role="menu"
+                          aria-orientation="vertical"
+                          aria-labelledby="menu-button"
+                          tabindex="-1"
+                        >
+                          <div class="py-1 bg-white rounded-xl" role="none">
+                            <button
+                              type="button"
+                              class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                              role="menuitem"
+                              tabindex="-1"
+                              id="menu-item-0"
+                              >Overview
+                            </button>
+                            <button
+                              type="button"
+                              class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                              role="menuitem"
+                              tabindex="-1"
+                              id="menu-item-1">Style Guide</button
+                            >
+                            <button
+                              type="button"
+                              class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                              role="menuitem"
+                              tabindex="-1"
+                              id="menu-item-2">Components</button
+                            >
+                            <form
+                              method="POST"
+                              action="#"
+                              role="none"
+                              class="border-t border-white/5"
+                            >
+                              <button
+                                type="submit"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-3">Sign out</button
+                              >
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="whitespace-nowrap pl-5 text-base uppercase text-black"
+                    >
+                      <span class="block text-black">z3726</span>
+                      <span class="hidden lg:block">ncj-02093</span>
+                    </td>
+                    <td class="whitespace-nowrap py-5 text-base text-black"
+                      >100.00€</td
+                    >
+                    <td class="whitespace-nowrap py-5 text-base text-black"
+                      >1.002.923€</td
+                    >
+                    <td class="whitespace-nowrap py-5 text-base text-black"
+                      >130.000€</td
+                    >
+                    <td
+                      class="whitespace-nowrap py-5 inline-flex items-center gap-2 text-base text-black"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                        ></path>
+                        <path
+                          d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                          stroke-width="0"
+                          fill="#db649f"></path>
+                      </svg>
+                      <span>Denied</span>
+                    </td>
+                    <td class="relative whitespace-nowrap pr-5 text-right">
+                      <div
+                        @click.away="open = false"
+                        class="relative"
+                        x-data="{ open: false }"
+                      >
+                        <button
+                          @click="open = !open"
+                          class="text-sm text-black transition-all hover:text-lila-800"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-dots w-6 h-6"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                            ></path>
+                            <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                            ></path>
+                            <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                            ></path>
+                            <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"
+                            ></path>
+                          </svg>
+                        </button>
+                        <div
+                          x-show="open"
+                          style="display: none;"
+                          x-transition:enter="transition ease-out duration-100"
+                          x-transition:enter-start="transform opacity-0 scale-95"
+                          x-transition:enter-end="transform opacity-100 scale-100"
+                          x-transition:leave="transition ease-in duration-75"
+                          x-transition:leave-start="transform opacity-100 scale-100"
+                          x-transition:leave-end="transform opacity-0 scale-95"
+                          class="absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black"
+                          role="menu"
+                          aria-orientation="vertical"
+                          aria-labelledby="menu-button"
+                          tabindex="-1"
+                        >
+                          <div class="py-1 bg-white rounded-xl" role="none">
+                            <button
+                              type="button"
+                              class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                              role="menuitem"
+                              tabindex="-1"
+                              id="menu-item-0"
+                              >Overview
+                            </button>
+                            <button
+                              type="button"
+                              class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                              role="menuitem"
+                              tabindex="-1"
+                              id="menu-item-1">Style Guide</button
+                            >
+                            <button
+                              type="button"
+                              class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                              role="menuitem"
+                              tabindex="-1"
+                              id="menu-item-2">Components</button
+                            >
+                            <form
+                              method="POST"
+                              action="#"
+                              role="none"
+                              class="border-t border-white/5"
+                            >
+                              <button
+                                type="submit"
+                                class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                                role="menuitem"
+                                tabindex="-1"
+                                id="menu-item-3">Sign out</button
+                              >
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- More rows  ... -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            With dividers
+          </h3>
+          <div class="mt-12 flow-root w-full">
+            <div class="overflow-x-auto border-2 border-black rounded-2xl shadow">
+              <div class="inline-block w-full align-middle ">
+                <table class="min-w-full divide-y-2 divide-black w-full">
+                  <thead class="bg-lila-500">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="py-3.5 text-left uppercase text-base font-medium text-black pl-5"
+                        ><span class="hidden md:inline">Application</span> ID</th
+                      >
+                      <th
+                        scope="col"
+                        class="py-3 text-left text-base uppercase font-medium text-black"
+                        >lease <span class="hidden md:inline">principle</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="py-3 text-left text-base uppercase font-medium text-black"
+                        >expired <span class="hidden md:inline">amount</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="pl-3 text-left text-base uppercase font-medium text-black"
+                        >status</th
+                      >
+                      <th scope="col" class="relative py-5">
+                        <span class="sr-only">Edit</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y-2 divide-black">
+                    <tr class="border-t border-black">
+                      <th
+                        colspan="5"
+                        scope="colgroup"
+                        class="bg-yellow-500 pl-5 py-2 text-left text-base font-normal text-black"
+                        >Thu, 28th</th
+                      >
+                    </tr>
+                    <tr>
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">a4489</span>
+                      </td>
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >600.00€</td
+                      >
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >6.002.923€</td
+                      >
+                      <td
+                        class="whitespace-nowrap py-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#84a3d9"></path>
+                        </svg>
+                        <span>Pending</span>
+                      </td>
+                      <td class="relative whitespace-nowrap pr-5 text-right">
+                        <a
+                          href="#"
+                          class="text-black items-center shadow shadow-black text-base font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-8 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                          >Edit<span class="sr-only">#ID</span></a
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="whitespace-nowrap pl-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">l2811</span>
+                      </td>
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >1200.00€</td
+                      >
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >12.002.923€</td
+                      >
+                      <td
+                        class="whitespace-nowrap py-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#6baca6"></path>
+                        </svg>
+                        <span>Approved</span>
+                      </td>
+                      <td class="relative whitespace-nowrap pr-5 text-right">
+                        <a
+                          href="#"
+                          class="text-black items-center shadow shadow-black text-base font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-8 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                          >Edit<span class="sr-only">#ID</span></a
+                        >
+                      </td>
+                    </tr>
+                    <tr class="border-t border-lila-500">
+                      <th
+                        colspan="5"
+                        scope="colgroup"
+                        class="bg-yellow-500 py-2 pl-5 text-left text-base font-normal text-black"
+                        >Wed, 27th</th
+                      >
+                    </tr>
+                    <tr>
+                      <td
+                        class="whitespace-nowrap pl-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">z3726</span>
+                      </td>
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >100.00€</td
+                      >
+                      <td class="whitespace-nowrap py-5 text-base text-black"
+                        >1.002.923€</td
+                      >
+                      <td
+                        class="whitespace-nowrap py-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#db649f"></path>
+                        </svg>
+                        <span>Denied</span>
+                      </td>
+                      <td class="relative whitespace-nowrap pr-5 text-right">
+                        <a
+                          href="#"
+                          class="text-black items-center shadow shadow-black text-base font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-8 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                          >Edit<span class="sr-only">#ID</span></a
+                        >
+                      </td>
+                    </tr>
+                    <!-- More rows  ... -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            Striped and boxed
+          </h3>
+          <div class="mt-12 flow-root w-full">
+            <div class="overflow-x-auto border-2 border-black rounded-2xl shadow">
+              <div
+                class="inline-block w-full align-middle rounded-xl overflow-hidden"
+              >
+                <table class="min-w-full divide-y-2 divide-black w-full">
+                  <thead class="bg-lila-500">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="p-5 text-left uppercase text-base font-medium text-black"
+                        ><span class="hidden md:inline">Application</span> ID</th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >lease <span class="hidden md:inline">principle</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >expired <span class="hidden md:inline">amount</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >Balance</th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >status</th
+                      >
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y-2 divide-black bg-lila-200">
+                    <tr>
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">a4489</span>
+                        <span class="hidden lg:block">abz-93847</span>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >600.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >6.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >830.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#84a3d9"></path>
+                        </svg>
+                        <span>Pending</span>
+                      </td>
+                    </tr>
+                    <tr class="bg-white">
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">l2811</span>
+                        <span class="hidden lg:block">lek-93840</span>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1200.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >12.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1630.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#6baca6"></path>
+                        </svg>
+                        <span>Approved</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">z3726</span>
+                        <span class="hidden lg:block">ncj-02093</span>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >100.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >130.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#db649f"></path>
+                        </svg>
+                        <span>Denied</span>
+                      </td>
+                    </tr>
+                    <tr class="bg-white">
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">d0294</span>
+                        <span class="hidden lg:block">lla-97621</span>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1300.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >56.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >938.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#6baca6"></path>
+                        </svg>
+                        <span>Approved</span>
+                      </td>
+                    </tr>
+                    <!-- More rows  ... -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            With checkboxes
+          </h3>
+          <div class="mt-12 flow-root w-full">
+            <div class="overflow-x-auto border-2 border-black rounded-2xl shadow">
+              <div
+                class="inline-block w-full align-middle  rounded-xl overflow-hidden"
+              >
+                <table class="min-w-full divide-y-2 divide-black w-full">
+                  <thead class="bg-lila-500">
+                    <tr>
+                      <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
+                        <input
+                          type="checkbox"
+                          class="absolute left-4 top-1/2 -mt-2 h-4 w-4 text-black focus:ring-black border-black border-2 rounded-full"
+                        />
+                      </th>
+                      <th
+                        scope="col"
+                        class="p-5 text-left uppercase text-base font-medium text-black"
+                        ><span class="hidden md:inline">Application</span> ID</th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >lease <span class="hidden md:inline">principle</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >expired <span class="hidden md:inline">amount</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >Balance</th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >status</th
+                      >
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y-2 divide-black bg-lila-200">
+                    <tr>
+                      <td class="relative px-7 sm:w-12 sm:px-6">
+                        <input
+                          type="checkbox"
+                          class="absolute left-4 top-1/2 -mt-2 h-4 w-4 text-black focus:ring-black border-black border-2 rounded-full"
+                        />
+                      </td>
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">a4489</span>
+                        <span class="hidden lg:block">abz-93847</span>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >600.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >6.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >830.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#84a3d9"></path>
+                        </svg>
+                        <span>Pending</span>
+                      </td>
+                    </tr>
+                    <tr class="bg-white">
+                      <td class="relative px-7 sm:w-12 sm:px-6">
+                        <input
+                          type="checkbox"
+                          class="absolute left-4 top-1/2 -mt-2 h-4 w-4 text-black focus:ring-black border-black border-2 rounded-full"
+                        />
+                      </td>
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">l2811</span>
+                        <span class="hidden lg:block">lek-93840</span>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1200.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >12.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1630.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#6baca6"></path>
+                        </svg>
+                        <span>Approved</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="relative px-7 sm:w-12 sm:px-6">
+                        <input
+                          type="checkbox"
+                          class="absolute left-4 top-1/2 -mt-2 h-4 w-4 text-black focus:ring-black border-black border-2 rounded-full"
+                        />
+                      </td>
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">z3726</span>
+                        <span class="hidden lg:block">ncj-02093</span>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >100.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >130.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#db649f"></path>
+                        </svg>
+                        <span>Denied</span>
+                      </td>
+                    </tr>
+                    <tr class="bg-white">
+                      <td class="relative px-7 sm:w-12 sm:px-6">
+                        <input
+                          type="checkbox"
+                          class="absolute left-4 top-1/2 -mt-2 h-4 w-4 text-black focus:ring-black border-black border-2 rounded-full"
+                        />
+                      </td>
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <span class="block text-black">d0294</span>
+                        <span class="hidden lg:block">lla-97621</span>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1300.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >56.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >938.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center gap-2 text-base text-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon icon-tabler w-8 h-8 icon-tabler-point-filled"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path
+                            d="M12 7a5 5 0 1 1 -4.995 5.217l-.005 -.217l.005 -.217a5 5 0 0 1 4.995 -4.783z"
+                            stroke-width="0"
+                            fill="#6baca6"></path>
+                        </svg>
+                        <span>Approved</span>
+                      </td>
+                    </tr>
+                    <!-- More rows  ... -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">With avatar</h3>
+          <div class="mt-12 flow-root w-full">
+            <div class="overflow-x-auto border-2 border-black rounded-2xl shadow">
+              <div
+                class="inline-block w-full align-middle b rounded-xl overflow-hidden"
+              >
+                <table class="min-w-full divide-y-2 divide-black w-full">
+                  <thead class="bg-lila-500">
+                    <tr>
+                      <th
+                        scope="col"
+                        class="p-5 text-left uppercase text-base font-medium text-black"
+                        ><span class="hidden md:inline">Application</span> ID</th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >lease <span class="hidden md:inline">principle</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >expired <span class="hidden md:inline">amount</span
+                        ></th
+                      >
+                      <th
+                        scope="col"
+                        class="p-5 text-left text-base uppercase font-medium text-black"
+                        >Balance</th
+                      >
+                      <th scope="col" class="relative py-5">
+                        <span class="sr-only">Edit</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y-2 divide-black">
+                    <tr>
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <div class="flex items-center gap-x-4">
+                          <img
+                            src="/integrations/stripe.svg"
+                            alt=""
+                            class="h-6 w-6"
+                          />
+                          <span class="block text-black">Stripe</span>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >600.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >6.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >830.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center"
+                      >
+                        <button
+                          type="button"
+                          class="text-black items-center shadow shadow-black text-base font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-8 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                          >Select</button
+                        >
+                      </td>
+                    </tr>
+                    <tr class="bg-white">
+                      <td
+                        class="whitespace-nowrap p-5 text-base uppercase text-black"
+                      >
+                        <div class="flex items-center gap-x-4">
+                          <img
+                            src="/integrations/mastercard.svg"
+                            alt=""
+                            class="h-6 w-6"
+                          />
+                          <span class="block text-black">Master Card</span>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1200.00€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >12.002.923€</td
+                      >
+                      <td class="whitespace-nowrap p-5 text-base text-black"
+                        >1630.000€</td
+                      >
+                      <td
+                        class="whitespace-nowrap p-5 inline-flex items-center"
+                      >
+                        <button
+                          type="button"
+                          class="text-black items-center shadow shadow-black text-base font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-8 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                          >Select</button
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tr>
+                    <td
+                      class="whitespace-nowrap p-5 text-base uppercase text-black"
+                    >
+                      <div class="flex items-center gap-x-4">
+                        <img
+                          src="/integrations/paypal.svg"
+                          alt=""
+                          class="h-6 w-6"
+                        />
+                        <span class="block text-black">Paypal</span>
+                      </div>
+                    </td>
+                    <td class="whitespace-nowrap p-5 text-base text-black"
+                      >100.00€</td
+                    >
+                    <td class="whitespace-nowrap p-5 text-base text-black"
+                      >1.002.923€</td
+                    >
+                    <td class="whitespace-nowrap p-5 text-base text-black"
+                      >130.000€</td
+                    >
+                    <td class="whitespace-nowrap p-5 inline-flex items-center">
+                      <button
+                        type="button"
+                        class="text-black items-center shadow shadow-black text-base font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-8 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                        >Select</button
+                      >
+                    </td>
+                  </tr>
+
+                  <!-- More rows  ... -->
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

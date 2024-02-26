@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+import EntriesTwo from "../entries/EntriesTwo.astro";
+---
+<section>
+  <div class="2xl:max-w-7xl max-w-6xl md:px-12 mx-auto px-8 py-12">
+    <div
+      class="grid gap-4 grid-cols-1 lg:gap-y-24 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {
+        allPosts
+          .slice(2, 8)
+          .map((post) => (
+            <EntriesTwo
+              url={"/posts/" + post.slug}
+              title={post.data.title}
+              description={post.data.description}
+              alt={post.data.title}
+              pubDate={post.data.pubDate.toString().slice(0, 10)}
+              author={post.data.author}
+              image={post.data.image.url}
+            />
+          ))
+      }
+    </div>
+  </div>
+</section>

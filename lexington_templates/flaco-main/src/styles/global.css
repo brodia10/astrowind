@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS */
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings:
+  "liga" 1,
+  "calt" 1, /* Contextual Alternates */
+  "dlig" 1, /* Discretionary Ligatures */
+  "ss07" 1, /* fSquare punctuation */
+  "ss08" 1, /* Square quotes */
+  "zero" 1, /* Slashed zero */
+  "tnum" 1, /* Tabular numbers */
+    "cv03" 1, /* Open six */
+    "cv04" 1, /* Open nine */
+    "cv01" 1, /* Alternate one */
+    "cv09", /* Flat-top three */
+    "cv02" 1; /* Open 4 */
+}
+@supports (font-variation-settings: normal) {
+  /* Use variable font if supported */
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+
+
+:root {
+  --astro-code-color-text: #909090;
+  --astro-code-color-background: #0c0c0c;
+  --astro-code-token-constant: #ffffff70;
+  --astro-code-token-string: #adadaf;
+  --astro-code-token-comment: #adadaf;
+  --astro-code-token-keyword: #f5f5f5;
+  --astro-code-token-parameter: #adadaf;
+  --astro-code-token-function: #eaeaeb;
+  --astro-code-token-string-expression: #fff;
+  --astro-code-token-punctuation: #ffffff80;
+  --astro-code-token-link: #adadaf;
+}

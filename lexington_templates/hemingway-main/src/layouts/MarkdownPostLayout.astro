@@ -1,0 +1,68 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const headings = document.querySelectorAll(
+      ".prose-styles h2,.prose-styles  h3"
+    );
+    const tocContainer = document.getElementById("table-of-contents");
+    if (tocContainer && headings.length > 0) {
+      const tocList = document.createElement("ul");
+      tocList.classList.add("space-y-3", "text-xs");
+      headings.forEach((heading) => {
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+        link.textContent = heading.textContent;
+        link.href = `#${heading.id}`;
+        link.classList.add("text-black", "dark:text-white", "hover:underline");
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
+      });
+      tocContainer.appendChild(tocList);
+      tocContainer.classList.remove("hidden");
+    }
+  });
+</script>
+<BaseLayout>
+
+  <section>
+    <div class=" max-w-7xl p-8 ">
+      <div class="grid grid-cols-1 lg:grid-cols-12">
+        <div class="lg:col-span-2">
+          <div id="table-of-contents" class="hidden lg:block sticky top-24">
+          </div>
+        </div>
+        <div class="lg:col-span-10 max-w-2xl">
+          <img
+          class="w-full"
+          src={frontmatter.image.url}
+          alt={frontmatter.image.alt}
+        />
+        <h1 class="font-medium text-zinc-700 mt-12 uppercase">
+          {frontmatter.title}
+        </h1>
+        <div class="prose-styles max-w-none">
+          <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
+          <p><em>{frontmatter.description}</em></p>
+          <p>Written by: {frontmatter.author}</p>
+          <div class="flex flex-wrap gap-3 mt-12">
+            {
+              frontmatter.tags.map((tag) => (
+                <span class="inline-flex items-center text-sm font-light text-black dark:text-white  underline hover:text-accent-300">
+                  <a href={`/tags/${tag}`}>{tag}</a>
+                </span>
+              ))
+            }
+          </div>
+          <slot />
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>

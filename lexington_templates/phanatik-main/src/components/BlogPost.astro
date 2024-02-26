@@ -1,0 +1,17 @@
+---
+const { title, url, pubDate } = Astro.props;
+---
+
+<a
+  class="flex flex-col lg:flex-row w-full justify-between py-3 group font-serif"
+  href={url}
+  title={title}>
+  <span
+    class="font-semibold text-black group-hover:text-salmon-600"
+    aria-hidden="true"
+    >{title}
+  </span>
+  <span class="text-black group-hover:text-salmon-600" aria-hidden="true"
+    >{pubDate}
+  </span>
+</a>

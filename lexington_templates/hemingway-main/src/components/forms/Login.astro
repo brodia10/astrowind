@@ -1,0 +1,73 @@
+<section>
+  <div class="p-8 text-zinc-700 text-xs flex flex-col w-full">
+    <div class="max-w-2xl mx-auto text-center">
+      <div>
+        <h1 class="font-medium text-zinc-700 uppercase">Log in to Hemingway</h1>
+      </div>
+      <form class="space-y-2 mt-6">
+        <div>
+          <label for="email" class="sr-only">Email address</label><div
+            class="mt-2">
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              placeholder="email@example.com"
+              required=""
+              class="block w-full text-center rounded-full border border-zinc-300 px-4 py-2 font-spline text-sm font-medium text-zinc-800 placeholder-zinc-400 focus:border-zinc-500 focus:outline-none focus:ring-2 lg:px-6 focus:ring-zinc-600/50 disabled:opacity-50"
+            />
+          </div>
+        </div>
+        <div>
+          <label for="password" class="sr-only">Password</label><div
+            class="mt-2">
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="your password"
+              required=""
+              class="block w-full text-center rounded-full border border-zinc-300 px-4 py-2 font-spline text-sm font-medium text-zinc-800 placeholder-zinc-400 focus:border-zinc-500 focus:outline-none focus:ring-2 lg:px-6 focus:ring-zinc-600/50 disabled:opacity-50"
+            />
+          </div>
+        </div>
+        <div class="inline-flex items-center gap-2 justify-between">
+          <div class="flex items-center">
+            <input
+              id="remember-me"
+              name="remember-me"
+              type="checkbox"
+              class="h-4 w-4 rounded-full text-500 focus:ring-zinc-600 text-black"
+            /><label for="remember-me" class="ml-2 block text-sm text-black"
+              >Remember me</label
+            >
+          </div>
+          <div class="text-sm">
+            <a
+              href="/forms/reset"
+              class="font-medium text-zinc-700 hover:text-accent-600"
+              >Forgot your password?</a
+            >
+          </div>
+        </div>
+        <div>
+          <button
+            type="submit"
+            class="items-center w-full inline-flex border duration-200 focus:ring-2 focus:ring-offset-2 justify-center px-4 py-2 rounded-full text-sm bg-black border-transparent focus:ring-white hover:bg-black/10 hover:text-white ring-1 ring-transparent text-white"
+            >Sign in</button
+          >
+        </div>
+        <div class="text-sm">
+          Don't have an account?
+          <a
+            href="/forms/signup"
+            class="tems-center mt-2 w-full inline-flex border duration-200 focus:ring-2 focus:ring-offset-2 justify-center px-4 py-2 rounded-full text-sm bg-white border-transparent focus:ring-white hover:bg-black/10 ring-1 ring-transparent text-black">
+            Create an account!</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

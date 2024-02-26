@@ -1,0 +1,18 @@
+---
+const { title, url, description } = Astro.props;
+---
+<a href={url} title={title} class="group"
+  ><article class="h-full flex-1 duration-200">
+    <div class="w-full flex flex-col flex-1 items-start justify-between">
+      <div>
+        <div>
+          <p class="font-medium text-black group-hover:text-salmon-600">
+          {title}
+          </p>
+        </div><p class="text-slate-600 line-clamp-3 font-normal mt-4">
+         {description}
+        </p>
+      </div>
+    </div>
+  </article></a
+>

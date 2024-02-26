@@ -1,0 +1,57 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import EntriesOne from "@/components/entries/EntriesOne.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("posts");
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={tag}>
+  <section>
+    <div
+      class="relative items-center w-full mx-auto 2xl:max-w-7xl p-8 border-b-2 border-black lg:p-20 2xl:px-0"
+    >
+      <div>
+        <p class="text-5xl lg:text-7xl text-black">Posts tagged with...</p>
+        <p class="mt-4 xl:text-2xl tracking-tight text-black">
+          {tag}
+        </p>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 p-8 lg:p-20 lg:grid-cols-2 gap-8 mx-auto 2xl:max-w-7xl 2xl:border-x-2 border-black [&>*:nth-child(1)]:bg-red-400 [&>*:nth-child(2)]:bg-green-400 [&>*:nth-child(3)]:bg-violet-300 [&>*:nth-child(4)]:bg-yellow-400"
+    >
+      {
+        posts.map((post) => (
+          <EntriesOne
+            url={"/posts/" + post.slug}
+            title={post.data.title}
+            description={post.data.description}
+            alt={post.data.title}
+            pubDate={post.data.pubDate.toString().slice(0, 10)}
+            author={post.data.author}
+            image={post.data.image.url}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

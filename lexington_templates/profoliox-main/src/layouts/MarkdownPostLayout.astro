@@ -1,0 +1,55 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const headings = document.querySelectorAll(" h2,  h3");
+    const tocContainer = document.getElementById("table-of-contents");
+    if (tocContainer && headings.length > 0) {
+      const tocList = document.createElement("ul");
+      tocList.classList.add("space-y-3", "text-xs");
+      headings.forEach((heading) => {
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+        link.textContent = heading.textContent;
+        link.href = `#${heading.id}`;
+        link.classList.add("text-black", "dark:text-white", "hover:underline");
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
+      });
+      tocContainer.appendChild(tocList);
+      tocContainer.classList.remove("hidden");
+    }
+  });
+</script>
+<BaseLayout>
+  <section>
+    <div class="max-w-3xl px-8 py-24 sm:pt-24">
+      <div class="prose-styles">
+        <p
+          class="text-2xl font-medium tracking-tight text-neutral-900 dark:text-white sm:text-4xl"
+        >
+          Articles
+        </p>
+        <p class="mt-4 text-neutral-400 dark:text-neutral-300">
+          Here you will find all articles written!
+        </p>
+        <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
+        <h1>{frontmatter.title}</h1>
+        <p><em>{frontmatter.description}</em></p>
+        <p>Written by: {frontmatter.author}</p>
+        <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
+        <slot />
+      </div>
+      <aside
+        class="fixed inset-y-0 right-0 hidden w-64 overflow-y-auto bg-white dark:bg-neutral-900 border-l dark:border-neutral-700 px-4 py-6 sm:px-6 lg:px-8 xl:block"
+      >
+        <div id="table-of-contents" class="hidden lg:block lg:sticky lg:top-20">
+          <!-- Your table of contents content here -->
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

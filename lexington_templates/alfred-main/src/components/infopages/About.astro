@@ -1,0 +1,340 @@
+---
+const contentOne = [
+  {
+    title: "innovation",
+    description:
+      "We continuously push the boundaries of financial technology to bring you cutting-edge solutions that adapt to your unique needs.",
+  },
+  {
+    title: "accessibility",
+    description:
+      "Our user-friendly platform is designed for both seasoned investors and those taking their first steps in the financial world.",
+  },
+  {
+    title: "security",
+    description:
+      "We take the protection of your data and assets seriously, employing the latest encryption and security measures.",
+  },
+  {
+    title: "utilization of services",
+    description:
+      "An impressive 76% of our members make use of our Care Router, ensuring they receive the most suitable financial support for their needs.",
+  },
+];
+const knowus = [
+  {
+    title: "OUR MISSION",
+    description:
+      "Our mission is to revolutionize the world of finance by empowering individuals and businesses with accessible, secure, and innovative solutions that pave the way for financial success and prosperity.",
+  },
+  {
+    title: "our values",
+    description:
+      "At Alfred, our core values are Integrity, Innovation, Inclusivity, and Excellence. We operate with the highest ethical standards, continuously seek to push the boundaries of financial technology, embrace diversity, and strive for excellence in all that we do.",
+  },
+  {
+    title: "our goals",
+    description:
+      "Implement a feature that offers personalized financial advice and Our goals are to drive financial inclusivity, foster innovation, and ensure the security of our customers' financial well-being.",
+  },
+];
+const team = [
+  {
+    image: "/avatar1.png",
+    name: "SOPHIA MARTELLI",
+    position: "CHIEF OPERATING OFFICER",
+    personality:
+      "Michael Andreuzza a wealth of operational expertise to his role as COO, with a focus on optimizing our internal processes and ensuring the highest standards of service delivery. his background in operational excellence and strategic planning is pivotal in guiding our fintech innovations from concept to market. Sophia's leadership ensures our operations align with our mission to provide seamless financial services.",
+  },
+  {
+    image: "/avatar2.png",
+    name: "ALEXANDER CHEN",
+    position: "HEAD OF PRODUCT DEVELOPMENT",
+    personality:
+      "Alexander oversees our product development team, driving the creation of user-centric financial tools that address the evolving needs of our clients. With a keen eye for design and functionality, he combines technical prowess with market insights to develop products that are not only innovative but also accessible to all users. His commitment to excellence is evident in the usability and sophistication of our financial platforms.",
+  },
+  {
+    image: "/avatar5.png",
+    name: "JASMINE TURNER",
+    position: "CHIEF FINANCIAL OFFICER",
+    personality:
+      "As CFO, Jasmine's strategic financial management supports our company's growth and sustainability. her expertise in financial planning, risk management, and regulatory compliance ensures that we remain on solid financial footing. Jasmine's forward-thinking approach to financial strategy is instrumental in funding innovation and expanding our reach in the fintech space, making financial services more accessible to a broader audience.",
+  },
+];
+---
+
+<section class="overflow-hidden border-b">
+  <div class="max-w-screen-xl px-8 pt-24 mx-auto md:px-12 lg:px-32">
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <div>
+        <span
+          class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+        >
+          About
+        </span>
+        <h1
+          class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950 md:text-6xl"
+        >
+          Learn more <span
+            class="md:block md:text-transparent md:bg-clip-text md:bg-gradient-to-r from-blue-500 to-indigo-600 py-2"
+            >about Alfred</span
+          >
+        </h1>
+        <p class="mt-4 text-base text-gray-700 lg:text-base">
+          At Alfred, we're driven by a single mission: to empower individuals
+          and businesses with the tools and knowledge they need to thrive in the
+          ever-evolving world of finance. We believe that financial success
+          should be within reach for everyone, and our fintech solutions are
+          designed to make that a reality.
+          <br />
+          <br />
+          Founded by a team of passionate experts in finance and technology, we combine
+          the best of both worlds to provide you with innovative and user-friendly
+          financial services. Our commitment to security, transparency, and accessibility
+          is at the core of everything we do.
+        </p>
+      </div>
+      <div class="flex flex-row -space-x-32 lg:ml-auto">
+        <img
+          class="z-10 mt-20 -mb-32 shadow-box lg:ml-12 shadow-gray-500/20 rounded-3xl"
+          src="/card4.svg"
+          alt=""
+        />
+        <img
+          class="mt-20 -mb-32 shadow-box shadow-gray-500/20 rounded-3xl"
+          src="/card6.svg"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="max-w-screen-xl px-8 pt-24 mx-auto md:px-12 lg:px-32">
+    <div
+      class="grid items-start grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-4"
+    >
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:grid-cols-1">
+        {
+          contentOne.map((content) => (
+            <>
+              <div>
+                <p class="font-mono text-base font-medium tracking-tighter uppercase text-blue-950">
+                  {content.title}
+                </p>
+                <p class="mt-2 text-sm text-gray-700">{content.description}</p>
+              </div>
+            </>
+          ))
+        }
+      </div>
+      <dl
+        class="grid grid-cols-1 gap-12 text-center lg:ml-auto sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:col-span-3"
+      >
+        <div class="col-span-full">
+          <img
+            class="w-full rounded-3xl shadow-box shadow-gray-500/20 tilt-card"
+            src="/card2.svg"
+            alt=""
+          />
+        </div>
+        <div
+          x-data="{ count: 0, target: 30, counter() { let interval = setInterval(() => { if (this.count < this.target) { this.count += 1; } else { clearInterval(interval); } }, 50); } }"
+          x-intersect.once="counter()"
+          class="flex flex-col"
+        >
+          <dt
+            class="mt-4 font-mono text-sm font-medium tracking-tighter uppercase text-blue-950"
+          >
+            Working Individuals
+          </dt>
+          <dd
+            x-text="`${count}%`"
+            class="order-first font-mono text-3xl font-semibold tracking-tight text-blue-700"
+          >
+          </dd>
+        </div>
+        <div
+          x-data="{ count: 0, target: 40, counter() { let interval = setInterval(() => { if (this.count < this.target) { this.count += 1; } else { clearInterval(interval); } }, 50); } }"
+          x-intersect.once="counter()"
+          class="flex flex-col"
+        >
+          <dt
+            class="mt-4 font-mono text-sm font-medium tracking-tighter uppercase text-blue-950"
+          >
+            super Low Fee
+          </dt>
+          <dd
+            x-text="`${count}%`"
+            class="order-first font-mono text-3xl font-semibold tracking-tight text-blue-700"
+          >
+          </dd>
+        </div>
+        <div
+          x-data="{ count: 0, target: 50, counter() { let interval = setInterval(() => { if (this.count < this.target) { this.count += 1; } else { clearInterval(interval); } }, 50); } }"
+          x-intersect.once="counter()"
+          class="flex flex-col"
+        >
+          <dt
+            class="mt-4 font-mono text-sm font-medium tracking-tighter uppercase text-blue-950"
+          >
+            Great Commitment
+          </dt>
+          <dd
+            x-text="`${count}%`"
+            class="order-first font-mono text-3xl font-semibold tracking-tight text-blue-700"
+          >
+          </dd>
+        </div>
+        <div
+          x-data="{ count: 0, target: 60000000, counter() { let interval = setInterval(() => { if (this.count < this.target) { this.count += 1000000; } else { clearInterval(interval); this.count = this.target; } }, 50); } }"
+          x-intersect.once="counter()"
+          class="flex flex-col"
+        >
+          <dt
+            class="mt-4 font-mono text-sm font-medium tracking-tighter uppercase text-blue-950"
+          >
+            Massive Earnings
+          </dt>
+          <dd
+            x-text="`${(count / 1000000) % 1 === 0 ? (count / 1000000) : (count / 1000000).toFixed(1)}M`"
+            class="order-first font-mono text-3xl font-semibold tracking-tight text-blue-700"
+          >
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+<section class="overflow-hidden">
+  <div class="relative max-w-screen-xl px-8 pt-24 mx-auto md:px-12 lg:px-32">
+    <div class="flex flex-col gap-12">
+      <div>
+        <span
+          class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+        >
+          Get to know us
+        </span>
+        <p class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950">
+          Our commitment to <span
+            class="md:block md:text-transparent md:bg-clip-text md:bg-gradient-to-r from-blue-500 to-indigo-600 py-2"
+            >financial empowerment
+          </span>
+        </p>
+        <p class="max-w-sm mt-4 text-base text-gray-700 lg:text-base">
+          Charting a path to your financial success
+        </p>
+      </div>
+      <div class="grid grid-cols-1 gap-12 mx-auto mt-8 lg:grid-cols-3">
+        {
+          knowus.map((content) => (
+            <>
+              <div>
+                <p class="font-mono text-base font-medium tracking-tighter uppercase text-blue-950">
+                  {content.title}
+                </p>
+                <p class="mt-2 text-sm text-gray-700">{content.description}</p>
+              </div>
+            </>
+          ))
+        }
+      </div>
+    </div>
+    <div
+      class="flex items-center gap-4 pt-12 lg:-mb-48 animate-marqueeRight whitespace-nowrap"
+    >
+      <img
+        src="/card1.svg"
+        class="w-full duration-500 origin-bottom transform rounded-3xl tilt-card"
+      /><img
+        src="/card2.svg"
+        class="w-full duration-500 origin-bottom transform rounded-3xl tilt-card"
+      /><img
+        src="/card3.svg"
+        class="w-full duration-500 origin-bottom transform rounded-3xl tilt-card"
+      /><img
+        class="w-full duration-500 origin-bottom transform rounded-3xl tilt-card"
+        src="/card4.svg"
+      />
+      <img
+        src="/card5.svg"
+        class="w-full duration-500 origin-bottom transform rounded-3xl tilt-card"
+      /><img
+        src="/card6.svg"
+        class="w-full duration-500 origin-bottom transform rounded-3xl tilt-card"
+      /><img
+        src="/card7.svg"
+        class="w-full duration-500 origin-bottom transform rounded-3xl tilt-card"
+      />
+    </div>
+  </div>
+</section>
+<section>
+  <div class="relative max-w-screen-xl px-8 pt-24 mx-auto md:px-12 lg:px-32">
+    <div class="flex flex-col gap-12">
+      <div>
+        <span
+          class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+        >
+          Team
+        </span>
+        <p class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950">
+          Our team
+        </p>
+        <p class="max-w-sm mt-4 text-base text-gray-700 lg:text-base">
+          Charting a path to your financial success
+        </p>
+      </div>
+      <div class="relative grid gap-12 mt-12 sm:grid-cols-2 xl:grid-cols-3">
+        {
+          team.map((team) => (
+            <>
+              <div class="flex flex-col justify-between h-full">
+                <div>
+                  <span class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase">
+                    {team.position}
+                  </span>
+                  <p class="mt-8 font-mono text-base font-medium tracking-tighter uppercase">
+                    {team.name}
+                  </p>
+                  <img
+                    src={team.image}
+                    class="order-last mt-8 rounded-2xl shadow-box shadow-gray-500/50 aspect-[4/4] object-cover"
+                    alt={team.name}
+                  />
+                  <div class="mt-8 text-sm text-gray-700">
+                    {team.personality}
+                  </div>
+                </div>
+              </div>
+            </>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="max-w-screen-xl px-8 py-24 mx-auto lg:py-32 md:px-12 lg:px-32">
+    <div class="flex flex-col w-full gap-12 text-center">
+      <div>
+        <p
+          class="text-4xl font-semibold tracking-tighter text-blue-950 md:text-6xl"
+        >
+          We are hiring
+        </p>
+        <p class="max-w-sm mx-auto mt-4 text-gray-700">
+          Check out our open positions
+        </p>
+      </div>
+      <div class="flex justify-center">
+        <a
+          href="/jobs/positions"
+          class="flex items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600 hover:to-indigo-700 shadow-button shadow-blue-600/50 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"
+        >
+          See open positions
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

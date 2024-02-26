@@ -1,0 +1,268 @@
+---
+const testimonials = [
+  {
+    avatar: "/avatar1.png",
+    name: "Mike Andreuzza",
+    xtag: "@Mike_Andreuzza",
+    testimonial:
+      "I've been using Alfred services for years, and they consistently exceed my expectations. The support team is fantastic!",
+  },
+  {
+    avatar: "/avatar2.png",
+    name: "Jhon Maccain",
+    xtag: "@Jhonjhon",
+    testimonial:
+      "The financial solutions they offer are top-notch. I've seen significant growth in my investments since I started using their platform.",
+  },
+  {
+    avatar: "/avatar3.png",
+    name: "Samantha Brookes",
+    xtag: "@SamanthaB",
+    testimonial:
+      "Their customer service is unparalleled. They really go the extra mile to ensure customer satisfaction.",
+  },
+  {
+    avatar: "/avatar4.png",
+    name: "Alex Johnson",
+    xtag: "@AlexJ",
+    testimonial:
+      "The user interface of their app is so intuitive and easy to navigate. It made my experience seamless.",
+  },
+  {
+    avatar: "/avatar5.png",
+    name: "Linda Smith",
+    xtag: "@LindaS",
+    testimonial:
+      "I appreciate their commitment to sustainability. It's great to see a company that aligns with my values.",
+  },
+  {
+    avatar: "/avatar6.png",
+    name: "Daniel Martinez",
+    xtag: "@DannyM",
+    testimonial:
+      "Their educational resources have helped me make informed decisions about my finances. Highly recommend!",
+  },
+  {
+    avatar: "/avatar7.png",
+    name: "Emily Zhang",
+    xtag: "@EmilyZ",
+    testimonial:
+      "The analytics features are incredibly detailed and useful for tracking my progress over time.",
+  },
+  {
+    avatar: "/avatar8.png",
+    name: "Mark Thompson",
+    xtag: "@MarkT",
+    testimonial:
+      "I've been impressed with the speed and reliability of their services. A game changer for my business.",
+  },
+  {
+    avatar: "/avatar9.png",
+    name: "Sophia Patel",
+    xtag: "@SophiaP",
+    testimonial:
+      "Their community support initiatives are remarkable. It's more than just a service; it's a partnership.",
+  },
+  {
+    avatar: "/avatar10.png",
+    name: "Ethan Wright",
+    xtag: "@EthanW",
+    testimonial:
+      "The flexibility of their plans is fantastic. I was able to find an option that perfectly matched my needs.",
+  },
+];
+---
+
+<section class="overflow-hidden">
+  <div
+    class="px-8 py-24 mx-auto md:px-12 lg:px-32 items-center max-w-screen-xl relative"
+  >
+    <div
+      class="flex flex-col w-full"
+      x-data="{
+          skip: 1,
+          atBeginning: false,
+          atEnd: false,
+          next() {
+              this.to((current, offset) => current + (offset * this.skip))
+          },
+          prev() {
+              this.to((current, offset) => current - (offset * this.skip))
+          },
+          to(strategy) {
+              let slider = this.$refs.slider
+              let current = slider.scrollLeft
+              let offset = slider.firstElementChild.getBoundingClientRect().width
+              slider.scrollTo({ left: strategy(current, offset), behavior: 'smooth' })
+          },
+          focusableWhenVisible: {
+              'x-intersect:enter'() {
+                  this.$el.removeAttribute('tabindex')
+              },
+              'x-intersect:leave'() {
+                  this.$el.setAttribute('tabindex', '-1')
+              },
+          },
+          disableNextAndPreviousButtons: {
+              'x-intersect:enter.threshold.05'() {
+                  let slideEls = this.$el.parentElement.children
+                  // If this is the first slide.
+                  if (slideEls[0] === this.$el) {
+                      this.atBeginning = true
+                  // If this is the last slide.
+                  } else if (slideEls[slideEls.length-1] === this.$el) {
+                      this.atEnd = true
+                  }
+              },
+              'x-intersect:leave.threshold.05'() {
+                  let slideEls = this.$el.parentElement.children
+                  // If this is the first slide.
+                  if (slideEls[0] === this.$el) {
+                      this.atBeginning = false
+                  // If this is the last slide.
+                  } else if (slideEls[slideEls.length-1] === this.$el) {
+                      this.atEnd = false
+                  }
+              },
+          },
+      }"
+    >
+      <div
+        class="flex flex-col w-full"
+        aria-labelledby="carousel-label"
+        role="region"
+        tabindex="0"
+        x-on:keydown.left="prev"
+        x-on:keydown.right="next"
+      >
+        <div class="flex flex-col lg:flex-row">
+          <div>
+            <div>
+              <span
+                class="text-blue-600 uppercase font-mono font-medium tracking-tight text-xs"
+              >
+                turns out we got customers
+              </span>
+              <p
+                class="text-4xl mt-8 tracking-tighter font-semibold text-blue-950"
+              >
+                Testimonials from <span
+                  class="md:block md:text-transparent md:bg-clip-text md:bg-gradient-to-r from-blue-500 to-indigo-600 py-2"
+                  >delighted customers</span
+                >
+              </p>
+              <p
+                class="text-base lg:text-base w-full mt-4 text-gray-700 max-w-xs"
+              >
+                Discover stories of success and satisfaction shared by our
+                clients.
+              </p>
+            </div>
+            <div class="items-center inline-flex mt-4 order-last space-x-2">
+              <button
+                class="bg-white hover:bg-gray-200 focus:bg-white rounded-full inline-flex items-center text-center text-gray-700 items-ceter p-3 shadow-button shadow-white/60 border-gray-300 border cursor-not-allowed"
+                :class="{ 'opacity-50 cursor-not-allowed': atBeginning }"
+                :aria-disabled="atBeginning"
+                :tabindex="atEnd ? -1 : 0"
+                x-on:click="prev"
+                tabindex="0"
+                aria-disabled="true"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-chevron-left"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M15 6l-6 6l6 6"></path>
+                </svg><span class="sr-only">Skip to previous slide page</span
+                ></button
+              ><button
+                class="bg-white hover:bg-gray-200 text-gray-700 focus:bg-white rounded-full inline-flex items-center text-center p-3 shadow-button shadow-white/60 border-gray-300 border"
+                :class="{ 'opacity-50 cursor-not-allowed': atEnd }"
+                :aria-disabled="atEnd"
+                :tabindex="atEnd ? -1 : 0"
+                x-on:click="next"
+                tabindex="0"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-chevron-right"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 6l6 6l-6 6"></path>
+                </svg><span class="sr-only">Skip to next slide page</span
+                ></button
+              >
+            </div>
+          </div>
+          <div
+            class="relative w-full snap-x lg:-mr-[90rem] lg:ml-32 mt-12 lg:mt-0"
+          >
+            <div class="w-full justify-between grid">
+              <div
+                class="absolute inset-0 from-gray-100 left-0 via-transparent w-32 z-10 bg-gradient-to-r"
+              >
+              </div>
+              <div
+                class="hidden lg:absolute inset-0 from-gray-100 left-0 via-transparent w-32 z-10 bg-gradient-to-l ml-auto"
+              >
+              </div>
+            </div>
+            <ul
+              class="gap-3 overflow-x-scroll w-screen grid grid-flow-col auto-cols-max scrollbar-hide snap-mandatory relative"
+              role="listbox"
+              aria-labelledby="carousel-content-label"
+              tabindex="0"
+              x-ref="slider"
+            >
+              {
+                testimonials.map((testimonials) => (
+                  <>
+                    <li
+                      role="option"
+                      aria-selected="false"
+                      x-bind="disableNextAndPreviousButtons"
+                      class="bg-white p-8 rounded-2xl shadow-box shadow-gray-500/20 snap-start w-64 h-full"
+                    >
+                      <figure>
+                        <div>
+                          <div class="inline-flex items-center gap-4">
+                            <img
+                              class="w-12 h-12 rounded-full object-cover"
+                              src={testimonials.avatar}
+                              alt={testimonials.name}
+                            />
+                            <p class="font-mono uppercase tracking-tighter text-sm font-medium group-hover:text-white">
+                              {testimonials.name}
+                            </p>
+                          </div>
+                          <p class="text-sm text-gray-700 group-hover:text-white mt-12 lg:mt-24">
+                            {testimonials.testimonial}
+                          </p>
+                        </div>
+                      </figure>
+                    </li>
+                  </>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+---
+<html lang="en">
+  <head>
+    <BaseHead />
+  </head>
+  <body class="bg-gray-100 flex flex-col min-h-screen">
+    <main class="flex-grow"><slot /></main>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+    //https://micku7zu.github.io/vanilla-tilt.js/
+    VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
+      max: 35, // max tilt rotation (degrees)
+      speed: 2500, // Speed of the enter/exit transition
+      transition: true, // Set a transition on enter/exit.
+    });
+    </script>
+  </body>
+
+</html>

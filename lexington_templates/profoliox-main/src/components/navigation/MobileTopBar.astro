@@ -1,0 +1,29 @@
+---
+import Logo from "../global/Logo.astro";
+---
+
+<div
+  class="bg-white dark:bg-neutral-800 dark:border-neutral-700 text-right justify-between items-center inline-flex w-full z-10 pt-3 px-8 lg:hidden sm:pl-3 sm:pt-3">
+  <div>
+    <a href="/" class="text-neutral-900 dark:text-white"><Logo /></a>
+  </div>
+  <button
+    type="button"
+    class="ml-auto h-12 w-12 inline-flex items-center justify-center rounded-md dark:text-white hover:text-blue-400 focus:outline-none focus:text-white focus:ring-inset"
+    @click="open = true">
+    <span class="sr-only">Open sidebar</span>
+    <svg
+      class="w-8 h-8"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+</div>

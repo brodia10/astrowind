@@ -1,0 +1,1493 @@
+<section class="overflow-hidden relative">
+  <div class="relative items-center w-full mx-auto 2xl:max-w-7xl">
+    <div class="divide-y-2 divide-black">
+      <div class="justify-center max-w-3xl p-8 lg:p-20">
+        <p class="text-5xl lg:text-7xl text-black">Tabs</p>
+      </div>
+      <div class="divide-y-2 divide-black">
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">Simple</h3>
+          <!-- Tabs -->
+          <div
+            x-data="{
+      selectedId: null,
+      init() {
+          // Set the first available tab on the page on page load.
+          this.$nextTick(() => this.select(this.$id('tab', 1)))
+      },
+      select(id) {
+          this.selectedId = id
+      },
+      isSelected(id) {
+          return this.selectedId === id
+      },
+      whichChild(el, parent) {
+          return Array.from(parent.children).indexOf(el) + 1
+      }
+  }"
+            x-id="['tab']"
+            class="mx-auto mt-10"
+          >
+            <!-- Tab List -->
+            <ul
+              x-ref="tablist"
+              @keydown.right.prevent.stop="$focus.wrap().next()"
+              @keydown.home.prevent.stop="$focus.first()"
+              @keydown.page-up.prevent.stop="$focus.first()"
+              @keydown.left.prevent.stop="$focus.wrap().prev()"
+              @keydown.end.prevent.stop="$focus.last()"
+              @keydown.page-down.prevent.stop="$focus.last()"
+              role="tablist"
+              class="-mb-px flex items-stretch space-x-1"
+            >
+              <!-- Tab -->
+              <li>
+                <button
+                  :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                  @click="select($el.id)"
+                  @mousedown.prevent
+                  @focus="select($el.id)"
+                  type="button"
+                  :tabindex="isSelected($el.id) ? 0 : -1"
+                  :aria-selected="isSelected($el.id)"
+                  :class="isSelected($el.id) ? 'border-lila-600 bg-lila-200   shadow-lila-600' : 'border-black shadow-black shadow'"
+                  class="inline-flex pb-1 text-black text-base lg:text-lg h-16 shadow items-center rounded-lg border-2 px-4"
+                  role="tab">Code</button
+                >
+              </li>
+              <li>
+                <button
+                  :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                  @click="select($el.id)"
+                  @mousedown.prevent
+                  @focus="select($el.id)"
+                  type="button"
+                  :tabindex="isSelected($el.id) ? 0 : -1"
+                  :aria-selected="isSelected($el.id)"
+                  :class="isSelected($el.id) ? 'border-lila-600 bg-lila-200  shadow-lila-600' : 'border-black shadow-black shadow'"
+                  class="inline-flex pb-1 text-black text-base lg:text-lg h-16 shadow items-center rounded-lg border-2 px-4"
+                  role="tab">Issues</button
+                >
+              </li>
+            </ul>
+            <!-- Panels -->
+            <div
+              class="mt-4 p-8 border-2 border-black rounded-2xl shadow"
+              role="tabpanels"
+            >
+              <!-- Panel -->
+              <section
+                x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                role="tabpanel"
+              >
+                <h2
+                  class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                >
+                  Code
+                </h2>
+                <p class="mt-2 text-lg lg:text-xl font-medium">
+                  in a GitHub repository, this refers to the actual source code
+                  files and scripts that make up a software project. It's where
+                  the core of the project is stored.
+                </p>
+              </section>
+              <section
+                x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                role="tabpanel"
+              >
+                <h2
+                  class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                >
+                  Issues
+                </h2>
+                <p class="mt-2 text-lg lg:text-xl font-medium">
+                  These are used to track and manage tasks, bugs, feature
+                  requests, and other project-related discussions. Issues help
+                  in organizing and prioritizing work on a project.
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">Centered</h3>
+          <!-- Tabs -->
+          <div
+            x-data="{
+    selectedId: null,
+    init() {
+        // Set the first available tab on the page on page load.
+        this.$nextTick(() => this.select(this.$id('tab', 1)))
+    },
+    select(id) {
+        this.selectedId = id
+    },
+    isSelected(id) {
+        return this.selectedId === id
+    },
+    whichChild(el, parent) {
+        return Array.from(parent.children).indexOf(el) + 1
+    }
+}"
+            x-id="['tab']"
+            class="mx-auto mt-10"
+          >
+            <!-- Tab List -->
+            <ul
+              x-ref="tablist"
+              @keydown.right.prevent.stop="$focus.wrap().next()"
+              @keydown.home.prevent.stop="$focus.first()"
+              @keydown.page-up.prevent.stop="$focus.first()"
+              @keydown.left.prevent.stop="$focus.wrap().prev()"
+              @keydown.end.prevent.stop="$focus.last()"
+              @keydown.page-down.prevent.stop="$focus.last()"
+              role="tablist"
+              class="-mb-px flex items-stretch space-x-1 justify-center"
+            >
+              <!-- Tab -->
+              <li>
+                <button
+                  :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                  @click="select($el.id)"
+                  @mousedown.prevent
+                  @focus="select($el.id)"
+                  type="button"
+                  :tabindex="isSelected($el.id) ? 0 : -1"
+                  :aria-selected="isSelected($el.id)"
+                  :class="isSelected($el.id) ? 'border-lila-600 bg-lila-200   shadow-lila-600' : 'border-black shadow-black shadow'"
+                  class="inline-flex pb-1 text-black text-base lg:text-lg h-16 shadow items-center rounded-lg border-2 px-4"
+                  role="tab">Code</button
+                >
+              </li>
+              <li>
+                <button
+                  :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                  @click="select($el.id)"
+                  @mousedown.prevent
+                  @focus="select($el.id)"
+                  type="button"
+                  :tabindex="isSelected($el.id) ? 0 : -1"
+                  :aria-selected="isSelected($el.id)"
+                  :class="isSelected($el.id) ? 'border-lila-600 bg-lila-200   shadow-lila-600' : 'border-black shadow-black shadow'"
+                  class="inline-flex pb-1 text-black text-base lg:text-lg h-16 shadow items-center rounded-lg border-2 px-4"
+                  role="tab">Issues</button
+                >
+              </li>
+              <li>
+                <button
+                  :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                  @click="select($el.id)"
+                  @mousedown.prevent
+                  @focus="select($el.id)"
+                  type="button"
+                  :tabindex="isSelected($el.id) ? 0 : -1"
+                  :aria-selected="isSelected($el.id)"
+                  :class="isSelected($el.id) ? 'border-lila-600 bg-lila-200   shadow-lila-600' : 'border-black shadow-black shadow'"
+                  class="inline-flex pb-1 text-black text-base lg:text-lg h-16 shadow items-center rounded-lg border-2 px-4"
+                  role="tab">Pull requests</button
+                >
+              </li>
+              <li>
+                <button
+                  :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                  @click="select($el.id)"
+                  @mousedown.prevent
+                  @focus="select($el.id)"
+                  type="button"
+                  :tabindex="isSelected($el.id) ? 0 : -1"
+                  :aria-selected="isSelected($el.id)"
+                  :class="isSelected($el.id) ? 'border-lila-600 bg-lila-200   shadow-lila-600' : 'border-black shadow-black shadow'"
+                  class="inline-flex pb-1 text-black text-base lg:text-lg h-16 shadow items-center rounded-lg border-2 px-4"
+                  role="tab">Actions</button
+                >
+              </li>
+            </ul>
+            <!-- Panels -->
+            <div
+              class="mt-4 p-8 border-2 border-black rounded-2xl shadow"
+              role="tabpanels"
+            >
+              <!-- Panel -->
+              <section
+                x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                role="tabpanel"
+              >
+                <h2
+                  class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                >
+                  Code
+                </h2>
+                <p class="mt-2 text-lg lg:text-xl font-medium">
+                  in a GitHub repository, this refers to the actual source code
+                  files and scripts that make up a software project. It's where
+                  the core of the project is stored.
+                </p>
+              </section>
+              <section
+                x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                role="tabpanel"
+              >
+                <h2
+                  class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                >
+                  Issues
+                </h2>
+                <p class="mt-2 text-lg lg:text-xl font-medium">
+                  These are used to track and manage tasks, bugs, feature
+                  requests, and other project-related discussions. Issues help
+                  in organizing and prioritizing work on a project.
+                </p>
+              </section>
+              <section
+                x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                role="tabpanel"
+              >
+                <h2
+                  class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                >
+                  Pull requests
+                </h2>
+                <p class="mt-2 text-lg lg:text-xl font-medium">
+                  Pull requests are proposed changes to a repository. They allow
+                  contributors to suggest modifications, fixes, or new features
+                  and seek approval from the repository's maintainers before the
+                  changes are merged into the main codebase.
+                </p>
+              </section>
+              <section
+                x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                role="tabpanel"
+              >
+                <h2
+                  class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                >
+                  Actions
+                </h2>
+                <p class="mt-2 text-lg lg:text-xl font-medium">
+                  GitHub Actions is an automation and continuous integration
+                  (CI) service provided by GitHub. It allows you to automate
+                  various tasks and workflows in your repository, such as
+                  running tests, building and deploying code, and more. Actions
+                  are defined in YAML files and can be triggered by events like
+                  code pushes or pull requests.iners before the changes are
+                  merged into the main codebase.
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">With icon</h3>
+          <!-- Tabs -->
+          <div
+            x-data="{
+    selectedId: null,
+    init() {
+        // Set the first available tab on the page on page load.
+        this.$nextTick(() => this.select(this.$id('tab', 1)))
+    },
+    select(id) {
+        this.selectedId = id
+    },
+    isSelected(id) {
+        return this.selectedId === id
+    },
+    whichChild(el, parent) {
+        return Array.from(parent.children).indexOf(el) + 1
+    }
+}"
+            x-id="['tab']"
+            class="mx-auto mt-10"
+          >
+            <!-- Tab List -->
+            <ul
+              x-ref="tablist"
+              @keydown.right.prevent.stop="$focus.wrap().next()"
+              @keydown.home.prevent.stop="$focus.first()"
+              @keydown.page-up.prevent.stop="$focus.first()"
+              @keydown.left.prevent.stop="$focus.wrap().prev()"
+              @keydown.end.prevent.stop="$focus.last()"
+              @keydown.page-down.prevent.stop="$focus.last()"
+              role="tablist"
+              class="-mb-px flex items-stretch space-x-1"
+            >
+              <!-- Tab -->
+              <li>
+                <button
+                  :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                  @click="select($el.id)"
+                  @mousedown.prevent
+                  @focus="select($el.id)"
+                  type="button"
+                  :tabindex="isSelected($el.id) ? 0 : -1"
+                  :aria-selected="isSelected($el.id)"
+                  :class="isSelected($el.id) ? 'border-lila-600 bg-lila-200   shadow-lila-600' : 'border-black shadow-black shadow'"
+                  class="inline-flex pb-1 text-black text-base lg:text-lg h-16 shadow items-center rounded-lg border-2 px-4"
+                  role="tab"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 icon icon-tabler icon-tabler-components"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                  </svg> Code
+                </button>
+              </li>
+              <li>
+                <button
+                  :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
+                  @click="select($el.id)"
+                  @mousedown.prevent
+                  @focus="select($el.id)"
+                  type="button"
+                  :tabindex="isSelected($el.id) ? 0 : -1"
+                  :aria-selected="isSelected($el.id)"
+                  :class="isSelected($el.id) ? 'border-lila-600 bg-lila-200   shadow-lila-600' : 'border-black shadow-black shadow'"
+                  class="inline-flex pb-1 text-black text-base lg:text-lg h-16 shadow items-center rounded-lg border-2 px-4"
+                  role="tab"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 icon icon-tabler icon-tabler-components"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                  </svg>Issues
+                </button>
+              </li>
+            </ul>
+            <!-- Panels -->
+            <div
+              class="mt-4 p-8 border-2 border-black rounded-2xl shadow"
+              role="tabpanels"
+            >
+              <!-- Panel -->
+              <section
+                x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                role="tabpanel"
+              >
+                <h2
+                  class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                >
+                  Code
+                </h2>
+                <p class="mt-2 text-lg lg:text-xl font-medium">
+                  in a GitHub repository, this refers to the actual source code
+                  files and scripts that make up a software project. It's where
+                  the core of the project is stored.
+                </p>
+              </section>
+              <section
+                x-show="isSelected($id('tab', whichChild($el, $el.parentElement)))"
+                :aria-labelledby="$id('tab', whichChild($el, $el.parentElement))"
+                role="tabpanel"
+              >
+                <h2
+                  class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                >
+                  Issues
+                </h2>
+                <p class="mt-2 text-lg lg:text-xl font-medium">
+                  These are used to track and manage tasks, bugs, feature
+                  requests, and other project-related discussions. Issues help
+                  in organizing and prioritizing work on a project.
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            Animated and boxed
+          </h3>
+          <div
+            x-data="{
+        tabSelected: 1,
+        tabId: $id('tabs'),
+        tabButtonClicked(tabButton){
+            this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+            this.tabRepositionMarker(tabButton);
+        },
+        tabRepositionMarker(tabButton){
+            this.$refs.tabMarker.style.width=tabButton.offsetWidth + 'px';
+            this.$refs.tabMarker.style.height=tabButton.offsetHeight + 'px';
+            this.$refs.tabMarker.style.left=tabButton.offsetLeft + 'px';
+        },
+        tabContentActive(tabContent){
+            return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+        }
+    }"
+            x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);"
+            class="relative mt-10"
+          >
+            <div
+              class="relative flex flex-row items-center gap-4 w-full h-8 mx-auto text-black select-none"
+              x-ref="tabButtons"
+            >
+              <button
+                class="relative z-20 inline-flex items-center gap-2 w-auto text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-1"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg> Code
+              </button>
+              <button
+                class="relative z-20 inline-flex py-3 px-6 w-auto gap-2 text-sm font-medium transition-all cursor-pointer items-center whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>Issues
+              </button>
+              <button
+                class="relative z-20 inline-flex py-3 px-6 w-auto gap-2 text-sm font-medium transition-all cursor-pointer items-center whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>Pull requests
+              </button>
+              <div
+                class="absolute left-0 z-10 inline-flex items-center w-full h-full duration-300 ease-out"
+                x-ref="tabMarker"
+              >
+                <div
+                  class="w-full rounded-lg bg-white border-2 shadow h-16 border-black"
+                >
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 p-8 border-2 border-black pt-6 rounded-2xl shadow">
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+              >
+                <!-- Tab Content 1 - Replace with your content -->
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Code
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    in a GitHub repository, this refers to the actual source
+                    code files and scripts that make up a software project. It's
+                    where the core of the project is stored.
+                  </p>
+                </section>
+                <!-- End Tab Content 1 -->
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Issues
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    These are used to track and manage tasks, bugs, feature
+                    requests, and other project-related discussions. Issues help
+                    in organizing and prioritizing work on a project.
+                  </p>
+                </section>
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Pull requests
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    Pull requests are proposed changes to a repository. They
+                    allow contributors to suggest modifications, fixes, or new
+                    features and seek approval from the repository's maintainers
+                    before the changes are merged into the main codebase.
+                  </p>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            Animated and centered
+          </h3>
+          <div
+            x-data="{
+        tabSelected: 1,
+        tabId: $id('tabs'),
+        tabButtonClicked(tabButton){
+            this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+            this.tabRepositionMarker(tabButton);
+        },
+        tabRepositionMarker(tabButton){
+            this.$refs.tabMarker.style.width=tabButton.offsetWidth + 'px';
+            this.$refs.tabMarker.style.height=tabButton.offsetHeight + 'px';
+            this.$refs.tabMarker.style.left=tabButton.offsetLeft + 'px';
+        },
+        tabContentActive(tabContent){
+            return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+        }
+    }"
+            x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);"
+            class="relative mt-10"
+          >
+            <div
+              class="relative flex flex-row items-center gap-4 w-full h-8 mx-auto text-black select-non justify-center"
+              x-ref="tabButtons"
+            >
+              <button
+                class="relative z-20 inline-flex items-center gap-2 w-auto text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-1"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg> Code
+              </button>
+              <button
+                class="relative z-20 inline-flex py-3 px-6 w-auto gap-2 text-sm font-medium transition-all cursor-pointer items-center whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>Issues
+              </button>
+              <button
+                class="relative z-20 inline-flex py-3 px-6 w-auto gap-2 text-sm font-medium transition-all cursor-pointer items-center whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>Pull requests
+              </button>
+              <div
+                class="absolute left-0 z-10 inline-flex items-center w-full h-full duration-300 ease-out"
+                x-ref="tabMarker"
+              >
+                <div
+                  class="w-full rounded-lg bg-white border-2 shadow h-16 border-black"
+                >
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 p-8 border-2 border-black pt-6 rounded-2xl shadow">
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+              >
+                <!-- Tab Content 1 - Replace with your content -->
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Code
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    in a GitHub repository, this refers to the actual source
+                    code files and scripts that make up a software project. It's
+                    where the core of the project is stored.
+                  </p>
+                </section>
+                <!-- End Tab Content 1 -->
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Issues
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    These are used to track and manage tasks, bugs, feature
+                    requests, and other project-related discussions. Issues help
+                    in organizing and prioritizing work on a project.
+                  </p>
+                </section>
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Pull requests
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    Pull requests are proposed changes to a repository. They
+                    allow contributors to suggest modifications, fixes, or new
+                    features and seek approval from the repository's maintainers
+                    before the changes are merged into the main codebase.
+                  </p>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            Animated only icon
+          </h3>
+          <div
+            x-data="{
+      tabSelected: 1,
+      tabId: $id('tabs'),
+      tabButtonClicked(tabButton){
+          this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+          this.tabRepositionMarker(tabButton);
+      },
+      tabRepositionMarker(tabButton){
+          this.$refs.tabMarker.style.width=tabButton.offsetWidth + 'px';
+          this.$refs.tabMarker.style.height=tabButton.offsetHeight + 'px';
+          this.$refs.tabMarker.style.left=tabButton.offsetLeft + 'px';
+      },
+      tabContentActive(tabContent){
+          return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+      }
+  }"
+            x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);"
+            class="relative mt-10"
+          >
+            <div
+              class="relative flex flex-row items-center gap-4 w-full h-8 mx-auto text-black select-none"
+              x-ref="tabButtons"
+            >
+              <button
+                class="relative z-20 inline-flex items-center gap-2 w-auto text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-1"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>
+              </button>
+              <button
+                class="relative z-20 inline-flex py-3 px-6 w-auto gap-2 text-sm font-medium transition-all cursor-pointer items-center whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>
+              </button>
+              <button
+                class="relative z-20 inline-flex py-3 px-6 w-auto gap-2 text-sm font-medium transition-all cursor-pointer items-center whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>
+              </button>
+              <div
+                class="absolute left-0 z-10 inline-flex items-center w-full h-full duration-300 ease-out"
+                x-ref="tabMarker"
+              >
+                <div
+                  class="w-full rounded-lg bg-white border-2 shadow h-16 border-black"
+                >
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 p-8 border-2 border-black pt-6 rounded-2xl shadow">
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+              >
+                <!-- Tab Content 1 - Replace with your content -->
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Code
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    in a GitHub repository, this refers to the actual source
+                    code files and scripts that make up a software project. It's
+                    where the core of the project is stored.
+                  </p>
+                </section>
+                <!-- End Tab Content 1 -->
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Issues
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    These are used to track and manage tasks, bugs, feature
+                    requests, and other project-related discussions. Issues help
+                    in organizing and prioritizing work on a project.
+                  </p>
+                </section>
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Pull requests
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    Pull requests are proposed changes to a repository. They
+                    allow contributors to suggest modifications, fixes, or new
+                    features and seek approval from the repository's maintainers
+                    before the changes are merged into the main codebase.
+                  </p>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            Animated, boxed with content underneath
+          </h3>
+          <div
+            x-data="{
+        tabSelected: 1,
+        tabId: $id('tabs'),
+        tabButtonClicked(tabButton){
+            this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+            this.tabRepositionMarker(tabButton);
+        },
+        tabRepositionMarker(tabButton){
+            this.$refs.tabMarker.style.width=tabButton.offsetWidth + 'px';
+            this.$refs.tabMarker.style.height=tabButton.offsetHeight + 'px';
+            this.$refs.tabMarker.style.left=tabButton.offsetLeft + 'px';
+        },
+        tabContentActive(tabContent){
+            return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+        }
+    }"
+            x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);"
+            class="relative mt-10 flex flex-col"
+          >
+            <div class="mt-4 p-8 border-2 border-black rounded-2xl shadow">
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+              >
+                <!-- Tab Content 1 - Replace with your content -->
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Code
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    in a GitHub repository, this refers to the actual source
+                    code files and scripts that make up a software project. It's
+                    where the core of the project is stored.
+                  </p>
+                </section>
+                <!-- End Tab Content 1 -->
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Issues
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    These are used to track and manage tasks, bugs, feature
+                    requests, and other project-related discussions. Issues help
+                    in organizing and prioritizing work on a project.
+                  </p>
+                </section>
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Pull requests
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    Pull requests are proposed changes to a repository. They
+                    allow contributors to suggest modifications, fixes, or new
+                    features and seek approval from the repository's maintainers
+                    before the changes are merged into the main codebase.
+                  </p>
+                </section>
+              </div>
+            </div>
+            <div
+              class="relative flex flex-row items-center gap-4 mt-8 w-full h-8 mx-auto text-black select-none"
+              x-ref="tabButtons"
+            >
+              <button
+                class="relative z-20 inline-flex items-center gap-2 w-auto text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-1"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg> Code
+              </button>
+              <button
+                class="relative z-20 inline-flex py-3 px-6 w-auto gap-2 text-sm font-medium transition-all cursor-pointer items-center whitespace-nowrap"
+                type="button"
+                :class="{ 'border-b-2 border-black' : tabButtonActive($el) }"
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                id="tabs-1-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>Issues
+              </button>
+
+              <div
+                class="absolute left-0 z-10 inline-flex items-center w-full h-full duration-300 ease-out"
+                x-ref="tabMarker"
+              >
+                <div
+                  class="w-full rounded-lg bg-white border-2 shadow h-16 border-black"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            Animated vertical
+          </h3>
+          <!-- Tabs -->
+          <div
+            class="flex flex-col items-start mt-10 -mb-px lg:grid-cols-4 lg:gap-12 lg:grid divide-black border-2 border-black rounded-2xl shadow lg:divide-x-2"
+            x-data="{
+      tabSelected: 1,
+      tabId: $id('tabs'),
+      tabButtonClicked(tabButton){
+          this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+          this.tabRepositionMarker(tabButton);
+      },
+      tabRepositionMarker(tabButton){
+          this.$refs.tabMarker.style.width = tabButton.offsetWidth + 'px';
+          this.$refs.tabMarker.style.height = tabButton.offsetHeight + 'px';
+          this.$refs.tabMarker.style.top = tabButton.offsetTop + 'px';
+      },
+      tabContentActive(tabContent){
+          return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+      }
+  }"
+            x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);"
+          >
+            <div
+              x-ref="tabButtons"
+              class="relative flex flex-col w-full gap-4 items-center select-none lg:flex-col lg:inline-grid md:flex-row m-8 ml-6"
+            >
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                :class="{ '' : tabButtonActive($el) }"
+                class="relative z-20 inline-flex items-center gap-2 h-16 w-full text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                id="tabs-3-1"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>
+                <p class="text-sm">Code</p>
+              </button>
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                :class="{ '' : tabButtonActive($el) }"
+                class="relative z-20 inline-flex items-center gap-2 h-16 w-full text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                id="tabs-3-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>
+                <p class="text-sm">Issues</p>
+              </button>
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                :class="{ '' : tabButtonActive($el) }"
+                class="relative z-20 inline-flex items-center gap-2 w-full h-16 text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                id="tabs-3-3"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-4 icon icon-tabler icon-tabler-components"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                  <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                </svg>
+                <p class="text-sm">Pull requests</p>
+              </button>
+
+              <div
+                x-ref="tabMarker"
+                class="absolute left-0 z-10 hidden w-full duration-300 ease-out lg:inline"
+              >
+                <div
+                  class="w-full rounded-lg bg-white border-2 shadow h-16 border-black"
+                >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative items-center hidden w-full overflow-hidden content lg:block lg:col-span-3 h-full p-8"
+            >
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                id="tabs-3-content-1"
+              >
+                <!-- Tab Content 1 - Replace with your content -->
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Code
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    in a GitHub repository, this refers to the actual source
+                    code files and scripts that make up a software project. It's
+                    where the core of the project is stored.
+                  </p>
+                </section>
+                <!-- End Tab Content 1 -->
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                id="tabs-3-content-2"
+                style="display: none;"
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Issues
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    These are used to track and manage tasks, bugs, feature
+                    requests, and other project-related discussions. Issues help
+                    in organizing and prioritizing work on a project.
+                  </p>
+                </section>
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                id="tabs-3-content-3"
+                style="display: none;"
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Pull requests
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    Pull requests are proposed changes to a repository. They
+                    allow contributors to suggest modifications, fixes, or new
+                    features and seek approval from the repository's maintainers
+                    before the changes are merged into the main codebase.
+                  </p>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            Animated vertical and description
+          </h3>
+          <!-- Tabs -->
+          <div
+            class="flex flex-col items-start mt-10 -mb-px lg:grid-cols-4 lg:gap-12 lg:grid  border-2 border-black rounded-2xl shadow lg:divide-x-2 divide-black"
+            x-data="{
+    tabSelected: 1,
+    tabId: $id('tabs'),
+    tabButtonClicked(tabButton){
+        this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+        this.tabRepositionMarker(tabButton);
+    },
+    tabRepositionMarker(tabButton){
+        this.$refs.tabMarker.style.width = tabButton.offsetWidth + 'px';
+        this.$refs.tabMarker.style.height = tabButton.offsetHeight + 'px';
+        this.$refs.tabMarker.style.top = tabButton.offsetTop + 'px';
+    },
+    tabContentActive(tabContent){
+        return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+    }
+}"
+            x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);"
+          >
+            <div
+              x-ref="tabButtons"
+              class="relative flex flex-col w-full gap-4 items-center select-none lg:flex-col lg:inline-grid md:flex-row m-8 ml-6"
+            >
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                :class="{ '' : tabButtonActive($el) }"
+                class="relative z-20 inline-flex items-center gap-2 h-16 w-full text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                id="tabs-3-1"
+              >
+                <div class="flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 icon icon-tabler icon-tabler-components"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                  </svg>
+                  <p class="text-sm">Code</p>
+                </div>
+                <p class="text-xs text-black">Short description</p>
+              </button>
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                :class="{ '' : tabButtonActive($el) }"
+                class="relative z-20 inline-flex items-center gap-2 h-16 w-full text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                id="tabs-3-2"
+              >
+                <div class="inline-flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 icon icon-tabler icon-tabler-components"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                  </svg>
+                  <p class="text-sm">Issues</p>
+                </div>
+                <p class="text-xs text-black">Short description</p>
+              </button>
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                :class="{ '' : tabButtonActive($el) }"
+                class="relative z-20 inline-flex items-center gap-2 w-full h-16 text-sm py-3 px-6 font-medium cursor-pointer transition-all whitespace-nowrap"
+                id="tabs-3-3"
+              >
+                <div class="inline-flex items-center gap-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-4 icon icon-tabler icon-tabler-components"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                    <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                  </svg>
+                  <p class="text-sm">Pull Requests</p>
+                </div>
+                <p class="text-xs text-black">Short description</p>
+              </button>
+
+              <div
+                x-ref="tabMarker"
+                class="absolute left-0 z-10 hidden w-full duration-300 ease-out lg:inline"
+              >
+                <div
+                  class="w-full rounded-lg bg-white border-2 shadow h-16 border-black"
+                >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative items-center hidden w-full overflow-hidden content lg:block lg:col-span-3 h-full p-8"
+            >
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                id="tabs-3-content-1"
+              >
+                <!-- Tab Content 1 - Replace with your content -->
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Code
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    in a GitHub repository, this refers to the actual source
+                    code files and scripts that make up a software project. It's
+                    where the core of the project is stored.
+                  </p>
+                </section>
+                <!-- End Tab Content 1 -->
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                id="tabs-3-content-2"
+                style="display: none;"
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Issues
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    These are used to track and manage tasks, bugs, feature
+                    requests, and other project-related discussions. Issues help
+                    in organizing and prioritizing work on a project.
+                  </p>
+                </section>
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                id="tabs-3-content-3"
+                style="display: none;"
+              >
+                <section>
+                  <h2
+                    class="text-xl font-medium leading-6 text-black lg:text-3xl"
+                  >
+                    Pull requests
+                  </h2>
+                  <p class="mt-2 text-lg lg:text-xl font-medium">
+                    Pull requests are proposed changes to a repository. They
+                    allow contributors to suggest modifications, fixes, or new
+                    features and seek approval from the repository's maintainers
+                    before the changes are merged into the main codebase.
+                  </p>
+                </section>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

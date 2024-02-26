@@ -1,0 +1,731 @@
+<section>
+  <div class="relative items-center w-full mx-auto 2xl:max-w-7xl">
+    <div class="divide-y-2 divide-black">
+      <div class="justify-center max-w-3xl p-8 lg:p-20">
+        <p class="text-5xl lg:text-7xl text-black">Modals</p>
+      </div>
+      <div class="divide-y-2 divide-black">
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">
+            Modal variations
+          </h3>
+          <div
+            class="inline-flex flex-wrap items-center w-full gap-2 mt-10 relative"
+          >
+            <div x-data="{ open: false }" class="flex justify-center">
+              <!-- Trigger -->
+              <span x-on:click="open = true">
+                <button
+                  type="button"
+                  class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                >
+                  Informative
+                </button>
+              </span>
+              <!-- Modal -->
+              <div
+                x-show="open"
+                style="display: none"
+                x-on:keydown.escape.prevent.stop="open = false"
+                role="dialog"
+                aria-modal="true"
+                x-id="['modal-title']"
+                :aria-labelledby="$id('modal-title')"
+                class="fixed inset-0 z-10 w-screen overflow-y-auto"
+              >
+                <!-- Overlay -->
+                <div
+                  x-show="open"
+                  x-transition.opacity
+                  class="fixed inset-0 bg-lila-500 bg-opacity-50"
+                >
+                </div>
+                <!-- Panel -->
+                <div
+                  x-show="open"
+                  x-transition
+                  x-on:click="open = false"
+                  class="relative flex min-h-screen items-center justify-center p-4"
+                >
+                  <div
+                    x-on:click.stop
+                    x-trap.noscroll.inert="open"
+                    class="relative w-full max-w-xl overflow-y-auto divide-y-2 divide-black ring-2 ring-inset ring-black text-black bg-white shadow-small rounded-xl"
+                  >
+                    <div class="p-8">
+                      <!-- Title -->
+                      <h2
+                        class="text-lg font-medium text-black lg:text-2xl"
+                        :id="$id('modal-title')"
+                      >
+                        Terms and agreements
+                      </h2>
+                      <!-- Content -->
+                      <p class="mt-2 text-black text-base">
+                        By using this service, you are agreeing to the following
+                        terms and conditions. You must accept and abide by these
+                        terms. This service is intended for personal,
+                        non-commercial use. We are dedicated to protecting your
+                        privacy, and you can find further information on how we
+                        handle your data in our Privacy Policy.
+                      </p>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="p-8 flex space-x-2">
+                      <button
+                        type="button"
+                        x-on:click="open = false"
+                        class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 ml-auto"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        x-on:click="open = false"
+                        class="text-black items-center shadow shadow-lila-600 text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-lila-300 focus:bg-lila-600 border-lila-600 duration-300 outline-none focus:shadow-none border-2 sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:bg-lila-500"
+                      >
+                        I agree
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-data="{ open: false }" class="flex justify-center">
+              <!-- Trigger -->
+              <span x-on:click="open = true">
+                <button
+                  type="button"
+                  class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                >
+                  State
+                </button>
+              </span>
+              <!-- Modal -->
+              <div
+                x-show="open"
+                style="display: none"
+                x-on:keydown.escape.prevent.stop="open = false"
+                role="dialog"
+                aria-modal="true"
+                x-id="['modal-title']"
+                :aria-labelledby="$id('modal-title')"
+                class="fixed inset-0 z-10 w-screen overflow-y-auto"
+              >
+                <!-- Overlay -->
+                <div
+                  x-show="open"
+                  x-transition.opacity
+                  class="fixed inset-0 bg-lila-500 bg-opacity-50"
+                >
+                </div>
+                <!-- Panel -->
+                <div
+                  x-show="open"
+                  x-transition
+                  x-on:click="open = false"
+                  class="relative flex min-h-screen items-center justify-center p-4"
+                >
+                  <div
+                    x-on:click.stop
+                    x-trap.noscroll.inert="open"
+                    class="relative w-full max-w-xl overflow-y-auto ring-2 ring-inset ring-black text-black bg-white shadow-small rounded-xl p-8"
+                  >
+                    <div>
+                      <div>
+                        <!-- Title -->
+                        <h2
+                          class="text-lg font-medium text-black lg:text-2xl inline-flex items-center gap-2"
+                          :id="$id('modal-title')"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="icon w-6 h-6 icon-tabler icon-tabler-alert-triangle text-danger-600"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                            ></path>
+                            <path d="M12 9v4"></path>
+                            <path
+                              d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"
+                            ></path>
+                            <path d="M12 16h.01"></path>
+                          </svg> Deactivate account
+                        </h2>
+                        <!-- Content -->
+                        <p class="mt-2 text-black text-base">
+                          Are you sure you want to deactivate your account? All
+                          of your data will be permanently removed from our
+                          servers forever. This action cannot be undone.
+                        </p>
+                      </div>
+                      <!-- Buttons -->
+                      <div class="mt-8 flex space-x-2">
+                        <button
+                          type="button"
+                          x-on:click="open = false"
+                          class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 ml-auto"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          x-on:click="open = false"
+                          class="text-danger-950 items-center shadow shadow-danger-500 text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-danger-300 focus:bg-danger-500 border-danger-500 ease-in-out duration-300 outline-none hover:bg-danger-400 hover:text-white focus:text-white focus:shadow-none border-2 sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full"
+                        >
+                          Deactivate
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-data="{ open: false }" class="flex justify-center">
+              <!-- Trigger -->
+              <span x-on:click="open = true">
+                <button
+                  type="button"
+                  class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                >
+                  Sign in
+                </button>
+              </span>
+              <!-- Modal -->
+              <div
+                x-show="open"
+                style="display: none"
+                x-on:keydown.escape.prevent.stop="open = false"
+                role="dialog"
+                aria-modal="true"
+                x-id="['modal-title']"
+                :aria-labelledby="$id('modal-title')"
+                class="fixed inset-0 z-10 w-screen overflow-y-auto"
+              >
+                <!-- Overlay -->
+                <div
+                  x-show="open"
+                  x-transition.opacity
+                  class="fixed inset-0 bg-lila-500 bg-opacity-50"
+                >
+                </div>
+                <!-- Panel -->
+                <div
+                  x-show="open"
+                  x-transition
+                  x-on:click="open = false"
+                  class="relative flex min-h-screen items-center justify-center p-4"
+                >
+                  <div
+                    x-on:click.stop
+                    x-trap.noscroll.inert="open"
+                    class="relative w-full max-w-xl text-center overflow-y-auto ring-2 ring-inset ring-black text-black bg-yellow-500 shadow-small rounded-xl p-8"
+                  >
+                    <h2 class="text-3xl font-medium text-black">
+                      Sign in to Flabbergasted
+                    </h2>
+
+                    <form class="mt-6">
+                      <input
+                        autocomplete="false"
+                        name="hidden"
+                        type="text"
+                        style="display:none;"
+                      />
+                      <input type="hidden" name="_redirect" value="#" />
+                      <div class="space-y-6">
+                        <div
+                          class="border-2 border-black divide-y-2 divide-black shadow rounded-xl overflow-hidden"
+                        >
+                          <div>
+                            <label name="name" class="sr-only">
+                              User name or email Adress
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="User name or email Adress"
+                              class="block w-full px-3 py-4 text-xl text-black border-2 border-transparent appearance-none placeholder-black border-black focus:border-black focus:bg-lila-500 focus:outline-none focus:ring-black sm:text-sm"
+                            />
+                          </div>
+                          <div class="col-span-full">
+                            <label name="company" class="sr-only">
+                              Password</label
+                            >
+                            <input
+                              type="password"
+                              class="block w-full px-3 py-4 text-xl text-black border-2 border-transparent appearance-none placeholder-black border-black focus:border-black focus:bg-lila-500 focus:outline-none focus:ring-black sm:text-sm"
+                              placeholder="Type password here..."
+                            />
+                          </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center">
+                            <input
+                              id="remember-me"
+                              name="remember-me"
+                              type="checkbox"
+                              class="h-4 w-4 text-black focus:ring-black border-black border-2 rounded-full"
+                            />
+                            <label
+                              for="remember-me"
+                              class="ml-2 block lg:text-2xl text-black"
+                            >
+                              Remember me
+                            </label>
+                          </div>
+                          <div class="text-sm">
+                            <a
+                              href="/forgot"
+                              class="text-black lg:text-2xl hover:text-black"
+                            >
+                              Forgot your password?
+                            </a>
+                          </div>
+                        </div>
+                        <div class="flex-col flex gap-3 mt-10">
+                          <a
+                            class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-between text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 gap-3"
+                            href="#_"
+                          >
+                            <span>Log in with</span>
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 32 32"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M30.0014 16.3109C30.0014 15.1598 29.9061 14.3198 29.6998 13.4487H16.2871V18.6442H24.1601C24.0014 19.9354 23.1442 21.8798 21.2394 23.1864L21.2127 23.3604L25.4536 26.58L25.7474 26.6087C28.4458 24.1665 30.0014 20.5731 30.0014 16.3109Z"
+                                fill="#4285F4"></path>
+                              <path
+                                d="M16.2862 30C20.1433 30 23.3814 28.7555 25.7465 26.6089L21.2386 23.1865C20.0322 24.011 18.4132 24.5866 16.2862 24.5866C12.5085 24.5866 9.30219 22.1444 8.15923 18.7688L7.9917 18.7827L3.58202 22.1272L3.52435 22.2843C5.87353 26.8577 10.6989 30 16.2862 30Z"
+                                fill="#34A853"></path>
+                              <path
+                                d="M8.16007 18.7688C7.85848 17.8977 7.68395 16.9643 7.68395 15.9999C7.68395 15.0354 7.85849 14.1021 8.1442 13.231L8.13621 13.0455L3.67126 9.64734L3.52518 9.71544C2.55696 11.6132 2.0014 13.7444 2.0014 15.9999C2.0014 18.2555 2.55696 20.3865 3.52518 22.2843L8.16007 18.7688Z"
+                                fill="#FBBC05"></path>
+                              <path
+                                d="M16.2863 7.4133C18.9688 7.4133 20.7783 8.54885 21.8101 9.4978L25.8418 5.64C23.3657 3.38445 20.1434 2 16.2863 2C10.699 2 5.87354 5.1422 3.52435 9.71549L8.14339 13.2311C9.30223 9.85555 12.5086 7.4133 16.2863 7.4133Z"
+                                fill="#EB4335"></path>
+                            </svg>
+                          </a>
+
+                          <a
+                            class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-between text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                            href="#_"
+                            >Log in <svg
+                              class="w-8 h-8"
+                              viewBox="0 0 36 36"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M5.22789 16.8936H4.22789V18.8936H5.22789V16.8936ZM31.2279 18.8936C31.7802 18.8936 32.2279 18.4459 32.2279 17.8936C32.2279 17.3413 31.7802 16.8936 31.2279 16.8936V18.8936ZM22.2279 7.89362V6.89362H20.2279V7.89362H22.2279ZM30.6485 18.671C31.1334 18.9355 31.7408 18.7568 32.0053 18.2719C32.2697 17.7871 32.0911 17.1797 31.6062 16.9152L30.6485 18.671ZM20.2278 27.7931V28.7931H22.2278V27.7931H20.2278ZM5.22789 18.8936H31.1273V16.8936H5.22789V18.8936ZM31.1273 18.8936H31.2279V16.8936H31.1273V18.8936ZM20.2279 7.89362C20.2279 9.36603 21.0232 10.7723 21.9994 11.9705C22.9957 13.1932 24.2995 14.3434 25.5662 15.3222C26.8387 16.3055 28.1063 17.1406 29.0529 17.7286C29.5271 18.0232 29.9231 18.2571 30.2017 18.4181C30.341 18.4987 30.4511 18.561 30.5272 18.6037C30.5653 18.625 30.5948 18.6414 30.6152 18.6527C30.6254 18.6583 30.6334 18.6627 30.6389 18.6658C30.6417 18.6673 30.6439 18.6685 30.6455 18.6694C30.6463 18.6698 30.647 18.6702 30.6475 18.6704C30.6477 18.6706 30.648 18.6707 30.6481 18.6708C30.6484 18.6709 30.6485 18.671 31.1274 17.7931C31.6062 16.9152 31.6063 16.9153 31.6064 16.9153C31.6064 16.9153 31.6064 16.9153 31.6064 16.9153C31.6063 16.9152 31.606 16.9151 31.6056 16.9149C31.6048 16.9144 31.6034 16.9137 31.6015 16.9126C31.5975 16.9104 31.5913 16.907 31.5828 16.9023C31.5657 16.8929 31.5397 16.8784 31.5052 16.8591C31.4363 16.8204 31.3337 16.7624 31.2024 16.6865C30.9396 16.5346 30.5621 16.3116 30.1083 16.0297C29.1987 15.4647 27.9914 14.6686 26.7891 13.7396C25.5809 12.806 24.4098 11.7626 23.5499 10.7072C22.67 9.62732 22.2279 8.6712 22.2279 7.89362H20.2279ZM31.1273 17.8936C30.7527 16.9664 30.7524 16.9666 30.7521 16.9667C30.7519 16.9667 30.7516 16.9669 30.7513 16.967C30.7507 16.9673 30.7499 16.9676 30.749 16.9679C30.7472 16.9687 30.7447 16.9697 30.7417 16.9709C30.7357 16.9734 30.7273 16.9768 30.7166 16.9812C30.6953 16.99 30.6648 17.0028 30.6258 17.0193C30.5478 17.0524 30.4356 17.1007 30.2941 17.1639C30.0113 17.2903 29.6105 17.4762 29.1309 17.7176C28.1742 18.1991 26.8918 18.9078 25.603 19.8126C24.3193 20.7138 22.9944 21.8337 21.9824 23.1472C20.9694 24.4621 20.2278 26.0278 20.2278 27.7931H22.2278C22.2278 26.6087 22.7237 25.4621 23.5668 24.3678C24.411 23.272 25.5609 22.2858 26.7521 21.4495C27.9382 20.6169 29.1306 19.9568 30.0301 19.504C30.4786 19.2782 30.8512 19.1055 31.1097 18.9901C31.2389 18.9324 31.3394 18.8891 31.4064 18.8607C31.4399 18.8465 31.465 18.836 31.4812 18.8293C31.4892 18.826 31.495 18.8236 31.4985 18.8222C31.5003 18.8215 31.5014 18.821 31.502 18.8208C31.5023 18.8206 31.5024 18.8206 31.5024 18.8206C31.5024 18.8206 31.5023 18.8206 31.5023 18.8206C31.5021 18.8207 31.5019 18.8208 31.1273 17.8936Z"
+                                fill="currentColor"></path>
+                            </svg></a
+                          >
+                        </div>
+                        <div>
+                          <p class="text-sm lg:text-2xl text-black">
+                            Not a member?
+                            <a
+                              class="text-black lg:text-2xl hover:text-lila-900 underline ml-3"
+                              href="/signup"
+                            >
+                              Sign up now
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-data="{ open: false }" class="flex justify-center">
+              <!-- Trigger -->
+              <span x-on:click="open = true">
+                <button
+                  type="button"
+                  class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                >
+                  Sign up
+                </button>
+              </span>
+              <!-- Modal -->
+              <div
+                x-show="open"
+                style="display: none"
+                x-on:keydown.escape.prevent.stop="open = false"
+                role="dialog"
+                aria-modal="true"
+                x-id="['modal-title']"
+                :aria-labelledby="$id('modal-title')"
+                class="fixed inset-0 z-10 w-screen overflow-y-auto"
+              >
+                <!-- Overlay -->
+                <div
+                  x-show="open"
+                  x-transition.opacity
+                  class="fixed inset-0 bg-lila-500 bg-opacity-50"
+                >
+                </div>
+                <!-- Panel -->
+                <div
+                  x-show="open"
+                  x-transition
+                  x-on:click="open = false"
+                  class="relative flex min-h-screen items-center justify-center p-4"
+                >
+                  <div
+                    x-on:click.stop
+                    x-trap.noscroll.inert="open"
+                    class="relative w-full max-w-xl text-center overflow-y-auto ring-2 ring-inset ring-black text-black bg-lila-500 shadow-small rounded-xl p-8"
+                  >
+                    <p class="text-3xl font-medium text-black">
+                      Sing up to Flabbergasted
+                    </p>
+
+                    <form class="mt-6">
+                      <input
+                        autocomplete="false"
+                        name="hidden"
+                        type="text"
+                        style="display:none;"
+                      />
+                      <input type="hidden" name="_redirect" value="#" />
+                      <div class="space-y-6">
+                        <div
+                          class="border-2 border-black divide-y-2 divide-black shadow rounded-xl overflow-hidden"
+                        >
+                          <div>
+                            <label name="name" class="sr-only">
+                              User name or email Adress
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="User name or email Adress"
+                              class="block w-full px-3 py-4 text-xl text-black border-2 border-transparent appearance-none placeholder-black border-black focus:border-black focus:bg-lila-500 focus:outline-none focus:ring-black sm:text-sm"
+                            />
+                          </div>
+                          <div class="col-span-full">
+                            <label name="company" class="sr-only">
+                              Password</label
+                            >
+                            <input
+                              type="password"
+                              class="block w-full px-3 py-4 text-xl text-black border-2 border-transparent appearance-none placeholder-black border-black focus:border-black focus:bg-lila-500 focus:outline-none focus:ring-black sm:text-sm"
+                              placeholder="Type password here..."
+                            />
+                          </div>
+                        </div>
+
+                        <div class="flex-col flex gap-3 mt-10">
+                          <a
+                            class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-between text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 gap-3"
+                            href="#_"
+                          >
+                            <span>Register with</span>
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 32 32"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M30.0014 16.3109C30.0014 15.1598 29.9061 14.3198 29.6998 13.4487H16.2871V18.6442H24.1601C24.0014 19.9354 23.1442 21.8798 21.2394 23.1864L21.2127 23.3604L25.4536 26.58L25.7474 26.6087C28.4458 24.1665 30.0014 20.5731 30.0014 16.3109Z"
+                                fill="#4285F4"></path>
+                              <path
+                                d="M16.2862 30C20.1433 30 23.3814 28.7555 25.7465 26.6089L21.2386 23.1865C20.0322 24.011 18.4132 24.5866 16.2862 24.5866C12.5085 24.5866 9.30219 22.1444 8.15923 18.7688L7.9917 18.7827L3.58202 22.1272L3.52435 22.2843C5.87353 26.8577 10.6989 30 16.2862 30Z"
+                                fill="#34A853"></path>
+                              <path
+                                d="M8.16007 18.7688C7.85848 17.8977 7.68395 16.9643 7.68395 15.9999C7.68395 15.0354 7.85849 14.1021 8.1442 13.231L8.13621 13.0455L3.67126 9.64734L3.52518 9.71544C2.55696 11.6132 2.0014 13.7444 2.0014 15.9999C2.0014 18.2555 2.55696 20.3865 3.52518 22.2843L8.16007 18.7688Z"
+                                fill="#FBBC05"></path>
+                              <path
+                                d="M16.2863 7.4133C18.9688 7.4133 20.7783 8.54885 21.8101 9.4978L25.8418 5.64C23.3657 3.38445 20.1434 2 16.2863 2C10.699 2 5.87354 5.1422 3.52435 9.71549L8.14339 13.2311C9.30223 9.85555 12.5086 7.4133 16.2863 7.4133Z"
+                                fill="#EB4335"></path>
+                            </svg>
+                          </a>
+
+                          <a
+                            class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-between text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                            href="#_"
+                            >Sign up <svg
+                              class="w-8 h-8"
+                              viewBox="0 0 36 36"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M5.22789 16.8936H4.22789V18.8936H5.22789V16.8936ZM31.2279 18.8936C31.7802 18.8936 32.2279 18.4459 32.2279 17.8936C32.2279 17.3413 31.7802 16.8936 31.2279 16.8936V18.8936ZM22.2279 7.89362V6.89362H20.2279V7.89362H22.2279ZM30.6485 18.671C31.1334 18.9355 31.7408 18.7568 32.0053 18.2719C32.2697 17.7871 32.0911 17.1797 31.6062 16.9152L30.6485 18.671ZM20.2278 27.7931V28.7931H22.2278V27.7931H20.2278ZM5.22789 18.8936H31.1273V16.8936H5.22789V18.8936ZM31.1273 18.8936H31.2279V16.8936H31.1273V18.8936ZM20.2279 7.89362C20.2279 9.36603 21.0232 10.7723 21.9994 11.9705C22.9957 13.1932 24.2995 14.3434 25.5662 15.3222C26.8387 16.3055 28.1063 17.1406 29.0529 17.7286C29.5271 18.0232 29.9231 18.2571 30.2017 18.4181C30.341 18.4987 30.4511 18.561 30.5272 18.6037C30.5653 18.625 30.5948 18.6414 30.6152 18.6527C30.6254 18.6583 30.6334 18.6627 30.6389 18.6658C30.6417 18.6673 30.6439 18.6685 30.6455 18.6694C30.6463 18.6698 30.647 18.6702 30.6475 18.6704C30.6477 18.6706 30.648 18.6707 30.6481 18.6708C30.6484 18.6709 30.6485 18.671 31.1274 17.7931C31.6062 16.9152 31.6063 16.9153 31.6064 16.9153C31.6064 16.9153 31.6064 16.9153 31.6064 16.9153C31.6063 16.9152 31.606 16.9151 31.6056 16.9149C31.6048 16.9144 31.6034 16.9137 31.6015 16.9126C31.5975 16.9104 31.5913 16.907 31.5828 16.9023C31.5657 16.8929 31.5397 16.8784 31.5052 16.8591C31.4363 16.8204 31.3337 16.7624 31.2024 16.6865C30.9396 16.5346 30.5621 16.3116 30.1083 16.0297C29.1987 15.4647 27.9914 14.6686 26.7891 13.7396C25.5809 12.806 24.4098 11.7626 23.5499 10.7072C22.67 9.62732 22.2279 8.6712 22.2279 7.89362H20.2279ZM31.1273 17.8936C30.7527 16.9664 30.7524 16.9666 30.7521 16.9667C30.7519 16.9667 30.7516 16.9669 30.7513 16.967C30.7507 16.9673 30.7499 16.9676 30.749 16.9679C30.7472 16.9687 30.7447 16.9697 30.7417 16.9709C30.7357 16.9734 30.7273 16.9768 30.7166 16.9812C30.6953 16.99 30.6648 17.0028 30.6258 17.0193C30.5478 17.0524 30.4356 17.1007 30.2941 17.1639C30.0113 17.2903 29.6105 17.4762 29.1309 17.7176C28.1742 18.1991 26.8918 18.9078 25.603 19.8126C24.3193 20.7138 22.9944 21.8337 21.9824 23.1472C20.9694 24.4621 20.2278 26.0278 20.2278 27.7931H22.2278C22.2278 26.6087 22.7237 25.4621 23.5668 24.3678C24.411 23.272 25.5609 22.2858 26.7521 21.4495C27.9382 20.6169 29.1306 19.9568 30.0301 19.504C30.4786 19.2782 30.8512 19.1055 31.1097 18.9901C31.2389 18.9324 31.3394 18.8891 31.4064 18.8607C31.4399 18.8465 31.465 18.836 31.4812 18.8293C31.4892 18.826 31.495 18.8236 31.4985 18.8222C31.5003 18.8215 31.5014 18.821 31.502 18.8208C31.5023 18.8206 31.5024 18.8206 31.5024 18.8206C31.5024 18.8206 31.5023 18.8206 31.5023 18.8206C31.5021 18.8207 31.5019 18.8208 31.1273 17.8936Z"
+                                fill="currentColor"></path>
+                            </svg></a
+                          >
+                        </div>
+                        <div>
+                          <p class="text-sm lg:text-2xl text-black">
+                            Already have a pass?
+                            <a
+                              class="text-black lg:text-2xl hover:text-lila-500 underline ml-3"
+                              href="/login"
+                            >
+                              Log in now
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-data="{ open: false }" class="flex justify-center">
+              <!-- Trigger -->
+              <span x-on:click="open = true">
+                <button
+                  type="button"
+                  class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                >
+                  Subscribe
+                </button>
+              </span>
+              <!-- Modal -->
+              <div
+                x-show="open"
+                style="display: none"
+                x-on:keydown.escape.prevent.stop="open = false"
+                role="dialog"
+                aria-modal="true"
+                x-id="['modal-title']"
+                :aria-labelledby="$id('modal-title')"
+                class="fixed inset-0 z-10 w-screen overflow-y-auto"
+              >
+                <!-- Overlay -->
+                <div
+                  x-show="open"
+                  x-transition.opacity
+                  class="fixed inset-0 bg-lila-500 bg-opacity-50"
+                >
+                </div>
+                <!-- Panel -->
+                <div
+                  x-show="open"
+                  x-transition
+                  x-on:click="open = false"
+                  class="relative flex min-h-screen items-center justify-center p-4"
+                >
+                  <div
+                    x-on:click.stop
+                    x-trap.noscroll.inert="open"
+                    class="relative w-full max-w-xl text-center overflow-y-auto ring-2 ring-inset ring-black text-black bg-white shadow-small rounded-xl p-8"
+                  >
+                    <h2 class="text-3xl font-medium text-black">
+                      Sign in to Flabbergasted
+                    </h2>
+                    <form
+                      class="bg-white border-2 border-black shadow-black overflow-hidden shadow justify-between mt-8 rounded-xl sm:flex"
+                    >
+                      <label class="sr-only" for="email-address"
+                        >Email address</label
+                      >
+                      <input
+                        autocomplete="email"
+                        class="w-full px-5 text-center lg:text-left border-transparent focus:ring-black h-20 text-sm py-3 bg-transparent focus:border-black placeholder-black rounded-xl"
+                        id="email-address"
+                        name="email"
+                        placeholder="Enter your email"
+                        required=""
+                        type="email"
+                      />
+                      <button
+                        class="text-black flex items-center text-lg font-bold focus:outline-none justify-center text-center bg-lila-500 lg:border-l-2 border-black transform transition hover:shadow-none duration-200 hover:bg-lila-600 w-full h-20 sm:w-20 shrink-0"
+                        type="button"
+                      >
+                        <svg
+                          class="w-10 h-10"
+                          viewBox="0 0 36 36"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M5.22789 16.8936H4.22789V18.8936H5.22789V16.8936ZM31.2279 18.8936C31.7802 18.8936 32.2279 18.4459 32.2279 17.8936C32.2279 17.3413 31.7802 16.8936 31.2279 16.8936V18.8936ZM22.2279 7.89362V6.89362H20.2279V7.89362H22.2279ZM30.6485 18.671C31.1334 18.9355 31.7408 18.7568 32.0053 18.2719C32.2697 17.7871 32.0911 17.1797 31.6062 16.9152L30.6485 18.671ZM20.2278 27.7931V28.7931H22.2278V27.7931H20.2278ZM5.22789 18.8936H31.1273V16.8936H5.22789V18.8936ZM31.1273 18.8936H31.2279V16.8936H31.1273V18.8936ZM20.2279 7.89362C20.2279 9.36603 21.0232 10.7723 21.9994 11.9705C22.9957 13.1932 24.2995 14.3434 25.5662 15.3222C26.8387 16.3055 28.1063 17.1406 29.0529 17.7286C29.5271 18.0232 29.9231 18.2571 30.2017 18.4181C30.341 18.4987 30.4511 18.561 30.5272 18.6037C30.5653 18.625 30.5948 18.6414 30.6152 18.6527C30.6254 18.6583 30.6334 18.6627 30.6389 18.6658C30.6417 18.6673 30.6439 18.6685 30.6455 18.6694C30.6463 18.6698 30.647 18.6702 30.6475 18.6704C30.6477 18.6706 30.648 18.6707 30.6481 18.6708C30.6484 18.6709 30.6485 18.671 31.1274 17.7931C31.6062 16.9152 31.6063 16.9153 31.6064 16.9153C31.6064 16.9153 31.6064 16.9153 31.6064 16.9153C31.6063 16.9152 31.606 16.9151 31.6056 16.9149C31.6048 16.9144 31.6034 16.9137 31.6015 16.9126C31.5975 16.9104 31.5913 16.907 31.5828 16.9023C31.5657 16.8929 31.5397 16.8784 31.5052 16.8591C31.4363 16.8204 31.3337 16.7624 31.2024 16.6865C30.9396 16.5346 30.5621 16.3116 30.1083 16.0297C29.1987 15.4647 27.9914 14.6686 26.7891 13.7396C25.5809 12.806 24.4098 11.7626 23.5499 10.7072C22.67 9.62732 22.2279 8.6712 22.2279 7.89362H20.2279ZM31.1273 17.8936C30.7527 16.9664 30.7524 16.9666 30.7521 16.9667C30.7519 16.9667 30.7516 16.9669 30.7513 16.967C30.7507 16.9673 30.7499 16.9676 30.749 16.9679C30.7472 16.9687 30.7447 16.9697 30.7417 16.9709C30.7357 16.9734 30.7273 16.9768 30.7166 16.9812C30.6953 16.99 30.6648 17.0028 30.6258 17.0193C30.5478 17.0524 30.4356 17.1007 30.2941 17.1639C30.0113 17.2903 29.6105 17.4762 29.1309 17.7176C28.1742 18.1991 26.8918 18.9078 25.603 19.8126C24.3193 20.7138 22.9944 21.8337 21.9824 23.1472C20.9694 24.4621 20.2278 26.0278 20.2278 27.7931H22.2278C22.2278 26.6087 22.7237 25.4621 23.5668 24.3678C24.411 23.272 25.5609 22.2858 26.7521 21.4495C27.9382 20.6169 29.1306 19.9568 30.0301 19.504C30.4786 19.2782 30.8512 19.1055 31.1097 18.9901C31.2389 18.9324 31.3394 18.8891 31.4064 18.8607C31.4399 18.8465 31.465 18.836 31.4812 18.8293C31.4892 18.826 31.495 18.8236 31.4985 18.8222C31.5003 18.8215 31.5014 18.821 31.502 18.8208C31.5023 18.8206 31.5024 18.8206 31.5024 18.8206C31.5024 18.8206 31.5023 18.8206 31.5023 18.8206C31.5021 18.8207 31.5019 18.8208 31.1273 17.8936Z"
+                            fill="black"></path>
+                        </svg>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div x-data="{ open: false }" class="flex justify-center">
+              <!-- Trigger -->
+              <span x-on:click="open = true">
+                <button
+                  type="button"
+                  class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                >
+                  Cookies
+                </button>
+              </span>
+              <!-- Modal -->
+              <div
+                x-show="open"
+                style="display: none"
+                x-on:keydown.escape.prevent.stop="open = false"
+                role="dialog"
+                aria-modal="true"
+                x-id="['modal-title']"
+                :aria-labelledby="$id('modal-title')"
+                class="fixed inset-0 z-10 w-screen overflow-y-auto"
+              >
+                <!-- Overlay -->
+                <div
+                  x-show="open"
+                  x-transition.opacity
+                  class="fixed inset-0 bg-lila-500 bg-opacity-50"
+                >
+                </div>
+                <!-- Panel -->
+                <div
+                  x-show="open"
+                  x-transition
+                  x-on:click="open = false"
+                  class="relative flex min-h-screen items-center justify-center p-4"
+                >
+                  <div
+                    x-on:click.stop
+                    x-trap.noscroll.inert="open"
+                    class="relative w-full max-w-lg overflow-y-auto ring-2 ring-inset ring-black text-black bg-white shadow-small rounded-xl p-8"
+                  >
+                    <div>
+                      <div>
+                        <h2
+                          class="text-xl font-medium text-black"
+                          :id="$id('modal-title')"
+                          id="modal-title-1"
+                        >
+                          Customize Consent Preferences
+                        </h2>
+                        <!-- Content -->
+                        <p class="mt-6 text-black text-base">
+                          We use first-party and third-party cookies to provide
+                          a better experience, tailor and measure ads, analyze
+                          traffic, and personalize content. See Section 4 of our
+
+                          <a
+                            href="#_"
+                            class="text-lila-800 hover:text-black duraton-300"
+                          >
+                            Privacy Policy</a
+                          > to learn more.
+                        </p>
+                        <div
+                          class="mt-4 "
+                        >
+                          <div class="flex items-center justify-between py-3">
+                            <span class="flex flex-grow flex-col">
+                              <span
+                                class="text-sm font-medium leading-6 text-black"
+                                id="availability-label">Necesary</span
+                              >
+                              <span class="text-xs text-black" id="#">
+                                Necessary cookies are required for this website
+                                to function and cannot be disabled.
+                              </span>
+                            </span>
+                            <!-- Toggle -->
+                            <div
+                              class="items-center inline-flex p-4 bg-white"
+                              x-data="{ value: false }"
+                            >
+                              <button
+                                x-ref="toggle"
+                                @click="value = ! value"
+                                type="button"
+                                role="switch"
+                                :aria-checked="value"
+                                :aria-labelledby="$id('toggle-label')"
+                                :class="value ? '' : 'bg-black'"
+                                class="relative inline-flex w-10 rounded-full py-1 transition bg-lila-500 border-2 shadow-small border-black"
+                                aria-checked="true"
+                                aria-labelledby="toggle-label-1"
+                                ><span
+                                  :class="value ? 'translate-x-6 bg-white' : 'translate-x-1 '"
+                                  class="bg-black h-2 w-2 rounded-full transition shadow-md translate-x-1"
+                                  aria-hidden="true"></span></button
+                              >
+                            </div>
+                          </div>
+                          <div class="flex items-center justify-between py-3">
+                            <span class="flex flex-grow flex-col">
+                              <span
+                                class="text-sm font-medium leading-6 text-black"
+                                id="availability-label">Functional</span
+                              >
+                              <span class="text-xs text-black" id="#">
+                                Functional cookies enable this website to
+                                provide enhanced functionality and
+                                personalization.
+                              </span>
+                            </span>
+                            <!-- Toggle -->
+                            <div
+                              class="items-center inline-flex p-4 bg-white"
+                              x-data="{ value: false }"
+                            >
+                              <button
+                                x-ref="toggle"
+                                @click="value = ! value"
+                                type="button"
+                                role="switch"
+                                :aria-checked="value"
+                                :aria-labelledby="$id('toggle-label')"
+                                :class="value ? '' : 'bg-black'"
+                                class="relative inline-flex w-10 rounded-full py-1 transition bg-lila-500 border-2 shadow-small border-black"
+                                aria-checked="true"
+                                aria-labelledby="toggle-label-1"
+                                ><span
+                                  :class="value ? 'translate-x-6 bg-white' : 'translate-x-1 '"
+                                  class="bg-black h-2 w-2 rounded-full transition shadow-md translate-x-1"
+                                  aria-hidden="true"></span></button
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="inline-flex flex-wrap items-center w-full gap-2 mt-10"
+                        >
+                          <button
+                            class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                          >
+                            Save my preferences</button
+                          >
+                          <button
+                            class="text-danger-950 items-center shadow shadow-danger-500 text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-danger-300 focus:bg-danger-500 border-danger-500 ease-in-out duration-300 outline-none hover:bg-danger-400 hover:text-white focus:text-white focus:shadow-none border-2 py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full"
+                          >
+                            Reject all</button
+                          >
+                          <button
+                            class="text-black items-center shadow shadow-lila-600 text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-lila-300 focus:bg-lila-600 border-lila-600 duration-300 outline-none focus:shadow-none border-2 py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:bg-lila-500"
+                          >
+                            Acept all</button
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

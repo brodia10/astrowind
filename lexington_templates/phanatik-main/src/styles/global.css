@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings:
+  "liga" 1,
+  "calt" 1, /* Contextual Alternates */
+  "dlig" 1, /* Discretionary Ligatures */
+  "ss07" 1, /* fSquare punctuation */
+  "ss08" 1, /* Square quotes */
+  "zero" 1, /* Slashed zero */
+  "tnum" 1, /* Tabular numbers */
+    "cv03" 1, /* Open six */
+    "cv04" 1, /* Open nine */
+    "cv01" 1, /* Alternate one */
+    "cv09", /* Flat-top three */
+    "cv02" 1; /* Open 4 */
+}
+@supports (font-variation-settings: normal) {
+  /* Use variable font if supported */
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+:root {
+  --astro-code-color-text: #536479;
+  --astro-code-color-background: #faf4ed;
+  --astro-code-token-constant: #3c63a680;
+  --astro-code-token-string: #3c63a660;
+  --astro-code-token-comment: #92a0a5;
+  --astro-code-token-keyword: #c8342a;
+  --astro-code-token-parameter: #ffffff;
+  --astro-code-token-function: #82b0a0;
+  --astro-code-token-string-expression: #3c63a6;
+  --astro-code-token-punctuation: #ffffff;
+  --astro-code-token-link: #ffffff;
+}
+
+.prose-styles {
+  @apply font-serif first-letter:float-left first-letter:font-bold first-letter:mr-3 first-letter:text-7xl first-letter:text-slate-900 first-line:tracking-widest first-line:uppercase prose prose-blockquote:border-l-salmon-500 prose-headings:font-sans prose-headings:text-black prose-li:marker:text-salmon-500 prose-slate ;
+}

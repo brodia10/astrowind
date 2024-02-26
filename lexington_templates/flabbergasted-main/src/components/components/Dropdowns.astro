@@ -1,0 +1,1314 @@
+<section>
+  <div class="relative items-center w-full mx-auto 2xl:max-w-7xl">
+    <div class="divide-y-2 divide-black">
+      <div class="justify-center max-w-3xl p-8 lg:p-20">
+        <p class="text-5xl lg:text-7xl text-black">Dropdowns</p>
+      </div>
+      <div class="divide-y-2 divide-black">
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium text-black">With text</h3>
+          <div class="inline-flex flex-wrap items-center w-full gap-4 mt-12">
+            <div
+              @click.away="open = false"
+              class="relative"
+              x-data="{ open: false }"
+            >
+              <button
+                @click="open = !open"
+                class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 gap-3"
+              >
+                <span>With down Dropdown</span>
+                <svg
+                  :class="{'rotate-180': open, 'rotate-0': !open}"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline h-4 transition-transform duration-200 transform rotate-0 icon icon-tabler icon-tabler-chevron-down"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M6 9l6 6l6 -6"></path>
+                </svg>
+              </button>
+              <div
+                x-show="open"
+                style="display: none;"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="shadow absolute right-0 z-10 w-full mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+              >
+                <div class="py-1 bg-white rounded-xl" role="none">
+                  <button
+                    type="button"
+                    class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                    >Overview
+                  </button>
+                  <button
+                    type="button"
+                    class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-2">Components</button
+                  >
+                  <form
+                    method="POST"
+                    action="#"
+                    role="none"
+                    class="border-t border-white/5"
+                  >
+                    <button
+                      type="submit"
+                      class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-3">Sign out</button
+                    >
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div
+              @click.away="open = false"
+              class="relative"
+              x-data="{ open: false }"
+            >
+              <div
+                x-show="open"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="shadow bottom-0 origin-top-right absolute left-0 mb-[4.2rem] -mr-1 w-full rounded-lg bg-white ring-2 ring-black focus:outline-none"
+              >
+                <div class="py-1 relative bg-white rounded-xl">
+                  <button
+                    type="button"
+                    class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                    >Overview
+                  </button>
+                  <button
+                    type="button"
+                    class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-2">Components</button
+                  >
+                  <form
+                    method="POST"
+                    action="#"
+                    role="none"
+                    class="border-t border-white/5"
+                  >
+                    <button
+                      type="submit"
+                      class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-3">Sign out</button
+                    >
+                  </form>
+                </div>
+              </div>
+              <div>
+                <button
+                  @click="open = !open"
+                  class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 gap-3"
+                >
+                  With drop up
+                  <svg
+                    :class="{'rotate-180': open, 'rotate-0': !open}"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="inline h-4 transition-transform duration-200 transform rotate-0 icon icon-tabler icon-tabler-chevron-down"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M6 9l6 6l6 -6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium text-black">Only icon</h3>
+          <div class="inline-flex flex-wrap items-center w-full gap-2 mt-12">
+            <div
+              @click.away="open = false"
+              class="relative"
+              x-data="{ open: false }"
+            >
+              <button
+                @click="open = !open"
+                class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto p-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+              >
+                <svg
+                  :class="{'rotate-180': open, 'rotate-0': !open}"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline h-4 transition-transform duration-200 transform rotate-0 icon icon-tabler icon-tabler-chevron-down"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M6 9l6 6l6 -6"></path>
+                </svg>
+              </button>
+              <div
+                x-show="open"
+                style="display: none;"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="shadow absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+              >
+                <div class="py-1 bg-white rounded-xl" role="none">
+                  <button
+                    type="button"
+                    class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                    >Overview
+                  </button>
+                  <button
+                    type="button"
+                    class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-2">Components</button
+                  >
+                  <form
+                    method="POST"
+                    action="#"
+                    role="none"
+                    class="border-t border-white/5"
+                  >
+                    <button
+                      type="submit"
+                      class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-3">Sign out</button
+                    >
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div
+              @click.away="open = false"
+              class="relative"
+              x-data="{ open: false }"
+            >
+              <div
+                x-show="open"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="shadow bottom-0 origin-top-right absolute left-0 mb-[4.2rem] -mr-1 w-auto rounded-lg bg-white ring-2 ring-black focus:outline-none"
+              >
+                <div class="py-1 relative bg-white rounded-xl">
+                  <button
+                    type="button"
+                    class="block text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                    >Overview
+                  </button>
+                  <button
+                    type="button"
+                    class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-2">Components</button
+                  >
+                  <form
+                    method="POST"
+                    action="#"
+                    role="none"
+                    class="border-t border-white/5"
+                  >
+                    <button
+                      type="submit"
+                      class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-3">Sign out</button
+                    >
+                  </form>
+                </div>
+              </div>
+              <div>
+                <button
+                  @click="open = !open"
+                  class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto p-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                >
+                  <svg
+                    :class="{'rotate-180': open, 'rotate-0': !open}"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="inline h-4 transition-transform duration-200 transform rotate-0 icon icon-tabler icon-tabler-chevron-down"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M6 9l6 6l6 -6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium text-black">With icons</h3>
+          <div class="inline-flex flex-wrap items-center w-full gap-2 mt-12">
+            <div
+              @click.away="open = false"
+              class="relative"
+              x-data="{ open: false }"
+            >
+              <button
+                @click="open = !open"
+                class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 gap-3"
+              >
+                <span>With left icon</span>
+                <svg
+                  :class="{'rotate-180': open, 'rotate-0': !open}"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline h-4 transition-transform duration-200 transform rotate-0 icon icon-tabler icon-tabler-chevron-down"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M6 9l6 6l6 -6"></path>
+                </svg>
+              </button>
+              <div
+                x-show="open"
+                style="display: none;"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="shadow absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+              >
+                <div class="py-1 bg-white rounded-xl" role="none">
+                  <button
+                    type="button"
+                    class="items-center gap-2 inline-flex text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-4 icon icon-tabler icon-tabler-components"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                      <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                      <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                      <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                    </svg>
+                     Overview
+                  </button>
+                  <button
+                    type="button"
+                    class="items-center gap-2 inline-flex text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-2"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-4 icon icon-tabler icon-tabler-components"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                      <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                      <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                      <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                    </svg>
+                     Components</button
+                  >
+                  <form
+                    method="POST"
+                    action="#"
+                    role="none"
+                    class="border-t border-white/5"
+                  >
+                    <button
+                      type="submit"
+                      class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-3">Sign out</button
+                    >
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div
+              @click.away="open = false"
+              class="relative"
+              x-data="{ open: false }"
+            >
+              <button
+                @click="open = !open"
+                class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 gap-3"
+              >
+                <span>With right icon</span>
+                <svg
+                  :class="{'rotate-180': open, 'rotate-0': !open}"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline h-4 transition-transform duration-200 transform rotate-0 icon icon-tabler icon-tabler-chevron-down"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M6 9l6 6l6 -6"></path>
+                </svg>
+              </button>
+              <div
+                x-show="open"
+                style="display: none;"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="shadow absolute right-0 z-10 w-auto mt-2 origin-top-right rounded-lg bg-white ring-2 ring-black focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+              >
+                <div class="py-1 bg-white rounded-xl" role="none">
+                  <button
+                    type="button"
+                    class="items-center gap-2 inline-flex text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-0"
+                  >
+                    Overview
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-4 icon icon-tabler icon-tabler-components"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                      <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                      <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                      <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    class="items-center gap-2 inline-flex text-left px-4 py-2 text-sm text-black hover:text-lila-800"
+                    role="menuitem"
+                    tabindex="-1"
+                    id="menu-item-2"
+                  >
+                    Components
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-4 icon icon-tabler icon-tabler-components"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                      <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                      <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                      <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                    </svg>
+                  </button>
+                  <form
+                    method="POST"
+                    action="#"
+                    role="none"
+                    class="border-t border-white/5"
+                  >
+                    <button
+                      type="submit"
+                      class="block px-4 py-2 text-sm text-black hover:text-lila-800"
+                      role="menuitem"
+                      tabindex="-1"
+                      id="menu-item-3">Sign out</button
+                    >
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium text-black">With menu</h3>
+          <div class="inline-flex flex-wrap items-center w-full gap-2 mt-12">
+            <div
+              @click.away="open = false"
+              class="relative mx-auto"
+              x-data="{ open: false }"
+            >
+              <button
+                @click="open = !open"
+                class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 gap-3"
+              >
+                <span>With menu</span>
+                <svg
+                  :class="{'rotate-180': open, 'rotate-0': !open}"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline h-4 transition-transform duration-200 transform rotate-0 icon icon-tabler icon-tabler-chevron-down"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M6 9l6 6l6 -6"></path>
+                </svg>
+              </button>
+              <div
+                x-show="open"
+                style="display: none;"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="shadow absolute right-0 z-10 mt-2 origin-top-right left-1/2 flex w-screen max-w-sm -translate-x-1/2 rounded-lg bg-white ring-2 ring-black focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+              >
+                <div
+                  class="w-screen max-w-3xl bg-white rounded-lg flex-auto overflow-hidden text-sm"
+                >
+                  <div class="divide-y-2 divide-black">
+                    <div
+                      class="group relative flex gap-x-6 p-4 duration-300 bg-white hover:bg-black"
+                    >
+                      <div
+                        class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 icon icon-tabler icon-tabler-components"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                          Navigation item
+                          <span class="absolute inset-0"></span>
+                        </a>
+                        <p
+                          class="mt-1 text-black group-hover:text-lila-500"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="group relative flex gap-x-6 p-4 duration-300 bg-white hover:bg-black"
+                    >
+                      <div
+                        class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 icon icon-tabler icon-tabler-components"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                          Navigation item
+                          <span class="absolute inset-0"></span>
+                        </a>
+                        <p
+                          class="mt-1 text-black group-hover:text-lila-500"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium text-black">With grid menu</h3>
+          <div class="inline-flex flex-wrap items-center w-full gap-2 mt-12">
+            <div
+              @click.away="open = false"
+              class="relative mx-auto"
+              x-data="{ open: false }"
+            >
+              <button
+                @click="open = !open"
+                class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 gap-3"
+              >
+                <span>With menu</span>
+                <svg
+                  :class="{'rotate-180': open, 'rotate-0': !open}"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline h-4 transition-transform duration-200 transform rotate-0 icon icon-tabler icon-tabler-chevron-down"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M6 9l6 6l6 -6"></path>
+                </svg>
+              </button>
+              <div
+                x-show="open"
+                style="display: none;"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="shadow absolute right-0 z-10 mt-2 origin-top-right left-1/2 flex w-screen max-w-sm md:max-w-5xl -translate-x-1/2 rounded-lg bg-white ring-2 ring-black focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+              >
+                <div
+                  class="w-screen max-w-7xl bg-white rounded-lg flex-auto overflow-hidden text-sm shadow-lg"
+                >
+                  <div class="grid grid-cols-1 lg:grid-cols-3 bg-black gap-0.5">
+                     <div
+                      class="group relative flex gap-x-6 p-4 duration-300 bg-white hover:bg-black"
+                    >
+                      <div
+                        class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 icon icon-tabler icon-tabler-components"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                          Navigation item
+                          <span class="absolute inset-0"></span>
+                        </a>
+                        <p
+                          class="mt-1 text-black group-hover:text-lila-500"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                    </div>
+                     <div
+                      class="group relative flex gap-x-6 p-4 duration-300 bg-white hover:bg-black"
+                    >
+                      <div
+                        class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 icon icon-tabler icon-tabler-components"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                          Navigation item
+                          <span class="absolute inset-0"></span>
+                        </a>
+                        <p
+                          class="mt-1 text-black group-hover:text-lila-500"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                    </div>
+                     <div
+                      class="group relative flex gap-x-6 p-4 duration-300 bg-white hover:bg-black"
+                    >
+                      <div
+                        class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 icon icon-tabler icon-tabler-components"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                          Navigation item
+                          <span class="absolute inset-0"></span>
+                        </a>
+                        <p
+                          class="mt-1 text-black group-hover:text-lila-500"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                    </div>
+                     <div
+                      class="group relative flex gap-x-6 p-4 duration-300 bg-white hover:bg-black"
+                    >
+                      <div
+                        class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 icon icon-tabler icon-tabler-components"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                          Navigation item
+                          <span class="absolute inset-0"></span>
+                        </a>
+                        <p
+                          class="mt-1 text-black group-hover:text-lila-500"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                    </div>
+                     <div
+                      class="group relative flex gap-x-6 p-4 duration-300 bg-white hover:bg-black"
+                    >
+                      <div
+                        class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 icon icon-tabler icon-tabler-components"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                          Navigation item
+                          <span class="absolute inset-0"></span>
+                        </a>
+                        <p
+                          class="mt-1 text-black group-hover:text-lila-500"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                    </div>
+                     <div
+                      class="group relative flex gap-x-6 p-4 duration-300 bg-white hover:bg-black"
+                    >
+                      <div
+                        class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-4 icon icon-tabler icon-tabler-components"
+                          viewBox="0 0 24 24"
+                          stroke-width="2"
+                          stroke="currentColor"
+                          fill="none"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                          ></path>
+                          <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                          <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                          Navigation item
+                          <span class="absolute inset-0"></span>
+                        </a>
+                        <p
+                          class="mt-1 text-black group-hover:text-lila-500"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium text-black">
+            With full width grid and blog menu
+          </h3>
+          <div class="inline-flex flex-wrap items-center w-full gap-2 mt-12">
+            <div
+              @click.away="open = false"
+              class="relative mx-auto"
+              x-data="{ open: false }"
+            >
+              <button
+                @click="open = !open"
+                class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800 gap-3"
+              >
+                <span>With menu</span>
+                <svg
+                  :class="{'rotate-180': open, 'rotate-0': !open}"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="inline h-4 transition-transform duration-200 transform rotate-0 icon icon-tabler icon-tabler-chevron-down"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M6 9l6 6l6 -6"></path>
+                </svg>
+              </button>
+              <div
+                x-show="open"
+                style="display: none;"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="shadow absolute right-0 z-10 mt-2 origin-top-right left-1/2 flex w-screen max-w-sm md:max-w-5xl -translate-x-1/2 rounded-lg bg-white ring-2 ring-black focus:outline-none"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="menu-button"
+                tabindex="-1"
+              >
+                <div
+                  class="w-screen max-w-7xl bg-white rounded-lg flex-auto overflow-hidden text-sm shadow-lg"
+                >
+                  <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 bg-black gap-0.5"
+                  >
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-0.5">
+                      <div
+                        class="group relative p-4 duration-300 bg-white hover:bg-black"
+                      >
+                        <div class="flex gap-x-6 items-center">
+                          <div
+                            class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="w-4 icon icon-tabler icon-tabler-components"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                            </svg>
+                          </div>
+                          <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                            Navigation item
+                            <span class="absolute inset-0"></span>
+                          </a>
+                        </div>
+                        <p
+                          class="mt-4 text-black group-hover:text-lila-600"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                      <div
+                        class="group relative p-4 duration-300 bg-white hover:bg-black"
+                      >
+                        <div class="flex gap-x-6 items-center">
+                          <div
+                            class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="w-4 icon icon-tabler icon-tabler-components"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                            </svg>
+                          </div>
+                          <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                            Navigation item
+                            <span class="absolute inset-0"></span>
+                          </a>
+                        </div>
+                        <p
+                          class="mt-4 text-black group-hover:text-lila-600"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                      <div
+                        class="group relative p-4 duration-300 bg-white hover:bg-black"
+                      >
+                        <div class="flex gap-x-6 items-center">
+                          <div
+                            class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="w-4 icon icon-tabler icon-tabler-components"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                            </svg>
+                          </div>
+                          <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                            Navigation item
+                            <span class="absolute inset-0"></span>
+                          </a>
+                        </div>
+                        <p
+                          class="mt-4 text-black group-hover:text-lila-600"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                      <div
+                        class="group relative p-4 duration-300 bg-white hover:bg-black"
+                      >
+                        <div class="flex gap-x-6 items-center">
+                          <div
+                            class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="w-4 icon icon-tabler icon-tabler-components"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                            </svg>
+                          </div>
+                          <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                            Navigation item
+                            <span class="absolute inset-0"></span>
+                          </a>
+                        </div>
+                        <p
+                          class="mt-4 text-black group-hover:text-lila-600"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                      <div
+                        class="group relative p-4 duration-300 bg-white hover:bg-black"
+                      >
+                        <div class="flex gap-x-6 items-center">
+                          <div
+                            class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="w-4 icon icon-tabler icon-tabler-components"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                            </svg>
+                          </div>
+                          <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                            Navigation item
+                            <span class="absolute inset-0"></span>
+                          </a>
+                        </div>
+                        <p
+                          class="mt-4 text-black group-hover:text-lila-600"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                      <div
+                        class="group relative p-4 duration-300 bg-white hover:bg-black"
+                      >
+                        <div class="flex gap-x-6 items-center">
+                          <div
+                            class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="w-4 icon icon-tabler icon-tabler-components"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                            </svg>
+                          </div>
+                          <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                            Navigation item
+                            <span class="absolute inset-0"></span>
+                          </a>
+                        </div>
+                        <p
+                          class="mt-4 text-black group-hover:text-lila-600"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                      <div
+                        class="group relative p-4 duration-300 bg-white hover:bg-black"
+                      >
+                        <div class="flex gap-x-6 items-center">
+                          <div
+                            class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="w-4 icon icon-tabler icon-tabler-components"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                            </svg>
+                          </div>
+                          <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                            Navigation item
+                            <span class="absolute inset-0"></span>
+                          </a>
+                        </div>
+                        <p
+                          class="mt-4 text-black group-hover:text-lila-600"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                      <div
+                        class="group relative p-4 duration-300 bg-white hover:bg-black"
+                      >
+                        <div class="flex gap-x-6 items-center">
+                          <div
+                            class="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-white group-hover:ring-white group-hover:bg-black group-hover:text-white duration-300 text-black ring-2 ring-black"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="w-4 icon icon-tabler icon-tabler-components"
+                              viewBox="0 0 24 24"
+                              stroke-width="2"
+                              stroke="currentColor"
+                              fill="none"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                              ></path>
+                              <path d="M3 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M15 12l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 6l3 3l3 -3l-3 -3z"></path>
+                              <path d="M9 18l3 3l3 -3l-3 -3z"></path>
+                            </svg>
+                          </div>
+                          <a href="#_" class="font-semibold text-black group-hover:text-white duration-300">
+                            Navigation item
+                            <span class="absolute inset-0"></span>
+                          </a>
+                        </div>
+                        <p
+                          class="mt-4 text-black group-hover:text-lila-600"
+                        >
+                          Here goes the description
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      class="grid grid-cols-1 lg:grid-cols-2 bg-black gap-0.5"
+                    >
+                      <div
+                        class="group divide-y-2 divide-black relative overflow-hidden bg-white"
+                      >
+                        <img
+                          src="/images/thumbnail1.svg "
+                          alt="#"
+                          class="object-cover object-center group-hover:opacity-75 bg-lila-500"
+                        />
+                        <div class="flex flex-col justify-end p-4">
+                          <div class="bg-opacity-60 text-base sm:text-sm">
+                            <a href="#_" class="font-medium text-black">
+                              <span class="absolute inset-0" aria-hidden="true"
+                              ></span>
+                               Blog Entry title
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="group divide-y-2 divide-black relative overflow-hidden bg-white"
+                      >
+                        <img
+                          src="/images/thumbnail3.svg "
+                          alt="#"
+                          class="object-cover object-center group-hover:opacity-75 bg-yellow-500"
+                        />
+                        <div class="flex flex-col justify-end p-4">
+                          <div class="bg-opacity-60 text-base sm:text-sm">
+                            <a href="#_" class="font-medium text-black">
+                              <span class="absolute inset-0" aria-hidden="true"
+                              ></span>
+                               Blog Entry title
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-span-full p-4 bg-white">
+                        <a
+                          href="/blog/blog-one"
+                          class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-between text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                          >Read more on our blog<span>&rarr;</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

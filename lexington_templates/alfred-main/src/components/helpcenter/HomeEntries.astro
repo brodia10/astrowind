@@ -1,0 +1,22 @@
+---
+const { title, url } = Astro.props;
+---
+<li class="relative flex justify-between gap-x-6 py-5">
+  <div class="min-w-0 flex-auto">
+    <p class="font-mono text-base font-medium tracking-tighter uppercase">
+      <a href={url} title={title}>
+        <span class="absolute inset-x-0 -top-px bottom-0"></span>
+        {title}
+      </a>
+    </p>
+  </div>
+  <div class="flex shrink-0 items-center gap-x-4">
+    <div class="hidden sm:flex sm:flex-col sm:items-end">
+      <p
+        class="flex items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-gray-500 transition-all duration-200 bg-white border border-gray-300 rounded-full hover:text-blue-700 focus:ring-2 shadow-button shadow-gray-500/5 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"
+      >
+        Read article
+      </p>
+    </div>
+  </div>
+</li>

@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import EntriesTwo from "@/components/blog/EntriesTwo.astro";
+const allPosts = await getCollection("posts");
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <section>
+    <div class="p-8 max-w-2xl mx-auto">
+      <div>
+        <p class="font-medium text-zinc-700 uppercase">
+          Welcome to my little blog 3
+        </p>
+      </div>
+      <ul
+        class="grid grid-cols-1 gap-y-12 md:grid-cols-2 mx-auto lg:gap-y-24 gap-x-6 mt-6 w-full"
+        role="list">
+        {
+          allPosts
+            .slice()
+            .map((post) => (
+              <EntriesTwo
+                url={"/posts/" + post.slug}
+                title={post.data.title}
+                description={post.data.description}
+                alt={post.data.title}
+                pubDate={post.data.pubDate.toString().slice(0, 10)}
+                author={post.data.author}
+                image={post.data.image.url}
+              />
+            ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

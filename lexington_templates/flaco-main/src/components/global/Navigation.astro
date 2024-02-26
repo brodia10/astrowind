@@ -1,0 +1,138 @@
+<div class="bg-darkest 2xl:max-w-7xl w-full mx-auto">
+  <div
+    class="lg:items-center lg:justify-between lg:flex-row lg:px-8 flex flex-col w-full px-2 py-3 mx-auto">
+    <div class="flex flex-row items-center justify-between w-full text-white">
+      <div class="focus:outline-none focus:shadow-outline">
+        <a href="/" class="text-white text-2xl lg:text-4xl"> Flaco</a>
+      </div>
+      <div class="lg:ml-auto">
+        <div
+          class="md:order-none order-last"
+          x-data="{ openMobileMenu: false }"
+          x-on:click.away="openMobileMenu = false">
+          <div class="relative">
+            <nav
+              class="sm:h-10 relative flex items-center justify-around w-full">
+              <div class="flex items-center justify-between flex-1">
+                <div
+                  class="flex items-center"
+                  x-on:click="openMobileMenu = !openMobileMenu">
+                  <button
+                    type="button"
+                    class="md:mt-0 hover:text-white focus:text-white focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 text-base transition duration-500 ease-in-out transform"
+                    id="main-menu"
+                    aria-label="Main menu"
+                    aria-haspopup="true">
+                    <svg
+                      focusable="false"
+                      preserveAspectRatio="xMidYMid meet"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 32 32"
+                      aria-hidden="true">
+                      <path
+                        d="M14 4H18V8H14zM4 4H8V8H4zM24 4H28V8H24zM14 14H18V18H14zM4 14H8V18H4zM24 14H28V18H24zM14 24H18V28H14zM4 24H8V28H4zM24 24H28V28H24z"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </nav>
+          </div>
+          <div
+            x-on:click="openMobileMenu = false"
+            x-transition:enter="transition ease-out duration-150"
+            x-transition:enter-start="opacity-0 transform scale-95"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-100"
+            x-transition:leave-start="opacity-100 transform scale-100"
+            x-transition:leave-end="opacity-0 transform scale-95"
+            :class="{'translate-y-0  duration-300': openMobileMenu, '-translate-y-full': ! openMobileMenu}"
+            class="fixed inset-0 top-0 z-40 h-screen overflow-y-auto transition origin-top transform -translate-y-full">
+            <div
+              class="shadow-thick bg-darkest relative h-screen"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="main-menu">
+              <!-- Menu Header -->
+              <div class="border-white/10 bg-darkest border-b">
+                <div>
+                  <div
+                    class="lg:px-12 flex items-center justify-between px-5 py-5">
+                    <div
+                      class="hover:text-white tracking-relaxed text-base font-light tracking-tighter text-darker transition duration-500 ease-in-out transform">
+                      <div class="focus:outline-none focus:shadow-outline">
+                        <a href="#" class="text-white text-2xl lg:text-4xl">
+                          <span class=""> Flaco</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="lg:ml-auto lg:mt-0 mt-6"></div>
+                    <div class="ml-2">
+                      <button
+                        x-on:click="openMobileMenu = !openMobileMenu"
+                        type="button"
+                        class="border-moody focus:outline-none text-white inline-flex items-center justify-center transition duration-150 ease-in-out rounded-full"
+                        aria-label="Close menu">
+                        <svg
+                          focusable="false"
+                          preserveAspectRatio="xMidYMid meet"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="currentColor"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 32 32"
+                          aria-hidden="true">
+                          <path
+                            d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+                          ></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Content -->
+              <div class="md:flex-row flex flex-col">
+                <div class="w-full">
+                  <div class="lg:p-10 items-end p-4">
+                    <ul class="space-y-8 list-none">
+                      <li>
+                        <a
+                          href="/overview"
+                          class="group md:text-10xl lg:flex-row flex flex-col justify-start w-full space-x-6 text-3xl font-normal text-left text-white tracking-tighter uppercase hover:text-gray"
+                          role="menuitem">
+                          <span> Overview</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="/style-guide"
+                          class="group md:text-10xl lg:flex-row flex flex-col justify-start w-full space-x-6 text-3xl font-normal text-left text-white tracking-tighter uppercase hover:text-gray"
+                          role="menuitem">
+                          <span> Style guide</span>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a
+                          href="https://lexingtonthemes.lemonsqueezy.com/checkout/buy/f73c2e0c-7337-413e-92a7-457316b265a3"
+                          class="group md:text-10xl lg:flex-row flex flex-col justify-start w-full space-x-6 text-3xl font-normal text-left text-white tracking-tighter uppercase hover:text-gray"
+                          role="menuitem">
+                          <span> Buy flaco</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

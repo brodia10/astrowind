@@ -1,0 +1,99 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { frontmatter } = Astro.props;
+import Subscribe from "@/components/cta/Subscribe.astro";
+---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const headings = document.querySelectorAll(".prose-styles h2,.prose-styles  h3");
+    const tocContainer = document.getElementById("table-of-contents");
+    if (tocContainer && headings.length > 0) {
+      const tocList = document.createElement("ul");
+      tocList.classList.add("space-y-3", "text-xs");
+      headings.forEach((heading) => {
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+        link.textContent = heading.textContent;
+        link.href = `#${heading.id}`;
+        link.classList.add("text-black", "hover:underline");
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
+      });
+      tocContainer.appendChild(tocList);
+      tocContainer.classList.remove("hidden");
+    }
+  });
+</script>
+<BaseLayout>
+  <section>
+    <div
+      class="mx-auto 2xl:max-w-screen-2xl md:px-12 px-8 grid py-12 space-y-6"
+    >
+
+      <img
+        class="w-full aspect-video h-full object-cover     "
+        src={frontmatter.image.url}
+        alt={frontmatter.image.alt}
+      />
+    </div>
+  </section>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl px-8 md:px-12  mx-auto  pb-24">
+    <div class="lg:col-span-3 hidden lg:block">
+      <div id="table-of-contents" class=" sticky top-48">
+
+      </div>
+    </div>
+    <section class="relative bg-wood-100 lg:-mt-96 lg:p-8 overflow-hidden lg:col-span-9 ">
+      <div class="grid grid-cols-1 gap-10 xl:gap-24">
+        <div
+        class="mx-auto bg-wood-100      "
+      >
+        <div>
+          <h1
+            class="text-black font-serif font-bold lg:text-4xl text-xl uppercase"
+          >
+            {frontmatter.title}
+          </h1>
+        </div>
+        <div class="items-center inline-flex mt-10">
+          <div class="items-center inline-flex space-x-1">
+            <p class="font-medium text-gray-900 text-sm">
+              {frontmatter.author}
+            </p><span aria-hidden="true">·</span>
+            <div class="flex text-gray-500 text-sm">
+              <time datetime={frontmatter.pubDate.toString().slice(0, 10)}
+                >{frontmatter.pubDate.toString().slice(0, 10)}</time
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 mt-6">
+          {
+            frontmatter.tags.map((tag) => (
+              <span class="bg-wood-500 px-3 py-1.5 text-xs    h-8 text-black items-center flex">
+                <a href={`/tags/${tag}`}>{tag} </a>{" "}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+        <div>
+          <p>
+            <em class="font-medium text-black font-serif text-2xl uppercase"
+              >{frontmatter.description}</em
+            >
+          </p>
+        </div>
+        <div>
+          <div
+            class="prose-styles "
+          >
+            <slot />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <Subscribe/>
+</BaseLayout>

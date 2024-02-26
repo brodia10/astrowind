@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Archive from "../../components/entries/Archive.astro";
+---
+<BaseLayout>
+  <section            >
+    <div
+      class="items-center 2xl:max-w-7xl max-w-6xl md:px-12 mx-auto px-8 py-32">
+      <div class="border-b pb-5">
+        <div class="max-w-xl">
+          <p
+            class="text-black          font-serif text-4xl font-semibold">
+            Phanatik's archive
+          </p><p class="text-slate-600 mt-4 text-lg         ">
+            Search thorugh old posts
+          </p>
+        </div>
+      </div>
+      <div
+        class="grid gap-12 grid-cols-1 lg:gap-10 lg:space-y-0 sm:grid-cols-2 border-b mt-12 pb-12">
+        {
+          allPosts.map((post) => (
+            <Archive
+              url={"/posts/" + post.slug}
+              title={post.data.title}
+              description={post.data.description}
+              alt={post.data.title}
+              pubDate={post.data.pubDate.toString().slice(0, 10)}
+              author={post.data.author}
+              image={post.data.image.url}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

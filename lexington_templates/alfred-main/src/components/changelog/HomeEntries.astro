@@ -1,0 +1,58 @@
+---
+const { title, intro, pubDate, url } = Astro.props;
+---
+
+<article class="relative group">
+  <div
+    class="absolute -inset-y-2.5 -inset-x-4 md:-inset-y-4 md:-inset-x-6 sm:rounded-2xl group-hover:bg-white duration-300"
+  >
+  </div>
+  <svg
+    viewBox="0 0 9 9"
+    class="hidden absolute right-full mr-6 top-2 text-blue-500 md:mr-12 w-[calc(0.5rem+1px)] h-[calc(0.5rem+1px)] overflow-visible sm:block"
+    ><circle
+      cx="4.5"
+      cy="4.5"
+      r="4.5"
+      stroke="currentColor"
+      class="fill-white"
+      stroke-width="2"></circle></svg
+  ><div class="relative">
+    <h3
+      class="font-mono text-base font-medium tracking-tighter uppercase text-blue-950 pt-8 lg:pt-0"
+    >
+      {title}
+    </h3><div
+      class="mt-2 mb-4 text-gray-700 text-base text-pretty line-clamp-2"
+    >
+      <p>
+        {intro}
+      </p>
+    </div><dl
+      class="absolute left-0 top-0 font-mono text-base font-medium tracking-tighter uppercase text-blue-950 lg:left-auto lg:right-full lg:mr-[calc(6.5rem+1px)]"
+    >
+      <dt class="sr-only">{pubDate}</dt><dd class="whitespace-nowrap">
+        <time datetime={pubDate}> {pubDate}</time>
+      </dd>
+    </dl>
+  </div>
+  <a class="flex items-center text-sm text-blue-700 font-medium" href={url}
+    ><span
+      class="absolute -inset-y-2.5 -inset-x-4 md:-inset-y-4 md:-inset-x-6 sm:rounded-2xl"
+    ></span><span class="relative"
+      >Read more<span class="sr-only">, {title}</span></span
+    >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon icon-tabler icon-tabler-chevron-right relative mt-px overflow-visible ml-2.5 size-4"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+        d="M9 6l6 6l-6 6"></path></svg
+    >
+  </a>
+</article>

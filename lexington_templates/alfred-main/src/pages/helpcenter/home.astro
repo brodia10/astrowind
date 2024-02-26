@@ -1,0 +1,74 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HomeEntries from "../../components/helpcenter/HomeEntries.astro";
+const allPosts = await getCollection("helpcenter");
+---
+
+<BaseLayout>
+  <section>
+    <div class="relative max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+      <div>
+        <span
+          class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+        >
+          help center
+        </span>
+        <p
+          class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950 lg:text-6xl"
+        >
+          Welcome to our help center
+          <span
+            class="md:block md:text-transparent md:bg-clip-text md:bg-gradient-to-r from-blue-500 to-indigo-600 py-2"
+          >
+            find all what you need
+          </span>
+        </p>
+        <p class="max-w-sm mt-4 text-base text-gray-700 lg:text-base">
+          Your one-stop resource for answers and support.
+        </p>
+
+        <div
+          class="w-full p-2 mt-8 rounded-2xl lg:rounded-full sm:flex sm:max-w-md bg-white shadow-box shadow-gray-500/20"
+        >
+          <label for="search" class="sr-only">Quick search</label>
+          <div class="relative flex items-center w-full">
+            <input
+              type="text"
+              name="search"
+              id="search"
+              class="pr-14 block w-full h-10 px-4 py-2 text-sm text-blue-700 border border-transparent appearance-none rounded-xl lg:rounded-full bg-gray-50 placeholder-gray-700 focus:border-gray-500 focus:bg-transparent focus:outline-none focus:ring-indigo-300 sm:text-sm"
+            />
+            <div class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+              <kbd
+                class="inline-flex items-center rounded-full border border-gray-200 px-1 font-sans text-xs text-gray-400"
+                >⌘K</kbd
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <p
+          class="font-mono text-base font-medium tracking-tighter uppercase text-blue-950"
+        >
+          Explore all topics
+        </p>
+
+        <ul role="list" class="divide-y mt-8 border-y">
+          {
+            allPosts
+              .slice()
+              .map((post) => (
+                <HomeEntries
+                  url={"/helpcenter/" + post.slug}
+                  title={post.data.title}
+                />
+              ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

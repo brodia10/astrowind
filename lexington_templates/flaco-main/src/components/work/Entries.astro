@@ -1,0 +1,88 @@
+---
+import { work } from "../../data/work.json";
+---
+
+<section class="bg-white dark:bg-darkest">
+  <div>
+    {
+      work.map((template) => (
+        <>
+          <article>
+            <section class="px-2 lg:px-8 py-3 ">
+              <div class="rounded-3xl overflow-hidden ">
+                <figure class="relative z-20">
+                  <div class="relative bg-darker overflow-hidden">
+                    <div class="max-w-8xl mx-auto">
+                      <div class="flex">
+                        <img
+                          class="relative lg:h-[75vh] w-full object-center object-cover"
+                          src={template.image}
+                          alt={template.description}
+                        />
+                        <div class="absolute w-full bottom-0 bg-gradient-to-t fram-lightgray dark:from-darkest">
+                          <div class="relative max-w-8xl py-6 mx-auto px-4 lg:px-8 flex items-center justify-between gap-6">
+                            <dl class="relative flex flex-wrap overflow-hidden">
+                              <div>
+                                <dt class="text-grayer dark:text-white uppercase lg:text-2xl">
+                                  {template.title}
+                                </dt>
+                              </div>
+                            </dl>
+                            <a
+                              aria-label="visit project"
+                              class="text-grayer dark:text-white uppercase lg:text-2xl inline-flex items-center group duration-200"
+                              href={template.url}>
+                              See project
+                              <span aria-hidden="true" class="ml-3">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="lg:w-10 lg:h-10 w-6 h-6 group-hover:ml-6 transform duration-200 -ml-3"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="1.5"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round">
+                                  <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                  />
+                                  <line
+                                    x1="5"
+                                    y1="12"
+                                    x2="19"
+                                    y2="12"
+                                    class="text-transparent group-hover:text-grayer dark:group-hover:text-white duration-200"
+                                  />
+                                  <line
+                                    x1="15"
+                                    y1="16"
+                                    x2="19"
+                                    y2="12"
+                                    class="group-hover:text-grayer duration-200 dark:group-hover:text-white"
+                                  />
+                                  <line
+                                    x1="15"
+                                    y1="8"
+                                    x2="19"
+                                    y2="12"
+                                    class="group-hover:text-grayer duration-200 dark:group-hover:text-white"
+                                  />
+                                </svg>
+                              </span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </figure>
+              </div>
+            </section>
+          </article>
+        </>
+      ))
+    }
+  </div>
+</section>

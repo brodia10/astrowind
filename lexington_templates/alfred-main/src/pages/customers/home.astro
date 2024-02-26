@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HomeEntries from "../../components/customers/HomeEntries.astro";
+const allPosts = await getCollection("customers");
+---
+<BaseLayout>
+    <section>
+  <div class="relative max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+    <div class="text-center">
+      <span
+        class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+      >
+        all customers
+      </span>
+      <p
+        class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950 md:text-6xl"
+      >
+        Our valued customers
+      </p>
+      <p class="max-w-sm mt-4 mx-auto text-base text-gray-700 lg:text-base">
+        A community of trust and partnership
+      </p>
+    </div>
+    <div
+      class="relative z-10 text-center grid gap-4 mt-12 sm:grid-cols-2 lg:grid-cols-3"
+    >
+        {
+          allPosts
+            .slice()
+            .map((post) => (
+              <HomeEntries
+                url={"/customers/" + post.slug}
+                alt={post.data.title}
+                logo={post.data.logo.url}
+              />
+            ))
+        }
+    </div>
+  </div>
+</section>
+</BaseLayout>

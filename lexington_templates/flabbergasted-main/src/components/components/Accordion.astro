@@ -1,0 +1,582 @@
+<section>
+  <div class="relative items-center w-full mx-auto 2xl:max-w-7xl">
+    <div class="divide-y-2 divide-black">
+      <div class="justify-center max-w-3xl p-8 lg:p-20">
+        <p class="text-5xl lg:text-7xl text-black">Accordion</p>
+      </div>
+      <div class="divide-y-2 divide-black">
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">Details</h3>
+          <div class="space-y-6 mt-12">
+            <details
+              class="p-8 border-2 border-black shadow bg-white rounded-2xl"
+            >
+              <summary
+                class="text-2xl tracking-wide text-black focus:text-violet-500 items-center justify-between"
+                >How do I get started with Flabbergasted?</summary
+              >
+              <p class="xl:text-2xl tracking-wide text-black pt-6">
+                Getting started with Flabbergasted is easy. Simply sign up for
+                an account, and you'll have access to our basic plan. From
+                there, you can explore our platform and decide if you'd like to
+                upgrade to our Pro or Premium plans for additional features.
+              </p>
+            </details>
+            <details
+              class="p-8 border-2 border-black shadow bg-white rounded-2xl"
+            >
+              <summary
+                class="text-2xl tracking-wide text-black focus:text-violet-500 items-center justify-between"
+                >Is my cryptocurrency safe on Flabbergasted?</summary
+              >
+              <p class="xl:text-2xl tracking-wide text-black pt-6">
+                Yes, your cryptocurrency is secured with the highest level of
+                encryption and security measures. We prioritize the safety of
+                your digital assets and provide secure wallets to protect them.
+              </p>
+            </details>
+
+            <details
+              class="p-8 border-2 border-black shadow bg-white rounded-2xl"
+            >
+              <summary
+                class="text-2xl tracking-wide text-black focus:text-violet-500 items-center justify-between"
+                >What cryptocurrencies can I access on Flabbergasted?</summary
+              >
+              <p class="xl:text-2xl tracking-wide text-black pt-6">
+                Flabbergasted offers a wide range of cryptocurrencies, including
+                Bitcoin, Ethereum, and many altcoins. Our platform supports
+                multiple digital assets, making it easy to diversify your
+                portfolio.
+              </p>
+            </details>
+
+            <details
+              class="p-8 border-2 border-black shadow bg-white rounded-2xl"
+            >
+              <summary
+                class="text-2xl tracking-wide text-black focus:text-violet-500 items-center justify-between"
+                >How can I earn staking rewards?</summary
+              >
+              <p class="xl:text-2xl tracking-wide text-black pt-6">
+                Staking rewards are available to our Pro and Premium plan users.
+                You can stake your tokens within our platform, and you'll start
+                earning rewards based on your participation in network
+                validation.
+              </p>
+            </details>
+
+            <details
+              class="p-8 border-2 border-black shadow bg-white rounded-2xl"
+            >
+              <summary
+                class="text-2xl tracking-wide text-black focus:text-violet-500 items-center justify-between"
+                >Can I trade NFTs on Flabbergasted?</summary
+              >
+              <p class="xl:text-2xl tracking-wide text-black pt-6">
+                Yes, you can buy, sell, and even create NFTs in our NFT
+                marketplace. It's a hub for digital collectibles and unique
+                assets.
+              </p>
+            </details>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">Simple</h3>
+          <div
+            x-data="{
+      activeAccordion: '',
+      setActiveAccordion(id) {
+      this.activeAccordion = (this.activeAccordion == id) ? '' : id
+      }
+      }"
+            class="relative w-full mx-auto lg:col-span-2 text-xl font-medium divide-y-2 divide-black border-2 border-black mt-12 rounded-3xl overflow-hidden shadow"
+          >
+            <div
+              x-data="{ id: $id('accordion') }"
+              :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+              class="cursor-pointer group text-black hover:text-lila-900 duration-300"
+            >
+              <button
+                @click="setActiveAccordion(id)"
+                class="flex items-center justify-between w-full p-8 text-left select-none"
+              >
+                <span>How does end-to-end encryption work?</span>
+                <div
+                  class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+                >
+                  <svg
+                    class="w-5 h-5 duration-300 ease-out text-accent-500"
+                    :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"></path>
+                  </svg>
+                </div>
+              </button>
+              <div
+                x-show="activeAccordion==id"
+                x-collapse=""
+                style="display: none;"
+              >
+                <div
+                  class="p-8 pt-0 text-black  text-lg max-w-3xl font-normal"
+                >
+                  End-to-end encryption ensures that only the sender and
+                  recipient can access the content of a message. The information
+                  is encrypted on the sender's device and can only be decrypted
+                  by the intended recipient, preventing any intermediaries,
+                  including the platform provider, from accessing the data.
+                </div>
+              </div>
+            </div>
+            <div
+              x-data="{ id: $id('accordion') }"
+              :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+              class="cursor-pointer group text-black hover:text-lila-900 duration-300"
+            >
+              <button
+                @click="setActiveAccordion(id)"
+                class="flex items-center justify-between w-full p-8 text-left select-none"
+              >
+                <span
+                  >Can I access my encrypted data if I forget my encryption key?</span
+                >
+                <div
+                  class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+                >
+                  <svg
+                    class="w-5 h-5 duration-300 ease-out text-accent-500"
+                    :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"></path>
+                  </svg>
+                </div>
+              </button>
+              <div
+                x-show="activeAccordion==id"
+                x-collapse=""
+                style="display: none;"
+              >
+                <div
+                  class="p-8 pt-0 text-black  text-lg max-w-3xl font-normal"
+                >
+                  No, forgetting or losing your encryption key means that your
+                  encrypted data cannot be accessed. This is a crucial security
+                  measure to ensure that even if someone gains unauthorized
+                  access to your account, they won't be able to decrypt and view
+                  your messages or files.
+                </div>
+              </div>
+            </div>
+            <div
+              x-data="{ id: $id('accordion') }"
+              :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+              class="cursor-pointer group text-black hover:text-lila-900 duration-300"
+            >
+              <button
+                @click="setActiveAccordion(id)"
+                class="flex items-center justify-between w-full p-8 text-left select-none"
+              >
+                <span
+                  >Are there any limitations to the self-destructing messages
+                  feature?</span
+                >
+                <div
+                  class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+                >
+                  <svg
+                    class="w-5 h-5 duration-300 ease-out text-accent-500"
+                    :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"></path>
+                  </svg>
+                </div>
+              </button>
+              <div
+                x-show="activeAccordion==id"
+                x-collapse=""
+                style="display: none;"
+              >
+                <div
+                  class="p-8 pt-0 text-black  text-lg max-w-3xl font-normal"
+                >
+                  Self-destructing messages are designed to automatically delete
+                  themselves after a specific period or upon being read by the
+                  recipient. However, it's important to note that the feature
+                  only removes the message from the devices involved in the
+                  conversation. Recipients may take screenshots or use other
+                  means to capture the content, which is beyond the platform's
+                  control.
+                </div>
+              </div>
+            </div>
+            <div
+              x-data="{ id: $id('accordion') }"
+              :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+              class="cursor-pointer group text-black hover:text-lila-900 duration-300"
+            >
+              <button
+                @click="setActiveAccordion(id)"
+                class="flex items-center justify-between w-full p-8 text-left select-none"
+              >
+                <span
+                  >What happens if I enable two-factor authentication and lose
+                  my device?</span
+                >
+                <div
+                  class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+                >
+                  <svg
+                    class="w-5 h-5 duration-300 ease-out text-accent-500"
+                    :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"></path>
+                  </svg>
+                </div>
+              </button>
+              <div
+                x-show="activeAccordion==id"
+                x-collapse=""
+                style="display: none;"
+              >
+                <div
+                  class="p-8 pt-0 text-black  text-lg max-w-3xl font-normal"
+                >
+                  Losing your device doesn't automatically compromise your
+                  account's security. It's recommended to contact our support
+                  team as soon as possible to disable the two-factor
+                  authentication on your lost device and set up the
+                  authentication on your new device. This process will help
+                  protect your account from unauthorized access while ensuring
+                  you can regain access to it.
+                </div>
+              </div>
+            </div>
+            <div
+              x-data="{ id: $id('accordion') }"
+              :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+              class="cursor-pointer group text-black hover:text-lila-900 duration-300"
+            >
+              <button
+                @click="setActiveAccordion(id)"
+                class="flex items-center justify-between w-full p-8 text-left select-none"
+              >
+                <span
+                  >Is my personal information shared or sold to third parties?</span
+                >
+                <div
+                  class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+                >
+                  <svg
+                    class="w-5 h-5 duration-300 ease-out text-accent-500"
+                    :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"></path>
+                  </svg>
+                </div>
+              </button>
+              <div
+                x-show="activeAccordion==id"
+                x-collapse=""
+                style="display: none;"
+              >
+                <div
+                  class="p-8 pt-0 text-black  text-lg max-w-3xl font-normal"
+                >
+                  No, we strictly adhere to a privacy-centric approach. Your
+                  personal information is never shared, sold, or monetized. We
+                  prioritize your privacy and ensure that your data remains
+                  confidential and only accessible to you.
+                </div>
+              </div>
+            </div>
+            <div
+              x-data="{ id: $id('accordion') }"
+              :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+              class="cursor-pointer group text-black hover:text-lila-900 duration-300"
+            >
+              <button
+                @click="setActiveAccordion(id)"
+                class="flex items-center justify-between w-full p-8 text-left select-none"
+              >
+                <span>Can I use this platform on multiple devices?</span>
+                <div
+                  class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+                >
+                  <svg
+                    class="w-5 h-5 duration-300 ease-out text-accent-500"
+                    :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"></path>
+                  </svg>
+                </div>
+              </button>
+              <div
+                x-show="activeAccordion==id"
+                x-collapse=""
+                style="display: none;"
+              >
+                <div
+                  class="p-8 pt-0 text-black  text-lg max-w-3xl font-normal"
+                >
+                  Yes, you can access our platform on multiple devices. Your
+                  encrypted data remains synced across all devices, allowing you
+                  to seamlessly communicate and access your files and messages
+                  from anywhere.
+                </div>
+              </div>
+            </div>
+            <div
+              x-data="{ id: $id('accordion') }"
+              :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+              class="cursor-pointer group text-black hover:text-lila-900 duration-300"
+            >
+              <button
+                @click="setActiveAccordion(id)"
+                class="flex items-center justify-between w-full p-8 text-left select-none"
+              >
+                <span
+                  >Are there any storage limitations for files and documents?</span
+                >
+                <div
+                  class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+                >
+                  <svg
+                    class="w-5 h-5 duration-300 ease-out text-accent-500"
+                    :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"></path>
+                  </svg>
+                </div>
+              </button>
+              <div
+                x-show="activeAccordion==id"
+                x-collapse=""
+                style="display: none;"
+              >
+                <div
+                  class="p-8 pt-0 text-black  text-lg max-w-3xl font-normal"
+                >
+                  Our platform provides ample storage space for your files and
+                  documents. However, there may be storage limitations based on
+                  the pricing plan you choose. We offer flexible plans to suit
+                  your needs and provide options to upgrade if you require
+                  additional storage capacity.
+                </div>
+              </div>
+            </div>
+            <div
+              x-data="{ id: $id('accordion') }"
+              :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+              class="cursor-pointer group text-black hover:text-lila-900 duration-300"
+            >
+              <button
+                @click="setActiveAccordion(id)"
+                class="flex items-center justify-between w-full p-8 text-left select-none"
+              >
+                <span>Is it possible to export my data from the platform?</span>
+                <div
+                  class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+                >
+                  <svg
+                    class="w-5 h-5 duration-300 ease-out text-accent-500"
+                    :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"></path>
+                  </svg>
+                </div>
+              </button>
+              <div
+                x-show="activeAccordion==id"
+                x-collapse=""
+                style="display: none;"
+              >
+                <div
+                  class="p-8 pt-0 text-black  text-lg max-w-3xl font-normal"
+                >
+                  Yes, you can export your data from the platform. We offer
+                  export features that allow you to download your messages,
+                  files, and documents, ensuring you have a local copy for
+                  backup or migration purposes. It provides you with greater
+                  control and flexibility over your data.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 lg:p-20">
+          <h3 class="text-xl font-medium leading-6 text-black">Animated</h3>
+          <div
+            class="relative mx-auto border-2 rounded-3xl mt-12 border-black bg-white"
+            x-data="{selected:null}"
+          >
+            <ul class="list-none" role="list" @click="open = !open">
+              <li class="relative border-b-2 border-black">
+                <button
+                  type="button"
+                  class="w-full px-8 py-6 text-left"
+                  @click="selected !== 1 ? selected = 1 : selected = null"
+                >
+                  <div
+                    class="flex items-center justify-between text-black group"
+                  >
+                    <p
+                      class="text-xl font-medium duration-200 text-black group-hover:text-lila-800"
+                    >
+                      How do I sign up for mobile banking?
+                    </p>
+
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all duration-700 max-h-0"
+                  style=""
+                  x-ref="container1"
+                  x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''"
+                >
+                  <div class="px-8 pt-4 pb-20 text-lg">
+                    Signing up for mobile banking is easy! Simply download our
+                    app from the App Store or Google Play, and follow the
+                    registration process. You'll be able to create an account
+                    and access your finances right from your mobile device.
+                  </div>
+                </div>
+              </li>
+              <li class="relative border-b-2 border-black">
+                <button
+                  type="button"
+                  class="w-full px-8 py-6 text-left"
+                  @click="selected !== 6 ? selected = 6 : selected = null"
+                >
+                  <div
+                    class="flex items-center justify-between text-black group"
+                  >
+                    <p
+                      class="text-xl font-medium duration-200 text-black group-hover:text-lila-800"
+                    >
+                      Can I access my account from multiple devices?
+                    </p>
+
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all duration-700 max-h-0"
+                  style=""
+                  x-ref="container2"
+                  x-bind:style="selected == 6 ? 'max-height: ' + $refs.container2.scrollHeight + 'px' : ''"
+                >
+                  <div class="px-8 pt-4 pb-20 text-lg">
+                    Yes, you can access your account from multiple devices. Our
+                    platform offers seamless multi-device synchronization,
+                    allowing you to log in and manage your finances from your
+                    smartphone, tablet, or computer. Your account information
+                    and transaction history will be up-to-date across all
+                    devices.
+                  </div>
+                </div>
+              </li>
+              <!----- Last -->
+              <li class="relative">
+                <button
+                  type="button"
+                  class="w-full px-8 py-6 text-left"
+                  @click="selected !== 7 ? selected = 7 : selected = null"
+                >
+                  <div
+                    class="flex items-center justify-between text-black group"
+                  >
+                    <p
+                      class="text-xl font-medium duration-200 text-black group-hover:text-lila-800"
+                    >
+                      Can I deposit checks using the mobile banking app?
+                    </p>
+
+                  </div>
+                </button>
+                <div
+                  class="relative overflow-hidden transition-all duration-700 max-h-0"
+                  style=""
+                  x-ref="container3"
+                  x-bind:style="selected == 7 ? 'max-height: ' + $refs.container3.scrollHeight + 'px' : ''"
+                >
+                  <div class="px-8 pt-4 pb-20 text-lg">
+                    Yes, you can conveniently deposit checks using our mobile
+                    banking app. Simply access the app, select the "Deposit"
+                    option, and follow the step-by-step instructions to capture
+                    images of the front and back of the check. Once submitted,
+                    your check will be securely processed, saving you time and
+                    effort by avoiding the need to visit a physical branch.
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

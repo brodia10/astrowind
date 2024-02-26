@@ -1,0 +1,166 @@
+---
+import { store } from "../../data/store.json";
+---
+
+<section>
+  <div class="mx-auto max-w-3xl px-8 py-24 sm:py-32">
+    <div class="mx-auto max-w-2xl">
+      <div>
+        <div>
+          <div>
+            <p
+              class="text-2xl font-medium tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
+              Diagonal
+            </p>
+          </div>
+          <p class="mt-4 text-neutral-400 dark:text-neutral-300">
+            28 Dark mesh wallpapers to use on your projects or as wallpapers
+          </p>
+          <div class="flex gap-2 mt-6">
+            <a
+              class="inline-flex items-center gap-2 justify-center rounded-lg py-3 px-6 text-sm outline-offset-2 transition active:transition-none bg-white text-black font-medium hover:bg-neutral-50 dark:text-white active:bg-neutral-100 active:text-neutral-900/60 dark:bg-neutral-800/50 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 dark:active:bg-neutral-800/50 dark:active:text-neutral-50/70 group w-full lg:w-auto border dark:border-white/20"
+              href="https://unwrapped.design/diagonal">
+              Buy Diagonal for $3
+            </a>
+          </div>
+        </div>
+        <div class="mt-12">
+          <div
+            x-data="{ init() {
+            new Splide(this.$refs.splide, {
+                perPage: 1,
+                gap: '0.5rem',
+                breakpoints: {
+                    640: {
+                        perPage: 1,
+                    },
+                },
+            }).mount()
+        },
+    }">
+            <section
+              x-ref="splide"
+              class="splide"
+              aria-label="Splide/Alpine.js">
+              <div class="splide__track h-full">
+                <ul class="splide__list">
+                  <li
+                    class="splide__slide flex flex-col items-center justify-center pb-8">
+                    <img
+                      class="w-full rounded-lg h-80 obeject-cover"
+                      src="https://images.pexels.com/photos/281260/pexels-photo-281260.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                      alt="placeholder image"
+                    />
+                  </li>
+                  <li
+                    class="splide__slide flex flex-col items-center justify-center pb-8">
+                    <img
+                      class="w-full rounded-lg h-80 obeject-cover"
+                      src="https://images.pexels.com/photos/12486830/pexels-photo-12486830.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      alt="placeholder image"
+                    />
+                  </li>
+                  <li
+                    class="splide__slide flex flex-col items-center justify-center pb-8">
+                    <img
+                      class="w-full rounded-lg h-80 obeject-cover"
+                      src="https://images.pexels.com/photos/7130470/pexels-photo-7130470.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      alt="placeholder image"
+                    />
+                  </li>
+                  <li
+                    class="splide__slide flex flex-col items-center justify-center pb-8">
+                    <img
+                      class="w-full rounded-lg h-80 obeject-cover"
+                      src="https://images.pexels.com/photos/7135004/pexels-photo-7135004.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      alt="placeholder image"
+                    />
+                  </li>
+                  <!-- Add mor eimages here -->
+                </ul>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="mt-12">
+          <div>
+            <!-- Product details -->
+            <div class="mt-10">
+              <h2
+                class="text-lg font-semibold leading-6 text-neutral-900 dark:text-white group-hover:text-blue-400">
+                Description
+              </h2>
+              <div
+                class="prose prose-sm text-neutral-400 dark:text-neutral-300 mt-3">
+                <p>
+                  A set of 28 dark & light mesh gradients in 5k resolution to
+                  use on your design projects, as backgrounds, wallpapers,
+                  presentations,.. and anywhere you can think of
+                </p>
+              </div>
+            </div>
+            <div class="mt-8 border-t dark:border-neutral-700 pt-8">
+              <h2
+                class="text-lg font-semibold leading-6 text-neutral-900 dark:text-white group-hover:text-blue-400">
+                Includes
+              </h2>
+              <div
+                class="prose prose-sm mt-4 text-neutral-400 dark:text-neutral-300">
+                <ul role="list">
+                  <li>14 5k ( 5120x2880 ) dark backgrounds</li>
+                  <li>14 5k ( 5120x2880 ) light backgrounds</li>
+                  <li>PNG Files</li>
+                  <li>PG Files</li>
+                  <li>SVG Files</li>
+                  <li>Use it for personal or professional purposes</li>
+                  <li>Use it anywhere license</li>
+                  <li>Lifetime license</li>
+                </ul>
+              </div>
+            </div>
+
+            <section aria-labelledby="policies-heading" class="mt-10">
+              <h2 id="policies-heading" class="sr-only">Our Policies</h2>
+              <dl
+                class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                <div
+                  class="rounded-lg border p-6 text-center dark:border-neutral-700">
+                  <dt>
+                    <span
+                      class="text-sm font-semibold text-neutral-900 dark:text-white"
+                      >Use it anywhere</span
+                    >
+                  </dt>
+                  <dd
+                    class="mt-1 text-sm text-neutral-400 dark:text-neutral-300">
+                    Use on your mobile too, for elevated swag.
+                  </dd>
+                </div>
+                <div
+                  class="rounded-lg border dark:border-neutral-700 p-6 text-center">
+                  <dt>
+                    <span
+                      class="text-sm font-semibold text-neutral-900 dark:text-white"
+                      >5k resolution</span
+                    >
+                  </dt>
+                  <dd
+                    class="mt-1 text-sm text-neutral-400 dark:text-neutral-300">
+                    All wallpapers are made with 5120x2880 resolution.
+                  </dd>
+                </div>
+                <div class="flex gap-2">
+                  <a
+                    class="inline-flex items-center gap-2 justify-center rounded-lg py-3 px-6 text-sm outline-offset-2 transition active:transition-none bg-blue-400 text-white font-medium hover:bg-neutral-800 active:bg-neutral-100 active:text-neutral-900/60 dark:bg-blue-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 dark:active:bg-neutral-800/50 dark:active:text-neutral-50/70 w-full lg:w-auto"
+                    href="https://unwrapped.design/diagonal">
+                    Buy Diagonal for $3
+                  </a>
+                </div>
+              </dl>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

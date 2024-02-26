@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogPost from "../../components/BlogPost.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("posts");
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={tag}>
+  <section>
+    <div class="mx-auto 2xl:max-w-7xl max-w-6xl md:px-12 px-8 py-24">
+      <ol class="mt-16 sm:space-y-16 space-y-10" role="list">
+        <li>
+          <h3 class="text-black font-bold font-serif text-3xl         ">
+            All tags
+          </h3><ol class="         mt-8 text-base" role="list">
+            {
+              posts.map((post) => (
+                <li
+                  class="flex justify-between py-3"
+                  aria-label="Strokes and fills on page 21">
+                  <BlogPost
+                    url={"/posts/" + post.slug}
+                    title={post.data.title}
+                    pubDate={post.data.pubDate.toString().slice(0, 10)}
+                  />
+                </li>
+              ))
+            }
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </section>
+</BaseLayout>

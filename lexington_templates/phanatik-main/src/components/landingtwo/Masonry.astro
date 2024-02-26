@@ -1,0 +1,23 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+import EntriesOne from "@/components/entries/EntriesOne.astro";
+---
+<section>
+  <div class="mx-auto 2xl:max-w-screen-2xl md:px-12 px-8 grid py-12 space-y-6">
+    {
+      allPosts
+        .map((post) => (
+          <EntriesOne
+            url={"/posts/" + post.slug}
+            title={post.data.title}
+            description={post.data.description}
+            alt={post.data.title}
+            pubDate={post.data.pubDate.toString().slice(0, 10)}
+            author={post.data.author}
+            image={post.data.image.url}
+          />
+        ))
+    }
+  </div>
+</section>

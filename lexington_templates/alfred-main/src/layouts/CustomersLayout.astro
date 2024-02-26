@@ -1,0 +1,94 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <section>
+    <div class="relative max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+      <div class="grid grid-cols-1 gap-10 items-start xl:gap-24 lg:grid-cols-3">
+        <div class="bg-white p-8 rounded-3xl shadow-box shadow-gray-500/20">
+          <div class="flex flex-col gap-2">
+            <div>
+              <p
+                class="mt-2 font-mono uppercase tracking-tighter text-blue-950"
+              >
+                Story
+              </p>
+              <p class="mt-2 text-xs text-gray-700">
+                {frontmatter.story}
+              </p>
+            </div>
+            <div>
+              <p
+                class="mt-2 font-mono uppercase tracking-tighter text-blue-950"
+              >
+                Industry
+              </p>
+              <p class="mt-2 text-xs text-gray-700">
+                {frontmatter.industry}
+              </p>
+            </div>
+            <div>
+              <p
+                class="mt-2 font-mono uppercase tracking-tighter text-blue-950"
+              >
+                Founded
+              </p>
+              <p class="mt-2 text-xs text-gray-700">
+                {frontmatter.founded}
+              </p>
+            </div>
+            <div>
+              <p
+                class="mt-2 font-mono uppercase tracking-tighter text-blue-950"
+              >
+                Headquarters
+              </p>
+              <p class="mt-2 text-xs text-gray-700">
+                {frontmatter.headquarters}
+              </p>
+            </div>
+            <div>
+              <p
+                class="mt-2 font-mono uppercase tracking-tighter text-blue-950"
+              >
+                Description
+              </p>
+              <p class="mt-2 text-xs text-gray-700">
+                {frontmatter.description}
+              </p>
+            </div>
+            <div>
+              <p
+                class="mt-2 font-mono uppercase tracking-tighter text-blue-950"
+              >
+                Website
+              </p>
+              <p class="mt-2 text-xs text-gray-700">
+                <a
+                  class="font-mono text-xs font-medium tracking-tight text-blue-700 uppercase hover:text-blue-950"
+                  href={frontmatter.website}
+                >
+                  {frontmatter.website}</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <div class="flex gap-3">
+            <img
+              src={frontmatter.logo.url}
+              alt={frontmatter.logo.alt}
+              class="h-full w-full"
+            />
+          </div>
+          <div class="prose-styles">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,114 @@
+---
+const logos = [
+  {
+    logo: "/brands/1.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/2.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/3.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/4.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/5.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/6.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/1.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/2.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/3.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/4.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/5.svg",
+    alt: "#_",
+  },
+  {
+    logo: "/brands/6.svg",
+    alt: "#_",
+  },
+];
+---
+
+<section>
+  <div
+    class="relative py-24 mx-auto overflow-hidden overflow-x-hidden text-center 2xl:max-w-screen-xl"
+  >
+    <div class="px-8">
+      <p class="text-4xl font-semibold tracking-tighter text-blue-950">
+        Trusted by the world’s most innovative teams
+      </p>
+    </div>
+
+    <div class="mt-12">
+      <div class="grid justify-between w-full">
+        <div
+          class="absolute inset-0 left-0 z-10 from-gray-100 via-transparent w-44 lg:w-64 bg-gradient-to-r"
+        >
+        </div>
+        <div
+          class="absolute inset-0 left-0 z-10 ml-auto from-gray-100 via-transparent w-44 lg:w-64 bg-gradient-to-l"
+        >
+        </div>
+      </div>
+      <div
+        class="relative flex items-center gap-4 animate-marqueeLeft whitespace-nowrap"
+      >
+        {
+          logos.map((logos) => (
+            <>
+              <img src={logos.logo} alt={logos.logo} />
+            </>
+          ))
+        }
+      </div>
+      <div
+        class="relative flex items-center gap-4 animate-marqueeRight whitespace-nowrap"
+      >
+         {
+          logos.map((logos) => (
+            <>
+              <img src={logos.logo} alt={logos.logo} />
+            </>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="justify-center mx-auto mt-24">
+      <p
+        class="font-mono text-base font-medium tracking-tighter text-center uppercase"
+      >
+        Alfred is used by over 100,000+ companies across the globe
+      </p>
+      <div class="flex justify-center mx-auto mt-10">
+        <a
+          href="#_"
+          class="flex items-center justify-center h-10 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600 hover:to-indigo-700 shadow-button shadow-blue-600/50 focus:ring-2 focus:ring-blue-950 focus:ring-offset-2 ring-offset-gray-200 hover:shadow-none"
+          >Start using Alfred today</a
+        >
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <section>
+    <div class="max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+      <div class="max-w-3xl mx-auto">
+        <span
+          class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+        >
+          {frontmatter.pubDate.toString().slice(0, 10)}
+        </span>
+        <p
+          class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950 md:text-6xl"
+        >
+          {frontmatter.title}
+        </p>
+        <p class="mt-4 text-base text-gray-700 lg:text-base">
+          {frontmatter.intro}
+        </p>
+        <div class="prose-styles"><slot /></div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

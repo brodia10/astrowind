@@ -1,0 +1,83 @@
+---
+const faq = [
+ {
+    question: "How do I get started with your SaaS platform?",
+    answer: "Getting started is straightforward. Simply navigate to the 'Get Started' or 'Sign Up' section on our website, and follow the on-screen instructions to create your new account.",
+  },
+  {
+    question: "What payment options are available?",
+    answer: "We support a variety of payment methods including major credit cards, debit cards, PayPal, and in some cases, bank transfers. Select your preferred option during the subscription process.",
+  },
+  {
+    question: "How do you protect my data?",
+    answer: "Data protection is our top priority. We employ advanced encryption and security practices to safeguard your personal and professional information, ensuring compliance with global data protection regulations.",
+  },
+  {
+    question: "Can I cancel my service subscription?",
+    answer: "Yes, you are free to cancel your subscription at any moment. Simply access your account settings and navigate to the 'Manage Subscription' area to cancel.",
+  },
+  {
+    question: "Is there a money-back guarantee?",
+    answer: "Absolutely, we offer a 30-day money-back guarantee. If our service doesn’t meet your expectations within the first 30 days, you're eligible for a full refund.",
+  },
+  {
+    question: "How can I reach customer support?",
+    answer: "Our customer support team is available via email, live chat, and phone. Visit our 'Support' or 'Contact Us' page for more details and to get in touch.",
+  },
+  {
+    question: "What are the technical requirements?",
+    answer: "Our platform is accessible on most devices with internet connectivity and a modern web browser. For specific software or OS requirements, please refer to our 'Technical Requirements' section.",
+  },
+  {
+    question: "Is it possible to upgrade my subscription plan?",
+    answer: "Definitely. You can upgrade your plan anytime through your account dashboard under the 'Subscription' or 'Plan' settings, where you’ll find options for different subscription levels.",
+  },
+  {
+    question: "Do you offer special pricing for non-profits?",
+    answer: "Yes, we support non-profit organizations with special pricing plans. Reach out to our sales team for more details and eligibility criteria.",
+  },
+  {
+    question: "What's your customer support response time?",
+    answer: "Our goal is to respond to all inquiries within 24 hours. Our dedicated support team works around the clock to ensure you receive the assistance you need, when you need it.",
+  }
+];
+---
+
+<section>
+  <div class="max-w-screen-xl px-8 py-24 mx-auto md:px-12 lg:px-32">
+    <div class="max-w-2xl">
+      <span
+        class="font-mono text-xs font-medium tracking-tight text-blue-600 uppercase"
+      >
+        FAQ
+      </span>
+      <p class="mt-8 text-4xl font-semibold tracking-tighter text-blue-950">
+        Frquently asked questions <span
+          class="md:block md:text-transparent md:bg-clip-text md:bg-gradient-to-r from-blue-500 to-indigo-600 py-2"
+          >ready to be answered</span
+        >
+      </p>
+      <p class="max-w-sm mt-4 text-base text-gray-700 lg:text-base">
+        Explore a wide range of financial tools, features, and support for your
+        financial goals and questions
+      </p>
+    </div>
+    <div class="flex flex-col gap-2 mt-12">
+      {
+        faq.map((faq) => (
+          <>
+
+            <details class="p-4 bg-white rounded-lg shadow-box shadow-gray-500/20">
+              <summary class="font-mono text-sm tracking-tighter uppercase cursor-pointer focus:text-blue-700">
+                {faq.question}
+              </summary>
+              <p class="pl-2 mt-8 text-sm text-gray-700">{faq.answer}</p>
+            </details>
+          </>
+        ))
+      }
+
+
+    </div>
+  </div>
+</section>

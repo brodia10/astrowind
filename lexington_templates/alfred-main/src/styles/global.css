@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings:
+  "liga" 1,
+  "calt" 1, /* Contextual Alternates */
+  "dlig" 1, /* Discretionary Ligatures */
+  "ss07" 1, /* fSquare punctuation */
+  "ss08" 1, /* Square quotes */
+  "zero" 1, /* Slashed zero */
+  "tnum" 1, /* Tabular numbers */
+    "cv03" 1, /* Open six */
+    "cv04" 1, /* Open nine */
+    "cv01" 1, /* Alternate one */
+    "cv09", /* Flat-top three */
+    "cv02" 1; /* Open 4 */
+}
+@supports (font-variation-settings: normal) {
+  /* Use variable font if supported */
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+:root {
+  --astro-code-color-text: theme('colors.blue.900');
+  --astro-code-color-background: theme('colors.white');
+  --astro-code-token-constant: theme('colors.indigo.600');
+  --astro-code-token-string: theme('colors.teal.600');
+  --astro-code-token-comment: theme('colors.gray.600');
+  --astro-code-token-keyword: theme('colors.blue.300');
+  --astro-code-token-parameter: theme('colors.white');
+  --astro-code-token-function: theme('colors.sky.500');
+  --astro-code-token-string-expression: theme('colors.blue.500');
+  --astro-code-token-punctuation: theme('colors.white');
+  --astro-code-token-link: theme('colors.white');
+}
+
+/* Transition on the summary tag by faking the bottom maring*/
+details summary {
+  cursor: pointer;
+  transition: margin 150ms ease-out !important;
+}
+details[open] summary {
+  margin-bottom: 10px;
+}
+
+
+.prose-styles {
+  @apply prose  max-w-none  prose-headings:uppercase  prose-li:marker:text-blue-700 prose-pre:shadow-box prose-pre:shadow-gray-500/20 prose-pre:rounded-2xl     prose-headings:font-semibold prose-headings:text-blue-950 prose-h1:text-2xl prose-headings:tracking-tighter text-sm prose-p:text-gray-700 prose-pre:bg-blue-900 prose-img:rounded-md prose-blockquote:border-blue-600 prose-img:w-full;
+}
+
+
+
+
+

@@ -1,0 +1,13 @@
+---
+const {  url, logo } = Astro.props;
+---
+<a
+  href={url}
+  class="group flex h-full cursor-pointer flex-col bg-white px-5 pb-[30px] pt-6 text-sm transition-all sm:min-h-[250px] md:min-h-[200px] xl:min-h-[250px] justify-center rounded-3xl hover:bg-gradient-to-b bg-gradient-to-b hover:from-blue-500 hover:to-indigo-600 from-gray-50 to-gray-100 duration-200 items-center tilt-card group shadow-box shadow-gray-500/20"
+>
+  <img
+    class="text-white group-hover:mix-blend-plus-lighter duration-200 group-hover:invert"
+    src={logo}
+    alt="logo"
+  />
+</a>

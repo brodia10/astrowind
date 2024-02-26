@@ -1,0 +1,21 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Navigation from "../components/global/Navigation.astro";
+import Footer from "../components/global/Footer.astro";
+---
+
+<html
+  lang="en"
+  class="scroll-smooth selection:bg-mist-400 selection:text-black">
+  <head>
+    <BaseHead />
+  </head>
+  <body class="bg-wood-100">
+    <Navigation />
+    <slot />
+    <Footer />
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { frontmatter } = Astro.props;
+
+---
+
+<BaseLayout>
+  <section>
+    <div class="px-2 lg:px-8">
+      <div
+        class="prose-blockquote:border-l-white max-w-none 2xl:max-w-7xl prose-blockquote:text-gray-500 mx-auto mt-12 hover:prose-a:text-black prose lg:prose-xl prose-a:text-accent-500 prose-blockquote:text-gray-500 prose-headings:text-white prose-code:text-white prose-headings:font-bold prose-headings:tracking-tighter text-gray prose-img:rounded-3xl prose-strong:text-white prose-blockquote:text-white prose-li:marker:text-white py-24 prose-img:w-full prose-pre:font-mono  lg:bg-darker lg:rounded-3xl lg:p-10">
+        <div class="px-4">
+          <h1
+            class="font-normal text-center tracking-tighter uppercase text-6xl lg:text-10xl text-white">
+            {frontmatter.title}
+          </h1>
+          <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
+          <div class="max-w-3xl mx-auto">
+            <p class="text-xs">
+              {frontmatter.pubDate.toString().slice(0, 10)} by {
+                frontmatter.author
+              }
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {
+                frontmatter.tags.map((tag) => (
+                  <span class="not-prose">
+                    <a
+                      class="inline-flex hover:bg-gray hover:text-black   items-center rounded-full  bg-grayer text-white px-3 py-0.5 text-sm font-medium "
+                      href={`/tags/${tag}`}>
+                      {tag}
+                    </a>
+                  </span>
+                ))
+              }
+            </div>
+            <p class="text-2xl"><em>{frontmatter.description}</em></p>
+
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

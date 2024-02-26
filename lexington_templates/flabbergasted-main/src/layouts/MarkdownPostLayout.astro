@@ -1,0 +1,83 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const headings = document.querySelectorAll(
+      ".prose-styles h1,.prose-styles h2, .prose-styles h3"
+    );
+    const tocContainer = document.getElementById("table-of-contents");
+    if (tocContainer && headings.length > 0) {
+      const tocList = document.createElement("ul");
+      tocList.classList.add(
+        "divide-y-2",
+        "divide-black",
+        "border-black",
+
+        "[&>*:nth-child(1)]:uppercase"
+      );
+      headings.forEach((heading) => {
+        const listItem = document.createElement("li");
+        listItem.classList.add("p-4");
+        const link = document.createElement("a");
+        link.textContent = heading.textContent;
+        link.href = `#${heading.id}`;
+        link.classList.add("prose-styles");
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
+      });
+      tocContainer.appendChild(tocList);
+      tocContainer.classList.remove("hidden");
+    }
+  });
+</script>
+<BaseLayout>
+  <section
+    aria-labelledby="post"
+    id="post"
+    class="mx-auto 2xl:max-w-7xl bg-violet-300 border-b-2 2xl:border-x-2 border-black"
+  >
+    <img
+      class="h-96 w-full object-contain"
+      src={frontmatter.image.url}
+      alt={frontmatter.image.alt}
+    />
+  </section>
+  <section>
+    <div class="2xl:max-w-7xl mx-auto 2xl:border-x-2  border-black">
+      <p
+        class="text-5xl font-display text-balance font-black md:text-7xl lg:text-8xl uppercase text-white"
+      >
+        {frontmatter.page}
+      </p>
+    </div>
+    <div class="2xl:border-x-2 border-black  2xl:max-w-7xl mx-auto">
+      <div
+        class="grid grid-cols-1 lg:grid-cols-4 lg:divide-x-2 lg:divide-black"
+      >
+        <div class="lg:col-span-1">
+          <div
+            id="table-of-contents"
+            class="hidden lg:block sticky border-b border-black top-20"
+          >
+            <div class="p-4 border-b-2 border-black">
+              <h3 class="text-black text-3xl  uppercase font-display">
+                Table of contents
+              </h3>
+            </div>
+            <!--
+              //Your table of contents content here
+            -->
+          </div>
+        </div>
+        <div class="lg:col-span-3 p-8 lg:p-20">
+          <div class="prose-styles">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+
+
+  <section >
+      <div
+        class="p-8 lg:p-20 lg:py-32 items-center 2xl:max-w-7xl mx-auto gap-12 h-full bg-red-500 border-b-2 2xl:border-x-2 border-black"
+      >
+        <div class="text-center max-w-4xl mx-auto">
+          <p class="text-5xl lg:text-7xl text-black">
+              {frontmatter.page}
+          </p>
+          <p class="max-w-xl mt-4 xl:text-2xl mx-auto tracking-tight text-black">
+            <time datetime="2020-03-16"
+              > Last upadated on {frontmatter.pubDate.toString().slice(0, 10)}
+            </time>
+          </p>
+        </div>
+      </div>
+      <div class="2xl:border-x-2 2xl:max-w-7xl border-black mx-auto p-8 lg:p-20 ">
+        <div class="max-w-3xl mx-auto">
+          <div class="prose-styles">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </section>
+</BaseLayout>

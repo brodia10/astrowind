@@ -1,0 +1,78 @@
+---
+const testimonials = [
+  {
+    avatar: "/avatar1.png",
+    name: "Mike Andreuzza",
+    xtag: "@Mike_Andreuzza",
+    testimonial:
+      "I've been using Alfred services for years, and they consistently exceed my expectations. The support team is fantastic!",
+  },
+  {
+    avatar: "/avatar2.png",
+    name: "Jhon Maccain",
+    xtag: "@Jhonjhon",
+    testimonial:
+      "The financial solutions they offer are top-notch. I've seen significant growth in my investments since I started using their platform.",
+  },
+];
+---
+
+<section>
+  <div class="px-8 py-24 mx-auto md:px-12 lg:px-32 max-w-screen-xl relative">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+      <div class="lg:pr-8 lg:pb-8">
+        <span
+          class="text-blue-600 uppercase font-mono font-medium tracking-tight text-xs"
+        >
+          turns out we got customers
+        </span>
+        <p
+          class="text-4xl lg:text-3xl mt-8 tracking-tighter font-semibold text-blue-950"
+        >
+          Testimonials from <span
+            class="md:block md:text-transparent md:bg-clip-text md:bg-gradient-to-r from-blue-500 to-indigo-600 py-2"
+            >delighted customers</span
+          >
+        </p>
+        <p class="text-base lg:text-base max-w-sm mt-4 text-gray-700">
+          Discover stories of success and satisfaction shared by our clients.
+        </p>
+        <div class="items-center flex-wrap mt-10 gap-2 flex">
+          <a
+            href="/customers/all"
+            class="rounded-full px-4 border py-2 text-sm font-semibold transition-all flex items-center justify-center bg-white text-gray-500 h-10 border-gray-300 focus:ring-2 shadow-button shadow-gray-500/5 focus:ring-blue-950 focus:ring-offset-2 duration-200 ring-offset-gray-200 hover:shadow-none"
+            >See all reviews</a
+          >
+        </div>
+      </div>
+      {
+        testimonials.map((testimonials) => (
+          <>
+
+            <figure class="rounded-2xl bg-white text-gray-700 p-8 shadow-box shadow-gray-500/30 h-full justify-between flex flex-col tilt-card ">
+              <blockquote class="text-base ">
+                <p>
+                    {testimonials.testimonial}
+                </p>
+              </blockquote>
+              <figcaption class="mt-6 lg:mt-24 flex items-center gap-x-4">
+                <img
+                  class="h-10 w-10 rounded-full bg-gray-50 object-cover"
+                  src={testimonials.avatar}
+                  alt=""
+                />
+                <div class="text-sm">
+                  <div class="font-mono uppercase tracking-tighter text-base font-medium text-blue-950">
+                   {testimonials.name}
+                  </div>
+                  <div>{testimonials.xtag}</div>
+                </div>
+              </figcaption>
+            </figure>
+          </>
+        ))
+      }
+
+    </div>
+  </div>
+</section>

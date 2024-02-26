@@ -1,0 +1,47 @@
+---
+import { carriers } from "@/data/carriers.json";
+---
+
+<section class="2xl:max-w-7xl mx-auto">
+  <div
+    class="relative items-center w-full mx-auto 2xl:max-w-7xl p-8 lg:p-20 lg:py-32 2xl:px-0 2xl:border-x-2 border-b-2 border-black bg-lila-500"
+  >
+    <div class="max-w-xl mx-auto text-center">
+      <h1 class="text-3xl lg:text-5xl font-medium text-black max-w-4xl mx-auto">
+        Help us bring software magic back
+      </h1>
+    </div>
+  </div>
+
+  <ul class="flex flex-col gap-12 p-8 lg:p-20 2xl:border-x-2 border-black">
+    {
+      carriers.map((template) => (
+        <>
+          <li class="flex flex-col lg:flex-row lg:items-center justify-between  border-2 h-full  bg-yellow-500 rounded-2xl shadow-large gap-12 border-black p-8 ">
+            <div class="flex-col flex">
+              <p class="text-3xl lg:text-6xl  mt-4">{template.name}</p>
+               <p> {template.role}</p>
+              <div class="flex flex-col lg:flex-row  gap-2 mt-8 text-xs">
+                <p class="p-2 inline-flex items-center  justify-center h-8  border-2 border-black shadow-tiny rounded-xl ">
+                  {" "}
+                  {template.location}
+                </p>
+                 <p class="p-2 inline-flex items-center  justify-center h-8  border-2 border-black shadow-tiny rounded-xl ">{template.date}</p>
+                 <p class="p-2 inline-flex items-center  justify-center h-8  border-2 border-black shadow-tiny rounded-xl ">{template.salary}</p>
+              </div>
+            </div>
+            <div>
+              <a
+                class="text-black items-center shadow shadow-black text-lg font-semibold inline-flex px-6 focus:outline-none justify-center text-center bg-white border-black ease-in-out transform transition-all focus:ring-lila-700 focus:shadow-none border-2 duration-100 focus:bg-black focus:text-white sm:w-auto py-3 rounded-lg h-16 tracking-wide focus:translate-y-1 w-full hover:text-lila-800"
+                href={template.link}
+                type="button"
+              >
+                Read more
+              </a>
+            </div>
+          </li>
+        </>
+      ))
+    }
+  </ul>
+</section>

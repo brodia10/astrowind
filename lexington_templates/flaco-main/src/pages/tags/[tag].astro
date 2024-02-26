@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import EntriesOne from "@/components/entries/EntriesOne.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("posts");
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout pageTitle={tag}>
+  <main class="relative overflow-hidden">
+    <div class="relative w-full">
+      <div class="animate-marquee whitespace-nowrap gap-4 flex items-baseline">
+        <h1
+          class="font-normal tracking-tighter uppercase text-6xl lg:text-14xl py-12"
+        >
+          <span class="text-white">Posts tagged with {tag}</span>
+          <span class="text-gray">Posts tagged with {tag}</span>
+          <span class="text-grayest">Posts tagged with {tag}</span>
+          <span class="text-gray">Posts tagged with {tag}</span>
+          <span class="text-white"> tags</span>
+          <span class="text-grayest">Posts tagged with {tag}</span>
+          <span class="text-gray">Posts tagged with {tag}</span>
+          <span class="text-grayest">Posts tagged with {tag}</span>
+        </h1>
+      </div>
+    </div>
+  </main>
+  <section>
+    <div class="px-2 lg:px-8 py-3">
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
+
+        {
+          posts.map((post) => (
+            <li class="flex justify-between py-3" aria-label="Posts">
+              <EntriesOne
+                url={"/posts/" + post.slug}
+                title={post.data.title}
+                description={post.data.description}
+                alt={post.data.title}
+                pubDate={post.data.pubDate.toString().slice(0, 10)}
+                author={post.data.author}
+                image={post.data.image.url}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

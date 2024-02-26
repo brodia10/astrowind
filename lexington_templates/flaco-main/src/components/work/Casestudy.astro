@@ -1,0 +1,84 @@
+---
+import { work } from "../../data/work.json";
+---
+
+<main         class="relative overflow-hidden">
+  <div class="relative w-full">
+    <div
+      class="animate-marquee whitespace-nowrap gap-4 flex mt-64 lg:mt-96 items-baseline">
+      <h1
+        class="font-normal tracking-tighter uppercase text-6xl lg:text-14xl pb-12">
+        <span class="text-white"> case study</span>
+        <span class="text-gray">monoqrom</span>
+        <span class="text-grayest">case study</span>
+        <span class="text-grayest">monoqrom</span>
+        <span class="text-white"> case study</span>
+        <span class="text-gray">monoqrom</span>
+        <span class="text-grayest">case study</span>
+        <span class="text-grayest">monoqrom</span>
+      </h1>
+    </div>
+  </div>
+</main>
+
+<section class="bg-darkest">
+  <div>
+    {
+      work.slice(0, 1).map((template) => (
+        <>
+          <article>
+            <section class="px-2 lg:px-8 py-3 ">
+              <figure class="rounded-3xl overflow-hidden bg-darker ">
+                <img
+                  class=" lg:h-[75vh] w-full object-center object-cover"
+                  src={template.image}
+                  alt={template.description}
+                />
+              </figure>
+            </section>
+          </article>
+        </>
+      ))
+    }
+  </div>
+  <div class="px-8 py-3 hidden lg:block">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:grid-cols-4">
+      {
+        work.slice(0, 1).map((template) => (
+          <>
+            <figure class="rounded-3xl overflow-hidden bg-darker ">
+              <img
+                class="w-full object-center object-cover"
+                src={template.projectImage1}
+                alt={template.description}
+              />
+            </figure>
+
+            <figure class="rounded-3xl overflow-hidden bg-darker ">
+              <img
+                class="w-full object-center object-cover"
+                src={template.projectImage2}
+                alt={template.description}
+              />
+            </figure>
+
+            <figure class="rounded-3xl overflow-hidden bg-darker ">
+              <img
+                class="w-full object-center object-cover"
+                src={template.projectImage3}
+                alt={template.description}
+              />
+            </figure>
+            <figure class="rounded-3xl overflow-hidden bg-darker ">
+              <img
+                class="w-full object-center object-cover"
+                src={template.projectImage4}
+                alt={template.description}
+              />
+            </figure>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>

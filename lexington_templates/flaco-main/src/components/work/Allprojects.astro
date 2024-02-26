@@ -1,0 +1,29 @@
+---
+import { work } from "../../data/work.json";
+---
+
+<section class="bg-darkest">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 px-2 lg:px-8 py-3">
+    {
+      work.map((template) => (
+        <>
+          <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-darker  px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
+            <img
+              src={template.image}
+              alt={template.description}
+              class="absolute inset-0 -z-10 h-full w-full object-cover"
+            />
+            <div class="absolute inset-0 -z-10 bg-gradient-to-t from-darker " />
+            <h3 class="mt-1 text-lg font-semibold  leading-6 text-white">
+              <a href={template.projectUrl}>
+                <span class="absolute inset-0" />
+                {template.title}
+
+              </a>
+            </h3>
+          </article>
+        </>
+      ))
+    }
+  </div>
+</section>

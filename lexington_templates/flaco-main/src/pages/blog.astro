@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EntriesOne from "../components/entries/EntriesOne.astro";
+import Hero from "../components/entries/Hero.astro";
+const allPosts = await getCollection("posts");
+---
+<BaseLayout>
+  <Hero />
+  <section>
+    <div class="px-2 lg:px-8 py-3">
+      <ul class="grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 gap-3 sm:gap-6">
+        {
+          allPosts
+            .slice()
+            .map((post) => (
+              <EntriesOne
+                url={"/posts/" + post.slug}
+                title={post.data.title}
+                description={post.data.description}
+                alt={post.data.title}
+                pubDate={post.data.pubDate.toString().slice(0, 10)}
+                author={post.data.author}
+                image={post.data.image.url}
+              />
+            ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

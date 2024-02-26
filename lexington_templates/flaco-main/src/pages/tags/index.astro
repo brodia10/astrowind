@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const allPosts = await getCollection("posts");
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+const pageTitle = "Tag Index";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <main         class="relative overflow-hidden">
+    <div class="relative w-full">
+      <div class="animate-marquee whitespace-nowrap gap-4 flex items-baseline">
+        <h1
+          class="font-normal tracking-tighter uppercase text-6xl lg:text-14xl py-12">
+          <span class="text-white"> tags</span>
+          <span class="text-gray">tags</span>
+          <span class="text-grayest">tags</span>
+          <span class="text-gray">tags</span>
+          <span class="text-white"> tags</span>
+          <span class="text-grayest">tags</span>
+          <span class="text-gray">tags</span>
+          <span class="text-grayest">tags</span>
+        </h1>
+      </div>
+    </div>
+  </main>
+  <section>
+    <div class="px-2 lg:px-8 w-full py-3">
+      <ol role="list">
+        {
+          tags.map((tag) => (
+            <>
+              <li>
+                <a
+                  class=" text-white hover:text-gray duration-200"
+                  href={`/tags/${tag}`}>
+                  <div>
+                    <p class="font-normal  tracking-tighter uppercase text-6xl md:text-10xl xl:text-12xl ">
+                      {tag}
+                    </p>
+                  </div>
+                </a>
+              </li>
+            </>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</BaseLayout>
