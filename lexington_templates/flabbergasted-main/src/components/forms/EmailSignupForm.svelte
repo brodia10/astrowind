@@ -45,7 +45,7 @@
        id="email-address"
        name="email"
        placeholder="Enter your email"
-       required=""
+       required
        type="email"
      />
      <button
