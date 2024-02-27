@@ -12,7 +12,7 @@ const formBuilderConfig = {
         checkbox: true,
         number: true,
         message: true,
-        payment: true
+        // payment: true
     },
     redirectRelationships: ['pages', 'posts', 'events',], // Redirect options 
     handlePayment: async ({ form, submissionData }) => {

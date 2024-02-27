@@ -1,9 +1,14 @@
-import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
-import sitemap from "@astrojs/sitemap";
+import cloudflare from '@astrojs/cloudflare';
 import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import svelte from '@astrojs/svelte';
+import tailwind from "@astrojs/tailwind";
+import { defineConfig } from 'astro/config';
+
 export default defineConfig({
-markdown: {
+  output: 'hybrid',
+  adapter: cloudflare(),
+  markdown: {
     drafts: true,
     shikiConfig: { theme: "css-variables" }
   },
@@ -12,6 +17,6 @@ markdown: {
     skipInline: false,
     drafts: true,
   },
-   site: 'https://lexingtonthemes.com',
-  integrations: [tailwind(),   sitemap(), mdx()]
+  site: 'https://bloomcms.io',
+  integrations: [tailwind(),   sitemap(), mdx(), svelte()]
 });

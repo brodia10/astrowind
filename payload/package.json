@@ -50,6 +50,7 @@
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "stripe": "^14.10.0",
+    "svelte": "^4.2.12",
     "url": "^0.11.3",
     "util": "^0.12.5"
   },
