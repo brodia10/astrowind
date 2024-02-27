@@ -180,4 +180,59 @@ export const seed = async (payload: Payload): Promise<void> => {
     //         },
     //     }),
     // ])
+
+
+    // const { id: locationOneID } = await payload.create({
+    //     collection: 'locations',
+    //     data: locationOne,
+    // });
+
+    // const { id: locationTwoID } = await payload.create({
+    //     collection: 'locations',
+    //     data: locationTwo,
+    // });
+
+
+    // await payload.create({
+    //     collection: 'staff',
+    //     data: {
+    //         ...staffOne,
+    //         location: [locationOneID],
+    //     },
+    // });
+
+
+    // await payload.create({
+    //     collection: 'staff',
+    //     data: {
+    //         ...staffTwo,
+    //         location: [locationTwoID],
+    //     },
+    // });
+
+    // eventsOne.map((event) => {
+    //     payload.create({
+    //         collection: 'events',
+    //         data: {
+    //             ...event,
+    //             location: locationOneID,
+    //         },
+    //     });
+
+    //     return null;
+    // });
+
+
+    // eventsTwo.map((event) => {
+    //     payload.create({
+    //         collection: 'events',
+    //         data: {
+    //             ...event,
+    //             location: locationTwoID,
+    //         },
+    //     });
+
+    //     return null;
+    // });
 }
+

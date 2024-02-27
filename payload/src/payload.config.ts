@@ -25,7 +25,6 @@ import formBuilderConfig from './plugins/formBuilder.config'
 // Collection Imports
 import Contacts from './collections/Contacts'
 import EmailLists from './collections/EmailLists'
-import { Events } from './collections/Events'
 import { Media } from './collections/Media'
 import OptInOptOutHistory from './collections/OptInOptOutHistory'
 import Pages from './collections/Pages'
@@ -43,6 +42,8 @@ import { CallToAction } from './blocks/CallToAction'
 import { Content } from './blocks/Content'
 import { FormBlock } from './blocks/Form'
 import Categories from './collections/Categories'
+import Events from './collections/Events'
+import Locations from './collections/Location'
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
 import searchOptions from './plugins/search'
@@ -153,7 +154,7 @@ export default buildConfig({
       }),
     ]
   }),
-  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Contacts, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events,],
+  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Contacts, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events, Locations],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

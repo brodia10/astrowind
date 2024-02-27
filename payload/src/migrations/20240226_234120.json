@@ -1,5 +1,5 @@
 {
-  "id": "15659f01-1b66-45a2-b7bd-4950b535e56e",
+  "id": "2f6191ce-b5eb-4b96-8c70-a93686598cf1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -4631,17 +4631,35 @@
           "primaryKey": false,
           "notNull": true
         },
-        "description": {
-          "name": "description",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
         "date": {
           "name": "date",
           "type": "timestamp(3) with time zone",
           "primaryKey": false,
           "notNull": true
+        },
+        "tickets_price": {
+          "name": "tickets_price",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tickets_sales_tax_percentage": {
+          "name": "tickets_sales_tax_percentage",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tickets_fees": {
+          "name": "tickets_fees",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tickets_total_price": {
+          "name": "tickets_total_price",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
         },
         "updated_at": {
           "name": "updated_at",
@@ -4699,8 +4717,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "media_id": {
-          "name": "media_id",
+        "locations_id": {
+          "name": "locations_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
@@ -4743,12 +4761,163 @@
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
-        "events_rels_media_id_media_id_fk": {
-          "name": "events_rels_media_id_media_id_fk",
+        "events_rels_locations_id_locations_id_fk": {
+          "name": "events_rels_locations_id_locations_id_fk",
           "tableFrom": "events_rels",
-          "tableTo": "media",
+          "tableTo": "locations",
           "columnsFrom": [
-            "media_id"
+            "locations_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "locations": {
+      "name": "locations",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "location": {
+          "name": "location",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city": {
+          "name": "city",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "state": {
+          "name": "state",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "locations_created_at_idx": {
+          "name": "locations_created_at_idx",
+          "columns": [
+            "created_at"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "locations_rels": {
+      "name": "locations_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "events_id": {
+          "name": "events_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "locations_rels_order_idx": {
+          "name": "locations_rels_order_idx",
+          "columns": [
+            "order"
+          ],
+          "isUnique": false
+        },
+        "locations_rels_parent_idx": {
+          "name": "locations_rels_parent_idx",
+          "columns": [
+            "parent_id"
+          ],
+          "isUnique": false
+        },
+        "locations_rels_path_idx": {
+          "name": "locations_rels_path_idx",
+          "columns": [
+            "path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "locations_rels_parent_id_locations_id_fk": {
+          "name": "locations_rels_parent_id_locations_id_fk",
+          "tableFrom": "locations_rels",
+          "tableTo": "locations",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "locations_rels_events_id_events_id_fk": {
+          "name": "locations_rels_events_id_events_id_fk",
+          "tableFrom": "locations_rels",
+          "tableTo": "events",
+          "columnsFrom": [
+            "events_id"
           ],
           "columnsTo": [
             "id"

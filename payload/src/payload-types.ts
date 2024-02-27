@@ -20,6 +20,7 @@ export interface Config {
     posts: Post;
     pages: Page;
     events: Event;
+    locations: Location;
     forms: Form;
     'form-submissions': FormSubmission;
     search: Search;
@@ -620,9 +621,29 @@ export interface Form {
 export interface Event {
   id: number;
   title: string;
-  description?: string | null;
   date: string;
-  image: number | Media;
+  location?: (number | null) | Location;
+  tickets?: {
+    price?: number | null;
+    salesTaxPercentage?: number | null;
+    fees?: number | null;
+    totalPrice?: number | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations".
+ */
+export interface Location {
+  id: number;
+  location?: string | null;
+  city: string;
+  state?: string | null;
+  country: string;
+  events?: (number | Event)[] | null;
+  nextEvent?: (number | null) | Event;
   updatedAt: string;
   createdAt: string;
 }
