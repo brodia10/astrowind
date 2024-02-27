@@ -12,25 +12,23 @@
         [key]: value
       }), {});
   
-      // Format data for the backend if necessary
+      // Format Request
       const formattedData = {
-        // Adjust according to your backend requirements
-        // For example, if you need to match the initial example exactly:
         form: 1,
         id: 1,
         submissionData: Object.entries(data).map(([field, value]) => ({ field, value })),
       };
   
-      const response = await fetch("http://localhost:3000/api/form-submissions/", {
+      // TODO: API_URL Env var
+      const response = await fetch(`${import.meta.env.PUBLIC_BLOOM_BASE_API_URL}/form-submissions/`, {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formattedData),
+        body: JSON.stringify(formattedData)
       });
   
       const responseData = await response.json();
-      console.log(responseData.message)
       responseMessage = responseData.message;
       formSubmitted = true
     }
