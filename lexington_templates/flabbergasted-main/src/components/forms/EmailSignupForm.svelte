@@ -65,14 +65,14 @@
      </button>
 </form>
 {:else}
-  <div class="flex flex-col items-center justify-center bg-black pt-5">
+  <div class="flex flex-col items-center justify-center bg-black pt-4">
     <div class="text-center pt-2 pl-6 pr-6 max-w-sm mx-auto bg-black rounded-xl shadow-md flex items-center space-x-4">
       <div class="flex-shrink-0">
         <!-- You can include an icon here if you want -->
       </div>
-      <div>
+      <div class="max-w-lg mx-auto mt-4 lg:text-xl tracking-wide text-secondary">
         <div class="text-xl font-medium text-white">Thank you!</div>
-        <p class="text-white text-opacity-80">{responseMessage}</p>
+        <p class="text-xl font-medium text-white">{responseMessage}</p>
       </div>
     </div>
   </div>
