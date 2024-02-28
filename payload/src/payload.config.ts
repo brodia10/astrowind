@@ -49,9 +49,18 @@ import { Logo } from './components/logo'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
+
+// Resolve .env
 dotenv.config({
   path: path.resolve(__dirname, '../.env'),
 })
+
+// Aliases for excluding server modules from the React Admin bundle. See here https://payloadcms.com/docs/admin/excluding-server-code
+const mockModulePath = path.resolve(__dirname, 'mocks/modules.js')
+const fullFilePath = path.resolve(
+  __dirname,
+  'collections/Tenants/TenantEmailConfigs/hooks/configurePostmark'
+)
 
 export default buildConfig({
   // serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -69,6 +78,7 @@ export default buildConfig({
         alias: {
           ...config.resolve.alias,
           dotenv: path.resolve(__dirname, './dotenv.js'),
+          [fullFilePath]: mockModulePath,
         },
         fallback: { // Extend this section with additional polyfills
           os: require.resolve('os-browserify/browser'),
