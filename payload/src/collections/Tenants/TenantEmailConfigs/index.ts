@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload/types';
 import { superAdmins } from '../../../access/superAdmins';
 import { isSuperOrTenantAdmin } from '../../Users/utilities/isSuperOrTenantAdmin';
 import { tenantAdmins } from '../Tenants/access/tenantAdmins';
+import configurePostmark from './hooks/configurePostmark';
 
 export const TenantEmailConfigs: CollectionConfig = {
     slug: 'tenant-email-configs',
@@ -17,6 +18,9 @@ export const TenantEmailConfigs: CollectionConfig = {
         create: superAdmins,
         update: tenantAdmins,
         delete: superAdmins,
+    },
+    hooks: {
+        beforeChange: [configurePostmark],
     },
     fields: [
         {
