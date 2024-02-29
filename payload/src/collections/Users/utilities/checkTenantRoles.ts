@@ -1,23 +1,23 @@
-import type { User } from '../../../payload-types'
+import type { Tenant, User } from '../../../payload-types';
+
+// Type guard to check if a variable is a Tenant object
+function isTenant(variable: any): variable is Tenant {
+  return typeof variable === 'object' && 'id' in variable;
+}
 
 export const checkTenantRoles = (
   allRoles: User['tenants'][0]['roles'] = [],
-  user: User = undefined,
-  tenant: User['tenants'][0]['tenant'] = undefined,
+  user: User | undefined = undefined,
+  tenant: User['tenants'][0]['tenant'] | undefined = undefined,
 ): boolean => {
-  if (tenant) {
-    const id = typeof tenant === 'string' ? tenant : tenant?.id
+  if (!user || !tenant) return false;
 
-    if (
-      allRoles.some(role => {
-        return user?.tenants?.some(({ tenant: userTenant, roles }) => {
-          const tenantID = typeof userTenant === 'string' ? userTenant : userTenant?.id
-          return tenantID === id && roles?.includes(role)
-        })
-      })
-    )
-      return true
-  }
+  const tenantId = isTenant(tenant) ? tenant.id : tenant;
 
-  return false
-}
+  return allRoles.some(role =>
+    user.tenants?.some(({ tenant: userTenant, roles }) => {
+      const userTenantId = isTenant(userTenant) ? userTenant.id : userTenant;
+      return userTenantId === tenantId && roles?.includes(role);
+    })
+  );
+};

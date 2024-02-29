@@ -1,18 +1,26 @@
-import type { Access } from 'payload/config'
+import type { Access } from 'payload/config';
 
-import { User } from '../../../payload-types'
-import { isSuperAdmin } from '../../../utils/isSuperAdmin'
+import { Tenant, User } from '../../../payload-types';
+import { isSuperAdmin } from '../../../utils/isSuperAdmin';
+
+// Assuming the Tenant interface is correctly defined in '../../../payload-types'
+// with at least an 'id' property of type string
+
+// Type guard to check if a variable is a Tenant
+function isTenant(variable: any): variable is Tenant {
+  return typeof variable === 'object' && 'id' in variable;
+}
 
 export const adminsAndSelf: Access<any, User> = async ({ req: { user } }) => {
   if (user) {
-    const isSuper = isSuperAdmin(user)
+    const isSuper = isSuperAdmin(user);
 
-    // allow super-admins through only if they have not scoped their user via `lastLoggedInTenant`
+    // Allow super-admins through only if they have not scoped their user via `lastLoggedInTenant`
     if (isSuper && !user?.lastLoggedInTenant) {
-      return true
+      return true;
     }
 
-    // allow users to read themselves and any users within the tenants they are admins of
+    // Allow users to read themselves and any users within the tenants they are admins of
     return {
       or: [
         {
@@ -25,9 +33,8 @@ export const adminsAndSelf: Access<any, User> = async ({ req: { user } }) => {
             {
               'tenants.tenant': {
                 in: [
-                  typeof user?.lastLoggedInTenant === 'string'
-                    ? user?.lastLoggedInTenant
-                    : user?.lastLoggedInTenant?.id,
+                  // Use the type guard to safely access the `id` property
+                  isTenant(user.lastLoggedInTenant) ? user.lastLoggedInTenant.id : user.lastLoggedInTenant,
                 ].filter(Boolean),
               },
             },
@@ -35,20 +42,18 @@ export const adminsAndSelf: Access<any, User> = async ({ req: { user } }) => {
           : [
             {
               'tenants.tenant': {
-                in:
-                  user?.tenants
-                    ?.map(({ tenant, roles }) =>
-                      roles.includes('admin')
-                        ? typeof tenant === 'string'
-                          ? tenant
-                          : tenant.id
-                        : null,
-                    ) // eslint-disable-line function-paren-newline
-                    .filter(Boolean) || [],
+                in: user?.tenants
+                  ?.map(({ tenant, roles }) =>
+                    roles.includes('admin')
+                      ? // Use the type guard to safely determine if tenant is an object and access its `id`
+                      isTenant(tenant) ? tenant.id : tenant
+                      : null,
+                  )
+                  .filter(Boolean) || [],
               },
             },
           ]),
       ],
-    }
+    };
   }
-}
+};

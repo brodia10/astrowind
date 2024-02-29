@@ -150,7 +150,6 @@ export interface TenantEmailConfig {
   messageStreams?: {
     transactional?: string | null;
     broadcast?: string | null;
-    inbound?: string | null;
   };
   updatedAt: string;
   createdAt: string;

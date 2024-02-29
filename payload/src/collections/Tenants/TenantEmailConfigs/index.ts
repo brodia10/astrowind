@@ -114,14 +114,7 @@ export const TenantEmailConfigs: CollectionConfig = {
                                         description: 'Stream ID for broadcast emails.',
                                     },
                                 },
-                                {
-                                    name: 'inbound',
-                                    type: 'text',
-                                    admin: {
-                                        readOnly: true,
-                                        description: 'Stream ID for inbound emails.',
-                                    },
-                                },
+
                             ],
                         },
                     ],
