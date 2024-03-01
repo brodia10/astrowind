@@ -1,46 +1,190 @@
 import { CollectionConfig, FieldHook } from 'payload/types';
 
+// Calculate total ticket price including sales tax and fees
 const getTotalPrice: FieldHook = async ({ data }) => {
     const { price, salesTaxPercentage, fees } = data.tickets;
-    const totalPrice = Math.round(price * (1 + (salesTaxPercentage / 100))) + fees;
+    const totalPrice = Math.round(price * (1 + salesTaxPercentage / 100)) + fees;
+    return { value: totalPrice };
+};
 
-    return totalPrice;
+// Validate linkUrl to ensure it starts with https://
+const validateLinkUrl: FieldHook = ({ data }) => {
+    // Assuming linkUrl is directly under data, adjust the path if nested differently
+    const linkUrl = data.virtualDetails?.linkUrl;
+    if (linkUrl && !linkUrl.startsWith('https://')) {
+        throw new Error('The link URL must start with "https://".');
+    }
+    // No need to return value as we're not modifying it, just validating
 };
 
 const Events: CollectionConfig = {
     slug: 'events',
     admin: {
-        defaultColumns: ['title', 'date', 'location'],
-        useAsTitle: 'title',
+        defaultColumns: ['eventDetails.title', 'eventDetails.dateTime', 'eventDetails.eventType', 'virtualDetails.platform'],
+        useAsTitle: 'eventDetails.title',
         group: 'Team',
-        description: 'Dive into the heart of event planning with unparalleled ease. This is where every detail comes to life, from setting dates and locations to calculating ticket prices with taxes and fees included. Perfect for crafting unforgettable experiences that bring your team and audience together.'
+        description: 'Manage your events, customizing details for either virtual or in-person experiences. Utilize this platform to streamline the planning process, ensuring every event detail is captured with precision.',
     },
     fields: [
         {
-            name: 'title',
-            type: 'text',
-            required: true,
-        },
-        {
-            type: 'row',
+            name: 'eventDetails',
+            label: 'Event Details',
+            type: 'group',
+            admin: {
+                width: '100%',
+            },
             fields: [
                 {
-                    name: 'date',
-                    type: 'date',
+                    type: 'row',
+                    fields: [
+                        {
+                            name: 'title',
+                            type: 'text',
+                            required: true,
+                            admin: {
+                                position: 'sidebar',
+                                width: '60%',
+                            },
+                        },
+                        {
+                            name: 'category',
+                            type: 'relationship',
+                            relationTo: 'categories',
+                            required: true,
+                            hasMany: true,
+                            admin: {
+                                position: 'sidebar',
+                                width: '40%'
+                            }
+                        },
+                    ],
+                },
+
+                {
+                    name: 'description',
+                    type: 'textarea',
+                    required: true,
+                    maxLength: 128,
+                    admin: {
+                        description: 'Describe your event. Max length of 128 characters.'
+                    }
+                },
+                {
+                    name: 'image',
+                    type: 'upload',
+                    relationTo: 'media',
                     required: true,
                 },
+                {
+                    type: 'row',
+                    fields: [
+
+                        {
+                            name: 'eventType',
+                            type: 'radio',
+                            required: true,
+                            options: [
+                                { label: 'In Person', value: 'inPerson' },
+                                { label: 'Virtual', value: 'virtual' },
+                            ],
+                            admin: {
+                                width: '10%',
+                                layout: 'horizontal',
+                                description: 'Select whether the event will be held in person or virtually. This choice determines additional details to be provided.',
+                            },
+                        },
+                        {
+                            name: 'dateTime',
+                            type: 'date',
+                            required: true,
+                            admin: {
+                                width: '20%',
+                                description: 'Select the date and time of the event. If the event spans multiple days, select the starting date and time. Ensure to consider the time zone when planning virtual events.',
+                                date: {
+                                    pickerAppearance: 'dayAndTime', // Allows selection of both date and time
+                                    displayFormat: 'PPPp', // Example format: Jan 1, 2024, 12:00 PM
+                                },
+                            },
+                        },
+                        {
+                            name: 'timeZone',
+                            label: 'Time Zone',
+                            type: 'select',
+                            options: [
+                                { label: 'UTC-12:00', value: 'UTC-12' },
+                                { label: 'UTC-11:00', value: 'UTC-11' },
+                                // Include all necessary time zones
+                                { label: 'UTC+14:00', value: 'UTC+14' },
+                            ],
+                            admin: {
+                                width: '15%',
+                                description: 'Select the time zone for the event. This is especially important for virtual events to coordinate with attendees in different regions.',
+                            },
+                        },
+                    ],
+                },
+            ],
+        },
+        // Physical Location Details
+        {
+            name: 'locationDetails',
+            label: 'Location',
+            type: 'group',
+            admin: {
+                condition: (_, siblingData) => siblingData.eventDetails?.eventType === 'inPerson',
+            },
+            fields: [
                 {
                     name: 'location',
                     type: 'relationship',
                     relationTo: 'locations',
-                    maxDepth: 0,
-                    hasMany: false,
+                    required: false,
+                    admin: {
+                        width: '100%',
+                        description: 'Select the location from existing venues. Required for in-person events. If the location is not listed, add it to the Locations collection first.',
+                    },
+                },
+            ],
+        },
+        {
+            name: 'virtualDetails',
+            label: 'Virtual Event Details',
+            type: 'group',
+            admin: {
+                condition: (_, siblingData) => siblingData.eventDetails?.eventType === 'virtual',
+            },
+            fields: [
+                {
+                    name: 'platform',
+                    type: 'relationship',
+                    relationTo: 'platforms',
+                    required: false,
+                    admin: {
+                        width: '50%',
+                        description: 'Select the platform where you will be hosting this event. Add options as needed. Required for virtual events.',
+                    },
+                },
+                {
+                    name: 'linkUrl',
+                    type: 'text',
+                    label: 'Event Link',
+                    required: false,
+                    admin: {
+                        width: '50%',
+                        description: 'Provide the URL for the virtual event platform (e.g., Zoom, Google Meet). Ensure the link is correct and accessible. Required for virtual events.',
+                        // Ensure this condition accurately reflects your data structure
+                        placeholder: 'https://example.com/meeting',
+                    },
+                    hooks: {
+                        beforeChange: [validateLinkUrl],
+                    },
                 },
             ],
         },
         {
             name: 'tickets',
             type: 'group',
+            admin: { position: 'sidebar' },
             fields: [
                 {
                     type: 'row',
@@ -49,26 +193,21 @@ const Events: CollectionConfig = {
                             name: 'price',
                             type: 'number',
                             admin: {
-                                description: 'USD',
+                                description: 'Enter the ticket price in USD. This will be the base price before taxes and fees.',
                             },
                         },
                         {
                             name: 'salesTaxPercentage',
                             type: 'number',
                             admin: {
-                                description: '%',
+                                description: 'Specify the sales tax rate as a percentage. This will be applied to the ticket price.',
                             },
                         },
-                    ],
-                },
-                {
-                    type: 'row',
-                    fields: [
                         {
                             name: 'fees',
                             type: 'number',
                             admin: {
-                                description: 'USD',
+                                description: 'Enter any additional fees in USD that will be applied to the ticket price.',
                             },
                         },
                         {
@@ -79,14 +218,12 @@ const Events: CollectionConfig = {
                                 update: () => false,
                             },
                             admin: {
-                                description: 'USD',
+                                description: 'This field displays the total ticket price, including taxes and fees, calculated automatically. Note: This field is read-only and updated based on the price, sales tax, and fees entered.',
                                 readOnly: true,
                             },
                             hooks: {
                                 beforeChange: [({ siblingData }) => {
-                                    // Mutate the sibling data to prevent DB storage
-                                    // eslint-disable-next-line no-param-reassign
-                                    siblingData.totalPrice = undefined;
+                                    siblingData.totalPrice = undefined; // Ensures the field is not stored in the DB
                                 }],
                                 afterRead: [getTotalPrice],
                             },

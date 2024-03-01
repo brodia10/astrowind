@@ -15,6 +15,7 @@ const Categories: CollectionConfig = {
         {
             name: 'title',
             type: 'text',
+            unique: true,
         },
     ],
 }

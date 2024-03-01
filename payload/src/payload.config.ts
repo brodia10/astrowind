@@ -43,7 +43,8 @@ import { Content } from './blocks/Content'
 import { FormBlock } from './blocks/Form'
 import Categories from './collections/Categories'
 import Events from './collections/Events'
-import Locations from './collections/Location'
+import Locations from './collections/Locations'
+import Platforms from './collections/Platform'
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
 import searchOptions from './plugins/search'
@@ -101,6 +102,26 @@ export default buildConfig({
     livePreview: {
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
       collections: ['pages', 'posts', 'events', 'comments', 'forms'], // The collections to enable Live Preview on (globals are also possible)
+      breakpoints: [
+        {
+          label: 'Mobile',
+          name: 'mobile',
+          width: 375,
+          height: 667,
+        },
+        {
+          label: 'Tablet',
+          name: 'tablet',
+          width: 768,
+          height: 1024,
+        },
+        {
+          label: 'Desktop',
+          name: 'desktop',
+          width: 1440,
+          height: 900,
+        },
+      ],
     },
     meta: {
       titleSuffix: '- Bloom CMS',
@@ -164,7 +185,7 @@ export default buildConfig({
       }),
     ]
   }),
-  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Contacts, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events, Locations],
+  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Contacts, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events, Locations, Platforms],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },

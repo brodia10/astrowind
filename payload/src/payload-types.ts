@@ -21,6 +21,7 @@ export interface Config {
     pages: Page;
     events: Event;
     locations: Location;
+    platforms: Platform;
     forms: Form;
     'form-submissions': FormSubmission;
     search: Search;
@@ -599,9 +600,22 @@ export interface Form {
  */
 export interface Event {
   id: number;
-  title: string;
-  date: string;
-  location?: (number | null) | Location;
+  eventDetails: {
+    title: string;
+    category: (number | Category)[];
+    description: string;
+    image: number | Media;
+    eventType: 'inPerson' | 'virtual';
+    dateTime: string;
+    timeZone?: ('UTC-12' | 'UTC-11' | 'UTC+14') | null;
+  };
+  locationDetails?: {
+    location?: (number | null) | Location;
+  };
+  virtualDetails?: {
+    platform?: (number | null) | Platform;
+    linkUrl?: string | null;
+  };
   tickets?: {
     price?: number | null;
     salesTaxPercentage?: number | null;
@@ -623,6 +637,16 @@ export interface Location {
   country: string;
   events?: (number | Event)[] | null;
   nextEvent?: (number | null) | Event;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "platforms".
+ */
+export interface Platform {
+  id: number;
+  name: string;
   updatedAt: string;
   createdAt: string;
 }
