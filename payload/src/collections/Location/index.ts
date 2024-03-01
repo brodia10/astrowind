@@ -60,6 +60,7 @@ const Locations: CollectionConfig = {
     admin: {
         defaultColumns: ['location', 'nextEvent'],
         useAsTitle: 'location',
+        description: 'Manage locations with ease: track cities, states, and countries for your events. Use it to pinpoint next event venues, ensuring attendees always find their way. Ideal for event planners looking to streamline venue selection and oversight.',
         hidden: true,
     },
     fields: [

@@ -16,8 +16,8 @@
     "generate:graphQLSchema": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:graphQLSchema",
     "payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload",
     "seed": "rm -rf media && cross-env PAYLOAD_SEED=true PAYLOAD_DROP_DATABASE=true PAYLOAD_CONFIG_PATH=src/payload.config.ts ts-node src/server.ts",
-    "migrate": "yarn payload migrate",
-    "migrate:generate:types": "yarn migrate && yarn generate:types"
+    "make:migration": "yarn payload migrate:create",
+    "migrate:generate:types": "yarn generate:types && yarn make:migration"
   },
   "dependencies": {
     "@nouance/payload-better-fields-plugin": "^1.3.5",

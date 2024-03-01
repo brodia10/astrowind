@@ -14,6 +14,7 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'firstName',
     group: 'Team',
+    description: 'Meet your Team\'s command center! Here, you can effortlessly manage member profiles, from basic contact information to roles within the platform. It\'s designed to simplify team coordination, making it a breeze to keep everyone\'s details current and accessible.'
   },
   access: {
     read: adminsAndSelf,

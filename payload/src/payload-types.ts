@@ -101,6 +101,7 @@ export interface Tenant {
 export interface Media {
   id: number;
   alt?: string | null;
+  category?: (number | Category)[] | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -135,6 +136,16 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  title?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -235,16 +246,6 @@ export interface OptInOptOutHistory {
   source?: string | null;
   reason?: string | null;
   tenant: number | Tenant;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: number;
-  title?: string | null;
   updatedAt: string;
   createdAt: string;
 }

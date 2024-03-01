@@ -10,6 +10,7 @@ const OptInOptOutHistory: CollectionConfig = {
     },
     admin: {
         hidden: true,
+        description: 'Track and manage the subscription history of your contacts, including both opt-ins and opt-outs. This collection provides a detailed record of each contact’s preferences over time, including the type of action (Opt-In or Opt-Out), the date it occurred, the source of the action, and the reason provided. Essential for maintaining compliance with email marketing regulations and for understanding the changing preferences of your audience.'
     },
     fields: [
         {

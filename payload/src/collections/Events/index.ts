@@ -12,7 +12,8 @@ const Events: CollectionConfig = {
     admin: {
         defaultColumns: ['title', 'date', 'location'],
         useAsTitle: 'title',
-        group: 'Team'
+        group: 'Team',
+        description: 'Dive into the heart of event planning with unparalleled ease. This is where every detail comes to life, from setting dates and locations to calculating ticket prices with taxes and fees included. Perfect for crafting unforgettable experiences that bring your team and audience together.'
     },
     fields: [
         {
