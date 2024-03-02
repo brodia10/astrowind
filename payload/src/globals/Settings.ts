@@ -4,6 +4,11 @@ export const Settings: GlobalConfig = {
     access: {
         read: () => true,
     },
+    versions: {
+        drafts: {
+            autosave: true,
+        }
+    },
     fields: [
         {
             name: 'postsPage',

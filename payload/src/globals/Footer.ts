@@ -6,6 +6,11 @@ export const Footer: GlobalConfig = {
     access: {
         read: () => true,
     },
+    versions: {
+        drafts: {
+            autosave: true,
+        }
+    },
     fields: [
         {
             name: 'navItems',
