@@ -52,7 +52,8 @@ const Subscribers: CollectionConfig = {
             label: 'Newsletters and Email Campaigns',
             admin: {
                 description: 'Newsletters and Email Campaigns this user has subscribed to.',
-                position: 'sidebar'
+                position: 'sidebar',
+                readOnly: true,
             },
             fields: [
                 {
@@ -80,6 +81,9 @@ const Subscribers: CollectionConfig = {
             fields: [
                 {
                     type: 'row',
+                    admin: {
+                        readOnly: true,
+                    },
                     fields: [
 
                         {
