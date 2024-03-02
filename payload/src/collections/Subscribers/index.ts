@@ -25,7 +25,10 @@ enum PermissionStatus {
 const Subscribers: CollectionConfig = {
     slug: 'subscribers',
     access: {
-        create: ({ req }) => !!req.user,
+        create: ({ req }) => {
+            // Check for a custom API request header to distinguish API requests
+            return !!req.user && req.headers['x-api-request'] === 'true';
+        },
     },
     admin: {
         useAsTitle: 'email.email_address',

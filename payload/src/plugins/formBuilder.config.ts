@@ -42,6 +42,14 @@ const formBuilderConfig = {
             listSearchableFields: ['form', 'submissionData'],
             description: 'Welcome to your Form Submissions center! This is where you can effortlessly keep track of all your audience\'s form responses, ensuring every message is accounted for and no engagement is missed. It\'s the perfect spot to maintain the pulse of your community\'s interactions, helping you stay engaged and responsive',
         },
+        access: {
+            read: () => true,
+            update: () => true,
+            create: ({ req }) => {
+                // Check for a custom API request header to distinguish API requests
+                return !!req.user && req.headers['x-api-request'] === 'true';
+            },
+        },
     },
 };
 
