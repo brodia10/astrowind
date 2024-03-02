@@ -12,6 +12,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 // Payload Imports
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import formBuilder from "@payloadcms/plugin-form-builder"
+import { sentry } from '@payloadcms/plugin-sentry'
 import {
   BlocksFeature,
   LinkFeature,
@@ -47,9 +48,9 @@ import Platforms from './collections/Platform'
 import Subscribers from './collections/Subscribers'
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
+import { Footer } from './globals/Footer'
 import { Header } from './globals/Header'
 import { Settings } from './globals/Settings'
-import { Footer } from './globals/footer'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
@@ -197,7 +198,21 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions),],
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), sentry({
+    dsn: process.env.SENTRY_DSN,
+    options: {
+      init: {
+        debug: process.env.SENTRY_DEBUG || false,
+        environment: process.env.NODE_ENV,
+        tracesSampleRate: 1.0,
+      },
+      requestHandler: {
+        serverName: false,
+        user: ["email"],
+      },
+      captureErrors: [400, 403, 404, 401, 405, 500, 502, 503],
+    }
+  }),],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,
