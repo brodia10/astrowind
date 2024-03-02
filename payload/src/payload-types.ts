@@ -11,7 +11,7 @@ export interface Config {
     users: User;
     'tenant-stripe-configs': TenantStripeConfig;
     'tenant-email-configs': TenantEmailConfig;
-    contacts: Contact;
+    subscribers: Subscriber;
     'email-lists': EmailList;
     'opt-in-opt-out-history': OptInOptOutHistory;
     tenants: Tenant;
@@ -201,24 +201,22 @@ export interface TenantStripeConfig {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contacts".
+ * via the `definition` "subscribers".
  */
-export interface Contact {
+export interface Subscriber {
   id: number;
-  personal_info: {
+  email: {
     email_address: string;
-    first_name?: string | null;
-    last_name?: string | null;
+    email_lists: (number | EmailList)[];
   };
-  subscription_management?: {
-    email_lists?: (number | EmailList)[] | null;
-    email_status?: ('Active' | 'Unsubscribed') | null;
-    email_permission_status?: ('Express' | 'Implied') | null;
-    confirmed_opt_in_date?: string | null;
-    confirmed_opt_in_source?: string | null;
-    confirmed_opt_out_date?: string | null;
-    confirmed_opt_out_source?: string | null;
-    confirmed_opt_out_reason?: string | null;
+  subscription_management: {
+    email_status: 'Active' | 'Unsubscribed';
+    email_permission_status: 'Express' | 'Implied';
+    confirmed_opt_in_date: string;
+    confirmed_opt_in_source: string;
+    confirmed_opt_out_date: string;
+    confirmed_opt_out_source: string;
+    confirmed_opt_out_reason: string;
   };
   tenant: number | Tenant;
   updatedAt: string;
@@ -241,7 +239,7 @@ export interface EmailList {
  */
 export interface OptInOptOutHistory {
   id: number;
-  contact: number | Contact;
+  subscriber: number | Subscriber;
   opt_type: 'Opt-In' | 'Opt-Out';
   date: string;
   source?: string | null;

@@ -23,7 +23,6 @@ import { buildConfig } from 'payload/config'
 import formBuilderConfig from './plugins/formBuilder.config'
 
 // Collection Imports
-import Contacts from './collections/Contacts'
 import EmailLists from './collections/EmailLists'
 import { Media } from './collections/Media'
 import OptInOptOutHistory from './collections/OptInOptOutHistory'
@@ -45,6 +44,7 @@ import Categories from './collections/Categories'
 import Events from './collections/Events'
 import Locations from './collections/Locations'
 import Platforms from './collections/Platform'
+import Subscribers from './collections/Subscribers'
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
 import searchOptions from './plugins/search'
@@ -185,7 +185,7 @@ export default buildConfig({
       }),
     ]
   }),
-  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Contacts, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events, Locations, Platforms],
+  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Subscribers, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events, Locations, Platforms],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
