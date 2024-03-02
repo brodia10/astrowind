@@ -51,6 +51,10 @@ export interface User {
       }[]
     | null;
   lastLoggedInTenant?: (number | null) | Tenant;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -96,6 +100,10 @@ export interface Tenant {
       }[]
     | null;
   emailConfig?: (number | null) | TenantEmailConfig;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -107,6 +115,10 @@ export interface Media {
   id: number;
   alt?: string | null;
   category?: (number | Category)[] | null;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -149,6 +161,10 @@ export interface Media {
 export interface Category {
   id: number;
   title?: string | null;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -167,6 +183,10 @@ export interface TenantEmailConfig {
     transactional?: string | null;
     broadcast?: string | null;
   };
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -200,6 +220,10 @@ export interface TenantStripeConfig {
     | 'ideal';
   successUrl: string;
   cancelUrl: string;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -223,6 +247,10 @@ export interface Subscriber {
     confirmed_opt_out_reason: string;
   };
   tenant: number | Tenant;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -234,6 +262,10 @@ export interface EmailList {
   id: number;
   name: string;
   tenant: number | Tenant;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -249,6 +281,10 @@ export interface OptInOptOutHistory {
   source?: string | null;
   reason?: string | null;
   tenant: number | Tenant;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -339,6 +375,10 @@ export interface Post {
     description?: string | null;
     image?: number | Media | null;
   };
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -414,6 +454,10 @@ export interface Page {
     description?: string | null;
     image?: number | Media | null;
   };
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -593,6 +637,10 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -624,6 +672,10 @@ export interface Event {
     fees?: number | null;
     totalPrice?: number | null;
   };
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -639,6 +691,10 @@ export interface Location {
   country: string;
   events?: (number | Event)[] | null;
   nextEvent?: (number | null) | Event;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -649,6 +705,10 @@ export interface Location {
 export interface Platform {
   id: number;
   name: string;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -666,6 +726,10 @@ export interface FormSubmission {
         id?: string | null;
       }[]
     | null;
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -690,6 +754,10 @@ export interface Search {
         relationTo: 'events';
         value: number | Event;
       };
+  lastModifiedBy?: {
+    relationTo: 'users';
+    value: number | User;
+  } | null;
   updatedAt: string;
   createdAt: string;
 }

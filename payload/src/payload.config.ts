@@ -51,6 +51,7 @@ import { Logo } from './components/logo'
 import { Footer } from './globals/Footer'
 import { Header } from './globals/Header'
 import { Settings } from './globals/Settings'
+import addLastModified from './plugins/LastModifiedBy'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
@@ -212,7 +213,8 @@ export default buildConfig({
       },
       captureErrors: [400, 403, 404, 401, 405, 500, 502, 503],
     }
-  }),],
+  }),
+    addLastModified],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,
