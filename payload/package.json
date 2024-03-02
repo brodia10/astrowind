@@ -26,6 +26,7 @@
     "@payloadcms/plugin-cloud": "^2.0.0",
     "@payloadcms/plugin-form-builder": "^1.0.15",
     "@payloadcms/plugin-search": "^1.0.1",
+    "@payloadcms/plugin-sentry": "^0.0.6",
     "@payloadcms/plugin-seo": "^1.0.15",
     "@payloadcms/plugin-stripe": "^0.0.19",
     "@payloadcms/richtext-lexical": "^0.7.0",
