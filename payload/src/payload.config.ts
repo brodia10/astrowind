@@ -47,12 +47,17 @@ import Platforms from './collections/Platform'
 import Subscribers from './collections/Subscribers'
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
+import { Footer } from './globals/Footer'
 import { Header } from './globals/Header'
 import { Settings } from './globals/Settings'
-import { Footer } from './globals/footer'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
+// import plugin
+import { visualEditor } from "payload-visual-editor"
+
+// import styles
+import "payload-visual-editor/dist/styles.scss"
 
 // Resolve .env
 dotenv.config({
@@ -191,13 +196,27 @@ export default buildConfig({
   }),
   collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Subscribers, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events, Locations, Platforms],
   globals: [Header, Footer, Settings],
+
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions),],
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), visualEditor({
+    previewUrl: () => `http://localhost:3000/pages/preview`,
+    previewWidthInPercentage: 60,
+    collections: {
+      ['pages']: {
+        previewUrl: () => `http://localhost:4321` // optional individual preview url for each collection
+      },
+    },
+    globals: {
+      ['header']: {
+        previewUrl: () => `http://localhost:4321` // optional individual preview url for each global
+      },
+    },
+  }),],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,

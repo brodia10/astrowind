@@ -44,6 +44,7 @@
     "os-browserify": "^0.3.0",
     "payload": "^2.11.1",
     "payload-plugin-comments": "^1.0.2",
+    "payload-visual-editor": "^2.0.5",
     "postmark": "^4.0.2",
     "react": "^18.2.0",
     "stream-browserify": "^3.0.0",

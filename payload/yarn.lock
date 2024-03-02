@@ -9882,6 +9882,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"payload-visual-editor@npm:^2.0.5":
+  version: 2.0.5
+  resolution: "payload-visual-editor@npm:2.0.5"
+  dependencies:
+    ts-pattern: "npm:^5.0.5"
+  peerDependencies:
+    payload: ^2.0.13
+    react: ^18.2.0
+    react-i18next: ^11.18.0
+  checksum: b1adb053225a79073ce014f6b16ff1178115e724c12e331cb75030460160eacee66f8cf050e46af596eb9cbf6eca844de0d38ac319e514f1c38a72cf810c6eed
+  languageName: node
+  linkType: hard
+
 "payload@npm:^2.11.1":
   version: 2.11.2
   resolution: "payload@npm:2.11.2"
@@ -10012,6 +10025,7 @@ __metadata:
     os-browserify: "npm:^0.3.0"
     payload: "npm:^2.11.1"
     payload-plugin-comments: "npm:^1.0.2"
+    payload-visual-editor: "npm:^2.0.5"
     postmark: "npm:^4.0.2"
     react: "npm:^18.2.0"
     stream-browserify: "npm:^3.0.0"
@@ -13124,6 +13138,13 @@ __metadata:
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
   checksum: e0f904090aba4b3496fdfca640cfd92c1f5a41fa303b0ccb40f49be160699687a97a4dd5f57200646a3b83528952611d1c5ad5804ee25f338b017e7b1c13f0f4
+  languageName: node
+  linkType: hard
+
+"ts-pattern@npm:^5.0.5":
+  version: 5.0.8
+  resolution: "ts-pattern@npm:5.0.8"
+  checksum: c0767f4a4ce960cc87e69274f750d4672e37e865b779f8aed472fb22566baaedd584caf7dfd454905c25138aabe88f3abb5c2351487b223e822a3affae9611eb
   languageName: node
   linkType: hard
 
