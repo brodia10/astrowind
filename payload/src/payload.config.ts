@@ -47,6 +47,9 @@ import Platforms from './collections/Platform'
 import Subscribers from './collections/Subscribers'
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
+import { Header } from './globals/Header'
+import { Settings } from './globals/Settings'
+import { Footer } from './globals/footer'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
@@ -186,6 +189,7 @@ export default buildConfig({
     ]
   }),
   collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Subscribers, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events, Locations, Platforms],
+  globals: [Header, Footer, Settings],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
