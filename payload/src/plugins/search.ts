@@ -1,5 +1,5 @@
 const searchOptions = ({
-    collections: ["posts", "categories", "events"],
+    collections: ["posts", "events"],
     // defaultPriorities: {
     //     posts: 20,
     // },
