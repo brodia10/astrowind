@@ -9,18 +9,16 @@ const getTotalPrice: FieldHook = async ({ data }) => {
 
 // Validate linkUrl to ensure it starts with https://
 const validateLinkUrl: FieldHook = ({ data }) => {
-    // Assuming linkUrl is directly under data, adjust the path if nested differently
     const linkUrl = data.virtualDetails?.linkUrl;
     if (linkUrl && !linkUrl.startsWith('https://')) {
         throw new Error('The link URL must start with "https://".');
     }
-    // No need to return value as we're not modifying it, just validating
 };
 
 const Events: CollectionConfig = {
     slug: 'events',
     admin: {
-        defaultColumns: ['eventDetails.title', 'eventDetails.dateTime', 'eventDetails.eventType', 'virtualDetails.platform'],
+        defaultColumns: ['eventDetails.row.title', 'eventDetails.dateTime', 'eventDetails.eventType', 'virtualDetails.platform'],
         useAsTitle: 'eventDetails.title',
         group: 'Team',
         description: 'Manage your events, customizing details for either virtual or in-person experiences. Utilize this platform to streamline the planning process, ensuring every event detail is captured with precision.',
@@ -59,7 +57,6 @@ const Events: CollectionConfig = {
                         },
                     ],
                 },
-
                 {
                     name: 'description',
                     type: 'textarea',

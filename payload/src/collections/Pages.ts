@@ -40,6 +40,7 @@ const Pages: CollectionConfig = {
                             type: 'relationship',
                             relationTo: 'categories',
                             hasMany: true,
+                            required: true,
                             admin: {
                                 position: 'sidebar'
                             }
