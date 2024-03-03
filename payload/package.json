@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "license": "MIT",
+  "openapi": {},
   "scripts": {
     "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts nodemon",
     "build:payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload build",
@@ -45,6 +46,7 @@
     "os-browserify": "^0.3.0",
     "payload": "^2.11.1",
     "payload-plugin-comments": "^1.0.2",
+    "payload-swagger": "^1.4.0",
     "postmark": "^4.0.2",
     "react": "^18.2.0",
     "stream-browserify": "^3.0.0",

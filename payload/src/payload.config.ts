@@ -55,6 +55,7 @@ import addLastModified from './plugins/LastModifiedBy'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
+import { swagger } from 'payload-swagger'
 
 // Resolve .env
 dotenv.config({
@@ -214,7 +215,28 @@ export default buildConfig({
       captureErrors: [400, 403, 404, 401, 405, 500, 502, 503],
     }
   }),
-    addLastModified],
+    addLastModified,
+  swagger({
+    disableAccessAnalysis: true,
+    exclude: {
+      authPaths: false,
+      authCollection: false,
+      passwordRecovery: false,
+      preferences: false,
+      custom: false
+    },
+    routes: {
+      swagger: '/api/docs', // Custom Swagger UI route
+      // specs: '/api/specs', // Custom OpenAPI specs route
+      // license: '/api/license' // Custom license route
+    },
+    ui: {
+      deepLinking: true,
+      displayOperationId: true,
+    },
+    throwOnError: true,
+  }),
+  ],
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,
