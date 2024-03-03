@@ -40,6 +40,10 @@ export const Media: CollectionConfig = {
         {
             name: 'alt',
             type: 'text',
+            admin: {
+                placeholder: 'Enter image description here',
+                description: 'Adding descriptive text to your images not only makes your site more accessible to visually impaired users, enhancing user experience and broadening your audience, but it can also improve your website\'s search engine ranking. This leads to increased visibility, more traffic, and potentially higher revenue.'
+            },
         },
         {
             name: 'category',
