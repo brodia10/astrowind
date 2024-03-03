@@ -243,8 +243,8 @@ export interface Tenant {
  */
 export interface Media {
   id: number;
-  alt?: string | null;
-  category?: (number | Category)[] | null;
+  alt: string;
+  category: (number | Category)[];
   lastModifiedBy?:
     | ({
         relationTo: 'users';
@@ -954,7 +954,7 @@ export interface Post {
   } | null;
   title: string;
   image: number | Media;
-  category?: (number | Category)[] | null;
+  category: (number | Category)[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1040,7 +1040,7 @@ export interface Post {
 export interface Page {
   id: number;
   title: string;
-  category?: (number | Category)[] | null;
+  category: (number | Category)[];
   layout: (
     | {
         invertBackground?: boolean | null;
@@ -1785,10 +1785,6 @@ export interface Search {
     | {
         relationTo: 'posts';
         value: number | Post;
-      }
-    | {
-        relationTo: 'categories';
-        value: number | Category;
       }
     | {
         relationTo: 'events';

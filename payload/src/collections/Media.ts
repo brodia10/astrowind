@@ -53,7 +53,8 @@ export const Media: CollectionConfig = {
             hasMany: true,
             required: true,
             admin: {
-                position: 'sidebar'
+                position: 'sidebar',
+                description: 'Add one or multiple tags to easily find what you\'re looking for.'
             }
         },
     ],
