@@ -25,6 +25,145 @@
       }"
           class="relative w-full mx-auto lg:col-span-2 text-xl font-medium divide-y-2 divide-black"
         >
+        <div
+        x-data="{ id: $id('accordion') }"
+        :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+        class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
+      >
+        <button
+          @click="setActiveAccordion(id)"
+          class="flex items-center justify-between w-full p-8 text-left select-none"
+        >
+          <span
+            >Why Bloom and not Wix, Shopify, Wordpress or Squarespace?</span
+          >
+          <div
+            class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+          >
+            <svg
+              class="w-5 h-5 duration-300 ease-out text-accent-500"
+              :class="{ '-rotate-[45deg]': activeAccordion==id }"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6v12m6-6H6"></path>
+            </svg>
+          </div>
+        </button>
+        <div
+          x-show="activeAccordion==id"
+          x-collapse=""
+          style="display: none;"
+        >
+          <div
+            class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
+          >
+           Bloom was made in the belief that all of these solutions are:
+           - too complex
+           - too much of what you don't need
+           - too much time learning drag and drop editors and design tools
+           - a million different services to use for email, forms, design, marketing
+
+           So how is Bloom different?
+           - focus on your content, not learning design tools
+           - we have designed bloom to be simple and efficient, not confusing or cluttered so that you can focus on your content, and your business or idea and not spend your time on learning how to use website builders.
+           - out of the box your site ranks higher by google (we show you the receipts inside of the admin dashboard!) this can mean higher conversions 
+           - Bloom offers only premium, high-design themes 
+          </div>
+        </div>
+      </div>
+        <div
+        x-data="{ id: $id('accordion') }"
+        :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+        class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
+      >
+        <button
+          @click="setActiveAccordion(id)"
+          class="flex items-center justify-between w-full p-8 text-left select-none"
+        >
+          <span
+            >Can I make Bloom’s designs match my unique style and brand?</span
+          >
+          <div
+            class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+          >
+            <svg
+              class="w-5 h-5 duration-300 ease-out text-accent-500"
+              :class="{ '-rotate-[45deg]': activeAccordion==id }"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 6v12m6-6H6"></path>
+            </svg>
+          </div>
+        </button>
+        <div
+          x-show="activeAccordion==id"
+          x-collapse=""
+          style="display: none;"
+        >
+          <div
+            class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
+          >
+           Yes, you can change colors and fonts in Bloom’s designs to make your website look exactly how you want.
+          </div>
+        </div>
+      </div>
+      <div
+      x-data="{ id: $id('accordion') }"
+      :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+      class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
+    >
+      <button
+        @click="setActiveAccordion(id)"
+        class="flex items-center justify-between w-full p-8 text-left select-none"
+      >
+        <span
+          >Can I use Gmail, Outlook, or other email providers with Bloom?</span
+        >
+        <div
+          class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+        >
+          <svg
+            class="w-5 h-5 duration-300 ease-out text-accent-500"
+            :class="{ '-rotate-[45deg]': activeAccordion==id }"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 6v12m6-6H6"></path>
+          </svg>
+        </div>
+      </button>
+      <div
+        x-show="activeAccordion==id"
+        x-collapse=""
+        style="display: none;"
+      >
+        <div
+          class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
+        >
+         Yes, you can use Gmail, Outlook, or any email provider you want to send emails or newsletters from Bloom! You can also choose to send from your own custom email like, myname@mycompany.com. Regardless of which you choose, any replies will be sent to your existing inbox.
+        </div>
+      </div>
+    </div>
           <div
             x-data="{ id: $id('accordion') }"
             :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
@@ -34,7 +173,7 @@
               @click="setActiveAccordion(id)"
               class="flex items-center justify-between w-full p-8 text-left select-none"
             >
-              <span>How does end-to-end encryption work?</span>
+              <span>Can I create and send newsletters with Bloom?</span>
               <div
                 class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
               >
@@ -62,11 +201,7 @@
               <div
                 class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
               >
-                End-to-end encryption ensures that only the sender and recipient
-                can access the content of a message. The information is
-                encrypted on the sender's device and can only be decrypted by
-                the intended recipient, preventing any intermediaries, including
-                the platform provider, from accessing the data.
+              You can create professional-looking emails right within Bloom, using beautiful templates to communicate with your audience effectively.
               </div>
             </div>
           </div>
@@ -80,7 +215,7 @@
               class="flex items-center justify-between w-full p-8 text-left select-none"
             >
               <span
-                >Can I access my encrypted data if I forget my encryption key?</span
+                >What is real-time editing in Bloom?</span
               >
               <div
                 class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
@@ -109,11 +244,7 @@
               <div
                 class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
               >
-                No, forgetting or losing your encryption key means that your
-                encrypted data cannot be accessed. This is a crucial security
-                measure to ensure that even if someone gains unauthorized access
-                to your account, they won't be able to decrypt and view your
-                messages or files.
+              With Bloom, you can see and tweak your emails and website updates instantly, ensuring they look perfect before anyone else sees them.
               </div>
             </div>
           </div>
@@ -127,8 +258,7 @@
               class="flex items-center justify-between w-full p-8 text-left select-none"
             >
               <span
-                >Are there any limitations to the self-destructing messages
-                feature?</span
+                >Can I run my Startup, Non-Profit, or Enterpise Business with Bloom?</span
               >
               <div
                 class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
@@ -157,12 +287,7 @@
               <div
                 class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
               >
-                Self-destructing messages are designed to automatically delete
-                themselves after a specific period or upon being read by the
-                recipient. However, it's important to note that the feature only
-                removes the message from the devices involved in the
-                conversation. Recipients may take screenshots or use other means
-                to capture the content, which is beyond the platform's control.
+              Absolutely. Bloom offers a comprehensive suite of tools, all in one place to support and grow any type of business or idea: from hosting your Resume to bringing your Ma & Pa online or running your Enterprise.
               </div>
             </div>
           </div>
@@ -176,8 +301,7 @@
               class="flex items-center justify-between w-full p-8 text-left select-none"
             >
               <span
-                >What happens if I enable two-factor authentication and lose my
-                device?</span
+                >How can I manage multiple websites with Bloom?</span
               >
               <div
                 class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
@@ -206,12 +330,7 @@
               <div
                 class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
               >
-                Losing your device doesn't automatically compromise your
-                account's security. It's recommended to contact our support team
-                as soon as possible to disable the two-factor authentication on
-                your lost device and set up the authentication on your new
-                device. This process will help protect your account from
-                unauthorized access while ensuring you can regain access to it.
+              Adding a new website or project with Bloom is a button click. Keep all of your sites managed from one place with Bloom, keeping everything organized without hassle.
               </div>
             </div>
           </div>
@@ -298,8 +417,7 @@
               <div
                 class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
               >
-                Yes, you can access our platform on multiple devices. Your
-                encrypted data remains synced across all devices, allowing you
+                Yes, you can access Bloom on multiple devices by visiting <a href="https://bloomcms.io/" >Bloom</a> allowing you
                 to seamlessly communicate and access your files and messages
                 from anywhere.
               </div>
@@ -315,7 +433,7 @@
               class="flex items-center justify-between w-full p-8 text-left select-none"
             >
               <span
-                >Are there any storage limitations for files and documents?</span
+                >Can I upload files and documents?</span
               >
               <div
                 class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
@@ -344,7 +462,7 @@
               <div
                 class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
               >
-                Our platform provides ample storage space for your files and
+                Absolutely! Bloom provides ample storage space for your files and
                 documents. However, there may be storage limitations based on
                 the pricing plan you choose. We offer flexible plans to suit
                 your needs and provide options to upgrade if you require
@@ -390,7 +508,7 @@
                 class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
               >
                 Yes, you can export your data from the platform. We offer export
-                features that allow you to download your messages, files, and
+                features that allow you to download your media, files, and
                 documents, ensuring you have a local copy for backup or
                 migration purposes. It provides you with greater control and
                 flexibility over your data.
