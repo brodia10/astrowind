@@ -12,7 +12,6 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 // Payload Imports
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import formBuilder from "@payloadcms/plugin-form-builder"
-import { sentry } from '@payloadcms/plugin-sentry'
 import {
   BlocksFeature,
   LinkFeature,
@@ -50,12 +49,13 @@ import { Icon } from './components/icon'
 import { Logo } from './components/logo'
 import { Footer } from './globals/Footer'
 import { Header } from './globals/Header'
-import { Settings } from './globals/Settings'
-import addLastModified from './plugins/LastModifiedBy'
 import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
 import { swagger } from 'payload-swagger'
+import Newsletters from './collections/Newsletters'
+import { PostmarkTemplates } from './collections/PostmarkTemplates'
+import { SiteSettings } from './globals/SiteSettings'
 
 // Resolve .env
 dotenv.config({
@@ -66,7 +66,7 @@ dotenv.config({
 const mockModulePath = path.resolve(__dirname, 'mocks/modules.js')
 const fullFilePath = path.resolve(
   __dirname,
-  'collections/Tenants/TenantEmailConfigs/hooks/configurePostmark'
+  'collections/Tenants/TenantEmailConfigs/hooks/configurePostmark',
 )
 
 export default buildConfig({
@@ -90,6 +90,7 @@ export default buildConfig({
         fallback: { // Extend this section with additional polyfills
           os: require.resolve('os-browserify/browser'),
           stream: require.resolve('stream-browserify'),
+          buffer: require.resolve('buffer/'),
           http: require.resolve('stream-http'),
           https: require.resolve('https-browserify'),
           url: require.resolve('url/'),
@@ -97,6 +98,7 @@ export default buildConfig({
           crypto: require.resolve('crypto-browserify'),
           util: require.resolve('util/'),
           assert: require.resolve('assert/'),
+          vm: require.resolve('vm-browserify'),
           fs: false, // fs is typically not needed on the client side
           net: false, // net is not available on the client side
           tls: false, // tls is not available on the client side
@@ -107,8 +109,8 @@ export default buildConfig({
     }),
     livePreview: {
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
-      collections: ['pages', 'posts', 'events', 'comments', 'forms'], // The collections to enable Live Preview on (globals are also possible)
-      globals: ['header', 'footer', 'settings'],
+      collections: ['newsletters', 'pages', 'posts', 'events', 'comments', 'forms'], // The collections to enable Live Preview on (globals are also possible)
+      globals: ['header', 'footer', 'siteSettings'],
       breakpoints: [
         {
           label: 'Mobile',
@@ -192,30 +194,30 @@ export default buildConfig({
       }),
     ]
   }),
-  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Subscribers, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events, Locations, Platforms],
-  globals: [Header, Footer, Settings],
+  globals: [Header, Footer, SiteSettings,],
+  collections: [Users, TenantStripeConfigs, TenantEmailConfigs, Subscribers, EmailLists, OptInOptOutHistory, Tenants, Media, Categories, Posts, Pages, Events, Locations, Platforms, Newsletters, PostmarkTemplates,],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions), sentry({
-    dsn: process.env.SENTRY_DSN,
-    options: {
-      init: {
-        debug: process.env.SENTRY_DEBUG || false,
-        environment: process.env.NODE_ENV,
-        tracesSampleRate: 1.0,
-      },
-      requestHandler: {
-        serverName: false,
-        user: ["email"],
-      },
-      captureErrors: [400, 403, 404, 401, 405, 500, 502, 503],
-    }
-  }),
-    addLastModified,
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions),
+  //    sentry({
+  //   dsn: process.env.SENTRY_DSN,
+  //   options: {
+  //     init: {
+  //       debug: process.env.SENTRY_DEBUG || false,
+  //       environment: process.env.NODE_ENV,
+  //       tracesSampleRate: 1.0,
+  //     },
+  //     requestHandler: {
+  //       serverName: false,
+  //       user: ["email"],
+  //     },
+  //     captureErrors: [400, 403, 404, 401, 405, 500, 502, 503],
+  //   }
+  // }),
   swagger({
     disableAccessAnalysis: true,
     exclude: {
@@ -226,9 +228,9 @@ export default buildConfig({
       custom: false
     },
     routes: {
-      swagger: '/api/docs', // Custom Swagger UI route
-      // specs: '/api/specs', // Custom OpenAPI specs route
-      // license: '/api/license' // Custom license route
+      swagger: '/api/docs', // Swagger UI route
+      specs: '/api/specs', // OpenAPI specs route
+      // license: '/api/license' // license route
     },
     ui: {
       deepLinking: true,
@@ -241,5 +243,6 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI,
     },
+    migrationDir: 'src/migrations'
   }),
 })

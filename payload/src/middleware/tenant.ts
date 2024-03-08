@@ -39,6 +39,7 @@ async function handleNoTenantFound(req: Request, res: Response, next: NextFuncti
             next(); // Proceed or redirect as needed after seeding
         } catch (error) {
             payload.logger.error('Error seeding database:', error);
+            console.log(error)
             next(error); // Ensure errors are passed to error handling middleware
         }
     } else {

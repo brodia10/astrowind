@@ -105,28 +105,28 @@ const Locations: CollectionConfig = {
                 },
             ],
         },
-        {
-            name: 'events',
-            maxDepth: 0,
-            type: 'relationship',
-            relationTo: 'events',
-            hasMany: true,
-            access: {
-                create: () => false,
-                update: () => false,
-            },
-            admin: {
-                readOnly: true,
-            },
-            hooks: {
-                beforeChange: [({ siblingData }) => {
-                    // Mutate the sibling data to prevent DB storage
-                    // eslint-disable-next-line no-param-reassign
-                    siblingData.events = undefined;
-                }],
-                afterRead: [getAllEvents],
-            },
-        },
+        // {
+        //     name: 'events',
+        //     maxDepth: 0,
+        //     type: 'relationship',
+        //     relationTo: 'events',
+        //     hasMany: true,
+        //     access: {
+        //         create: () => false,
+        //         update: () => false,
+        //     },
+        //     admin: {
+        //         readOnly: true,
+        //     },
+        //     hooks: {
+        //         beforeChange: [({ siblingData }) => {
+        //             // Mutate the sibling data to prevent DB storage
+        //             // eslint-disable-next-line no-param-reassign
+        //             siblingData.events = undefined;
+        //         }],
+        //         afterRead: [getAllEvents],
+        //     },
+        // },
         // {
         //     name: 'staff',
         //     type: 'relationship',

@@ -6,10 +6,8 @@ export const Footer: GlobalConfig = {
     access: {
         read: () => true,
     },
-    versions: {
-        drafts: {
-            autosave: true,
-        }
+    admin: {
+        group: 'Site',
     },
     fields: [
         {

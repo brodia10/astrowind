@@ -108,3 +108,4 @@ class PostmarkTemplateService {
     }
 }
 
+export default PostmarkTemplateService

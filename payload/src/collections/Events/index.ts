@@ -20,7 +20,7 @@ const Events: CollectionConfig = {
     admin: {
         defaultColumns: ['eventDetails.row.title', 'eventDetails.dateTime', 'eventDetails.eventType', 'virtualDetails.platform'],
         useAsTitle: 'eventDetails.title',
-        group: 'Team',
+        group: 'Content',
         description: 'Manage your events, customizing details for either virtual or in-person experiences. Utilize this platform to streamline the planning process, ensuring every event detail is captured with precision.',
     },
     fields: [
@@ -107,6 +107,7 @@ const Events: CollectionConfig = {
                             name: 'timeZone',
                             label: 'Time Zone',
                             type: 'select',
+                            required: true,
                             options: [
                                 { label: 'UTC-12:00', value: 'UTC-12' },
                                 { label: 'UTC-11:00', value: 'UTC-11' },
@@ -131,16 +132,16 @@ const Events: CollectionConfig = {
                 condition: (_, siblingData) => siblingData.eventDetails?.eventType === 'inPerson',
             },
             fields: [
-                {
-                    name: 'location',
-                    type: 'relationship',
-                    relationTo: 'locations',
-                    required: false,
-                    admin: {
-                        width: '100%',
-                        description: 'Select the location from existing venues. Required for in-person events. If the location is not listed, add it to the Locations collection first.',
-                    },
-                },
+                // {
+                //     name: 'location',
+                //     type: 'relationship',
+                //     relationTo: 'locations',
+                //     required: false,
+                //     admin: {
+                //         width: '100%',
+                //         description: 'Select the location from existing venues. Required for in-person events. If the location is not listed, add it to the Locations collection first.',
+                //     },
+                // },
             ],
         },
         {
