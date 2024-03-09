@@ -219,7 +219,7 @@ export const Tenants: CollectionConfig = {
         },
         {
           label: 'Domains',
-          description: 'A domain is your website name (bloomcms.io) where your website lives. All domains, including your free Bloom subdomain and any custom domains, come with free SSL certificates for security.',
+          description: 'A domain is your website name (builditwithbloom.com) where your website lives. All domains, including your free Bloom subdomain and any custom domains, come with free SSL certificates for security.',
           fields: [
             {
               name: "domains",
@@ -248,7 +248,7 @@ export const Tenants: CollectionConfig = {
               ],
               admin: {
                 position: "sidebar",
-                description: "To connect your custom domain, add a CNAME record in your DNS settings. The record should point to your Bloom subdomain (e.g., user123.bloomcms.io). This process typically takes a few minutes to a few hours. Refer to the following guides based on your domain registrar:\n- [GoDaddy DNS Management](https://www.godaddy.com/help/add-a-cname-record-19236)\n- [Namecheap Advanced DNS](https://www.namecheap.com/support/knowledgebase/article.aspx/319/2237/how-can-i-set-up-a-cname-record-for-my-domain/)\n- [Google Domains DNS Settings](https://support.google.com/domains/answer/9211383?hl=en)\n- [Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)\n- [Cloudflare DNS Records](https://support.cloudflare.com/hc/en-us/articles/360019093151-Managing-DNS-records-in-Cloudflare)"
+                description: "To connect your custom domain, add a CNAME record in your DNS settings. The record should point to your Bloom subdomain (e.g., user123.builditwithbloom.com). This process typically takes a few minutes to a few hours. Refer to the following guides based on your domain registrar:\n- [GoDaddy DNS Management](https://www.godaddy.com/help/add-a-cname-record-19236)\n- [Namecheap Advanced DNS](https://www.namecheap.com/support/knowledgebase/article.aspx/319/2237/how-can-i-set-up-a-cname-record-for-my-domain/)\n- [Google Domains DNS Settings](https://support.google.com/domains/answer/9211383?hl=en)\n- [Amazon Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)\n- [Cloudflare DNS Records](https://support.cloudflare.com/hc/en-us/articles/360019093151-Managing-DNS-records-in-Cloudflare)"
               }
             }
           ]

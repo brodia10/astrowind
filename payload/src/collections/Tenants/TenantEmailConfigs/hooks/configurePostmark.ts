@@ -48,8 +48,8 @@ const configurePostmark: CollectionBeforeChangeHook = async ({
 
             await senderService.createSenderSignature({
                 Name: randomString,
-                FromEmail: `${randomString}@bloomcms.io`,
-                ReturnPathDomain: 'pm-bounces.bloomcms.io',
+                FromEmail: `${randomString}@builditwithbloom.com`,
+                ReturnPathDomain: 'pm-bounces.builditwithbloom.com',
             });
 
             const messageStreamService = new PostmarkMessageStreamService(serverToken);

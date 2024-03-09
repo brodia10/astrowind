@@ -13,7 +13,7 @@ function generateUniqueId(): string {
 function generateSubdomain(tenantName: string, uniqueId: string, type: 'site' | 'dashboard'): string {
     try {
         const sanitizedTenantName = tenantName.replace(/[^a-zA-Z0-9-]/g, '').toLowerCase();
-        return `${sanitizedTenantName}-${uniqueId}-${type}.bloomcms.io`;
+        return `${sanitizedTenantName}-${uniqueId}-${type}.builditwithbloom.com`;
     } catch (error) {
         throw new Error(`Subdomain generation failed: ${error}`);
     }
