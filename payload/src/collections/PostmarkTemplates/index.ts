@@ -12,9 +12,6 @@ export const PostmarkTemplates: CollectionConfig = {
         hidden: true,
         useAsTitle: 'name'
     },
-    // hooks: {
-    //     beforeRead: [getPostmarkTemplates,],
-    // },
     fields: [
         {
             name: 'name',

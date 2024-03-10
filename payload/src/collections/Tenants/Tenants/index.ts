@@ -127,6 +127,7 @@ export const Tenants: CollectionConfig = {
               name: 'name',
               label: 'Company Name',
               type: 'text',
+              required: true,
               admin: {
                 placeholder: 'My Company',
                 position: 'sidebar'
