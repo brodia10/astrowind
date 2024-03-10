@@ -79,7 +79,7 @@ export interface Tenant {
     secondaryColor?: string | null;
   };
   company: {
-    name?: string | null;
+    name: string;
     telephone?: {
       telephone?: string | null;
       businessHours?: string | null;

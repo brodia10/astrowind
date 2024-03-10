@@ -1,10 +1,8 @@
 import { CollectionBeforeChangeHook } from 'payload/types';
 import { LinkTrackingOptions, UnsubscribeHandlingTypes } from 'postmark/dist/client/models';
-import { PostmarkAccountService, PostmarkMessageStreamService, PostmarkSenderSignatureService, } from '../../../../services/tenant/email';
-import { MessageStreamType, PostmarkServiceError, StreamErrorResponse, StreamSuccessResponse } from '../../../../services/tenant/email/PostmarkMessageStreamService';
-
-// Assuming MessageStreamType is accurately defined according to your needs
-// Ensure your MessageStreamType reflects the exact string values expected by Postmark
+import { TenantConfigurationService } from '../../../../services/tenant/TenantConfigurationService';
+import { PostmarkAccountService, PostmarkMessageStreamService, PostmarkSenderSignatureService } from '../../../../services/tenant/email';
+import { MessageStreamType, PostmarkServiceError } from '../../../../services/tenant/email/PostmarkMessageStreamService';
 
 function generateValidId(length: number): string {
     const letters = 'abcdefghijklmnopqrstuvwxyz';
@@ -16,83 +14,77 @@ function generateValidId(length: number): string {
     return result;
 }
 
-const configurePostmark: CollectionBeforeChangeHook = async ({
-    data,
-    operation,
-    req,
-}) => {
-    if (operation === 'create') {
+const tenantService = TenantConfigurationService.getInstance();
+
+async function setupPostmarkForTenant(companyName: string, apiToken: string, data: any) {
+    const serverService = new PostmarkAccountService(apiToken);
+    const senderService = new PostmarkSenderSignatureService(apiToken);
+    const serverResponse = await serverService.createServer({
+        Name: companyName,
+        TrackLinks: LinkTrackingOptions.HtmlAndText,
+        TrackOpens: true,
+    });
+
+    const serverToken = serverResponse.ApiTokens[0];
+
+    await senderService.createSenderSignature({
+        Name: companyName,
+        FromEmail: `${companyName.toLowerCase()}@builditwithbloom.com`,
+        ReturnPathDomain: 'pm-bounces.builditwithbloom.com',
+    });
+
+    const messageStreamService = new PostmarkMessageStreamService(serverToken);
+    const messageStreamTypes: MessageStreamType[] = ['Transactional', 'Broadcasts'];
+    const streams = await createMessageStreams(companyName, messageStreamService, messageStreamTypes);
+
+    data.postmarkServerId = serverResponse.ID;
+    data.postmarkServerToken = serverToken;
+    data.messageStreams = streams.map(s => ({ type: s.type, ID: s.ID }));
+}
+
+async function createMessageStreams(companyName: string, service: PostmarkMessageStreamService, types: MessageStreamType[]) {
+    const results = await Promise.allSettled(
+        types.map(type =>
+            service.createMessageStream(
+                generateValidId(10),
+                `${companyName} ${type} Stream`,
+                type,
+                type === 'Broadcasts' ? UnsubscribeHandlingTypes.Postmark : UnsubscribeHandlingTypes.None
+            ).then(response => ({ type, ID: response.ID }))
+                .catch(error => { throw error; })
+        )
+    );
+
+    const successfulStreams = results.filter(result => result.status === 'fulfilled') as PromiseFulfilledResult<any>[];
+    if (results.some(result => result.status === 'rejected')) {
+        const errorDetails = results.filter(result => result.status === 'rejected');
+        errorDetails.forEach(error => {
+            console.error('Stream creation error:', error);
+        });
+        throw new Error('Failed to create one or more Postmark message streams.');
+    }
+
+    return successfulStreams.map(result => result.value);
+}
+
+const configurePostmark: CollectionBeforeChangeHook = async ({ data, operation, req }) => {
+    if (operation !== 'create') return;
+
+    const postmarkAccountApiToken = process.env.POSTMARK_ACCOUNT_API_TOKEN;
+    if (!postmarkAccountApiToken) {
+        throw new PostmarkServiceError('POSTMARK_ACCOUNT_API_TOKEN is not defined.', 'InitialSetup');
+    }
+
+    try {
         const tenantId = req.body.tenant;
-        if (!tenantId) {
-            throw new Error('Tenant ID is missing from the request.');
+        const tenant = await tenantService.getTenantById(tenantId);
+        if (!tenant) {
+            throw new Error('Tenant is invalid on configuring Postmark.');
         }
 
-        const postmarkAccountApiToken: string = process.env.POSTMARK_ACCOUNT_API_TOKEN ?? '';
-        if (!postmarkAccountApiToken) {
-            throw new PostmarkServiceError('POSTMARK_ACCOUNT_API_TOKEN is not defined.', 'InitialSetup');
-        }
-
-        try {
-            const randomString = generateValidId(10);
-            const serverService = new PostmarkAccountService(postmarkAccountApiToken);
-            const senderService = new PostmarkSenderSignatureService(postmarkAccountApiToken);
-
-            const serverResponse = await serverService.createServer({
-                Name: randomString,
-                TrackLinks: LinkTrackingOptions.HtmlAndText,
-                TrackOpens: true,
-            });
-
-            const serverToken = serverResponse.ApiTokens[0];
-            const serverId = serverResponse.ID;
-
-            await senderService.createSenderSignature({
-                Name: randomString,
-                FromEmail: `${randomString}@builditwithbloom.com`,
-                ReturnPathDomain: 'pm-bounces.builditwithbloom.com',
-            });
-
-            const messageStreamService = new PostmarkMessageStreamService(serverToken);
-
-            // Correct MessageStreamType values to match Postmark's expectations
-            const messageStreamTypes: MessageStreamType[] = ['Transactional', 'Broadcasts']; // Adjust if necessary
-
-            const streamResponses: (StreamSuccessResponse | StreamErrorResponse)[] = [];
-
-            for (const type of messageStreamTypes) {
-                try {
-                    const response = await messageStreamService.createMessageStream(
-                        generateValidId(10),
-                        `${randomString}-${type.toLowerCase()}`,
-                        type,
-                        type === 'Broadcasts' ? UnsubscribeHandlingTypes.Postmark : UnsubscribeHandlingTypes.None
-                    );
-                    // Assuming the response has an 'ID' field for success responses
-                    streamResponses.push({ ID: response.ID, type });
-                } catch (error) {
-                    console.error(`Error creating ${type} stream:`, error);
-                    streamResponses.push({ error, type });
-                }
-            }
-
-            const successfulStreams = streamResponses.filter((resp): resp is StreamSuccessResponse => !('error' in resp));
-            const errorStreams = streamResponses.filter((resp): resp is StreamErrorResponse => 'error' in resp);
-
-            if (errorStreams.length > 0) {
-                // Handle or log errors accordingly
-                // For example, you might log a summary of failed stream creations
-                throw new PostmarkServiceError('One or more message streams failed to create.', 'CreateMessageStream');
-            }
-
-            // Save Postmark Data data to tenant's email config
-            data.postmarkServerId = serverId;
-            data.postmarkServerToken = serverToken;
-            data.messageStreams = successfulStreams.map(s => ({ type: s.type, ID: s.ID }));
-            console.log('Tenant Email Config Data', data)
-
-        } catch (error) {
-            throw new PostmarkServiceError('Failed to configure Postmark for the tenant.', 'configurePostmark', error);
-        }
+        await setupPostmarkForTenant(tenant.company.name, postmarkAccountApiToken, data);
+    } catch (error) {
+        throw new PostmarkServiceError('Failed to configure Postmark for the tenant.', 'configurePostmark', error);
     }
 };
 

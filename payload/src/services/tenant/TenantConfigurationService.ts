@@ -63,4 +63,24 @@ export class TenantConfigurationService {
             console.error("Error configuring tenant context:", error);
         }
     }
+
+    /**
+      * Retrieves tenant configuration by tenant ID.
+      * @param {string} tenantId - The unique identifier for the tenant.
+      * @returns {Promise<Tenant | null>} The tenant configuration if found, otherwise null.
+      */
+    public async getTenantById(tenantId: string): Promise<Tenant | null> {
+        try {
+            const tenant = await payload.findByID({
+                collection: 'tenants',
+                id: tenantId,
+                depth: 1,
+            });
+
+            return tenant ?? null;
+        } catch (error) {
+            console.error(`Error fetching tenant by ID (${tenantId}):`, error);
+            return null;
+        }
+    }
 }

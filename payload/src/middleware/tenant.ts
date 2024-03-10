@@ -66,6 +66,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
     try {
         // Try to resolve the tenant
         const tenant = await tenantResolutionService.resolveTenant(req);
+        console.log('do we have the tenant', tenant)
 
         // May need to check if tenant has an email config here and if not, create it.
         if (tenant) {
