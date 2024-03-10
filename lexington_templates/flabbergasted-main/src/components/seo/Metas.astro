@@ -46,3 +46,15 @@ let subtitle = "Launch your dream website or online store in minutes";
   content={Astro.site ? `${Astro.site}${twitterImage}` : twitterImage}
 />
 <title>{title} | {subtitle}</title>
+
+<!---------------------
+    Google Analytics (gtags.js)
+ --------------------->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YSXXEHBP45"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YSXXEHBP45');
+</script>
