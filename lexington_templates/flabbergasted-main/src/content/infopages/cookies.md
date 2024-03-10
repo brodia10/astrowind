@@ -2,15 +2,15 @@
 page: Cookies
 pubDate: 2023-12-22
 ---
-This cookie policy describes how Flabbergasted (Flabbergasted) uses “cookies” and other similar technologies, in connection with our Site and Services. For more information on Flabbergasted privacy practices, please see our Privacy Policy.
+This cookie policy describes how Bloom Agency (Bloom Agency) uses “cookies” and other similar technologies, in connection with our Site and Services. For more information on Bloom Agency privacy practices, please see our Privacy Policy.
 
 ### About cookies
 
 A cookie is a small piece of information stored on your computer via the web browser you use. Cookies are used to personalize your web experience with a website. They help with things like understanding how you use a website, remembering your login details, and storing site preferences.
 
-### How Flabbergasted uses cookies
+### How Bloom Agency uses cookies
 
-Flabbergasted uses two types of cookies: first and third-party cookies. First party cookies are set and read by us when you use Flabbergasted. Third party cookies are set by companies other than Flabbergasted and collect information about you which may be sent to a third party. Flabbergasted uses third party cookies for site analytics purposes.
+Bloom Agency uses two types of cookies: first and third-party cookies. First party cookies are set and read by us when you use Bloom Agency. Third party cookies are set by companies other than Bloom Agency and collect information about you which may be sent to a third party. Bloom Agency uses third party cookies for site analytics purposes.
 
 ### Opting out
 
