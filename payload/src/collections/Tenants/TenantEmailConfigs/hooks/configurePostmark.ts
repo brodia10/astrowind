@@ -17,8 +17,8 @@ function generateValidId(length: number): string {
 const tenantService = TenantConfigurationService.getInstance();
 
 async function setupPostmarkForTenant(companyName: string, apiToken: string, data: any) {
+    // Server
     const serverService = new PostmarkAccountService(apiToken);
-    const senderService = new PostmarkSenderSignatureService(apiToken);
     const serverResponse = await serverService.createServer({
         Name: companyName,
         TrackLinks: LinkTrackingOptions.HtmlAndText,
@@ -27,19 +27,29 @@ async function setupPostmarkForTenant(companyName: string, apiToken: string, dat
 
     const serverToken = serverResponse.ApiTokens[0];
 
+    // Save data
+    data.postmarkServerId = serverResponse.ID;
+    data.postmarkServerToken = serverToken;
+
+    // Sender Signature
+    const senderService = new PostmarkSenderSignatureService(apiToken);
     await senderService.createSenderSignature({
         Name: companyName,
         FromEmail: `${companyName.toLowerCase()}@builditwithbloom.com`,
         ReturnPathDomain: 'pm-bounces.builditwithbloom.com',
     });
 
+    // Message Streams
     const messageStreamService = new PostmarkMessageStreamService(serverToken);
     const messageStreamTypes: MessageStreamType[] = ['Transactional', 'Broadcasts'];
-    const streams = await createMessageStreams(companyName, messageStreamService, messageStreamTypes);
 
-    data.postmarkServerId = serverResponse.ID;
-    data.postmarkServerToken = serverToken;
-    data.messageStreams = streams.map(s => ({ type: s.type, ID: s.ID }));
+    const streams = await createMessageStreams(companyName, messageStreamService, messageStreamTypes);
+    const broadcastStream = streams.find(s => s.type === 'Broadcasts');
+    const transactionalStream = streams.find(s => s.type === 'Transactional');
+
+    // Save data
+    data.messageStreams.broadcast = broadcastStream?.ID;
+    data.messageStreams.transactional = transactionalStream?.ID;
 }
 
 async function createMessageStreams(companyName: string, service: PostmarkMessageStreamService, types: MessageStreamType[]) {
