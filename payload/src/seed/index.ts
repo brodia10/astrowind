@@ -5,10 +5,10 @@ export const seed = async (payload: Payload): Promise<void> => {
     await payload.create({
         collection: 'users',
         data: {
-            firstName: 'Demo',
-            lastName: 'User',
-            email: 'demo@builditwithbloom.com',
-            password: 'demo',
+            firstName: 'Brook',
+            lastName: 'Rodia',
+            email: 'brook@builditwithbloom.com',
+            password: 'Nirvana1987k!',
             roles: ['super-admin'],
         },
     })
@@ -140,17 +140,15 @@ export const seed = async (payload: Payload): Promise<void> => {
         },
     });
 
-    bloom.emailConfig = bloomEmailConfig
-
-    // await Promise.all([
-    //     await payload.update({
-    //         collection: 'tenants',
-    //         id: bloom.id,
-    //         data: {
-    //             emailConfig: emailConfig.id,
-    //         },
-    //     }),
-    // ]);
+    await Promise.all([
+        await payload.update({
+            collection: 'tenants',
+            id: bloom.id,
+            data: {
+                emailConfig: bloomEmailConfig.id,
+            },
+        }),
+    ]);
 
 
     // create tenant-scoped pages
