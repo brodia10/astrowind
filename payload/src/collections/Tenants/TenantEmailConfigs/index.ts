@@ -80,7 +80,7 @@ export const TenantEmailConfigs: CollectionConfig = {
                             name: 'postmarkServerId',
                             type: 'number',
                             admin: {
-                                // readOnly: true,
+                                readOnly: true,
                                 width: '100%',
                                 description: 'The ID of the Postmark server used for this tenant.',
                             },
@@ -89,7 +89,7 @@ export const TenantEmailConfigs: CollectionConfig = {
                             name: 'postmarkServerToken',
                             type: 'text',
                             admin: {
-                                // readOnly: true,
+                                readOnly: true,
                                 width: '100%',
                                 description: 'The server API token for the Postmark server.',
                             },
