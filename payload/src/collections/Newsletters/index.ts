@@ -12,9 +12,6 @@ const Newsletters: CollectionConfig = {
             autosave: true,
         },
     },
-    // hooks: {
-    //     beforeChange: [getPostmarkTemplates,]
-    // },
     fields: [
         {
             type: 'tabs',

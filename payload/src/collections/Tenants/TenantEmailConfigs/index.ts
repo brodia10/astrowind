@@ -21,6 +21,7 @@ export const TenantEmailConfigs: CollectionConfig = {
     },
     hooks: {
         beforeChange: [configurePostmark],
+        // afterRead: [getPostmarkTemplates],
     },
     fields: [
         {
@@ -106,6 +107,7 @@ export const TenantEmailConfigs: CollectionConfig = {
                                     type: 'text',
                                     admin: {
                                         description: 'Stream ID for transactional emails.',
+                                        readOnly: true,
                                     },
                                 },
                                 {
@@ -113,6 +115,7 @@ export const TenantEmailConfigs: CollectionConfig = {
                                     type: 'text',
                                     admin: {
                                         description: 'Stream ID for broadcast emails.',
+                                        readOnly: true,
                                     },
                                 },
 

@@ -63,11 +63,12 @@ dotenv.config({
 })
 
 // Aliases for excluding server modules from the React Admin bundle. See here https://payloadcms.com/docs/admin/excluding-server-code
-const mockModulePath = path.resolve(__dirname, 'mocks/modules.js')
-const fullFilePath = path.resolve(
-  __dirname,
-  'collections/Tenants/TenantEmailConfigs/hooks/configurePostmark',
-)
+// Define the path to your mock module
+const mockModulePath = path.resolve(__dirname, 'mocks/modules.js');
+
+// Correctly specify each module's full file path that you wish to mock
+const configurePostmark = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/configurePostmark.ts');
+const getPostmarkTemplates = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/getPostmarkTemplates.ts');
 
 export default buildConfig({
   // serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -85,7 +86,9 @@ export default buildConfig({
         alias: {
           ...config.resolve.alias,
           dotenv: path.resolve(__dirname, './dotenv.js'),
-          [fullFilePath]: mockModulePath,
+          // Alias each server module path to the mockModulePath individually
+          [configurePostmark]: mockModulePath,
+          [getPostmarkTemplates]: mockModulePath,
         },
         fallback: { // Extend this section with additional polyfills
           os: require.resolve('os-browserify/browser'),

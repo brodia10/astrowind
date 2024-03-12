@@ -1,4 +1,3 @@
-// src/globals/PostmarkTemplates.js
 import { CollectionConfig } from 'payload/types';
 
 export const PostmarkTemplates: CollectionConfig = {
@@ -9,7 +8,7 @@ export const PostmarkTemplates: CollectionConfig = {
         update: () => true, // Restrict this to admin roles
     },
     admin: {
-        hidden: true,
+        // hidden: true,
         useAsTitle: 'name'
     },
     fields: [
