@@ -392,7 +392,7 @@ CREATE TABLE IF NOT EXISTS "tenants" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"theme_colors_primary_color" varchar,
 	"theme_colors_secondary_color" varchar,
-	"company_name" varchar,
+	"company_name" varchar NOT NULL,
 	"company_telephone_telephone" varchar,
 	"company_telephone_business_hours" varchar,
 	"company_street_address" varchar,
