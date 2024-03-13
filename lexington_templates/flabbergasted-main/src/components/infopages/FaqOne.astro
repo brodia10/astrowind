@@ -64,7 +64,7 @@
           <div
             class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
           >
-          Choosing Bloom is like picking a top-notch garden where your business or personal brand can grow. If you're wondering why Bloom might be a better fit for you than services like Wix, GoDaddy, Squarespace, or WordPress, it’s because we've tailored our platform to be as user-friendly as a simple word processor. Whether you’re a solopreneur, business owner, creative, (or all three as many of use are), our drag-and-drop Bloom Blocks make designing a website as easy as creating a document. Our beautiful, ready-made templates take the hassle out of design, allowing you to focus on what really matters — your content. Plus, with out-of-the-box SEO tools, your site is primed to be found on Google from day one. And yes, we mesh perfectly with your favorite email providers, so managing your communication is a breeze. Bloom is the go-to for creators who want a gorgeous website without the tech overwhelm. Whether you're managing multiple sites or fine-tuning your email marketing with real-time editing and premium Postmark newsletter templates, Bloom empowers your online presence to flourish organically. Choose Bloom to cultivate a website that truly represents your unique brand and resonates with your audience.        </div>
+          Choosing Bloom is like picking a top-notch garden where your business or personal brand can grow. If you're wondering why Bloom might be a better fit for you than services like Wix, GoDaddy, Squarespace, or WordPress, it’s because we've tailored our platform to be as user-friendly as a simple word processor. Whether you’re a solopreneur, business owner, creative, (or all three as many of use are), our drag-and-drop Bloom Blocks make designing a website as easy as creating a document. Our beautiful, ready-made templates take the hassle out of design, allowing you to focus on what really matters — your content. Plus, with out-of-the-box SEO tools, your site is primed to be found on Google from day one. And yes, we mesh perfectly with your favorite email providers, so managing your communication is a breeze. Bloom is the go-to for creators who want a gorgeous website without the tech overwhelm. Whether you're managing multiple sites or fine-tuning your email marketing with real-time editing and premium Postmark newsletter templates, Bloom empowers your online presence to flourish organically. Choose Bloom to cultivate a website that truly represents your unique brand and resonates with your audience.</div>
         </div>
       </div>
         <div
@@ -195,6 +195,139 @@
             </div>
           </div>
           <div
+          x-data="{ id: $id('accordion') }"
+          :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+          class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
+        >
+          <button
+            @click="setActiveAccordion(id)"
+            class="flex items-center justify-between w-full p-8 text-left select-none"
+          >
+            <span
+              >Can I upload files and documents?</span
+            >
+            <div
+              class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+            >
+              <svg
+                class="w-5 h-5 duration-300 ease-out text-accent-500"
+                :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 6v12m6-6H6"></path>
+              </svg>
+            </div>
+          </button>
+          <div
+            x-show="activeAccordion==id"
+            x-collapse=""
+            style="display: none;"
+          >
+            <div
+              class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
+            >
+              Absolutely! Bloom provides ample storage space for your files and
+              documents. However, there may be storage limitations based on
+              the pricing plan you choose. We offer flexible plans to suit
+              your needs and provide options to upgrade if you require
+              additional storage capacity.
+            </div>
+          </div>
+        </div>
+          <div
+          x-data="{ id: $id('accordion') }"
+          :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+          class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
+        >
+          <button
+            @click="setActiveAccordion(id)"
+            class="flex items-center justify-between w-full p-8 text-left select-none"
+          >
+            <span
+              >Can I create customer portals for my customers?</span
+            >
+            <div
+              class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+            >
+              <svg
+                class="w-5 h-5 duration-300 ease-out text-accent-500"
+                :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 6v12m6-6H6"></path>
+              </svg>
+            </div>
+          </button>
+          <div
+            x-show="activeAccordion==id"
+            x-collapse=""
+            style="display: none;"
+          >
+            <div
+              class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
+            >
+            Yes, you can create customer portals for each website so your customers can access your documents or data. You control what your customer can and can not see by creating roles. Roles that come out-of-the-box with Bloom are: Admin, Staff, Customer, Publisher, Editor... and you can create your own roles for your own use cases!
+            </div>
+          </div>
+        </div>
+          <div
+          x-data="{ id: $id('accordion') }"
+          :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
+          class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
+        >
+          <button
+            @click="setActiveAccordion(id)"
+            class="flex items-center justify-between w-full p-8 text-left select-none"
+          >
+            <span
+              >Can I run my Startup, Non-Profit, or Enterprise Business with Bloom?</span
+            >
+            <div
+              class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
+            >
+              <svg
+                class="w-5 h-5 duration-300 ease-out text-accent-500"
+                :class="{ '-rotate-[45deg]': activeAccordion==id }"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 6v12m6-6H6"></path>
+              </svg>
+            </div>
+          </button>
+          <div
+            x-show="activeAccordion==id"
+            x-collapse=""
+            style="display: none;"
+          >
+            <div
+              class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
+            >
+            Absolutely. Bloom offers a comprehensive suite of tools, all in one place to support and grow any type of business or idea: from hosting your Resume to bringing your Ma & Pa online or running your Enterprise.
+            </div>
+          </div>
+        </div>
+          <div
             x-data="{ id: $id('accordion') }"
             :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
             class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
@@ -233,50 +366,7 @@
               <div
                 class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
               >
-              With Bloom, you can see and tweak your emails and website updates instantly, ensuring they look perfect before anyone else sees them.
-              </div>
-            </div>
-          </div>
-          <div
-            x-data="{ id: $id('accordion') }"
-            :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
-            class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
-          >
-            <button
-              @click="setActiveAccordion(id)"
-              class="flex items-center justify-between w-full p-8 text-left select-none"
-            >
-              <span
-                >Can I run my Startup, Non-Profit, or Enterprise Business with Bloom?</span
-              >
-              <div
-                class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
-              >
-                <svg
-                  class="w-5 h-5 duration-300 ease-out text-accent-500"
-                  :class="{ '-rotate-[45deg]': activeAccordion==id }"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 6v12m6-6H6"></path>
-                </svg>
-              </div>
-            </button>
-            <div
-              x-show="activeAccordion==id"
-              x-collapse=""
-              style="display: none;"
-            >
-              <div
-                class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
-              >
-              Absolutely. Bloom offers a comprehensive suite of tools, all in one place to support and grow any type of business or idea: from hosting your Resume to bringing your Ma & Pa online or running your Enterprise.
+              With Bloom, you can see and tweak your emails, newsletters, forms, blog posts, pages, events and other website updates instantly, ensuring they look perfect before anyone else sees them.
               </div>
             </div>
           </div>
@@ -369,7 +459,7 @@
               </div>
             </div>
           </div>
-          <div
+          <!-- <div
             x-data="{ id: $id('accordion') }"
             :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
             class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
@@ -411,7 +501,7 @@
                 from anywhere.
               </div>
             </div>
-          </div>
+          </div> -->
           <div
             x-data="{ id: $id('accordion') }"
             :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
@@ -421,9 +511,7 @@
               @click="setActiveAccordion(id)"
               class="flex items-center justify-between w-full p-8 text-left select-none"
             >
-              <span
-                >Can I upload files and documents?</span
-              >
+              <span>Is it possible to export my data from Bloom?</span>
               <div
                 class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
               >
@@ -451,54 +539,9 @@
               <div
                 class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
               >
-                Absolutely! Bloom provides ample storage space for your files and
-                documents. However, there may be storage limitations based on
-                the pricing plan you choose. We offer flexible plans to suit
-                your needs and provide options to upgrade if you require
-                additional storage capacity.
-              </div>
-            </div>
-          </div>
-          <div
-            x-data="{ id: $id('accordion') }"
-            :class="{ 'text-black': activeAccordion==id, '  hover:text-lila-900 duration-300': activeAccordion!=id }"
-            class="cursor-pointer group text-black       hover:text-lila-900 duration-300"
-          >
-            <button
-              @click="setActiveAccordion(id)"
-              class="flex items-center justify-between w-full p-8 text-left select-none"
-            >
-              <span>Is it possible to export my data from the platform?</span>
-              <div
-                class="h-8 w-8 border-2 border-black inline-flex items-center justify-center rounded-full shadow-tiny shadow-black group-hover:bg-lila-500 group-hover:text-black"
-              >
-                <svg
-                  class="w-5 h-5 duration-300 ease-out text-accent-500"
-                  :class="{ '-rotate-[45deg]': activeAccordion==id }"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M12 6v12m6-6H6"></path>
-                </svg>
-              </div>
-            </button>
-            <div
-              x-show="activeAccordion==id"
-              x-collapse=""
-              style="display: none;"
-            >
-              <div
-                class="p-8 pt-0 text-slate-600 font-sans text-lg max-w-3xl font-normal"
-              >
-                Yes, you can export your data from the platform. We offer export
-                features that allow you to download your media, files, and
-                documents, ensuring you have a local copy for backup or
+                Absolutely, you can export all of your data from Bloom at anytime on any plan. Bloom offers export
+                features that allow you to download your media, files,
+                documents, and all other data ensuring you have a local copy for backup or
                 migration purposes. It provides you with greater control and
                 flexibility over your data.
               </div>

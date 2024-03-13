@@ -20,7 +20,7 @@
       };
   
       // TODO: API_URL Env var
-      const response = await fetch(`${import.meta.env.PUBLIC_BLOOM_BASE_API_URL}/form-submissions/`, {
+      const response = await fetch(`${import.meta.env.PUBLIC_BLOOM_BASE_API_URL}/api/form-submissions/`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
