@@ -36,8 +36,8 @@ const start = async () => {
   } else {
     emailConfig = {
       transport: app.locals.emailTransport,
-      fromAddress: app.locals.tenantEmailConfig?.fromEmailAddress,
-      fromName: app.locals.tenantEmailConfig?.fromName,
+      fromAddress: app.locals.emailConfig?.fromEmailAddress,
+      fromName: app.locals.emailConfig?.fromName,
     };
   }
 

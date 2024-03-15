@@ -1,11 +1,9 @@
 import type { CollectionConfig } from 'payload/types';
 import { superAdmins } from '../../../access/superAdmins';
-import { isSuperOrTenantAdmin } from '../../Users/utilities/isSuperOrTenantAdmin';
 import { tenantAdmins } from '../Tenants/access/tenantAdmins';
-import configurePostmark from './hooks/configurePostmark';
 
 export const TenantEmailConfigs: CollectionConfig = {
-    slug: 'tenant-email-configs',
+    slug: 'email-configs',
     admin: {
         useAsTitle: 'fromEmailAddress',
         defaultColumns: ['fromEmailAddress', 'updatedAt'],
@@ -19,23 +17,7 @@ export const TenantEmailConfigs: CollectionConfig = {
         update: tenantAdmins,
         delete: superAdmins,
     },
-    hooks: {
-        beforeChange: [configurePostmark],
-        // afterRead: [getPostmarkTemplates],
-    },
     fields: [
-        {
-            name: 'tenant',
-            type: 'relationship',
-            relationTo: 'tenants',
-            required: true,
-            unique: true,
-            index: true,
-            admin: {
-                readOnly: !isSuperOrTenantAdmin,
-                description: 'Reference to the tenant this Email configuration belongs to. Each tenant can have only one Email configuration.',
-            },
-        },
         {
             type: 'tabs',
             tabs: [

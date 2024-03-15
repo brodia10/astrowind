@@ -68,7 +68,6 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
         const tenant = await tenantResolutionService.resolveTenant(req);
         console.log('do we have the tenant', tenant)
 
-        // May need to check if tenant has an email config here and if not, create it.
         if (tenant) {
             payload.logger.info(`Tenant Email Config: ${safeStringify(tenant.emailConfig)}`);
 
@@ -85,7 +84,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
             res.locals.emailTransport = transport;
 
             // Store Tenant Email Config for use in other  middleware
-            res.locals.tenantEmailConfig = emailService.getConfig()
+            res.locals.emailConfig = emailService.getConfig()
 
             // Store Tenant for use in other middleware
             res.locals.tenant = tenant

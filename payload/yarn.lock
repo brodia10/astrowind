@@ -10226,6 +10226,7 @@ __metadata:
     stream-http: "npm:^3.2.0"
     stripe: "npm:^14.10.0"
     svelte: "npm:^4.2.12"
+    svelte-confetti: "npm:^1.3.2"
     ts-node: "npm:^9.1.1"
     typescript: "npm:^4.8.4"
     url: "npm:^0.11.3"
@@ -12936,6 +12937,15 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 10c0/6c4032340701a9950865f7ae8ef38578d8d7053f5e10518076e6554a9381fa91bd9c6850193695c141f32b21f979c985db07265a758867bac95de05f7d8aeb39
+  languageName: node
+  linkType: hard
+
+"svelte-confetti@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "svelte-confetti@npm:1.3.2"
+  peerDependencies:
+    svelte: ^4.0.0
+  checksum: 10c0/2034343ede245b961fe27eb7b6d587cb00f3fd4b093c7780385041562213e6673f36281a48b12d5d62de0d34b131d3eff5d3503af57da0c7287516820aa011da
   languageName: node
   linkType: hard
 

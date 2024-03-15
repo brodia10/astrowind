@@ -10,7 +10,7 @@ export interface Config {
   collections: {
     users: User;
     'tenant-stripe-configs': TenantStripeConfig;
-    'tenant-email-configs': TenantEmailConfig;
+    'email-configs': EmailConfig;
     subscribers: Subscriber;
     'email-lists': EmailList;
     'opt-in-opt-out-history': OptInOptOutHistory;
@@ -97,7 +97,7 @@ export interface Tenant {
         id?: string | null;
       }[]
     | null;
-  emailConfig?: (number | null) | TenantEmailConfig;
+  emailConfig?: (number | null) | EmailConfig;
   updatedAt: string;
   createdAt: string;
 }
@@ -156,11 +156,10 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tenant-email-configs".
+ * via the `definition` "email-configs".
  */
-export interface TenantEmailConfig {
+export interface EmailConfig {
   id: number;
-  tenant: number | Tenant;
   fromEmailAddress: string;
   fromName: string;
   postmarkServerId?: number | null;

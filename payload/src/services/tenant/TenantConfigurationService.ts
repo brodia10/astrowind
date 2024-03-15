@@ -51,7 +51,7 @@ export class TenantConfigurationService {
      * @returns {Promise<void>}
      */
     public async configureTenantContext(tenant: Tenant): Promise<void> {
-        payload.logger.info(`Current Tenant:  ${JSON.stringify(tenant.emailConfig)} (${tenant.domains.map(domain => domain?.domain).join(', ')})`);
+        payload.logger.info(`Current Tenant Email Config and Domains:  ${JSON.stringify(tenant.emailConfig)} (${tenant.domains.map(domain => domain?.domain).join(', ')})`);
         // const stripeService = StripeConfigurationService.getInstance();
         const emailService = EmailConfigService.getInstance();
 

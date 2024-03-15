@@ -67,8 +67,9 @@ dotenv.config({
 const mockModulePath = path.resolve(__dirname, 'mocks/modules.js');
 
 // Correctly specify each module's full file path that you wish to mock
-const configurePostmark = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/configurePostmark.ts');
-const getPostmarkTemplates = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/getPostmarkTemplates.ts');
+const configurePostmark = path.resolve(__dirname, 'collections/Tenants/Tenants/hooks/configurePostmark.ts');
+// const getPostmarkTemplates = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/getPostmarkTemplates.ts');
+
 
 export default buildConfig({
   // serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -88,7 +89,7 @@ export default buildConfig({
           dotenv: path.resolve(__dirname, './dotenv.js'),
           // Alias each server module path to the mockModulePath individually
           [configurePostmark]: mockModulePath,
-          [getPostmarkTemplates]: mockModulePath,
+          // [getPostmarkTemplates]: mockModulePath,
         },
         fallback: { // Extend this section with additional polyfills
           os: require.resolve('os-browserify/browser'),
@@ -146,7 +147,7 @@ export default buildConfig({
         Icon,
       },
       // afterNavLinks: [],
-      // afterDashboard: [SiteLink],
+      // beforeDashboard: [SiteLink],
     },
   },
   editor: lexicalEditor({

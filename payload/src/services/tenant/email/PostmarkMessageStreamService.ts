@@ -2,7 +2,12 @@
 import { ServerClient } from 'postmark';
 import { MessageStream, UnsubscribeHandlingTypes } from 'postmark/dist/client/models';
 
-export type MessageStreamType = 'Transactional' | 'Broadcasts';
+
+export enum MessageStreamType {
+    Transactional = 'Transactional',
+    Broadcasts = 'Broadcasts',
+}
+
 type UnsubscribeHandlingType = 'None' | 'Postmark' | 'Custom';
 
 // Custom error class for Postmark service errors
@@ -32,7 +37,7 @@ export class PostmarkMessageStreamService {
         this.client = new ServerClient(serverToken);
     }
 
-    async getMessageStreams(includeArchivedStreams: boolean = false, messageStreamType?: string): Promise<MessageStream[]> {
+    async getMessageStreams(includeArchivedStreams: boolean = false, messageStreamType?: MessageStreamType): Promise<MessageStream[]> {
         try {
             const result = await this.client.getMessageStreams({ includeArchivedStreams, messageStreamType });
             console.log(`Total Message Streams: ${result.TotalCount}`);

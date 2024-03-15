@@ -45,10 +45,7 @@ const formBuilderConfig = {
         access: {
             read: () => true,
             update: () => true,
-            create: ({ req }) => {
-                // Check for a custom API request header to distinguish API requests
-                return !!req.user && req.headers['x-api-request'] === 'true';
-            },
+            create: () => true,
         },
     },
 };

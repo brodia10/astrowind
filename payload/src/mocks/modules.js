@@ -6,11 +6,11 @@ export const configurePostmark = () => {
     return {};
   };
   
-  // Mock implementation for getPostmarkTemplates hook
-  export const getPostmarkTemplates = () => {
-    // Dummy implementation, or simply return an empty array if no implementation is needed
-    return [];
-  };
+  // // Mock implementation for getPostmarkTemplates hook
+  // export const getPostmarkTemplates = () => {
+  //   // Dummy implementation, or simply return an empty array if no implementation is needed
+  //   return [];
+  // };
   
   // Export an empty default object
   export default {};

@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload/types'
 
 import { ColourPickerField, TelephoneField } from '@nouance/payload-better-fields-plugin'
 import { tenantAdmins } from './access/tenantAdmins'
+import configurePostmark from './hooks/configurePostmark'
 import generateTenantSubdomains from './hooks/generateSubdomains'
 
 export const Tenants: CollectionConfig = {
@@ -14,6 +15,7 @@ export const Tenants: CollectionConfig = {
   },
   hooks: {
     beforeChange: [generateTenantSubdomains],
+    afterChange: [configurePostmark]
   },
   admin: {
     useAsTitle: 'company.name',
@@ -243,7 +245,8 @@ export const Tenants: CollectionConfig = {
                   required: true,
                   defaultValue: false,
                   admin: {
-                    description: "This domain was automatically generated for your site by Bloom. All free domains come with free SSL Certificates."
+                    description: "This domain was automatically generated for your site by Bloom. All free domains come with free SSL Certificates.",
+                    readOnly: true,
                   }
                 }
               ],
@@ -259,11 +262,11 @@ export const Tenants: CollectionConfig = {
           description: 'Manage your tenant\'s email configuration settings here. This includes configuring SMTP settings, sender information, and more.',
           fields: [
             {
+              index: true,
               name: 'emailConfig',
               label: 'Email',
               type: 'relationship',
-              relationTo: 'tenant-email-configs',
-              hasMany: false,
+              relationTo: 'email-configs',
               unique: true, // Ensures that each tenant is linked to a unique email configuration
               admin: {
                 description: 'The email configuration associated with this tenant. This allows for customization of email settings specific to each tenant.',

@@ -1,6 +1,7 @@
 'use strict'
 import nodemailerPostmarkTransport, { PostmarkTransport } from "nodemailer-postmark-transport";
-import { TenantEmailConfig } from "payload/generated-types";
+import payload from "payload";
+import { EmailConfig } from "payload/generated-types";
 
 /**
  * Manages email configurations for a multi-tenant application using Postmark. Designed to ensure operational
@@ -21,7 +22,7 @@ export class EmailConfigService {
      * @type {EmailConfigService | null}
      */
     private static instance: EmailConfigService | null = null;
-    private emailConfig: TenantEmailConfig | null = null;
+    private emailConfig: EmailConfig | null = null;
 
     /**
      * Private constructor to prevent instantiation from outside and ensure the class follows
@@ -46,31 +47,59 @@ export class EmailConfigService {
     /**
      * Gets the tenant email configuration
      * 
-     * @return {TenantEmailConfig} 
+     * @return {EmailConfig} 
      * @memberof EmailConfigurationService
      */
-    public getConfig(): TenantEmailConfig {
+    public getConfig(): EmailConfig {
         return this.emailConfig;
     }
 
     /**
      * Sets the tenant email configuration
      *
-     * @param {TenantEmailConfig} config
+     * @param {EmailConfig} config
      * @memberof EmailConfigurationService
      */
-    public setConfig(config: TenantEmailConfig) {
+    public setConfig(config: EmailConfig) {
         this.emailConfig = config;
+    }
+
+    /**
+     * Updates and persists the tenant's email configuration with Postmark data in a PayloadCMS collection.
+     * 
+     * @param tenantId - The unique identifier for the tenant, used as the document ID in the collection.
+     * @param emailConfig - The updated email configuration data.
+     */
+    public async updateEmailConfigInPayload(tenantId: string, emailConfig: EmailConfig): Promise<void> {
+        try {
+            const result = await payload.update({
+                collection: 'email-configs', // Use the correct collection name
+                id: tenantId, // Document ID, assuming it matches the tenantId
+                data: emailConfig, // The updated email configuration data
+                depth: 0, // Adjust based on your needs for related documents
+                overrideAccess: true, // Consider the implications of overriding access control
+                showHiddenFields: false, // Set according to your needs
+            });
+
+            console.log('Email configuration updated successfully in PayloadCMS:', result);
+
+            // Optionally, synchronize the service's in-memory state with the updated result
+            this.emailConfig = result;
+
+        } catch (error) {
+            console.error('Failed to update email configuration in PayloadCMS:', error);
+            throw new Error('Error updating email configuration in PayloadCMS');
+        }
     }
 
     /**
      * Configure the EmailConfigurationService with the tenant email configuration
      * This is called from the tenant middleware
      *
-     * @param {TenantEmailConfig} config
+     * @param {EmailConfig} config
      * @memberof EmailConfigurationService
      */
-    public configureService(config: TenantEmailConfig): void {
+    public configureService(config: EmailConfig): void {
         this.setConfig(config);
     }
 
