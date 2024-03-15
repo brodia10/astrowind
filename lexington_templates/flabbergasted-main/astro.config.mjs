@@ -1,5 +1,7 @@
 import cloudflare from '@astrojs/cloudflare';
 import mdx from "@astrojs/mdx";
+import react from '@astrojs/react';
+
 import sitemap from "@astrojs/sitemap";
 import svelte from '@astrojs/svelte';
 import tailwind from "@astrojs/tailwind";
@@ -18,5 +20,5 @@ export default defineConfig({
     drafts: true,
   },
   site: 'https://builditwithbloom.com',
-  integrations: [tailwind(),   sitemap(), mdx(), svelte()]
+  integrations: [tailwind(),   sitemap(), mdx(), svelte(), react()]
 });
