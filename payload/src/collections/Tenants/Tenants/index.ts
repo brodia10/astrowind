@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload/types'
 
 import { ColourPickerField, TelephoneField } from '@nouance/payload-better-fields-plugin'
 import { tenantAdmins } from './access/tenantAdmins'
-import configurePostmark from './hooks/configurePostmark'
 import generateTenantSubdomains from './hooks/generateSubdomains'
 
 export const Tenants: CollectionConfig = {
@@ -15,7 +14,6 @@ export const Tenants: CollectionConfig = {
   },
   hooks: {
     beforeChange: [generateTenantSubdomains],
-    afterChange: [configurePostmark]
   },
   admin: {
     useAsTitle: 'company.name',

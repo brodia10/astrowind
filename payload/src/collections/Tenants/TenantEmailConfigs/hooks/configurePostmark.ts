@@ -1,4 +1,5 @@
-import { CollectionAfterChangeHook } from 'payload/types';
+import payload from 'payload';
+import { CollectionBeforeChangeHook } from 'payload/types';
 import { LinkTrackingOptions, UnsubscribeHandlingTypes } from 'postmark/dist/client/models';
 import { PostmarkAccountService, PostmarkMessageStreamService, PostmarkSenderSignatureService } from '../../../../services/tenant/email';
 import { MessageStreamType } from '../../../../services/tenant/email/PostmarkMessageStreamService';
@@ -45,20 +46,42 @@ async function setupEmailConfig(companyName: string, apiToken: string) {
     const { serverId, serverToken } = await createPostmarkServer(`${companyName}|${generateValidId(10)}`, apiToken);
     await createSenderSignature(`${companyName}|${generateValidId(10)}`, apiToken);
     const messageStreams = await createMessageStreams(companyName, serverToken);
-    return { postmarkServerId: serverId, messageStreams };
+    return { postmarkServerId: serverId, postmarkServerToken: serverToken, messageStreams };
 }
 
-const configurePostmark: CollectionAfterChangeHook = async ({ doc, operation }) => {
+const configurePostmark: CollectionBeforeChangeHook = async ({ data, req, operation }) => {
+    // Need to augment the Request and extend it to include the tenant so it's available everywhere.
+    // Right now we get req.user which has the tenant id
     if (operation == 'create') {
-        if (!doc.company?.name || !process.env.POSTMARK_ACCOUNT_API_TOKEN) {
-            console.error('Missing company name or Postmark API token.');
+
+        // Get tenant ID from request and convert it to an integer.
+        const tenantId = parseInt(req.user.tenants[0].tenant.id, 10);
+
+        // get the tenant by ID
+        const tenant = await payload.findByID({
+            collection: 'tenants',
+            id: tenantId
+        })
+
+        if (!tenant || !process.env.POSTMARK_ACCOUNT_API_TOKEN) {
+            console.error('Missing Tenant or Postmark API token.');
             throw new Error('Postmark configuration failed due to missing data.');
         }
         try {
-            const emailConfig = await setupEmailConfig(doc.company.name, process.env.POSTMARK_ACCOUNT_API_TOKEN);
-            doc.emailConfig = { ...doc.emailConfig, ...emailConfig };
-            // // Ensure to handle the promise correctly
-            // await payload.update({ collection: 'tenants', id: doc.id, data: { emailConfig: doc.emailConfig } });
+            const { postmarkServerId, postmarkServerToken, messageStreams } = await setupEmailConfig(tenant?.company?.name, process.env.POSTMARK_ACCOUNT_API_TOKEN);
+            data = {
+                ...data,
+                postmarkServerId,
+                postmarkServerToken,
+                messageStreams,
+            }
+
+            console.log('postmarkServerId: ', postmarkServerId)
+            console.log('postmarkServerToken', postmarkServerToken)
+            console.log('messageStreams', messageStreams)
+            console.log('DATA DOC', data)
+            // I think I need to update the emailconfig context here
+            // EmailConfigService.getInstance().setConfig(data)
         } catch (error) {
             console.error('Failed to configure Postmark for the tenant:', error);
             throw new Error('Postmark configuration failed.');

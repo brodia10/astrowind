@@ -67,9 +67,8 @@ dotenv.config({
 const mockModulePath = path.resolve(__dirname, 'mocks/modules.js');
 
 // Correctly specify each module's full file path that you wish to mock
-const configurePostmark = path.resolve(__dirname, 'collections/Tenants/Tenants/hooks/configurePostmark.ts');
+const configurePostmark = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/configurePostmark.ts');
 // const getPostmarkTemplates = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/getPostmarkTemplates.ts');
-
 
 export default buildConfig({
   // serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
