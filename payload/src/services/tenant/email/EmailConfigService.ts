@@ -62,7 +62,6 @@ export class EmailConfigService {
      */
     public setConfig(config: EmailConfig) {
         this.emailConfig = config;
-        console.log('Config set', this.emailConfig)
     }
 
     /**
