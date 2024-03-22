@@ -86,8 +86,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
             // Store Tenant for use in other middleware
             res.locals.tenant = tenant
 
-            payload.logger.info(`Tenant Email Transport in Middleware Locals: ${safeStringify(res.locals.emailTransport)}`);
-            console.log('do we have the tenant', tenant)
+            payload.logger.info('Tenant: ', tenant)
             next();
         } else {
             await handleNoTenantFound(req, res, next); // Ensure response is handled in all paths
