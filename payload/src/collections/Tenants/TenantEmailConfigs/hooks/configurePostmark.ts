@@ -68,17 +68,11 @@ const configurePostmark: CollectionBeforeChangeHook = async ({ data, req, operat
             throw new Error('Postmark configuration failed due to missing data.');
         }
         try {
-            const { postmarkServerId, postmarkServerToken, messageStreams } = await setupEmailConfig(tenant?.company?.name, process.env.POSTMARK_ACCOUNT_API_TOKEN);
-
+            const { postmarkServerId, postmarkServerToken, messageStreams } = await setupEmailConfig(tenant.company.name, process.env.POSTMARK_ACCOUNT_API_TOKEN);
             data.postmarkServerId = postmarkServerId
             data.postmarkServerToken = postmarkServerToken
             data.messageStreams = messageStreams
-            console.log('postmarkServerId: ', postmarkServerId)
-            console.log('postmarkServerToken', postmarkServerToken)
-            console.log('messageStreams', messageStreams)
-            console.log('DATA DOC', data)
-            // // I think I need to update the emailconfig context here
-            // EmailConfigService.getInstance().setConfig(data)
+            return data
         } catch (error) {
             console.error('Failed to configure Postmark for the tenant:', error);
             throw new Error('Postmark configuration failed.');
