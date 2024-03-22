@@ -67,10 +67,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
         // Try to resolve the tenant
         const tenant = await tenantResolutionService.resolveTenant(req);
 
-
         if (tenant) {
-            payload.logger.info(`Tenant Email Config: ${safeStringify(tenant.emailConfig)}`);
-
             // Update the tenant config service's context with this tenant's data
             await tenantConfigurationService.configureTenantContext(tenant);
 
