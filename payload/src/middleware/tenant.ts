@@ -66,7 +66,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
     try {
         // Try to resolve the tenant
         const tenant = await tenantResolutionService.resolveTenant(req);
-        console.log('do we have the tenant', tenant)
+
 
         if (tenant) {
             payload.logger.info(`Tenant Email Config: ${safeStringify(tenant.emailConfig)}`);
@@ -89,10 +89,8 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
             // Store Tenant for use in other middleware
             res.locals.tenant = tenant
 
-            // Use safeStringify instead of JSON.stringify
-            payload.logger.info(`TenantConfigService: Tenant Email Transport: ${safeStringify(transport)}`);
             payload.logger.info(`Tenant Email Transport in Middleware Locals: ${safeStringify(res.locals.emailTransport)}`);
-            payload.logger.info(`tenant: ${safeStringify(res.locals.tenant)}`);
+            console.log('do we have the tenant', tenant)
             next();
         } else {
             await handleNoTenantFound(req, res, next); // Ensure response is handled in all paths
