@@ -1,6 +1,6 @@
 // src/services/PostmarkAccountService.ts
 import { AccountClient } from 'postmark';
-import { CreateServerRequest, Server, Servers } from 'postmark/dist/client/models';
+import { CreateServerRequest, Server, Servers, TemplatesPush, TemplatesPushRequest } from 'postmark/dist/client/models';
 
 export class PostmarkAccountService {
     private client: AccountClient;
@@ -62,6 +62,17 @@ export class PostmarkAccountService {
         } catch (error) {
             console.error('Error deleting server:', error);
             throw error;
+        }
+    }
+
+    public async pushTemplates(req: TemplatesPushRequest): Promise<TemplatesPush> {
+        try {
+            const result = await this.client.pushTemplates(req);
+            console.log(`Total Templates Pushed: ${result.TotalCount}`);
+            return result;
+        } catch (error) {
+            console.error('Error pushing templates:', error);
+            throw error; // Maintain consistent error handling across your service methods
         }
     }
 }

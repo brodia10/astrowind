@@ -3,6 +3,7 @@ import { CollectionBeforeChangeHook } from 'payload/types';
 import { LinkTrackingOptions, UnsubscribeHandlingTypes } from 'postmark/dist/client/models';
 import { PostmarkAccountService, PostmarkMessageStreamService, PostmarkSenderSignatureService } from '../../../../services/tenant/email';
 import { MessageStreamType } from '../../../../services/tenant/email/PostmarkMessageStreamService';
+import PostmarkTemplateService from '../../../../services/tenant/email/PostmarkTemplateService';
 
 async function createPostmarkServer(companyName: string, apiToken: string) {
     const serverService = new PostmarkAccountService(apiToken);
@@ -42,10 +43,74 @@ async function createMessageStreams(companyName: string, serverToken: string) {
     return streams.reduce((acc, stream) => ({ ...acc, [stream.type.toLowerCase()]: stream.ID }), {});
 }
 
-async function setupEmailConfig(companyName: string, apiToken: string) {
-    const { serverId, serverToken } = await createPostmarkServer(`${companyName}|${generateValidId(10)}`, apiToken);
-    await createSenderSignature(`${companyName}|${generateValidId(10)}`, apiToken);
+async function savePostmarkTemplates({ Name, TemplateId }): Promise<void> {
+    const templateIdStr = TemplateId.toString();
+    try {
+        const [existingTemplate] = await payload.find({
+            collection: 'postmark-templates',
+            where: {
+                id: {
+                    equals: templateIdStr,
+                },
+            },
+            limit: 1,
+        }).then(res => res.docs);
+
+        const data = { name: Name, id: templateIdStr };
+
+        if (existingTemplate) {
+            // Template exists, update it
+            await payload.update({
+                collection: 'postmark-templates',
+                id: existingTemplate.id,
+                data,
+            });
+        } else {
+            // Template does not exist, create it
+            await payload.create({
+                collection: 'postmark-templates',
+                data,
+            });
+        }
+    } catch (error) {
+        console.error('Failed to save template to Payload CMS:', error);
+    }
+}
+
+async function fetchAndSavePostmarkTemplates(serverToken: string) {
+    const templateService = new PostmarkTemplateService(serverToken);
+    try {
+        const { Templates: templates } = await templateService.listTemplates();
+        await Promise.all(templates.map(template => savePostmarkTemplates(template)));
+        console.log('templates', templates)
+    } catch (error) {
+        console.error('Error fetching or saving Postmark templates:', error);
+    }
+}
+
+async function setupEmailConfig(companyName: string, accountToken: string) {
+    // Create Server
+    const { serverId, serverToken } = await createPostmarkServer(`${companyName}|${generateValidId(10)}`, accountToken);
+
+    // Create Sender Signature
+    await createSenderSignature(`${companyName}|${generateValidId(10)}`, accountToken);
+
+    // Create Message Streams
     const messageStreams = await createMessageStreams(companyName, serverToken);
+
+    // Initialize the PostmarkAccountService with the account API token
+    const accountService = new PostmarkAccountService(accountToken);
+
+    // Call pushTemplates to push templates from the source server to the new server
+    await accountService.pushTemplates({
+        SourceServerID: 12853267,
+        DestinationServerID: serverId,
+        PerformChanges: true,
+    });
+
+    // Fetch Templates from Server and Save to DB
+    await fetchAndSavePostmarkTemplates(serverToken);
+
     return { postmarkServerId: serverId, postmarkServerToken: serverToken, messageStreams };
 }
 
