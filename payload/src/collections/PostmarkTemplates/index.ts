@@ -1,8 +1,11 @@
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { CollectionConfig } from 'payload/types';
 
-const PostmarkTemplates: CollectionConfig = {
+export const PostmarkTemplates: CollectionConfig = {
     slug: 'postmark-templates',
+    admin: {
+        hidden: true,
+    },
     fields: [
         {
             name: 'name',
@@ -22,7 +25,7 @@ const PostmarkTemplates: CollectionConfig = {
         {
             name: 'htmlBody',
             type: 'richText',
-            editor: lexicalEditor(),
+            editor: lexicalEditor({}),
             required: true,
         },
         {
@@ -58,5 +61,3 @@ const PostmarkTemplates: CollectionConfig = {
         },
     ],
 };
-
-export default PostmarkTemplates;
