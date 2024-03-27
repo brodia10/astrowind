@@ -65,7 +65,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
 
     try {
         // Try to resolve the tenant
-        const tenant = await tenantResolutionService.resolveTenant(req);
+        const tenant = await tenantResolutionService.resolveTenantByDomain(req);
 
         if (tenant) {
             // Update the tenant config service's context with this tenant's data
@@ -85,7 +85,8 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
 
             // Store Tenant for use in other middleware
             res.locals.tenant = tenant
-            console.log("Current Tenant: ", tenant)
+            req.tenant = tenant
+            console.log("Current Tenant on Request: ", req.tenant)
             next();
         } else {
             await handleNoTenantFound(req, res, next); // Ensure response is handled in all paths
