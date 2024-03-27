@@ -1,3 +1,4 @@
+import payload from "payload";
 import { ServerClient } from "postmark";
 import {
     CreateTemplateRequest,
@@ -104,6 +105,51 @@ class PostmarkTemplateService {
             return result;
         } catch (error) {
             throw new PostmarkServiceError('Error sending batch email with templates', 'sendEmailBatchWithTemplates', error);
+        }
+    }
+
+    async savePostmarkTemplates({ Name, TemplateId }): Promise<void> {
+        const templateIdStr = TemplateId.toString();
+        try {
+            const [existingTemplate] = await payload.find({
+                collection: 'postmark-templates',
+                where: {
+                    id: {
+                        equals: templateIdStr,
+                    },
+                },
+                limit: 1,
+            }).then(res => res.docs);
+
+            const data = { name: Name, templateId: templateIdStr };
+
+            if (existingTemplate) {
+                // Template exists, update it
+                await payload.update({
+                    collection: 'postmark-templates',
+                    id: existingTemplate.id,
+                    data,
+                });
+            } else {
+                // Template does not exist, create it
+                await payload.create({
+                    collection: 'postmark-templates',
+                    data,
+                });
+            }
+        } catch (error) {
+            console.error('Failed to save template to Payload CMS:', error);
+        }
+    }
+
+    async fetchAndSavePostmarkTemplates(serverToken: string) {
+        const templateService = new PostmarkTemplateService(serverToken);
+        try {
+            const { Templates: templates } = await templateService.listTemplates();
+            await Promise.all(templates.map(template => this.savePostmarkTemplates(template)));
+            console.log('templates', templates)
+        } catch (error) {
+            console.error('Error fetching or saving Postmark templates:', error);
         }
     }
 }
