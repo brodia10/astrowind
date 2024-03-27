@@ -657,7 +657,7 @@ export interface Location {
 export interface Newsletter {
   id: number;
   title?: string | null;
-  templates?: (string | null) | PostmarkTemplate;
+  templates?: (number | null) | PostmarkTemplate;
   content?:
     | {
         text: string;
@@ -678,8 +678,31 @@ export interface Newsletter {
  * via the `definition` "postmark-templates".
  */
 export interface PostmarkTemplate {
-  name?: string | null;
-  id: string;
+  id: number;
+  name: string;
+  templateId: number;
+  subject: string;
+  htmlBody: {
+    root: {
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      type: string;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  textBody: string;
+  associatedServerId: number;
+  active?: boolean | null;
+  alias?: string | null;
+  templateType: 'Standard' | 'Layout';
+  layoutTemplate?: string | null;
   updatedAt: string;
   createdAt: string;
 }
