@@ -10,7 +10,7 @@ export const TenantEmailConfigs: CollectionConfig = {
         defaultColumns: ['fromEmailAddress', 'updatedAt'],
         description: "Configure the Email Integration for your email service provider here. Ensure that you have the correct SMTP host, port, and credentials or API key as provided by your email service.",
         group: 'Team',
-        // hidden: true,
+        hidden: true,
     },
     access: {
         read: tenantAdmins,
@@ -57,7 +57,8 @@ export const TenantEmailConfigs: CollectionConfig = {
                     ],
                 },
                 {
-                    label: 'Postmark Configuration',
+                    label: 'Postmark',
+                    name: 'postmark',
                     description: 'Configure the Postmark settings for email service.',
                     admin: {
                         position: 'sidebar'
