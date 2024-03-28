@@ -6,6 +6,7 @@ const relateEmailConfigToTenant: CollectionAfterChangeHook = async ({
   doc, // Full document data of the email configuration
   req, // Full express request
   operation, // Implicitly 'create' or 'update', no need to check
+  previousDoc
 }) => {
   try {
     const tenant = await new TenantResolutionService().getTenantFromRequest(req);
@@ -16,14 +17,15 @@ const relateEmailConfigToTenant: CollectionAfterChangeHook = async ({
       return doc;
     }
 
-    // Directly update the tenant document with the new or updated email configuration ID
-    await payload.update({
-      collection: 'tenants',
-      id: tenant.id,
-      data: { emailConfig: doc.id },
-    });
+    // // Directly update the tenant document with the new or updated email configuration ID
+    // await payload.update({
+    //   collection: 'tenants',
+    //   id: tenant.id,
+    //   data: { emailConfig: doc },
+    // });
 
-    console.log("DOC", doc)
+    console.log("DOC", doc.id)
+    console.log("PREVIOUS DOC", previousDoc.id)
 
     payload.logger.info(`EmailConfig ID ${doc.id} successfully ${operation === 'create' ? 'associated with' : 'updated for'} Tenant ID ${tenant.id}.`);
 
