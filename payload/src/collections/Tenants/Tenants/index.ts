@@ -20,8 +20,8 @@ export const Tenants: CollectionConfig = {
     group: 'Team'
   },
   labels: {
-    singular: 'Account Settings',
-    plural: 'Account Settings',
+    singular: 'My Apps',
+    plural: 'My Apps',
   },
   fields: [
     {
@@ -265,7 +265,6 @@ export const Tenants: CollectionConfig = {
               label: 'Email',
               type: 'relationship',
               relationTo: 'email-configs',
-              unique: true, // Ensures that each tenant is linked to a unique email configuration
               admin: {
                 description: 'The email configuration associated with this tenant. This allows for customization of email settings specific to each tenant.',
               },
