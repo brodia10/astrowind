@@ -8,9 +8,9 @@ import payload from "payload";
  * @param {Response} _res
  * @param {NextFunction} next
  */
-function logRequest(req: Request, _res: Response, next: NextFunction): void {
-    payload.logger.info(`Request URL: ${req.url}`);
+function requestLoggingMiddleware(req: Request, _res: Response, next: NextFunction): void {
+    payload.logger.info(`request: ${req.method} ${req.url}`)
     next();
 }
 
-export default logRequest;
+export default requestLoggingMiddleware;
