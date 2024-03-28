@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload/types';
 import { superAdmins } from '../../../access/superAdmins';
 import { tenantAdmins } from '../Tenants/access/tenantAdmins';
 import configurePostmark from './hooks/configurePostmark';
+import relateEmailConfigToTenant from './hooks/relateEmailConfigToTenant';
 
 export const TenantEmailConfigs: CollectionConfig = {
     slug: 'email-configs',
@@ -19,7 +20,8 @@ export const TenantEmailConfigs: CollectionConfig = {
         delete: superAdmins,
     },
     hooks: {
-        beforeChange: [configurePostmark]
+        beforeChange: [configurePostmark],
+        afterChange: [relateEmailConfigToTenant]
     },
     fields: [
         {
@@ -58,7 +60,6 @@ export const TenantEmailConfigs: CollectionConfig = {
                 },
                 {
                     label: 'Postmark',
-                    name: 'postmark',
                     description: 'Configure the Postmark settings for email service.',
                     admin: {
                         position: 'sidebar'
