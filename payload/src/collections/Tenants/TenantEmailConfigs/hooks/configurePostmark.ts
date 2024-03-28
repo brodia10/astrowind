@@ -29,20 +29,26 @@ async function createSenderSignature(companyName: string, apiToken: string) {
 
 async function createMessageStreams(companyName: string, serverToken: string) {
     const service = new PostmarkMessageStreamService(serverToken);
-    const types = Object.values(MessageStreamType);
 
-    const streamPromises = types.map(async (type) => {
-        const id = generateValidId(10);
+    const streamsToCreate = [
+        { type: MessageStreamType.Transactional, id: 'transactional' },
+        { type: MessageStreamType.Broadcasts, id: 'broadcast' },
+    ];
+
+    const streams = {};
+    for (const { type, id } of streamsToCreate) {
+        const streamId = generateValidId(10);
         const name = `${companyName} ${type} Stream`;
-        const unsubscribeHandling = type === MessageStreamType.Broadcasts ? UnsubscribeHandlingTypes.Postmark : UnsubscribeHandlingTypes.None;
-        const response = await service.createMessageStream(id, name, type, unsubscribeHandling);
-        return { type, ID: response.ID };
-    });
+        const unsubscribeHandling = type === MessageStreamType.Broadcasts ?
+            UnsubscribeHandlingTypes.Postmark :
+            UnsubscribeHandlingTypes.None;
 
-    const streams = await Promise.all(streamPromises);
-    return streams.reduce((acc, stream) => ({ ...acc, [stream.type.toLowerCase()]: stream.ID }), {});
+        const response = await service.createMessageStream(streamId, name, type, unsubscribeHandling);
+        streams[id] = response.ID;
+    }
+
+    return streams;
 }
-
 
 async function setupEmailConfig(companyName: string, accountToken: string) {
     // Create Server
@@ -57,15 +63,15 @@ async function setupEmailConfig(companyName: string, accountToken: string) {
     // Create Message Streams
     const messageStreams = await createMessageStreams(companyName, serverToken);
 
-    // Call pushTemplates to push templates from the source server to the new server
-    await accountService.pushTemplates({
-        SourceServerID: 12853267,
-        DestinationServerID: serverId,
-        PerformChanges: true,
-    });
+    // // Call pushTemplates to push templates from the source server to the new server
+    // await accountService.pushTemplates({
+    //     SourceServerID: 12853267,
+    //     DestinationServerID: serverId,
+    //     PerformChanges: true,
+    // });
 
-    // Fetch Templates from Server and Save to DB
-    await templateService.fetchAndSavePostmarkTemplates(serverToken);
+    // // Fetch Templates from Server and Save to DB
+    // await templateService.fetchAndSavePostmarkTemplates(serverToken);
 
     return { postmarkServerId: serverId, postmarkServerToken: serverToken, messageStreams };
 }
@@ -74,12 +80,15 @@ const configurePostmark: CollectionBeforeChangeHook = async ({ data, req, operat
     // Need to augment the Request and extend it to include the tenant so it's available everywhere.
     // Right now we get req.user which has the tenant id
     if (operation == 'create') {
+
         const tenant = await new TenantResolutionService().getTenantFromRequest(req)
         console.log('CONFIGURE POSTMARK TENANT FROM RESOLUTION SERVICE', tenant)
+
         if (!tenant || !process.env.POSTMARK_ACCOUNT_API_TOKEN) {
             console.error('Missing Tenant or Postmark API token.');
             throw new Error('Postmark configuration failed due to missing data.');
         }
+
         try {
             const { postmarkServerId, postmarkServerToken, messageStreams } = await setupEmailConfig(tenant.company.name, process.env.POSTMARK_ACCOUNT_API_TOKEN);
             data.postmarkServerId = postmarkServerId
