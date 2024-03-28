@@ -48,6 +48,8 @@ async function handleNoTenantFound(req: Request, res: Response, next: NextFuncti
     }
 }
 
+// TODO: Tenant Tear Down Script - deletes postmark data 
+
 /** 
  * Resolve and configure tenant
  * This function is called after the request is logged.
@@ -110,7 +112,7 @@ export async function tenantMiddleware(req: Request, res: Response, next: NextFu
     try {
         await resolveAndConfigureTenant(req, res, next);
     } catch (error) {
-        payload.logger.error('Error in Tenant middleware:', error);
+        console.error('Error in Tenant middleware:', error);
         next(error);
     }
 }
