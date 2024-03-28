@@ -656,22 +656,28 @@ export interface Location {
  */
 export interface Newsletter {
   id: number;
-  title?: string | null;
-  templates?: (number | null) | PostmarkTemplate;
-  content?:
-    | {
-        text: string;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'text';
-      }[]
-    | null;
-  emailLists?: (number | EmailList)[] | null;
-  status?: ('draft' | 'scheduled' | 'sent') | null;
+  image: number | Media;
+  title: string;
+  content: {
+    root: {
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      type: string;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  emailLists: (number | EmailList)[];
+  status: 'draft' | 'scheduled' | 'sent';
   scheduledSendDate?: string | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
