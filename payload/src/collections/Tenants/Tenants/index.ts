@@ -265,6 +265,7 @@ export const Tenants: CollectionConfig = {
               label: 'Email',
               type: 'relationship',
               relationTo: 'email-configs',
+              hasMany: false,
               admin: {
                 description: 'The email configuration associated with this tenant. This allows for customization of email settings specific to each tenant.',
               },

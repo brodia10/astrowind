@@ -64,7 +64,7 @@ const Newsletters: CollectionConfig = {
                                     {
                                         name: 'caption',
                                         type: 'richText',
-                                        editor: lexicalEditor(),
+                                        editor: lexicalEditor({}),
                                     },
                                 ],
                             },
