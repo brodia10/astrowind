@@ -90,7 +90,7 @@ const configurePostmark: CollectionBeforeChangeHook = async ({ data, req, operat
         }
 
         try {
-            const { postmarkServerId, postmarkServerToken, messageStreams } = await setupEmailConfig(tenant.company.name, process.env.POSTMARK_ACCOUNT_API_TOKEN);
+            const { postmarkServerId, postmarkServerToken, messageStreams } = await setupEmailConfig(tenant.siteName, process.env.POSTMARK_ACCOUNT_API_TOKEN);
             data.postmarkServerId = postmarkServerId
             data.postmarkServerToken = postmarkServerToken
             data.messageStreams = messageStreams

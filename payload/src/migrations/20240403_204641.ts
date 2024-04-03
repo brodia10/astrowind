@@ -17,18 +17,6 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
- CREATE TYPE "enum_tenant_stripe_configs_default_currency" AS ENUM('US', 'EU', 'GB', 'CA', 'AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- CREATE TYPE "enum_tenant_stripe_configs_payment_methods" AS ENUM('american_express', 'diners_club', 'mastercard', 'visa', 'apple_pay', 'google_pay', 'microsoft_pay', 'paypal', 'alipay', 'wechat_pay', 'unionpay', 'jcb', 'klarna', 'afterpay', 'ideal');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
  CREATE TYPE "enum_subscribers_email_status" AS ENUM('Active', 'Unsubscribed');
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -215,18 +203,6 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
- CREATE TYPE "enum_forms_confirmation_type" AS ENUM('message', 'redirect');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- CREATE TYPE "enum_forms_redirect_type" AS ENUM('reference', 'custom');
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
  CREATE TYPE "enum_header_nav_items_type" AS ENUM('reference', 'custom');
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -234,6 +210,18 @@ END $$;
 
 DO $$ BEGIN
  CREATE TYPE "enum_footer_nav_items_type" AS ENUM('reference', 'custom');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_forms_confirmation_type" AS ENUM('message', 'redirect');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ CREATE TYPE "enum_forms_redirect_type" AS ENUM('reference', 'custom');
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -274,28 +262,6 @@ CREATE TABLE IF NOT EXISTS "users" (
 );
 
 CREATE TABLE IF NOT EXISTS "users_rels" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"order" integer,
-	"parent_id" integer NOT NULL,
-	"path" varchar NOT NULL,
-	"tenants_id" integer
-);
-
-CREATE TABLE IF NOT EXISTS "tenant_stripe_configs" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"stripe_secret_key" varchar NOT NULL,
-	"stripe_publishable_key" varchar NOT NULL,
-	"stripe_account_id" varchar NOT NULL,
-	"stripe_webhook_secret" varchar NOT NULL,
-	"defaultCurrency" "enum_tenant_stripe_configs_default_currency" NOT NULL,
-	"paymentMethods" "enum_tenant_stripe_configs_payment_methods" NOT NULL,
-	"success_url" varchar NOT NULL,
-	"cancel_url" varchar NOT NULL,
-	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "tenant_stripe_configs_rels" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"order" integer,
 	"parent_id" integer NOT NULL,
@@ -372,6 +338,34 @@ CREATE TABLE IF NOT EXISTS "opt_in_opt_out_history_rels" (
 	"tenants_id" integer
 );
 
+CREATE TABLE IF NOT EXISTS "customers" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"stripe_customer_id" varchar,
+	"payment_method" varchar,
+	"stripe_i_d" varchar,
+	"skip_sync" boolean,
+	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "customers_rels" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"order" integer,
+	"parent_id" integer NOT NULL,
+	"path" varchar NOT NULL,
+	"plans_id" integer
+);
+
+CREATE TABLE IF NOT EXISTS "plans" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"stripe_plan_id" varchar,
+	"price" numeric,
+	"stripe_i_d" varchar,
+	"skip_sync" boolean,
+	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS "tenants_domains" (
 	"_order" integer NOT NULL,
 	"_parent_id" integer NOT NULL,
@@ -382,16 +376,14 @@ CREATE TABLE IF NOT EXISTS "tenants_domains" (
 
 CREATE TABLE IF NOT EXISTS "tenants" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"theme_colors_primary_color" varchar,
-	"theme_colors_secondary_color" varchar,
-	"company_name" varchar NOT NULL,
-	"company_telephone_telephone" varchar,
-	"company_telephone_business_hours" varchar,
-	"company_street_address" varchar,
-	"company_city" varchar,
-	"company_state" varchar,
-	"company_postal_code" varchar,
-	"company_country" varchar,
+	"site_name" varchar NOT NULL,
+	"street_address" varchar,
+	"city" varchar,
+	"state" varchar,
+	"postal_code" varchar,
+	"country" varchar,
+	"telephone" varchar,
+	"business_hours" varchar,
 	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
 	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
 );
@@ -401,8 +393,9 @@ CREATE TABLE IF NOT EXISTS "tenants_rels" (
 	"order" integer,
 	"parent_id" integer NOT NULL,
 	"path" varchar NOT NULL,
-	"media_id" integer,
-	"email_configs_id" integer
+	"customers_id" integer,
+	"email_configs_id" integer,
+	"media_id" integer
 );
 
 CREATE TABLE IF NOT EXISTS "media" (
@@ -854,6 +847,54 @@ CREATE TABLE IF NOT EXISTS "postmark_templates" (
 	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS "header_nav_items" (
+	"_order" integer NOT NULL,
+	"_parent_id" integer NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"link_type" "enum_header_nav_items_type",
+	"link_new_tab" boolean,
+	"link_url" varchar,
+	"link_label" varchar NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "header" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "header_rels" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"order" integer,
+	"parent_id" integer NOT NULL,
+	"path" varchar NOT NULL,
+	"pages_id" integer
+);
+
+CREATE TABLE IF NOT EXISTS "footer_nav_items" (
+	"_order" integer NOT NULL,
+	"_parent_id" integer NOT NULL,
+	"id" varchar PRIMARY KEY NOT NULL,
+	"link_type" "enum_footer_nav_items_type",
+	"link_new_tab" boolean,
+	"link_url" varchar,
+	"link_label" varchar NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "footer" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
+	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS "footer_rels" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"order" integer,
+	"parent_id" integer NOT NULL,
+	"path" varchar NOT NULL,
+	"pages_id" integer
+);
+
 CREATE TABLE IF NOT EXISTS "forms_blocks_checkbox" (
 	"_order" integer NOT NULL,
 	"_parent_id" integer NOT NULL,
@@ -1029,23 +1070,6 @@ CREATE TABLE IF NOT EXISTS "form_submissions_rels" (
 	"forms_id" integer
 );
 
-CREATE TABLE IF NOT EXISTS "search" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"title" varchar,
-	"priority" numeric,
-	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
-	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "search_rels" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"order" integer,
-	"parent_id" integer NOT NULL,
-	"path" varchar NOT NULL,
-	"posts_id" integer,
-	"events_id" integer
-);
-
 CREATE TABLE IF NOT EXISTS "payload_preferences" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"key" varchar,
@@ -1070,68 +1094,6 @@ CREATE TABLE IF NOT EXISTS "payload_migrations" (
 	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS "header_nav_items" (
-	"_order" integer NOT NULL,
-	"_parent_id" integer NOT NULL,
-	"id" varchar PRIMARY KEY NOT NULL,
-	"link_type" "enum_header_nav_items_type",
-	"link_new_tab" boolean,
-	"link_url" varchar,
-	"link_label" varchar NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "header" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"updated_at" timestamp(3) with time zone,
-	"created_at" timestamp(3) with time zone
-);
-
-CREATE TABLE IF NOT EXISTS "header_rels" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"order" integer,
-	"parent_id" integer NOT NULL,
-	"path" varchar NOT NULL,
-	"pages_id" integer
-);
-
-CREATE TABLE IF NOT EXISTS "footer_nav_items" (
-	"_order" integer NOT NULL,
-	"_parent_id" integer NOT NULL,
-	"id" varchar PRIMARY KEY NOT NULL,
-	"link_type" "enum_footer_nav_items_type",
-	"link_new_tab" boolean,
-	"link_url" varchar,
-	"link_label" varchar NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS "footer" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"updated_at" timestamp(3) with time zone,
-	"created_at" timestamp(3) with time zone
-);
-
-CREATE TABLE IF NOT EXISTS "footer_rels" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"order" integer,
-	"parent_id" integer NOT NULL,
-	"path" varchar NOT NULL,
-	"pages_id" integer
-);
-
-CREATE TABLE IF NOT EXISTS "site_settings" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"updated_at" timestamp(3) with time zone,
-	"created_at" timestamp(3) with time zone
-);
-
-CREATE TABLE IF NOT EXISTS "site_settings_rels" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"order" integer,
-	"parent_id" integer NOT NULL,
-	"path" varchar NOT NULL,
-	"pages_id" integer
-);
-
 CREATE INDEX IF NOT EXISTS "users_roles_order_idx" ON "users_roles" ("order");
 CREATE INDEX IF NOT EXISTS "users_roles_parent_idx" ON "users_roles" ("parent_id");
 CREATE INDEX IF NOT EXISTS "users_tenants_roles_order_idx" ON "users_tenants_roles" ("order");
@@ -1143,11 +1105,6 @@ CREATE UNIQUE INDEX IF NOT EXISTS "users_email_idx" ON "users" ("email");
 CREATE INDEX IF NOT EXISTS "users_rels_order_idx" ON "users_rels" ("order");
 CREATE INDEX IF NOT EXISTS "users_rels_parent_idx" ON "users_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "users_rels_path_idx" ON "users_rels" ("path");
-CREATE INDEX IF NOT EXISTS "tenant_stripe_configs_payment_methods_idx" ON "tenant_stripe_configs" ("paymentMethods");
-CREATE INDEX IF NOT EXISTS "tenant_stripe_configs_created_at_idx" ON "tenant_stripe_configs" ("created_at");
-CREATE INDEX IF NOT EXISTS "tenant_stripe_configs_rels_order_idx" ON "tenant_stripe_configs_rels" ("order");
-CREATE INDEX IF NOT EXISTS "tenant_stripe_configs_rels_parent_idx" ON "tenant_stripe_configs_rels" ("parent_id");
-CREATE INDEX IF NOT EXISTS "tenant_stripe_configs_rels_path_idx" ON "tenant_stripe_configs_rels" ("path");
 CREATE INDEX IF NOT EXISTS "email_configs_created_at_idx" ON "email_configs" ("created_at");
 CREATE UNIQUE INDEX IF NOT EXISTS "subscribers_email_email_email_address_idx" ON "subscribers" ("email_email_address");
 CREATE INDEX IF NOT EXISTS "subscribers_created_at_idx" ON "subscribers" ("created_at");
@@ -1163,6 +1120,11 @@ CREATE INDEX IF NOT EXISTS "opt_in_opt_out_history_created_at_idx" ON "opt_in_op
 CREATE INDEX IF NOT EXISTS "opt_in_opt_out_history_rels_order_idx" ON "opt_in_opt_out_history_rels" ("order");
 CREATE INDEX IF NOT EXISTS "opt_in_opt_out_history_rels_parent_idx" ON "opt_in_opt_out_history_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "opt_in_opt_out_history_rels_path_idx" ON "opt_in_opt_out_history_rels" ("path");
+CREATE INDEX IF NOT EXISTS "customers_created_at_idx" ON "customers" ("created_at");
+CREATE INDEX IF NOT EXISTS "customers_rels_order_idx" ON "customers_rels" ("order");
+CREATE INDEX IF NOT EXISTS "customers_rels_parent_idx" ON "customers_rels" ("parent_id");
+CREATE INDEX IF NOT EXISTS "customers_rels_path_idx" ON "customers_rels" ("path");
+CREATE INDEX IF NOT EXISTS "plans_created_at_idx" ON "plans" ("created_at");
 CREATE INDEX IF NOT EXISTS "tenants_domains_order_idx" ON "tenants_domains" ("_order");
 CREATE INDEX IF NOT EXISTS "tenants_domains_parent_id_idx" ON "tenants_domains" ("_parent_id");
 CREATE INDEX IF NOT EXISTS "tenants_created_at_idx" ON "tenants" ("created_at");
@@ -1274,6 +1236,18 @@ CREATE INDEX IF NOT EXISTS "newsletters_rels_order_idx" ON "newsletters_rels" ("
 CREATE INDEX IF NOT EXISTS "newsletters_rels_parent_idx" ON "newsletters_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "newsletters_rels_path_idx" ON "newsletters_rels" ("path");
 CREATE INDEX IF NOT EXISTS "postmark_templates_created_at_idx" ON "postmark_templates" ("created_at");
+CREATE INDEX IF NOT EXISTS "header_nav_items_order_idx" ON "header_nav_items" ("_order");
+CREATE INDEX IF NOT EXISTS "header_nav_items_parent_id_idx" ON "header_nav_items" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "header_created_at_idx" ON "header" ("created_at");
+CREATE INDEX IF NOT EXISTS "header_rels_order_idx" ON "header_rels" ("order");
+CREATE INDEX IF NOT EXISTS "header_rels_parent_idx" ON "header_rels" ("parent_id");
+CREATE INDEX IF NOT EXISTS "header_rels_path_idx" ON "header_rels" ("path");
+CREATE INDEX IF NOT EXISTS "footer_nav_items_order_idx" ON "footer_nav_items" ("_order");
+CREATE INDEX IF NOT EXISTS "footer_nav_items_parent_id_idx" ON "footer_nav_items" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "footer_created_at_idx" ON "footer" ("created_at");
+CREATE INDEX IF NOT EXISTS "footer_rels_order_idx" ON "footer_rels" ("order");
+CREATE INDEX IF NOT EXISTS "footer_rels_parent_idx" ON "footer_rels" ("parent_id");
+CREATE INDEX IF NOT EXISTS "footer_rels_path_idx" ON "footer_rels" ("path");
 CREATE INDEX IF NOT EXISTS "forms_blocks_checkbox_order_idx" ON "forms_blocks_checkbox" ("_order");
 CREATE INDEX IF NOT EXISTS "forms_blocks_checkbox_parent_id_idx" ON "forms_blocks_checkbox" ("_parent_id");
 CREATE INDEX IF NOT EXISTS "forms_blocks_checkbox_path_idx" ON "forms_blocks_checkbox" ("_path");
@@ -1315,29 +1289,12 @@ CREATE INDEX IF NOT EXISTS "form_submissions_created_at_idx" ON "form_submission
 CREATE INDEX IF NOT EXISTS "form_submissions_rels_order_idx" ON "form_submissions_rels" ("order");
 CREATE INDEX IF NOT EXISTS "form_submissions_rels_parent_idx" ON "form_submissions_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "form_submissions_rels_path_idx" ON "form_submissions_rels" ("path");
-CREATE INDEX IF NOT EXISTS "search_created_at_idx" ON "search" ("created_at");
-CREATE INDEX IF NOT EXISTS "search_rels_order_idx" ON "search_rels" ("order");
-CREATE INDEX IF NOT EXISTS "search_rels_parent_idx" ON "search_rels" ("parent_id");
-CREATE INDEX IF NOT EXISTS "search_rels_path_idx" ON "search_rels" ("path");
 CREATE INDEX IF NOT EXISTS "payload_preferences_key_idx" ON "payload_preferences" ("key");
 CREATE INDEX IF NOT EXISTS "payload_preferences_created_at_idx" ON "payload_preferences" ("created_at");
 CREATE INDEX IF NOT EXISTS "payload_preferences_rels_order_idx" ON "payload_preferences_rels" ("order");
 CREATE INDEX IF NOT EXISTS "payload_preferences_rels_parent_idx" ON "payload_preferences_rels" ("parent_id");
 CREATE INDEX IF NOT EXISTS "payload_preferences_rels_path_idx" ON "payload_preferences_rels" ("path");
 CREATE INDEX IF NOT EXISTS "payload_migrations_created_at_idx" ON "payload_migrations" ("created_at");
-CREATE INDEX IF NOT EXISTS "header_nav_items_order_idx" ON "header_nav_items" ("_order");
-CREATE INDEX IF NOT EXISTS "header_nav_items_parent_id_idx" ON "header_nav_items" ("_parent_id");
-CREATE INDEX IF NOT EXISTS "header_rels_order_idx" ON "header_rels" ("order");
-CREATE INDEX IF NOT EXISTS "header_rels_parent_idx" ON "header_rels" ("parent_id");
-CREATE INDEX IF NOT EXISTS "header_rels_path_idx" ON "header_rels" ("path");
-CREATE INDEX IF NOT EXISTS "footer_nav_items_order_idx" ON "footer_nav_items" ("_order");
-CREATE INDEX IF NOT EXISTS "footer_nav_items_parent_id_idx" ON "footer_nav_items" ("_parent_id");
-CREATE INDEX IF NOT EXISTS "footer_rels_order_idx" ON "footer_rels" ("order");
-CREATE INDEX IF NOT EXISTS "footer_rels_parent_idx" ON "footer_rels" ("parent_id");
-CREATE INDEX IF NOT EXISTS "footer_rels_path_idx" ON "footer_rels" ("path");
-CREATE INDEX IF NOT EXISTS "site_settings_rels_order_idx" ON "site_settings_rels" ("order");
-CREATE INDEX IF NOT EXISTS "site_settings_rels_parent_idx" ON "site_settings_rels" ("parent_id");
-CREATE INDEX IF NOT EXISTS "site_settings_rels_path_idx" ON "site_settings_rels" ("path");
 DO $$ BEGIN
  ALTER TABLE "users_roles" ADD CONSTRAINT "users_roles_parent_id_users_id_fk" FOREIGN KEY ("parent_id") REFERENCES "users"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
@@ -1364,18 +1321,6 @@ END $$;
 
 DO $$ BEGIN
  ALTER TABLE "users_rels" ADD CONSTRAINT "users_rels_tenants_id_tenants_id_fk" FOREIGN KEY ("tenants_id") REFERENCES "tenants"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "tenant_stripe_configs_rels" ADD CONSTRAINT "tenant_stripe_configs_rels_parent_id_tenant_stripe_configs_id_fk" FOREIGN KEY ("parent_id") REFERENCES "tenant_stripe_configs"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "tenant_stripe_configs_rels" ADD CONSTRAINT "tenant_stripe_configs_rels_tenants_id_tenants_id_fk" FOREIGN KEY ("tenants_id") REFERENCES "tenants"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -1429,6 +1374,18 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
+ ALTER TABLE "customers_rels" ADD CONSTRAINT "customers_rels_parent_id_customers_id_fk" FOREIGN KEY ("parent_id") REFERENCES "customers"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "customers_rels" ADD CONSTRAINT "customers_rels_plans_id_plans_id_fk" FOREIGN KEY ("plans_id") REFERENCES "plans"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
  ALTER TABLE "tenants_domains" ADD CONSTRAINT "tenants_domains__parent_id_tenants_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "tenants"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -1441,13 +1398,19 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
- ALTER TABLE "tenants_rels" ADD CONSTRAINT "tenants_rels_media_id_media_id_fk" FOREIGN KEY ("media_id") REFERENCES "media"("id") ON DELETE cascade ON UPDATE no action;
+ ALTER TABLE "tenants_rels" ADD CONSTRAINT "tenants_rels_customers_id_customers_id_fk" FOREIGN KEY ("customers_id") REFERENCES "customers"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 
 DO $$ BEGIN
  ALTER TABLE "tenants_rels" ADD CONSTRAINT "tenants_rels_email_configs_id_email_configs_id_fk" FOREIGN KEY ("email_configs_id") REFERENCES "email_configs"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "tenants_rels" ADD CONSTRAINT "tenants_rels_media_id_media_id_fk" FOREIGN KEY ("media_id") REFERENCES "media"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -1765,6 +1728,42 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
+ ALTER TABLE "header_nav_items" ADD CONSTRAINT "header_nav_items__parent_id_header_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "header"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "header_rels" ADD CONSTRAINT "header_rels_parent_id_header_id_fk" FOREIGN KEY ("parent_id") REFERENCES "header"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "header_rels" ADD CONSTRAINT "header_rels_pages_id_pages_id_fk" FOREIGN KEY ("pages_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "footer_nav_items" ADD CONSTRAINT "footer_nav_items__parent_id_footer_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "footer"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "footer_rels" ADD CONSTRAINT "footer_rels_parent_id_footer_id_fk" FOREIGN KEY ("parent_id") REFERENCES "footer"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+ ALTER TABLE "footer_rels" ADD CONSTRAINT "footer_rels_pages_id_pages_id_fk" FOREIGN KEY ("pages_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
  ALTER TABLE "forms_blocks_checkbox" ADD CONSTRAINT "forms_blocks_checkbox__parent_id_forms_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "forms"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -1873,24 +1872,6 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
- ALTER TABLE "search_rels" ADD CONSTRAINT "search_rels_parent_id_search_id_fk" FOREIGN KEY ("parent_id") REFERENCES "search"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "search_rels" ADD CONSTRAINT "search_rels_posts_id_posts_id_fk" FOREIGN KEY ("posts_id") REFERENCES "posts"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "search_rels" ADD CONSTRAINT "search_rels_events_id_events_id_fk" FOREIGN KEY ("events_id") REFERENCES "events"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
  ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_parent_id_payload_preferences_id_fk" FOREIGN KEY ("parent_id") REFERENCES "payload_preferences"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -1898,54 +1879,6 @@ END $$;
 
 DO $$ BEGIN
  ALTER TABLE "payload_preferences_rels" ADD CONSTRAINT "payload_preferences_rels_users_id_users_id_fk" FOREIGN KEY ("users_id") REFERENCES "users"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "header_nav_items" ADD CONSTRAINT "header_nav_items__parent_id_header_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "header"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "header_rels" ADD CONSTRAINT "header_rels_parent_id_header_id_fk" FOREIGN KEY ("parent_id") REFERENCES "header"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "header_rels" ADD CONSTRAINT "header_rels_pages_id_pages_id_fk" FOREIGN KEY ("pages_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "footer_nav_items" ADD CONSTRAINT "footer_nav_items__parent_id_footer_id_fk" FOREIGN KEY ("_parent_id") REFERENCES "footer"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "footer_rels" ADD CONSTRAINT "footer_rels_parent_id_footer_id_fk" FOREIGN KEY ("parent_id") REFERENCES "footer"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "footer_rels" ADD CONSTRAINT "footer_rels_pages_id_pages_id_fk" FOREIGN KEY ("pages_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "site_settings_rels" ADD CONSTRAINT "site_settings_rels_parent_id_site_settings_id_fk" FOREIGN KEY ("parent_id") REFERENCES "site_settings"("id") ON DELETE cascade ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
-
-DO $$ BEGIN
- ALTER TABLE "site_settings_rels" ADD CONSTRAINT "site_settings_rels_pages_id_pages_id_fk" FOREIGN KEY ("pages_id") REFERENCES "pages"("id") ON DELETE cascade ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
@@ -1961,8 +1894,6 @@ DROP TABLE "users_tenants_roles";
 DROP TABLE "users_tenants";
 DROP TABLE "users";
 DROP TABLE "users_rels";
-DROP TABLE "tenant_stripe_configs";
-DROP TABLE "tenant_stripe_configs_rels";
 DROP TABLE "email_configs";
 DROP TABLE "subscribers";
 DROP TABLE "subscribers_rels";
@@ -1970,6 +1901,9 @@ DROP TABLE "email_lists";
 DROP TABLE "email_lists_rels";
 DROP TABLE "opt_in_opt_out_history";
 DROP TABLE "opt_in_opt_out_history_rels";
+DROP TABLE "customers";
+DROP TABLE "customers_rels";
+DROP TABLE "plans";
 DROP TABLE "tenants_domains";
 DROP TABLE "tenants";
 DROP TABLE "tenants_rels";
@@ -2012,6 +1946,12 @@ DROP TABLE "platforms";
 DROP TABLE "newsletters";
 DROP TABLE "newsletters_rels";
 DROP TABLE "postmark_templates";
+DROP TABLE "header_nav_items";
+DROP TABLE "header";
+DROP TABLE "header_rels";
+DROP TABLE "footer_nav_items";
+DROP TABLE "footer";
+DROP TABLE "footer_rels";
 DROP TABLE "forms_blocks_checkbox";
 DROP TABLE "forms_blocks_country";
 DROP TABLE "forms_blocks_email";
@@ -2028,18 +1968,8 @@ DROP TABLE "forms_rels";
 DROP TABLE "form_submissions_submission_data";
 DROP TABLE "form_submissions";
 DROP TABLE "form_submissions_rels";
-DROP TABLE "search";
-DROP TABLE "search_rels";
 DROP TABLE "payload_preferences";
 DROP TABLE "payload_preferences_rels";
-DROP TABLE "payload_migrations";
-DROP TABLE "header_nav_items";
-DROP TABLE "header";
-DROP TABLE "header_rels";
-DROP TABLE "footer_nav_items";
-DROP TABLE "footer";
-DROP TABLE "footer_rels";
-DROP TABLE "site_settings";
-DROP TABLE "site_settings_rels";`);
+DROP TABLE "payload_migrations";`);
 
 };

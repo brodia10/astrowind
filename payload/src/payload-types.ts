@@ -9,11 +9,12 @@
 export interface Config {
   collections: {
     users: User;
-    'tenant-stripe-configs': TenantStripeConfig;
     'email-configs': EmailConfig;
     subscribers: Subscriber;
     'email-lists': EmailList;
     'opt-in-opt-out-history': OptInOptOutHistory;
+    customers: Customer;
+    plans: Plan;
     tenants: Tenant;
     media: Media;
     categories: Category;
@@ -28,7 +29,6 @@ export interface Config {
     footer: Footer;
     forms: Form;
     'form-submissions': FormSubmission;
-    search: Search;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -68,26 +68,8 @@ export interface User {
  */
 export interface Tenant {
   id: number;
-  brandAssets?: {
-    logo?: number | Media | null;
-    icon?: number | Media | null;
-  };
-  themeColors?: {
-    primaryColor?: string | null;
-    secondaryColor?: string | null;
-  };
-  company: {
-    name: string;
-    telephone?: {
-      telephone?: string | null;
-      businessHours?: string | null;
-    };
-    streetAddress?: string | null;
-    city?: string | null;
-    state?: string | null;
-    postalCode?: string | null;
-    country?: string | null;
-  };
+  siteName: string;
+  customer?: (number | null) | Customer;
   domains?:
     | {
         domain: string;
@@ -96,6 +78,59 @@ export interface Tenant {
       }[]
     | null;
   emailConfig?: (number | null) | EmailConfig;
+  logo?: number | Media | null;
+  icon?: number | Media | null;
+  streetAddress?: string | null;
+  city?: string | null;
+  state?: string | null;
+  postalCode?: string | null;
+  country?: string | null;
+  telephone?: string | null;
+  businessHours?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers".
+ */
+export interface Customer {
+  id: number;
+  stripeCustomerId?: string | null;
+  paymentMethod?: string | null;
+  plan?: (number | null) | Plan;
+  stripeID?: string | null;
+  skipSync?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plans".
+ */
+export interface Plan {
+  id: number;
+  stripePlanId?: string | null;
+  price?: number | null;
+  stripeID?: string | null;
+  skipSync?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "email-configs".
+ */
+export interface EmailConfig {
+  id: number;
+  fromEmailAddress: string;
+  fromName: string;
+  postmarkServerId?: number | null;
+  postmarkServerToken?: string | null;
+  messageStreams?: {
+    transactional?: string | null;
+    broadcast?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -149,56 +184,6 @@ export interface Media {
 export interface Category {
   id: number;
   title?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "email-configs".
- */
-export interface EmailConfig {
-  id: number;
-  fromEmailAddress: string;
-  fromName: string;
-  postmarkServerId?: number | null;
-  postmarkServerToken?: string | null;
-  messageStreams?: {
-    transactional?: string | null;
-    broadcast?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tenant-stripe-configs".
- */
-export interface TenantStripeConfig {
-  id: number;
-  tenant: number | Tenant;
-  stripeSecretKey: string;
-  stripePublishableKey: string;
-  stripeAccountId: string;
-  stripeWebhookSecret: string;
-  defaultCurrency: 'US' | 'EU' | 'GB' | 'CA' | 'AF' | 'AX' | 'AL' | 'DZ' | 'AS' | 'AD' | 'AO';
-  paymentMethods:
-    | 'american_express'
-    | 'diners_club'
-    | 'mastercard'
-    | 'visa'
-    | 'apple_pay'
-    | 'google_pay'
-    | 'microsoft_pay'
-    | 'paypal'
-    | 'alipay'
-    | 'wechat_pay'
-    | 'unionpay'
-    | 'jcb'
-    | 'klarna'
-    | 'afterpay'
-    | 'ideal';
-  successUrl: string;
-  cancelUrl: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -772,26 +757,6 @@ export interface FormSubmission {
         id?: string | null;
       }[]
     | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "search".
- */
-export interface Search {
-  id: number;
-  title?: string | null;
-  priority?: number | null;
-  doc:
-    | {
-        relationTo: 'posts';
-        value: number | Post;
-      }
-    | {
-        relationTo: 'events';
-        value: number | Event;
-      };
   updatedAt: string;
   createdAt: string;
 }

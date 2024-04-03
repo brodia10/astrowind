@@ -29,30 +29,30 @@ import OptInOptOutHistory from './collections/OptInOptOutHistory'
 import Pages from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { TenantEmailConfigs } from './collections/Tenants/TenantEmailConfigs'
-import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
 import { Tenants } from './collections/Tenants/Tenants'
 import { Users } from './collections/Users'
 
 // Branding Imports
 import { payloadCloud } from '@payloadcms/plugin-cloud'
 import seo from '@payloadcms/plugin-seo'
+import stripePlugin from '@payloadcms/plugin-stripe'
+import { swagger } from 'payload-swagger'
 import { CallToAction } from './blocks/CallToAction'
 import { Content } from './blocks/Content'
 import { FormBlock } from './blocks/Form'
 import Categories from './collections/Categories'
+import { Customers } from './collections/Customers'
 import Events from './collections/Events'
 import { Footer } from './collections/Footer'
 import { Header } from './collections/Header'
 import Locations from './collections/Locations'
-import Platforms from './collections/Platform'
-import Subscribers from './collections/Subscribers'
-import { Icon } from './components/icon'
-import { Logo } from './components/logo'
-import seoGenerator from './plugins/seoGenerator'
-
-import { swagger } from 'payload-swagger'
 import Newsletters from './collections/Newsletters'
+import { Plans } from './collections/Plans'
+import Platforms from './collections/Platform'
 import { PostmarkTemplates } from './collections/PostmarkTemplates'
+import Subscribers from './collections/Subscribers'
+import seoGenerator from './plugins/seoGenerator'
+import stripeConfig from './plugins/stripeConfig'
 
 // Resolve .env
 dotenv.config({
@@ -107,23 +107,23 @@ export default buildConfig({
         },
       },
     }),
-    components: {
-      Nav: {},
-      graphics: {
-        Logo,
-        Icon,
-      },
-      afterDashboard: [],
-      afterLogin: [],
-      beforeDashboard: [],
-      afterNavLinks: [],
-      actions: [],
-      views: {
-        Account: [],
-        Dashboard: [],
-      },
-      providers: [],
-    },
+    // components: {
+    //   Nav: {},
+    //   graphics: {
+    //     Logo,
+    //     Icon,
+    //   },
+    //   afterDashboard: [],
+    //   afterLogin: [],
+    //   beforeDashboard: [],
+    //   afterNavLinks: [],
+    //   actions: [],
+    //   views: {
+    //     Account: [],
+    //     Dashboard: [],
+    //   },
+    //   providers: [],
+    // },
     livePreview: {
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
       collections: ['header', 'footer', 'pages', 'posts', 'events', 'comments', 'forms'], // The collections to enable Live Preview on (globals are also possible)
@@ -204,11 +204,12 @@ export default buildConfig({
   }),
   collections: [
     Users,
-    TenantStripeConfigs,
     TenantEmailConfigs,
     Subscribers,
     EmailLists,
     OptInOptOutHistory,
+    Customers,
+    Plans,
     Tenants,
     Media,
     Categories,
@@ -228,7 +229,7 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator),
+  plugins: [payloadCloud(), stripePlugin(stripeConfig), formBuilder(formBuilderConfig), seo(seoGenerator),
   //    sentry({
   //   dsn: process.env.SENTRY_DSN,
   //   options: {
