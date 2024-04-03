@@ -35,27 +35,24 @@ import { Users } from './collections/Users'
 
 // Branding Imports
 import { payloadCloud } from '@payloadcms/plugin-cloud'
-import search from "@payloadcms/plugin-search"
 import seo from '@payloadcms/plugin-seo'
 import { CallToAction } from './blocks/CallToAction'
 import { Content } from './blocks/Content'
 import { FormBlock } from './blocks/Form'
 import Categories from './collections/Categories'
 import Events from './collections/Events'
+import { Footer } from './collections/Footer'
+import { Header } from './collections/Header'
 import Locations from './collections/Locations'
 import Platforms from './collections/Platform'
 import Subscribers from './collections/Subscribers'
 import { Icon } from './components/icon'
 import { Logo } from './components/logo'
-import { Footer } from './globals/Footer'
-import { Header } from './globals/Header'
-import searchOptions from './plugins/search'
 import seoGenerator from './plugins/seoGenerator'
 
 import { swagger } from 'payload-swagger'
 import Newsletters from './collections/Newsletters'
 import { PostmarkTemplates } from './collections/PostmarkTemplates'
-import { SiteSettings } from './globals/SiteSettings'
 
 // Resolve .env
 dotenv.config({
@@ -110,10 +107,26 @@ export default buildConfig({
         },
       },
     }),
+    components: {
+      Nav: {},
+      graphics: {
+        Logo,
+        Icon,
+      },
+      afterDashboard: [],
+      afterLogin: [],
+      beforeDashboard: [],
+      afterNavLinks: [],
+      actions: [],
+      views: {
+        Account: [],
+        Dashboard: [],
+      },
+      providers: [],
+    },
     livePreview: {
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
-      collections: ['newsletters', 'pages', 'posts', 'events', 'comments', 'forms'], // The collections to enable Live Preview on (globals are also possible)
-      globals: ['header', 'footer', 'siteSettings'],
+      collections: ['header', 'footer', 'pages', 'posts', 'events', 'comments', 'forms'], // The collections to enable Live Preview on (globals are also possible)
       breakpoints: [
         {
           label: 'Mobile',
@@ -139,14 +152,6 @@ export default buildConfig({
       titleSuffix: '- Bloom CMS',
       favicon: '/assets/icon.png',
       ogImage: '/assets/logo-with-image.png',
-    },
-    components: {
-      graphics: {
-        Logo,
-        Icon,
-      },
-      // afterNavLinks: [],
-      // beforeDashboard: [SiteLink],
     },
   },
   editor: lexicalEditor({
@@ -197,11 +202,6 @@ export default buildConfig({
       }),
     ]
   }),
-  globals: [
-    Header,
-    Footer,
-    SiteSettings,
-  ],
   collections: [
     Users,
     TenantStripeConfigs,
@@ -219,6 +219,8 @@ export default buildConfig({
     Platforms,
     Newsletters,
     PostmarkTemplates,
+    Header,
+    Footer
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
@@ -226,7 +228,7 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
   },
-  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator), search(searchOptions),
+  plugins: [payloadCloud(), formBuilder(formBuilderConfig), seo(seoGenerator),
   //    sentry({
   //   dsn: process.env.SENTRY_DSN,
   //   options: {

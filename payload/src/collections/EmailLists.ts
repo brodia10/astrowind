@@ -10,7 +10,6 @@ const EmailLists: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'name',
-        group: 'Audience',
         description: 'Streamline your email campaigns and newsletter management by organizing your audience into specific lists. Create categories such as "Subscribers," "Prospects," "Customers," or "VIPs" to tailor your communication effectively. This tool is designed for marketers and businesses focused on engaging their audience through customized content and updates.',
         hidden: true,
         listSearchableFields: ['name',]

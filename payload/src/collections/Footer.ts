@@ -1,13 +1,14 @@
-import type { GlobalConfig } from 'payload/types'
+import type { CollectionConfig, } from 'payload/types'
 
 import link from '../fields/link'
 
-export const Header: GlobalConfig = {
+export const Footer: CollectionConfig = {
     access: {
         read: () => true,
     },
-    label: 'Main Menu',
-    admin: {
+    labels: {
+        singular: 'Footer',
+        plural: 'Footer',
     },
     fields: [
         {
@@ -21,5 +22,5 @@ export const Header: GlobalConfig = {
             type: 'array',
         },
     ],
-    slug: 'header',
+    slug: 'footer',
 }
