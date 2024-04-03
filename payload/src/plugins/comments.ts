@@ -7,6 +7,5 @@ const commentsConfig = {
     alertIntro: '<p>Your site received the following comment.</p>',
     alertClosing: '<p>Please log in to review, approve, or delete this comment.</p>',
     admin: {
-        group: 'Admin'
     }
 }

@@ -8,7 +8,6 @@ export const Header: GlobalConfig = {
     },
     label: 'Main Menu',
     admin: {
-        group: 'Site',
     },
     fields: [
         {

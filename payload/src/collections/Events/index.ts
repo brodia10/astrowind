@@ -20,7 +20,6 @@ const Events: CollectionConfig = {
     admin: {
         defaultColumns: ['eventDetails.row.title', 'eventDetails.dateTime', 'eventDetails.eventType', 'virtualDetails.platform'],
         useAsTitle: 'eventDetails.title',
-        group: 'Content',
         description: 'Manage your events, customizing details for either virtual or in-person experiences. Utilize this platform to streamline the planning process, ensuring every event detail is captured with precision.',
     },
     fields: [

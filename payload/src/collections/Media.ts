@@ -3,7 +3,6 @@ import { CollectionConfig } from 'payload/types'
 export const Media: CollectionConfig = {
     slug: 'media',
     admin: {
-        group: 'Content',
         description: 'The Media collection is your central hub for storing, categorizing, and optimizing images for your website. Automatically generate optimized versions for thumbnails, cards, and responsive layouts to ensure your images look perfect on any device. Categorize your media to keep it organized and easily accessible for future content creation. Add categories to easily sort through media. This collection supports all image types, making it a versatile tool for your digital asset management needs.'
     },
     upload: {

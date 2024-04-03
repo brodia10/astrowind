@@ -8,9 +8,9 @@ import { MediaBlock } from '../../blocks/MediaBlock';
 const Newsletters: CollectionConfig = {
     slug: 'newsletters',
     admin: {
-        group: 'Content',
         useAsTitle: 'title',
         defaultColumns: ['title', 'status', 'scheduledSendDate'],
+        hidden: true,
     },
 
     fields: [

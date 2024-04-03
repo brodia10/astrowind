@@ -5,7 +5,6 @@ export const SiteSettings: GlobalConfig = {
         read: () => true,
     },
     admin: {
-        group: 'Site',
     },
     fields: [
         {

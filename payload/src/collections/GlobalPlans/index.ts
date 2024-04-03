@@ -6,7 +6,6 @@ const GlobalPlans: CollectionConfig = {
     slug: 'global-plans',
     admin: {
         useAsTitle: 'planGroup.globalPlan',
-        group: 'Admin',
         hidden: true,
     },
     access: {
@@ -32,6 +31,7 @@ const GlobalPlans: CollectionConfig = {
                         { label: 'Pro', value: 'pro' },
                         { label: 'Enterprise', value: 'enterprise' }
                     ],
+                    defaultValue: 'free',
                     required: true,
                 },
             ],

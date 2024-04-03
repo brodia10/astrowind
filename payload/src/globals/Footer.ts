@@ -7,7 +7,6 @@ export const Footer: GlobalConfig = {
         read: () => true,
     },
     admin: {
-        group: 'Site',
     },
     fields: [
         {

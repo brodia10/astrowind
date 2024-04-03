@@ -32,8 +32,8 @@ const Subscribers: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'email.email_address',
-        group: 'Audience',
-        description: 'Welcome to the Subscriber Hub, where managing your subscribers\' information becomes intuitive and efficient. Perfect for organizing newsletters, sending out event announcements, or sharing important updates, this hub allows you to connect with your audience effectively. Utilize it to segment your contacts for targeted campaigns, keep your community informed, and enhance engagement with timely and relevant communications.'
+        description: 'Welcome to the Subscriber Hub, where managing your subscribers\' information becomes intuitive and efficient. Perfect for organizing newsletters, sending out event announcements, or sharing important updates, this hub allows you to connect with your audience effectively. Utilize it to segment your contacts for targeted campaigns, keep your community informed, and enhance engagement with timely and relevant communications.',
+        hidden: true,
     },
     hooks: {
         beforeChange: [

@@ -10,7 +10,6 @@ export const TenantStripeConfigs: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'tenant',
-        group: 'Payment',
         // TODO: unhide when we get to ecommerce
         hidden: true,
     },

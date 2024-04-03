@@ -17,11 +17,10 @@ export const Tenants: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'company.name',
-    group: 'Team'
   },
   labels: {
-    singular: 'My Apps',
-    plural: 'My Apps',
+    singular: 'Site',
+    plural: 'Sites',
   },
   fields: [
     {
