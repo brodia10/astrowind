@@ -9,7 +9,7 @@ export const seed = async (payload: Payload): Promise<void> => {
         data: {
             firstName: 'Brook',
             lastName: 'Rodia',
-            email: 'brook@builditwithbloom.com',
+            email: 'brook@bloomcms.io',
             password: 'Nirvana1987k!',
             roles: ['super-admin'],
         },

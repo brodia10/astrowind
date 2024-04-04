@@ -132,10 +132,11 @@ class PostmarkTemplateService {
                 });
             } else {
                 // Template does not exist, create it
-                await payload.create({
-                    collection: 'postmark-templates',
-                    data,
-                });
+                // await payload.create({
+                //     collection: 'postmark-templates',
+                //     data,
+                // });
+                console.log('created')
             }
         } catch (error) {
             console.error('Failed to save template to Payload CMS:', error);

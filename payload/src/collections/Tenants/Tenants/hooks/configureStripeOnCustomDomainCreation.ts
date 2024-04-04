@@ -33,7 +33,7 @@ const updateOrCreatePayloadCustomer = async (email: string, stripeCustomerId: st
     if (findResult.totalDocs === 0) {
         const createResult = await payload.create({
             collection: 'customers',
-            data: { stripeCustomerId },
+            data: { email, stripeCustomerId },
         });
         customerResult = createResult as Customer;
     } else {

@@ -15,20 +15,20 @@ async function upsertTemplate(template: Template) {
 
   const templateData = { name: template.Name, id: templateIdStr };
   console.log('templateData')
-  if (existingTemplates.totalDocs > 0) {
-    await payload.update({
-      collection: 'postmark-templates',
-      id: existingTemplates.docs[0].id,
-      data: templateData,
-    });
-    console.log('templates updated!')
-  } else {
-    await payload.create({
-      collection: 'postmark-templates',
-      data: templateData,
-    });
-    console.log('templates created!')
-  }
+  // if (existingTemplates.totalDocs > 0) {
+  //   await payload.update({
+  //     collection: 'postmark-templates',
+  //     id: existingTemplates.docs[0].id,
+  //     data: templateData,
+  //   });
+  //   console.log('templates updated!')
+  // } else {
+  //   await payload.create({
+  //     collection: 'postmark-templates',
+  //     data: templateData,
+  //   });
+  //   console.log('templates created!')
+  // }
 }
 
 const getPostmarkTemplates: CollectionAfterChangeHook = async ({ doc, req }) => {

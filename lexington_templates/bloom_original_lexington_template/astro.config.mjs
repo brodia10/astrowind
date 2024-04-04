@@ -14,6 +14,6 @@ export default defineConfig({
     skipInline: false,
     drafts: true
   },
-  site: 'https://builditwithbloom.com',
+  site: 'https://bloomcms.io',
   integrations: [tailwind(), sitemap(), mdx()]
 });

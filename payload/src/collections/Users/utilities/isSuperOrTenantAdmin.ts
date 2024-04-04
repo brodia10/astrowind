@@ -43,7 +43,7 @@ export const isSuperOrTenantAdmin = async (args: { req: PayloadRequest }): Promi
   }
 
   if (logs) {
-    const msg = `Found tenant: '${foundTenants.docs?.[0]?.company.name}', checking if user is an tenant admin`
+    const msg = `Found tenant: '${foundTenants.docs?.[0]?.siteName}', checking if user is an tenant admin`
     payload.logger.info({ msg })
   }
 
@@ -54,7 +54,7 @@ export const isSuperOrTenantAdmin = async (args: { req: PayloadRequest }): Promi
 
   if (tenantWithUser?.roles?.some(role => role === 'admin')) {
     if (logs) {
-      const msg = `User is an admin of ${foundTenants.docs[0].company.name}, allowing access`
+      const msg = `User is an admin of ${foundTenants.docs[0].siteName}, allowing access`
       payload.logger.info({ msg })
     }
 
@@ -62,7 +62,7 @@ export const isSuperOrTenantAdmin = async (args: { req: PayloadRequest }): Promi
   }
 
   if (logs) {
-    const msg = `User is not an admin of ${foundTenants.docs[0].company.name}, denying access`
+    const msg = `User is not an admin of ${foundTenants.docs[0].siteName}, denying access`
     payload.logger.info({ msg })
   }
 

@@ -1,7 +1,7 @@
 import { User } from "payload/generated-types";
 
 export const superAdmin: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'salt' | 'hash'> = {
-    email: 'brook@builditwithbloom.com',
+    email: 'brook@bloomcms.io',
     password: 'Nirvana1987k!',
     firstName: 'Brook',
     lastName: 'Rodia',

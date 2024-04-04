@@ -14,6 +14,10 @@ export const Customers: CollectionConfig = {
             },
         },
         {
+            name: 'email',
+            type: 'email',
+        },
+        {
             name: 'paymentMethod',
             type: 'text',
             admin: {

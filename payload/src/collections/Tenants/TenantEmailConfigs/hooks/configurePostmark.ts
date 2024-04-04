@@ -22,8 +22,8 @@ async function createSenderSignature(companyName: string, apiToken: string) {
     const senderService = new PostmarkSenderSignatureService(apiToken);
     await senderService.createSenderSignature({
         Name: companyName,
-        FromEmail: `${companyName.toLowerCase()}@builditwithbloom.com`,
-        ReturnPathDomain: 'pm-bounces.builditwithbloom.com',
+        FromEmail: `${companyName.toLowerCase()}@bloomcms.io`,
+        ReturnPathDomain: 'pm-bounces.bloomcms.io',
     });
 }
 

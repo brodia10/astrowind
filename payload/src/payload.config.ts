@@ -77,6 +77,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    // css: path.resolve(__dirname, 'relative/path/to/stylesheet.scss'),
     webpack: (config) => ({
       ...config,
       resolve: {
