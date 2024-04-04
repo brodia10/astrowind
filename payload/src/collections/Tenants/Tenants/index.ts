@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload/types';
 
 import { TelephoneField } from '@nouance/payload-better-fields-plugin';
 import { tenantAdmins } from './access/tenantAdmins';
+import configureStripeOnCustomDomainCreation from './hooks/configureStripeOnCustomDomainCreation';
 import generateTenantSubdomains from './hooks/generateSubdomains';
 
 export const Tenants: CollectionConfig = {
@@ -13,7 +14,7 @@ export const Tenants: CollectionConfig = {
     delete: tenantAdmins,
   },
   hooks: {
-    beforeChange: [generateTenantSubdomains],
+    beforeChange: [generateTenantSubdomains, configureStripeOnCustomDomainCreation],
   },
   admin: {
     useAsTitle: 'siteName',

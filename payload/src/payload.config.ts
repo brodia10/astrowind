@@ -51,6 +51,7 @@ import { Plans } from './collections/Plans'
 import Platforms from './collections/Platform'
 import { PostmarkTemplates } from './collections/PostmarkTemplates'
 import Subscribers from './collections/Subscribers'
+import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
 import seoGenerator from './plugins/seoGenerator'
 import stripeConfig from './plugins/stripeConfig'
 
@@ -65,7 +66,7 @@ const mockModulePath = path.resolve(__dirname, 'mocks/modules.js');
 
 // Correctly specify each module's full file path that you wish to mock
 const configurePostmark = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/configurePostmark.ts');
-// const getPostmarkTemplates = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/getPostmarkTemplates.ts');
+const configureStripeOnCustomDomainCreation = path.resolve(__dirname, 'collections/Tenants/Tenants/hooks/configureStripeOnCustomDomainCreation.ts');
 
 export default buildConfig({
   // serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -85,7 +86,7 @@ export default buildConfig({
           dotenv: path.resolve(__dirname, './dotenv.js'),
           // Alias each server module path to the mockModulePath individually
           [configurePostmark]: mockModulePath,
-          // [getPostmarkTemplates]: mockModulePath,
+          [configureStripeOnCustomDomainCreation]: mockModulePath,
         },
         fallback: { // Extend this section with additional polyfills
           os: require.resolve('os-browserify/browser'),
@@ -205,6 +206,7 @@ export default buildConfig({
   collections: [
     Users,
     TenantEmailConfigs,
+    TenantStripeConfigs,
     Subscribers,
     EmailLists,
     OptInOptOutHistory,
