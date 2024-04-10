@@ -32,6 +32,8 @@
     "@payloadcms/plugin-stripe": "^0.0.19",
     "@payloadcms/richtext-lexical": "^0.7.0",
     "@payloadcms/richtext-slate": "^1.0.0",
+    "@stripe/react-stripe-js": "^2.6.2",
+    "@stripe/stripe-js": "^3.2.0",
     "@types/nodemailer-sendgrid": "^1.0.3",
     "add": "^2.0.6",
     "assert": "^2.1.0",

@@ -67,6 +67,7 @@ const mockModulePath = path.resolve(__dirname, 'mocks/modules.js');
 // Correctly specify each module's full file path that you wish to mock
 const configurePostmark = path.resolve(__dirname, 'collections/Tenants/TenantEmailConfigs/hooks/configurePostmark.ts');
 const configureStripeOnCustomDomainCreation = path.resolve(__dirname, 'collections/Tenants/Tenants/hooks/configureStripeOnCustomDomainCreation.ts');
+const createPriceInStripe = path.resolve(__dirname, 'collections/Plans/hooks/createPriceInStripe.ts');
 
 export default buildConfig({
   // serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -88,6 +89,7 @@ export default buildConfig({
           // Alias each server module path to the mockModulePath individually
           [configurePostmark]: mockModulePath,
           [configureStripeOnCustomDomainCreation]: mockModulePath,
+          [createPriceInStripe]: mockModulePath,
         },
         fallback: { // Extend this section with additional polyfills
           os: require.resolve('os-browserify/browser'),

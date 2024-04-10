@@ -5,6 +5,11 @@ const stripeConfig = {
     stripeAccountId: process.env.STRIPE_ACCOUNT_ID,
     stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
     stripeWebhooksEndpointSecret: process.env.STRIPE_WEBHOOKS_ENDPOINT_SECRET,
+    // webhooks: {
+    //     'product.created': productUpdated,
+    //     'product.updated': productUpdated,
+    //     'price.updated': priceUpdated,
+    // },
     sync: [
         {
             collection: 'customers',
@@ -12,19 +17,35 @@ const stripeConfig = {
             stripeResourceTypeSingular: 'customer',
             fields: [
                 {
-                    fieldPath: 'stripeCustomerId', // this is a field on your own Payload config
+                    fieldPath: 'id', // this is a field on your own Payload config
+                    stripeProperty: 'metadata.bloomId', // use dot notation, if applicable
+                },
+                {
+                    fieldPath: 'email', // this is a field on your own Payload config
+                    stripeProperty: 'email', // use dot notation, if applicable
+                },
+                {
+                    fieldPath: 'name', // this is a field on your own Payload config
                     stripeProperty: 'name', // use dot notation, if applicable
                 },
             ],
         },
         {
             collection: 'plans',
-            stripeResourceType: 'subscriptions',
-            stripeResourceTypeSingular: 'subscription',
+            stripeResourceType: 'products',
+            stripeResourceTypeSingular: 'product',
             fields: [
                 {
-                    fieldPath: 'stripePlanId', // this is a field on your own Payload config
+                    fieldPath: 'name', // this is a field on your own Payload config
                     stripeProperty: 'name', // use dot notation, if applicable
+                },
+                {
+                    fieldPath: 'description', // this is a field on your own Payload config
+                    stripeProperty: 'description', // use dot notation, if applicable
+                },
+                {
+                    fieldPath: 'features', // this is a field on your own Payload config
+                    stripeProperty: 'features', // use dot notation, if applicable
                 },
             ],
         },

@@ -2,20 +2,26 @@ import { CollectionConfig } from 'payload/types';
 
 export const Customers: CollectionConfig = {
     slug: 'customers',
+    admin: {
+        useAsTitle: 'name',
+    },
     access: {
         // Define your access control here
     },
     fields: [
         {
-            name: 'stripeCustomerId',
+            name: 'name',
             type: 'text',
             admin: {
                 readOnly: true,
-            },
+            }
         },
         {
             name: 'email',
             type: 'email',
+            admin: {
+                readOnly: true,
+            }
         },
         {
             name: 'paymentMethod',
@@ -29,7 +35,7 @@ export const Customers: CollectionConfig = {
             label: 'Plan',
             type: 'relationship',
             relationTo: 'plans',
-            hasMany: false,
+            hasMany: true,
         },
     ],
 };

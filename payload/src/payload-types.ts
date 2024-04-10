@@ -108,10 +108,10 @@ export interface Category {
  */
 export interface Customer {
   id: number;
-  stripeCustomerId?: string | null;
+  name?: string | null;
   email?: string | null;
   paymentMethod?: string | null;
-  plan?: (number | null) | Plan;
+  plan?: (number | Plan)[] | null;
   stripeID?: string | null;
   skipSync?: boolean | null;
   updatedAt: string;
@@ -123,8 +123,18 @@ export interface Customer {
  */
 export interface Plan {
   id: number;
-  stripePlanId?: string | null;
-  price?: number | null;
+  name: string;
+  price: number;
+  description: string;
+  isFree?: boolean | null;
+  features?:
+    | {
+        feature: string;
+        id?: string | null;
+      }[]
+    | null;
+  stripeProductId?: string | null;
+  stripePriceId?: string | null;
   stripeID?: string | null;
   skipSync?: boolean | null;
   updatedAt: string;

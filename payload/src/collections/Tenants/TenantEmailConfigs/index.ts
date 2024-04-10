@@ -1,7 +1,6 @@
 import type { CollectionConfig } from 'payload/types';
 import { superAdmins } from '../../../access/superAdmins';
 import { tenantAdmins } from '../Tenants/access/tenantAdmins';
-import configurePostmark from './hooks/configurePostmark';
 import relateEmailConfigToTenant from './hooks/relateEmailConfigToTenant';
 
 export const TenantEmailConfigs: CollectionConfig = {
@@ -19,7 +18,6 @@ export const TenantEmailConfigs: CollectionConfig = {
         delete: superAdmins,
     },
     hooks: {
-        beforeChange: [configurePostmark],
         afterChange: [relateEmailConfigToTenant]
     },
     fields: [
