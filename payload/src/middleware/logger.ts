@@ -16,7 +16,7 @@ function requestLoggingMiddleware(req: Request, _res: Response, next: NextFuncti
     const fullUrl = new URL(req.url, `${protocol}${req.headers.host}`).href;
 
     // Log the method and the full URL
-    payload.logger.info(`${req.method} ${fullUrl}`);
+    payload.logger.info(`${req.method} ${fullUrl} (${_res.statusCode})`);
 
     // Call the next middleware in the stack
     next();

@@ -22,31 +22,44 @@ app.get('/', (_, res) => {
   res.redirect('/admin')
 })
 
-// This is your test secret API key.
-const stripe = require('stripe')('sk_test_51KrDzFGcfEQQlDX8Fvrxh2oNChaqfmmiRNeSd4lu9b6DdRF4xjOmfyr1rkwyGgvBoXoBOJKIw684aMSnQ04N0fd600OwvB61YU');
-
 app.use(express.static('public'));
 
-const YOUR_DOMAIN = 'http://localhost:3000';
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 // Create Checkout Session
-app.post('/create-checkout-session', async (req, res) => {
-  const baseUrl = process.env.NODE_ENV == 'development' ? `http://${process.env.BLOOM_DOMAIN}:3000` : `https://${process.env.BLOOM_DOMAIN}`
-  const session = await stripe.checkout.sessions.create({
-    ui_mode: 'embedded',
-    line_items: [
-      {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: 'price_1KrE9AGcfEQQlDX8zUife1ZC',
-      },
-    ],
-    mode: 'subscription',
-    return_url: `${baseUrl}/admin/return?session_id={CHECKOUT_SESSION_ID}`,
-    automatic_tax: { enabled: true },
-  });
+app.post('/api/create-checkout-session', async (req, res) => {
+  const { priceId } = req.body;  // Extracting priceId from the request body
 
-  res.send({ clientSecret: session.client_secret });
+  if (!priceId) {
+    return res.status(400).json({ error: 'priceId is required' });
+  }
+
+  const baseUrl = process.env.NODE_ENV == 'development' ? `http://${process.env.BLOOM_DOMAIN}:3000` : `https://${process.env.BLOOM_DOMAIN}`;
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      ui_mode: 'embedded',
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        },
+      ],
+      mode: 'subscription',
+      return_url: `${baseUrl}/admin/return?session_id={CHECKOUT_SESSION_ID}`,
+      automatic_tax: { enabled: true },
+    });
+
+    res.send({ clientSecret: session.client_secret });
+  } catch (error) {
+    console.error('Failed to create checkout session:', error);
+    res.status(500).json({ error: 'Failed to create checkout session' });
+  }
 });
+
 
 // Get Session Status
 app.get('/session-status', async (req, res) => {

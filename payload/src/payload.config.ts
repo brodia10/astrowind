@@ -54,6 +54,7 @@ import Subscribers from './collections/Subscribers'
 import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
 import { Icon } from './components/Icon'
 import { Logo } from './components/Logo'
+import PricingPage from './components/PricingPage'
 import StripeCheckoutForm from './components/StripeCheckoutForm'
 import StripeCheckoutReturn from './components/StripeCheckoutReturn'
 import seoGenerator from './plugins/seoGenerator'
@@ -129,9 +130,13 @@ export default buildConfig({
       views: {
         // Account: [],
         // Dashboard: [],
+        PricingPage: {
+          Component: PricingPage,
+          path: '/plans'
+        },
         StripeCheckoutForm: {
           Component: StripeCheckoutForm,
-          path: '/checkout',
+          path: '/checkout/:priceId',
         },
         StripeCheckoutReturn: {
           Component: StripeCheckoutReturn,
