@@ -4387,7 +4387,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.2":
+"axios@npm:^1.6.2, axios@npm:^1.6.8":
   version: 1.6.8
   resolution: "axios@npm:1.6.8"
   dependencies:
@@ -10262,6 +10262,7 @@ __metadata:
     "@types/react": "npm:^18"
     add: "npm:^2.0.6"
     assert: "npm:^2.1.0"
+    axios: "npm:^1.6.8"
     browserify-zlib: "npm:^0.2.0"
     buffer: "npm:^6.0.3"
     copyfiles: "npm:^2.4.1"

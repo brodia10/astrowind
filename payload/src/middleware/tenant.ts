@@ -88,7 +88,7 @@ async function resolveAndConfigureTenant(req: Request, res: Response, next: Next
             // Store Tenant for use in other middleware
             res.locals.tenant = tenant
             req.tenant = tenant
-            console.log("Current Tenant on Request: ", req.tenant)
+            // console.log("Current Tenant on Request: ", req.tenant)
             next();
         } else {
             await handleNoTenantFound(req, res, next); // Ensure response is handled in all paths

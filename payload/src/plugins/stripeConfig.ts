@@ -5,11 +5,11 @@ const stripeConfig = {
     stripeAccountId: process.env.STRIPE_ACCOUNT_ID,
     stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
     stripeWebhooksEndpointSecret: process.env.STRIPE_WEBHOOKS_ENDPOINT_SECRET,
-    // webhooks: {
-    //     'product.created': productUpdated,
-    //     'product.updated': productUpdated,
-    //     'price.updated': priceUpdated,
-    // },
+    logs: true,
+    webhooks: {
+        'checkout.session.completed': () => console.log('Checkout Session Complete!'),
+        'payment_intent.failed': console.log('Payment Failure'),
+    },
     sync: [
         {
             collection: 'customers',

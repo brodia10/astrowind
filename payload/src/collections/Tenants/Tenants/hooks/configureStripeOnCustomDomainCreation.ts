@@ -1,4 +1,3 @@
-// configureStripeOnCustomDomainCreation.ts
 import payload from "payload";
 import { CollectionBeforeChangeHook } from "payload/types";
 
@@ -10,7 +9,6 @@ const isNewCustomDomainAdded = (data, originalDomains = []) => {
 const configureStripeOnCustomDomainCreation: CollectionBeforeChangeHook = async ({ data, originalDoc, operation, req }) => {
     if (operation === 'update' && data.emailConfig) {
         const emailConfig = data.emailConfig;
-        console.log("REQUEST IN STRIPE HOOK", req)
 
         if (emailConfig && data.domains) {
             const originalDomains = originalDoc.domains || [];

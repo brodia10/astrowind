@@ -52,6 +52,10 @@ import Platforms from './collections/Platform'
 import { PostmarkTemplates } from './collections/PostmarkTemplates'
 import Subscribers from './collections/Subscribers'
 import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
+import { Icon } from './components/Icon'
+import { Logo } from './components/Logo'
+import StripeCheckoutForm from './components/StripeCheckoutForm'
+import StripeCheckoutReturn from './components/StripeCheckoutReturn'
 import seoGenerator from './plugins/seoGenerator'
 import stripeConfig from './plugins/stripeConfig'
 
@@ -111,23 +115,32 @@ export default buildConfig({
         },
       },
     }),
-    // components: {
-    //   Nav: {},
-    //   graphics: {
-    //     Logo,
-    //     Icon,
-    //   },
-    //   afterDashboard: [],
-    //   afterLogin: [],
-    //   beforeDashboard: [],
-    //   afterNavLinks: [],
-    //   actions: [],
-    //   views: {
-    //     Account: [],
-    //     Dashboard: [],
-    //   },
-    //   providers: [],
-    // },
+    components: {
+      // Nav: {},
+      graphics: {
+        Logo: Logo,
+        Icon: Icon,
+      },
+      // afterDashboard: [],
+      // afterLogin: [],
+      // beforeDashboard: [],
+      // afterNavLinks: [],
+      // actions: [],
+      views: {
+        // Account: [],
+        // Dashboard: [],
+        StripeCheckoutForm: {
+          Component: StripeCheckoutForm,
+          path: '/checkout',
+        },
+        StripeCheckoutReturn: {
+          Component: StripeCheckoutReturn,
+          path: '/return',
+          exact: true,
+        },
+      },
+      // providers: [],
+    },
     livePreview: {
       url: 'http://localhost:4321', // The URL to your front-end, this can also be a function (see below)
       collections: ['header', 'footer', 'pages', 'posts', 'events', 'comments', 'forms'], // The collections to enable Live Preview on (globals are also possible)

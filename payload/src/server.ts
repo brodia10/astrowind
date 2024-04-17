@@ -22,6 +22,43 @@ app.get('/', (_, res) => {
   res.redirect('/admin')
 })
 
+// This is your test secret API key.
+const stripe = require('stripe')('sk_test_51KrDzFGcfEQQlDX8Fvrxh2oNChaqfmmiRNeSd4lu9b6DdRF4xjOmfyr1rkwyGgvBoXoBOJKIw684aMSnQ04N0fd600OwvB61YU');
+
+app.use(express.static('public'));
+
+const YOUR_DOMAIN = 'http://localhost:3000';
+
+// Create Checkout Session
+app.post('/create-checkout-session', async (req, res) => {
+  const baseUrl = process.env.NODE_ENV == 'development' ? `http://${process.env.BLOOM_DOMAIN}:3000` : `https://${process.env.BLOOM_DOMAIN}`
+  const session = await stripe.checkout.sessions.create({
+    ui_mode: 'embedded',
+    line_items: [
+      {
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        price: 'price_1KrE9AGcfEQQlDX8zUife1ZC',
+      },
+    ],
+    mode: 'subscription',
+    return_url: `${baseUrl}/admin/return?session_id={CHECKOUT_SESSION_ID}`,
+    automatic_tax: { enabled: true },
+  });
+
+  res.send({ clientSecret: session.client_secret });
+});
+
+// Get Session Status
+app.get('/session-status', async (req, res) => {
+  const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+
+  res.send({
+    status: session.status,
+    customer_email: session.customer_details.email
+  });
+});
+
+
 
 const start = async () => {
 
@@ -36,8 +73,8 @@ const start = async () => {
   } else {
     emailConfig = {
       transport: app.locals.emailTransport,
-      fromAddress: app.locals.emailConfig?.fromEmailAddress,
-      fromName: app.locals.emailConfig?.fromName,
+      fromName: process.env.BLOOM_FROM_NAME,
+      fromAddress: process.env.BLOOM_EMAIL,
     };
   }
 
