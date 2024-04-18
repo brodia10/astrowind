@@ -57,6 +57,7 @@ import { Logo } from './components/Logo'
 import PricingPage from './components/PricingPage'
 import StripeCheckoutForm from './components/StripeCheckoutForm'
 import StripeCheckoutReturn from './components/StripeCheckoutReturn'
+import TenantSwitcher from './components/TenantSwitcher'
 import UpgradeButton from './components/UpgradeButton'
 import seoGenerator from './plugins/seoGenerator'
 import stripeConfig from './plugins/stripeConfig'
@@ -128,7 +129,7 @@ export default buildConfig({
       // afterLogin: [],
       // beforeDashboard: [],
       // afterNavLinks: [],
-      // actions: [],
+      actions: [UpgradeButton, TenantSwitcher],
       views: {
         // Account: [],
         // Dashboard: [],
