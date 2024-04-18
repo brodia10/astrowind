@@ -2,7 +2,7 @@ import payload from 'payload';
 import { CollectionAfterChangeHook } from 'payload/types';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2022-08-01' });
 
 const createPriceInStripe: CollectionAfterChangeHook = async ({
     doc, // the current document state after the change
