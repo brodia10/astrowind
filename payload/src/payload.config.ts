@@ -52,8 +52,6 @@ import Platforms from './collections/Platform'
 import { PostmarkTemplates } from './collections/PostmarkTemplates'
 import Subscribers from './collections/Subscribers'
 import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
-import { Icon } from './components/Icon'
-import { Logo } from './components/Logo'
 import PricingPage from './components/PricingPage'
 import StripeCheckoutForm from './components/StripeCheckoutForm'
 import StripeCheckoutReturn from './components/StripeCheckoutReturn'
@@ -121,10 +119,10 @@ export default buildConfig({
     components: {
       beforeDashboard: [UpgradeButton],
       // Nav: {},
-      graphics: {
-        Logo: Logo,
-        Icon: Icon,
-      },
+      // graphics: {
+      //   Logo: Logo,
+      //   Icon: Icon,
+      // },
       // afterDashboard: [],
       // afterLogin: [],
       // beforeDashboard: [],
