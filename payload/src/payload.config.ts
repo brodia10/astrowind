@@ -57,6 +57,7 @@ import { Logo } from './components/Logo'
 import PricingPage from './components/PricingPage'
 import StripeCheckoutForm from './components/StripeCheckoutForm'
 import StripeCheckoutReturn from './components/StripeCheckoutReturn'
+import UpgradeButton from './components/UpgradeButton'
 import seoGenerator from './plugins/seoGenerator'
 import stripeConfig from './plugins/stripeConfig'
 
@@ -117,6 +118,7 @@ export default buildConfig({
       },
     }),
     components: {
+      beforeDashboard: [UpgradeButton],
       // Nav: {},
       graphics: {
         Logo: Logo,
