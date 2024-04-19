@@ -1,4 +1,4 @@
-name = "my-worker"
+name = "bloom-reverse-proxy-production"
 main = "src/index.ts"
 compatibility_date = "2023-12-18"
 
