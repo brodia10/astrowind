@@ -84,6 +84,9 @@ function modifyResponseForDashboard(response: Response, displayURL?: string): Re
 
 
 function getScenario(hostname: string, pathname: string): Scenario {
+	if ((hostname === DOMAIN_BLOOM_PUBLIC_SITE || hostname === DOMAIN_BLOOM_PUBLIC_SITE_WWW) && pathname.startsWith('/admin')) {
+		return Scenario.BloomAdminDashboard;
+	}
 	if (hostname.endsWith(SUBDOMAIN_SITE_SUFFIX) && pathname.startsWith('/admin')) {
 		return Scenario.Dashboard;
 	} else if (pathname.startsWith('/api/')) {
