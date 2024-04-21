@@ -31,7 +31,7 @@ const TenantSwitcher: React.FC = () => {
                 const dashboardDomain = tenant.domains?.find(domain => domain.domain.includes('-dashboard.bloomcms.io'));
                 return {
                     ...tenant,
-                    dashboardUrl: `${dashboardDomain}/admin` ? `https://${dashboardDomain.domain}/admin` : undefined
+                    dashboardUrl: `${dashboardDomain}` ? `https://${dashboardDomain.domain}` : undefined
                 };
             }).filter(tenant => tenant.dashboardUrl);
             setTenants(tenantData);
