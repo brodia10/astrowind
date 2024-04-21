@@ -119,10 +119,10 @@ export default buildConfig({
     components: {
       beforeDashboard: [UpgradeButton],
       // Nav: {},
-      // graphics: {
-      //   Logo: Logo,
-      //   Icon: Icon,
-      // },
+      graphics: {
+        Logo: Logo,
+        Icon: Icon,
+      },
       // afterDashboard: [],
       // afterLogin: [],
       // beforeDashboard: [],
@@ -172,9 +172,9 @@ export default buildConfig({
       ],
     },
     meta: {
-      titleSuffix: '- Bloom CMS',
-      favicon: '/assets/icon.png',
-      ogImage: '/assets/logo-with-image.png',
+      titleSuffix: '- Rally',
+      favicon: '/assets/logo.png',
+      ogImage: '/assets/logo.png',
     },
   },
   editor: lexicalEditor({

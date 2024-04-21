@@ -3,7 +3,7 @@ import React from 'react';
 export const Logo = () => (
     <div className="logo">
         <img
-            src="/assets/rally.png"
+            src="/assets/logo.png"
             alt="Brand Logo"
             style={{ width: 'auto', maxHeight: '12em' }}
         />
