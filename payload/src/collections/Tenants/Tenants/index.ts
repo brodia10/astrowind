@@ -30,6 +30,21 @@ export const Tenants: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    // Status Field
+    {
+      name: 'status',
+      label: 'Status',
+      type: 'select',
+      required: true,
+      options: [
+        { label: 'Live', value: 'live' },
+        { label: 'Ready to Launch', value: 'ready_to_launch' },
+      ],
+      defaultValue: 'ready_to_launch',
+      admin: {
+        position: 'sidebar',
+      },
+    },
     {
       name: 'category',
       type: 'relationship',

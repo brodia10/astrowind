@@ -70,6 +70,7 @@ export interface User {
 export interface Tenant {
   id: number;
   siteName: string;
+  status: 'live' | 'ready_to_launch';
   category?: (number | Category)[] | null;
   customer?: (number | null) | Customer;
   domains?:
