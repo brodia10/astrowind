@@ -47,6 +47,12 @@ EXCEPTION
 END $$;
 
 DO $$ BEGIN
+ CREATE TYPE "enum_tenants_status" AS ENUM('live', 'ready_to_launch');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
  CREATE TYPE "enum_posts_blocks_content_columns_size" AS ENUM('oneThird', 'half', 'twoThirds', 'full');
 EXCEPTION
  WHEN duplicate_object THEN null;
@@ -423,6 +429,7 @@ CREATE TABLE IF NOT EXISTS "tenants_domains" (
 CREATE TABLE IF NOT EXISTS "tenants" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"site_name" varchar NOT NULL,
+	"status" "enum_tenants_status" NOT NULL,
 	"street_address" varchar,
 	"city" varchar,
 	"state" varchar,
