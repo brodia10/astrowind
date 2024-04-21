@@ -7,8 +7,8 @@ export class TenantResolutionService {
         try {
             // const domain = req.hostname;
             const domain = req.headers.origin ?? req.hostname;
-            console.log(`Origin: ${req.headers.origin}`);
-            console.log(`Hostname: ${req.hostname}`);
+            payload.logger.info(`Origin: ${req.headers.origin}`);
+            payload.logger.info(`Hostname: ${req.hostname}`);
             payload.logger.info(`Resolving tenant for domain: ${domain}`);
 
             const tenants = await payload.find({
