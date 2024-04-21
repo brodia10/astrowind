@@ -54,12 +54,15 @@ import { PostmarkTemplates } from './collections/PostmarkTemplates'
 import Subscribers from './collections/Subscribers'
 import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
 import AccountNavItem from './components/AccountNavItem'
+import Analytics from './components/Analytics'
 import AnalyticsNavItem from './components/AnalyticsNavItem'
 import MySitesNavItem from './components/MySitesNavItem'
 import PricingPage from './components/PricingPage'
+import Resources from './components/Resources'
 import ResourcesNavItem from './components/ResourcesNavItem'
 import StripeCheckoutForm from './components/StripeCheckoutForm'
 import StripeCheckoutReturn from './components/StripeCheckoutReturn'
+import Support from './components/Support'
 import SupportNavItem from './components/SupportNavItem'
 import TeamsNavItem from './components/TeamsNavItem'
 import TenantSwitcher from './components/TenantSwitcher'
@@ -150,6 +153,18 @@ export default buildConfig({
           Component: StripeCheckoutReturn,
           path: '/return',
           exact: true,
+        },
+        ResourcesPage: {
+          Component: Resources,
+          path: '/resources'
+        },
+        SupportPage: {
+          Component: Support,
+          path: '/support',
+        },
+        AnalyticsPage: {
+          Component: Analytics,
+          path: '/analytics'
         },
       },
       // providers: [],
