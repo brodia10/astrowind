@@ -122,8 +122,8 @@ export default buildConfig({
       beforeDashboard: [UpgradeButton],
       // Nav: {},
       graphics: {
-        Logo: Logo,
-        Icon: Icon,
+        Logo: Logo ?? null,
+        Icon: Icon ?? null,
       },
       // afterDashboard: [],
       // afterLogin: [],
