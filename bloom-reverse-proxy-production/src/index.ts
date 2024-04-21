@@ -46,20 +46,30 @@ function createProxyRequest(request: Request, destinationURL: string, url: URL):
 		requestPath = requestPath.slice(destinationPath.length);
 	}
 
-	return new Request(destinationURL + requestPath + url.search, request);
+	const newRequest = new Request(destinationURL + requestPath + url.search, request);
+	newRequest.headers.set('Origin', url.hostname);
+	return newRequest;
 }
 
 
 async function fetchAndApplyContentType(newRequest: Request, contentType: string): Promise<Response> {
 	const response = await fetch(newRequest);
+	console.log('content type', contentType)
+	if (!response.ok && response.headers.get('Content-Type')?.startsWith('text/html')) {
+		console.error('Received HTML content for a static asset request. Check proxy routing rules.');
+		return new Response('Incorrect content type received', { status: 500 });
+	}
 	const newHeaders = new Headers(response.headers);
-	newHeaders.set('Content-Type', contentType);
+	if (contentType) {
+		newHeaders.set('Content-Type', contentType);
+	}
 	return new Response(response.body, {
 		status: response.status,
 		statusText: response.statusText,
 		headers: newHeaders
 	});
 }
+
 
 async function fetchRequest(newRequest: Request): Promise<Response> {
 	return fetch(newRequest);
@@ -124,14 +134,35 @@ function determineDestination(url: URL): Destination {
 				displayURL: url.hostname + url.pathname
 			};
 		case Scenario.Dashboard:
-			return { destinationURL: ADMIN_DASHBOARD_SERVER_URL };
+			// Ensure static assets in the admin path are correctly proxied
+			if (url.pathname.startsWith('/admin')) {
+				return { destinationURL: ADMIN_DASHBOARD_SERVER_URL + url.pathname };
+			} else if (url.pathname === '/') {
+				return {
+					destinationURL: ADMIN_DASHBOARD_SERVER_URL + '/admin',
+					displayURL: url.hostname + '/admin'
+				};
+			} else {
+				return { destinationURL: ADMIN_DASHBOARD_SERVER_URL };
+			}
 		case Scenario.BloomPublicSite:
 			return {
 				destinationURL: PUBLIC_SITE_SERVER_URL,
 				displayURL: url.hostname + url.pathname
 			};
 		case Scenario.BloomAdminDashboard:
-			return { destinationURL: ADMIN_DASHBOARD_SERVER_URL };
+			// Add specific handling for the root path redirect to /admin
+			// Ensure static assets in the admin path are correctly proxied
+			if (url.pathname.startsWith('/admin')) {
+				return { destinationURL: ADMIN_DASHBOARD_SERVER_URL + url.pathname };
+			} else if (url.pathname === '/') {
+				return {
+					destinationURL: ADMIN_DASHBOARD_SERVER_URL + '/admin',
+					displayURL: url.hostname + '/admin'
+				};
+			} else {
+				return { destinationURL: ADMIN_DASHBOARD_SERVER_URL };
+			}
 		case Scenario.PostmarkReturnPath:
 			return { destinationURL: POSTMARK_RETURN_PATH_HOST }
 		default:
@@ -141,27 +172,31 @@ function determineDestination(url: URL): Destination {
 
 export default {
 	async fetch(request: Request): Promise<Response> {
+		console.log(request.url);
 		const url = new URL(request.url);
+
 		const scenario = getScenario(url.hostname, url.pathname);
 		const { destinationURL, displayURL } = determineDestination(url);
 		const contentType = getContentType(url);
 
 		try {
 			const newRequest = createProxyRequest(request, destinationURL, url);
-
-			let response;
-			if (contentType) {
-				response = await fetchAndApplyContentType(newRequest, contentType);
-			} else {
-				response = await fetchRequest(newRequest);
-			}
+			console.log(`Proxying request to: ${newRequest.url}`);
+			const response = await fetchRequest(newRequest);
+			// let response;
+			// if (contentType) {
+			// 	response = await fetchAndApplyContentType(newRequest, contentType);
+			// } else {
+			// 	response = await fetchRequest(newRequest);
+			// }
 
 			// Do not modify the response for assets or the web manifest file
 			if (scenario === Scenario.Assets || scenario === Scenario.BloomPublicSite || scenario == Scenario.PostmarkReturnPath) {
 				return response;
 			}
 
-			return modifyResponseForDashboard(response, displayURL);
+			// return modifyResponseForDashboard(response, displayURL);
+			return response;
 		} catch (error) {
 			console.error('Error fetching the new request:', error);
 			return new Response('Error fetching the request', { status: 500 });
