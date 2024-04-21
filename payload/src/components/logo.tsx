@@ -1,6 +1,6 @@
 import React from 'react';
 // logo for white-labeling admin
-const Logo = () => (
+const Logo: React.FC = () => (
     <div className="logo">
         <img
             src="/assets/logo.png"
