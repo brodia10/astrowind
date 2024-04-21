@@ -52,11 +52,15 @@ import Platforms from './collections/Platform'
 import { PostmarkTemplates } from './collections/PostmarkTemplates'
 import Subscribers from './collections/Subscribers'
 import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
-import Icon from './components/Icon'
-import Logo from './components/Logo'
+import AccountNavItem from './components/AccountNavItem'
+import AnalyticsNavItem from './components/AnalyticsNavItem'
+import MySitesNavItem from './components/MySitesNavItem'
 import PricingPage from './components/PricingPage'
+import ResourcesNavItem from './components/ResourcesNavItem'
 import StripeCheckoutForm from './components/StripeCheckoutForm'
 import StripeCheckoutReturn from './components/StripeCheckoutReturn'
+import SupportNavItem from './components/SupportNavItem'
+import TeamsNavItem from './components/TeamsNavItem'
 import TenantSwitcher from './components/TenantSwitcher'
 import UpgradeButton from './components/UpgradeButton'
 import seoGenerator from './plugins/seoGenerator'
@@ -119,17 +123,17 @@ export default buildConfig({
       },
     }),
     components: {
-      beforeDashboard: [UpgradeButton],
+      // beforeDashboard: [UpgradeButton],
       // Nav: {},
-      graphics: {
-        Logo: Logo ?? null,
-        Icon: Icon ?? null,
-      },
+      // graphics: {
+      //   Logo: Logo ?? null,
+      //   Icon: Icon ?? null,
+      // },
       // afterDashboard: [],
       // afterLogin: [],
       // beforeDashboard: [],
       // afterNavLinks: [],
-      actions: [UpgradeButton, TenantSwitcher],
+      actions: [MySitesNavItem, AccountNavItem, TeamsNavItem, ResourcesNavItem, SupportNavItem, AnalyticsNavItem, UpgradeButton, TenantSwitcher],
       views: {
         // Account: [],
         // Dashboard: [],
