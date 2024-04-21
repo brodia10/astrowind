@@ -47,7 +47,7 @@ const TenantSwitcher: React.FC = () => {
     const handleSelectionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const url = event.target.value;
         setSelectedUrl(url);
-        window.location.href = `${url}/admin`;
+        window.location.href = url;
     };
 
     return (
