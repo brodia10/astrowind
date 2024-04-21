@@ -5,7 +5,10 @@ export class TenantResolutionService {
     // This service is instantiated per request to resolve the tenant based on the domain
     async resolveTenantByDomain(req: Request): Promise<Tenant | null> {
         try {
-            const domain = req.hostname;
+            // const domain = req.hostname;
+            const domain = req.headers.origin ?? req.hostname;
+            console.log(`Origin: ${req.headers.origin}`);
+            console.log(`Hostname: ${req.hostname}`);
             payload.logger.info(`Resolving tenant for domain: ${domain}`);
 
             const tenants = await payload.find({
