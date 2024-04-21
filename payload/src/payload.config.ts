@@ -40,6 +40,7 @@ import { swagger } from 'payload-swagger'
 import { CallToAction } from './blocks/CallToAction'
 import { Content } from './blocks/Content'
 import { FormBlock } from './blocks/Form'
+import { MediaBlock } from './blocks/MediaBlock'
 import Categories from './collections/Categories'
 import { Customers } from './collections/Customers'
 import Events from './collections/Events'
@@ -224,7 +225,7 @@ export default buildConfig({
         blocks: [
           // Banner,
           CallToAction,
-          Media,
+          MediaBlock,
           FormBlock,
           Content,
         ],
