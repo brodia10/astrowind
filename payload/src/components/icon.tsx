@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Icon = () => (
+const Icon = () => (
     <div className="icon">
         <img
             src="/assets/logo.png"
@@ -9,3 +9,5 @@ export const Icon = () => (
         />
     </div>
 );
+
+export default Icon;

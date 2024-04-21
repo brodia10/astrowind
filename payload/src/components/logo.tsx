@@ -1,6 +1,6 @@
 import React from 'react';
 // logo for white-labeling admin
-export const Logo = () => (
+const Logo = () => (
     <div className="logo">
         <img
             src="/assets/logo.png"
@@ -9,3 +9,5 @@ export const Logo = () => (
         />
     </div>
 );
+
+export default Logo;
