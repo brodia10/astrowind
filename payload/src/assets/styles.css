@@ -1,0 +1,14 @@
+/* Full Header */
+.app-header__content {
+    background-color: black;
+}
+
+/* Hide Gradient */
+.step-nav::after {
+    display: none;
+}
+
+/* Hide Gradient */
+.app-header__gradient-placeholder {
+    display: none;
+}

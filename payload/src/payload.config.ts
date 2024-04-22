@@ -56,6 +56,8 @@ import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
 import AccountNavItem from './components/AccountNavItem'
 import Analytics from './components/Analytics'
 import AnalyticsNavItem from './components/AnalyticsNavItem'
+import Icon from './components/Icon'
+import Logo from './components/Logo'
 import MySitesNavItem from './components/MySitesNavItem'
 import PricingPage from './components/PricingPage'
 import Resources from './components/Resources'
@@ -93,7 +95,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
-    // css: path.resolve(__dirname, 'relative/path/to/stylesheet.scss'),
+    css: path.resolve(__dirname, 'assets/styles.css'),
     webpack: (config) => ({
       ...config,
       resolve: {
@@ -129,10 +131,10 @@ export default buildConfig({
     components: {
       // beforeDashboard: [UpgradeButton],
       // Nav: {},
-      // graphics: {
-      //   Logo: Logo ?? null,
-      //   Icon: Icon ?? null,
-      // },
+      graphics: {
+        Logo: Logo,
+        Icon: Icon,
+      },
       // afterDashboard: [],
       // afterLogin: [],
       // beforeDashboard: [],
@@ -140,7 +142,9 @@ export default buildConfig({
       actions: [MySitesNavItem, AccountNavItem, TeamsNavItem, ResourcesNavItem, SupportNavItem, AnalyticsNavItem, UpgradeButton, TenantSwitcher],
       views: {
         // Account: [],
-        // Dashboard: [],
+        // Dashboard: {
+        //   path: '/plans',
+        // },
         PricingPage: {
           Component: PricingPage,
           path: '/plans'
