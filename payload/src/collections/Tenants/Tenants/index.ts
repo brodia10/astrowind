@@ -1,6 +1,7 @@
 import type { CollectionConfig } from 'payload/types';
 
 import { TelephoneField } from '@nouance/payload-better-fields-plugin';
+import CreateSiteButton from '../../../components/CreateSiteButton';
 import { tenantAdmins } from './access/tenantAdmins';
 import configureStripeOnCustomDomainCreation from './hooks/configureStripeOnCustomDomainCreation';
 import generateTenantSubdomains from './hooks/generateSubdomains';
@@ -18,6 +19,9 @@ export const Tenants: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'siteName',
+    components: {
+      BeforeListTable: [CreateSiteButton,]
+    }
   },
   labels: {
     singular: 'Site',

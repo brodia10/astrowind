@@ -12,3 +12,16 @@
 .app-header__gradient-placeholder {
     display: none;
 }
+
+.template-default__wrap {
+    background-color: #f5f6fa;
+}
+
+.collection-list__wrap {
+    background-color: white;
+    border-radius: 7;
+}
+/* 
+.collection-list__header{
+    background: #f5f6fa;
+} */
