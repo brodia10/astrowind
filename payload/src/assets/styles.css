@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 /* Full Header */
 .app-header__content {
-    background-color: black;
+    background-color: #11111a;
 }
 
 /* Hide Gradient */
@@ -20,6 +26,18 @@
 .collection-list__wrap {
     background-color: white;
     border-radius: 7;
+}
+
+.step-nav {
+    color: white;
+}
+
+.step-nav:hover {
+    color: white;
+}
+
+.step-nav span {
+    color: grey;
 }
 /* 
 .collection-list__header{

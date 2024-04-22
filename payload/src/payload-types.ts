@@ -90,6 +90,7 @@ export interface Tenant {
   country?: string | null;
   telephone?: string | null;
   businessHours?: string | null;
+  subscription: 'pro' | 'basic' | 'free';
   updatedAt: string;
   createdAt: string;
 }

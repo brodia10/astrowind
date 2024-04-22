@@ -1,0 +1,20 @@
+// UserProfile.scss
+.user-profile {
+  padding: 16px; // Adjust padding as needed
+  border: 1px solid #dcdcdc; // Border color from your navbar design
+  background-color: #fff; // White background
+}
+
+.user-name {
+  margin: 0;
+  font-size: 1.5em; // Adjust font-size as needed
+  font-family: 'Lato', sans-serif; // Using Lato as per your navbar
+  color: #333; // Text color - adjust as needed
+}
+
+.user-website {
+  margin: 0;
+  font-size: 1em; // Adjust font-size as needed
+  font-family: 'Lato', sans-serif; // Consistency with the navbar
+  color: #666; // Lighter text color for the website - adjust as needed
+}

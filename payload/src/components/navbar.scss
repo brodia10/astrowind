@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons'); // Import Material Icons
+
+.custom-navbar {
+    background-color: #ffffff; // Default background color is white
+    min-height: 100vh;
+    width: 274px; // Set the width for the navbar
+    font-family: 'Lato', sans-serif; // Use the Lato font
+    font-size: 1.1em; // Set font size
+    margin-top: 31.5%;
+    border-right: solid 1px  #dcdcdc;
+
+    .nav-items {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        // border-right: solid 1px  #dcdcdc;
+    
+
+        .nav-item {
+            padding: 15px 20px;
+            color: #11111a; // Default text color is black
+            border-bottom: 1px solid #dcdcdc; // Bottom border for each item
+            // border-right: solid 1px  #dcdcdc;
+            display: flex; // Use flex to align icon and text
+            align-items: center; // Center items vertically
+
+            .material-icons {
+                font-size: 24px; // Icon size
+                margin-right: 15px; // Space between icon and text
+            }
+
+            &:hover, &:focus {
+                background-color: #11111a;; // Hover background color is black
+                color: #fff; // Hover text color is white
+                cursor: pointer; // Change cursor to pointer on hover
+            }
+            
+            a {
+                text-decoration: none; // Remove underline from links
+                color: inherit; // Link color matches the nav-item text color
+                display: flex; // Ensure link fills the nav-item for a larger clickable area
+                align-items: center; // Center the link vertically
+                width: 100%; // Full width of the nav-item
+
+                &:hover, &:focus {
+                    text-decoration: none; // Ensure no underline on hover
+                }
+            }
+        }
+    }
+}

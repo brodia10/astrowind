@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.custom-sites-cell {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+
+  &__thumbnail {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin-right: 12px;
+    object-fit: cover;
+  }
+
+  &__details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 2rem;
+    color: #333;
+    font-weight: bold;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  &__icons {
+    display: flex;
+    gap: 8px;
+    .material-icons {
+      font-size: 24px;
+      color: #666;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+// status-cell.scss
+.custom-status-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #73c987;
+  border-radius: 16px;
+  width: auto;
+  padding: 0.25em 0.75em;
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  
+
+  &__text {
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &__live {
+    display: none;
+  }
+}
+
+.custom-sites-cell__status  {
+display: none;
+}

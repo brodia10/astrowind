@@ -2,6 +2,8 @@ import type { CollectionConfig } from 'payload/types';
 
 import { TelephoneField } from '@nouance/payload-better-fields-plugin';
 import CreateSiteButton from '../../../components/CreateSiteButton';
+import SitesCell from '../../../components/cells/SitesCell';
+import StatusCell from '../../../components/cells/StatusCell';
 import { tenantAdmins } from './access/tenantAdmins';
 import configureStripeOnCustomDomainCreation from './hooks/configureStripeOnCustomDomainCreation';
 import generateTenantSubdomains from './hooks/generateSubdomains';
@@ -33,6 +35,11 @@ export const Tenants: CollectionConfig = {
       label: 'Site Name',
       type: 'text',
       required: true,
+      admin: {
+        components: {
+          Cell: SitesCell,
+        }
+      }
     },
     // Status Field
     {
@@ -47,6 +54,9 @@ export const Tenants: CollectionConfig = {
       defaultValue: 'ready_to_launch',
       admin: {
         position: 'sidebar',
+        components: {
+          Cell: StatusCell,
+        }
       },
     },
     {
@@ -197,6 +207,18 @@ export const Tenants: CollectionConfig = {
         position: 'sidebar',
         description: 'Add your business hours here.',
       },
+    },
+    {
+      name: 'subscription',
+      label: 'Subscription',
+      type: 'select',
+      required: true,
+      options: [
+        { label: 'Pro', value: 'pro' },
+        { label: 'Basic', value: 'basic' },
+        { label: 'Free', value: 'free' },
+      ],
+      defaultValue: 'pro',
     },
   ],
 };

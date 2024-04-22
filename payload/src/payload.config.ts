@@ -59,7 +59,9 @@ import AnalyticsNavItem from './components/AnalyticsNavItem'
 import Icon from './components/Icon'
 import Logo from './components/Logo'
 import MySitesNavItem from './components/MySitesNavItem'
+import CustomNavbar from './components/Navbar'
 import PricingPage from './components/PricingPage'
+import RedirectToTenants from './components/RedirectToMySites'
 import Resources from './components/Resources'
 import ResourcesNavItem from './components/ResourcesNavItem'
 import StripeCheckoutForm from './components/StripeCheckoutForm'
@@ -130,7 +132,7 @@ export default buildConfig({
     }),
     components: {
       // beforeDashboard: [UpgradeButton],
-      // Nav: {},
+      Nav: CustomNavbar,
       graphics: {
         Logo: Logo,
         Icon: Icon,
@@ -138,13 +140,12 @@ export default buildConfig({
       // afterDashboard: [],
       // afterLogin: [],
       // beforeDashboard: [],
+      // beforeNavLinks: [CustomAccountAvatar],
       // afterNavLinks: [],
       actions: [MySitesNavItem, AccountNavItem, TeamsNavItem, ResourcesNavItem, SupportNavItem, AnalyticsNavItem, UpgradeButton, TenantSwitcher],
       views: {
         // Account: [],
-        // Dashboard: {
-        //   path: '/plans',
-        // },
+        Dashboard: RedirectToTenants,
         PricingPage: {
           Component: PricingPage,
           path: '/plans'
