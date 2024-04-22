@@ -1,52 +1,44 @@
-// CustomNavbar.jsx
-import axios from 'axios';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import CustomAccountAvatar from './CustomAccountAvatar';
 import './navbar.scss';
 
-const navItems = [
-    'Settings',
-    'Header',
-    'Footer',
-    'Pages',
-    'Media',
-    'Posts',
-    'Priorities',
-    'Redirections',
-    'Alerts/Pop ups',
-    'Form Submissions',
+interface NavItem {
+    title: string;
+    link: string;
+}
+
+const navItems: NavItem[] = [
+    { title: 'Settings', link: '/admin/collections/settings' },
+    { title: 'Header', link: '/admin/collections/header?limit=10' },
+    { title: 'Footer', link: '/admin/collections/footer?limit=10' },
+    { title: 'Pages', link: '/admin/collections/pages?limit=10' },
+    { title: 'Media', link: '/admin/collections/media?limit=10' },
+    { title: 'Posts', link: '/admin/collections/posts?limit=10' },
+    { title: 'Priorities', link: '/admin/collections/priorities?limit=10' },
+    { title: 'Redirections', link: '/admin/collections/redirections?limit=10' },
+    { title: 'Alerts/Popups', link: '/admin/collections/alertspopups?limit=10' },
+    { title: 'Form Submissions', link: '/admin/collections/form-submissions?limit=10' },
 ];
 
-const handleLogout = async () => {
-    try {
-        // Send a POST request to the logout endpoint
-        await axios.post('api/users/logout');
-        window.location.href = '/login'
-    } catch (error) {
-        // Handle errors here, such as displaying a message to the user
-        console.error('Logout failed', error);
-    }
-};
-
 const CustomNavbar: React.FC = () => {
+    const memoizedNavItems = useMemo(() => navItems.map(item => (
+        <Link key={item.title} to={item.link} className="nav-item">
+            <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                {item.title}
+            </div>
+        </Link>
+    )), []);
+
     return (
         <nav className="custom-navbar">
             <ul className="nav-items">
                 <CustomAccountAvatar />
-                {navItems.map((item) => (
-                    <li key={item} className="nav-item">
-                        <Link to={`/admin/${item.toLowerCase().replace(/ /g, '')}`}>
-                            {item}
-                        </Link>
-                    </li>
-                ))}
-                <li className="nav-item">
-                    <button onClick={handleLogout} className="logout-button">
-                        Logout
-                    </button>
-                </li>
+                {memoizedNavItems}
             </ul>
+            <Link to="/admin/logout" className="logout-icon-link">
+                <i className="fas fa-sign-out-alt" title="Logout"></i>
+            </Link>
         </nav>
     );
 };

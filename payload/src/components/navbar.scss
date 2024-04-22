@@ -24,6 +24,7 @@
             // border-right: solid 1px  #dcdcdc;
             display: flex; // Use flex to align icon and text
             align-items: center; // Center items vertically
+            width: 100%; // Ensure the nav-item takes full width
 
             .material-icons {
                 font-size: 24px; // Icon size
@@ -37,14 +38,23 @@
             }
             
             a {
-                text-decoration: none; // Remove underline from links
+                text-decoration: none !important; // Remove underline from links
                 color: inherit; // Link color matches the nav-item text color
                 display: flex; // Ensure link fills the nav-item for a larger clickable area
                 align-items: center; // Center the link vertically
-                width: 100%; // Full width of the nav-item
+                width: 100%; // Ensure the link fills the nav-item
+                flex-grow: 1; // Allow the link to expand fully within the nav-item
+
+                *, *::before, *::after { // Apply to all children and pseudo-elements
+                    text-decoration: none !important; // Ensure no underline
+                }
+
+                .nav-item {
+                    text-decoration: none !important;
+                }
 
                 &:hover, &:focus {
-                    text-decoration: none; // Ensure no underline on hover
+                    text-decoration: none !important; // Ensure no underline on hover
                 }
             }
         }

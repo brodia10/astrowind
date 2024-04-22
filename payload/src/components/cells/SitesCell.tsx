@@ -1,13 +1,15 @@
 // SitesCell.tsx
 import type { Props } from 'payload/components/views/Cell';
 import React from 'react';
+import rallyLogo from '../../assets/rally.png';
 import './sites-cell.scss';
+
 
 const SitesCell: React.FC<Props> = () => {
     return (
         <div className="custom-sites-cell">
             <img
-                src="https://via.placeholder.com/60" // Placeholder image
+                src={rallyLogo}
                 alt="Maria Warner"
                 className="custom-sites-cell__thumbnail"
             />

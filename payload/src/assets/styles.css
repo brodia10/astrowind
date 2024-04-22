@@ -39,7 +39,11 @@ body {
 .step-nav span {
     color: grey;
 }
-/* 
+
+.graphic-account {
+    display: none;
+}
+
 .collection-list__header{
-    background: #f5f6fa;
-} */
+    padding-top: 1em;
+} 

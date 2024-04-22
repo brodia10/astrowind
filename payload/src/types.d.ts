@@ -6,3 +6,8 @@ declare module 'express-serve-static-core' {
     tenant?: Tenant;
   }
 }
+
+declare module '*.png' {
+  const value: any;
+  export = value;
+}
