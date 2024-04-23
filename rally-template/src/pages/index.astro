@@ -2,6 +2,9 @@
 // Component Imports
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import rallyLogo from "../assets/images/rally-logo.png";
 ---
 
 <html lang="en">
@@ -37,37 +40,43 @@
             <a
               href="#"
               class="text-gray-700 hover:text-campaign-light-blue transition-colors"
-              >Home</a>
+              >Home</a
+            >
           </li>
           <li>
             <a
               href="#"
               class="text-gray-700 hover:text-campaign-light-blue transition-colors"
-              >Meet Marie</a>
+              >Meet Marie</a
+            >
           </li>
           <li>
             <a
               href="#"
               class="text-gray-700 hover:text-campaign-light-blue transition-colors"
-              >Issues</a>
+              >Issues</a
+            >
           </li>
           <li>
             <a
               href="#"
               class="text-gray-700 hover:text-campaign-light-blue transition-colors"
-              >Media</a>
+              >Media</a
+            >
           </li>
           <li>
             <a
               href="#"
               class="text-gray-700 hover:text-campaign-light-blue transition-colors"
-              >Volunteer</a>
+              >Volunteer</a
+            >
           </li>
           <li>
             <a
               href="#"
               class="text-white bg-campaign-green hover:bg-campaign-light-blue transition-colors px-6 py-2 rounded-full shadow-lg"
-              >Donate</a>
+              >Donate</a
+            >
           </li>
         </ul>
       </nav>
@@ -182,27 +191,33 @@
         <ul class="inline-flex space-x-4 text-sm">
           <li>
             <a href="#" class="hover:text-campaign-light-blue transition-colors"
-              >Home</a>
+              >Home</a
+            >
           </li>
           <li>
             <a href="#" class="hover:text-campaign-light-blue transition-colors"
-              >Meet Marie</a>
+              >Meet Marie</a
+            >
           </li>
           <li>
             <a href="#" class="hover:text-campaign-light-blue transition-colors"
-              >Issues</a>
+              >Issues</a
+            >
           </li>
           <li>
             <a href="#" class="hover:text-campaign-light-blue transition-colors"
-              >Media</a>
+              >Media</a
+            >
           </li>
           <li>
             <a href="#" class="hover:text-campaign-light-blue transition-colors"
-              >Volunteer</a>
+              >Volunteer</a
+            >
           </li>
           <li>
             <a href="#" class="hover:text-campaign-light-blue transition-colors"
-              >Donate</a>
+              >Donate</a
+            >
           </li>
         </ul>
       </nav>
@@ -214,18 +229,29 @@
 
       <!-- Social Media Icons -->
       <div class="flex justify-center space-x-4 mb-8">
-        <a href="#" class="hover:text-campaign-light-blue transition-colors"
-          >FB</a
+        <!-- Facebook Icon -->
+        <a
+          href="https://facebook.com"
+          class="hover:text-campaign-light-blue transition-colors"
+          aria-label="Facebook"
         >
-        <a href="#" class="hover:text-campaign-light-blue transition-colors"
-          >TW</a
+          <Icon name="facebook" />
+        </a>
+
+        <!-- Twitter Icon -->
+        <a
+          href="https://twitter.com"
+          class="hover:text-campaign-light-blue transition-colors"
+          aria-label="Twitter"
         >
+          <Icon name="twitter" />
+        </a>
         <a href="#" class="hover:text-campaign-light-blue transition-colors"
-          >IG</a
-        >
+          ><Icon name="instagram" />
+        </a>
         <a href="#" class="hover:text-campaign-light-blue transition-colors"
-          >YT</a
-        >
+          ><Icon name="youtube" />
+        </a>
       </div>
 
       <!-- Legal Text and Links -->
@@ -240,10 +266,12 @@
 
       <!-- Sponsor Logo -->
       <div class="mt-4">
-        <img
-          src="https://via.placeholder.com/100x20?text=Rally"
-          alt="Rally Logo"
+        <Image
+          src={rallyLogo}
           class="mx-auto h-6"
+          alt="Rally Logo"
+          height="50"
+          width="50"
         />
       </div>
     </footer>
