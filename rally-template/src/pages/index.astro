@@ -1,0 +1,215 @@
+---
+// Component Imports
+
+// Full Astro Component Syntax:
+// https://docs.astro.build/basics/astro-components/
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro + TailwindCSS</title>
+  </head>
+
+  <body>
+    <!-- Top Bar with Promotional Text -->
+    <div class="bg-gray-800 text-white text-xs py-2 px-6 text-center">
+      Lorem ipsum dolor sit amet consectetur dolor sit amet...
+    </div>
+
+    <!-- Navigation Bar -->
+    <header
+      class="flex justify-between items-center bg-white py-4 px-8 shadow-md"
+    >
+      <div>
+        <!-- Placeholder for Logo -->
+        <img
+          src="https://via.placeholder.com/150x50?text=Logo"
+          alt="Marie Warner Logo"
+          class="h-12"
+        />
+      </div>
+      <nav aria-label="Primary">
+        <ul class="flex space-x-6 font-semibold">
+          <li>
+            <a
+              href="#"
+              class="text-gray-700 hover:text-teal-700 transition-colors"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-gray-700 hover:text-teal-700 transition-colors"
+              >Meet Marie</a
+            >
+          </li>
+          <!-- ... other links ... -->
+          <li>
+            <a
+              href="#"
+              class="text-white bg-teal-700 hover:bg-teal-800 transition-colors px-6 py-2 rounded-full shadow-lg"
+              >Donate</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-blue-900 text-white font-semibold">
+      <div class="grid grid-cols-1 md:grid-cols-2">
+        <div class="py-16 px-8 md:px-16">
+          <h1 class="text-5xl font-bold mb-8">Fighting for California</h1>
+          <form class="flex flex-col space-y-4 mb-10">
+            <input
+              type="email"
+              placeholder="Email Address"
+              class="w-full p-4 rounded text-gray-700"
+            />
+            <input
+              type="text"
+              placeholder="Zip Code"
+              class="w-full p-4 rounded text-gray-700"
+            />
+            <button
+              type="submit"
+              class="bg-white text-blue-900 rounded py-3 px-6 font-bold hover:bg-gray-100 transition-colors"
+              >Join Us</button
+            >
+          </form>
+        </div>
+        <div class="hidden md:block">
+          <!-- Placeholder for Candidate Image -->
+          <img
+            src="https://via.placeholder.com/600x800?text=Candidate"
+            class="object-cover w-full h-full"
+            alt="Candidate Image"
+          />
+        </div>
+      </div>
+      <div
+        class="absolute right-10 bottom-10 bg-red-600 hover:bg-red-700 transition-colors p-6 rounded-full shadow-lg cursor-pointer"
+      >
+        <!-- Play Icon - use an SVG or font icon here -->
+        <span class="text-white text-2xl">▶︎</span>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="bg-gray-50 py-16 px-6 md:px-12">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-8">Meet Marie Warner</h2>
+        <p class="text-lg text-gray-600 mb-8">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          <!-- ... -->
+        </p>
+        <button
+          class="border-2 border-orange-400 text-orange-400 rounded-full font-bold py-3 px-8 hover:bg-orange-400 hover:text-white transition-colors"
+          >Read More</button
+        >
+      </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="bg-teal-700 text-white py-12 px-6">
+      <h2 class="text-3xl font-bold text-center mb-10">
+        Chip in to Elect a Marie Warner
+      </h2>
+      <div class="flex justify-center space-x-3 mb-8">
+        <!-- Donation Amount Buttons -->
+        <!-- Use a loop to generate these buttons if possible, to keep your code DRY -->
+        <button
+          class="bg-teal-800 hover:bg-teal-900 transition-colors text-white font-bold py-3 px-6 rounded-full shadow"
+          >\$5</button
+        >
+        <!-- ... more buttons ... -->
+        <button
+          class="text-teal-700 bg-white hover:bg-gray-100 transition-colors font-bold py-3 px-6 rounded-full shadow"
+          >Other Amount...</button
+        >
+      </div>
+      <p class="text-sm text-center">
+        If you've saved your information with ActBlue Express, your donation
+        will go through immediately.
+      </p>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-teal-900 text-white text-center p-10">
+      <!-- Logo and Tagline -->
+      <div class="mb-4">
+        <img
+          src="https://via.placeholder.com/200x60?text=Logo"
+          alt="Marie Warner Logo"
+          class="mx-auto h-12 mb-2"
+        />
+        <p class="text-sm font-light uppercase">for U.S. Senate</p>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="mb-4">
+        <ul class="inline-flex space-x-4 text-sm">
+          <li>
+            <a href="#" class="hover:text-teal-300 transition-colors">Home</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-teal-300 transition-colors"
+              >Meet Marie</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-teal-300 transition-colors">Issues</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-teal-300 transition-colors">Media</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-teal-300 transition-colors"
+              >Volunteer</a>
+          </li>
+          <li>
+            <a href="#" class="hover:text-teal-300 transition-colors">Donate</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Address -->
+      <address class="text-sm font-light mb-4">
+        55555 Street Name, City State 55555
+      </address>
+
+      <!-- Social Media Icons -->
+      <div class="flex justify-center space-x-4 mb-4">
+        <!-- Insert actual icons here -->
+        <a href="#" class="hover:text-teal-300 transition-colors">FB</a>
+        <a href="#" class="hover:text-teal-300 transition-colors">TW</a>
+        <a href="#" class="hover:text-teal-300 transition-colors">IG</a>
+        <a href="#" class="hover:text-teal-300 transition-colors">YT</a>
+      </div>
+
+      <!-- Legal Text and Links -->
+      <div class="text-teal-300 text-xs font-light mb-4">
+        Paid for by Marie Warner for US Senate
+      </div>
+      <div class="text-teal-300 text-xs font-light">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">Contact Us</a>
+      </div>
+
+      <!-- Sponsor Logo -->
+      <div class="mt-4">
+        <img
+          src="https://via.placeholder.com/100x20?text=Rally"
+          alt="Rally Logo"
+          class="mx-auto h-6"
+        />
+      </div>
+    </footer>
+  </body>
+</html>
