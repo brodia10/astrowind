@@ -1,6 +1,5 @@
 ---
 // Component Imports
-
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
@@ -16,7 +15,7 @@
 
   <body>
     <!-- Top Bar with Promotional Text -->
-    <div class="bg-gray-800 text-white text-xs py-2 px-6 text-center">
+    <div class="bg-campaign-dark-blue text-white text-xs py-2 px-6 text-center">
       Lorem ipsum dolor sit amet consectetur dolor sit amet...
     </div>
 
@@ -37,31 +36,45 @@
           <li>
             <a
               href="#"
-              class="text-gray-700 hover:text-teal-700 transition-colors"
-              >Home</a
-            >
+              class="text-gray-700 hover:text-campaign-light-blue transition-colors"
+              >Home</a>
           </li>
           <li>
             <a
               href="#"
-              class="text-gray-700 hover:text-teal-700 transition-colors"
-              >Meet Marie</a
-            >
+              class="text-gray-700 hover:text-campaign-light-blue transition-colors"
+              >Meet Marie</a>
           </li>
-          <!-- ... other links ... -->
           <li>
             <a
               href="#"
-              class="text-white bg-teal-700 hover:bg-teal-800 transition-colors px-6 py-2 rounded-full shadow-lg"
-              >Donate</a
-            >
+              class="text-gray-700 hover:text-campaign-light-blue transition-colors"
+              >Issues</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-gray-700 hover:text-campaign-light-blue transition-colors"
+              >Media</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-gray-700 hover:text-campaign-light-blue transition-colors"
+              >Volunteer</a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="text-white bg-campaign-green hover:bg-campaign-light-blue transition-colors px-6 py-2 rounded-full shadow-lg"
+              >Donate</a>
           </li>
         </ul>
       </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative bg-blue-900 text-white font-semibold">
+    <section class="relative bg-campaign-dark-blue text-white font-semibold">
       <div class="grid grid-cols-1 md:grid-cols-2">
         <div class="py-16 px-8 md:px-16">
           <h1 class="text-5xl font-bold mb-8">Fighting for California</h1>
@@ -78,7 +91,7 @@
             />
             <button
               type="submit"
-              class="bg-white text-blue-900 rounded py-3 px-6 font-bold hover:bg-gray-100 transition-colors"
+              class="bg-white text-campaign-dark-blue rounded py-3 px-6 font-bold hover:bg-campaign-gray transition-colors"
               >Join Us</button
             >
           </form>
@@ -101,36 +114,48 @@
     </section>
 
     <!-- About Section -->
-    <section class="bg-gray-50 py-16 px-6 md:px-12">
+    <section class="bg-campaign-gray py-16 px-6 md:px-12">
       <div class="max-w-4xl mx-auto text-center">
         <h2 class="text-4xl font-bold text-gray-800 mb-8">Meet Marie Warner</h2>
         <p class="text-lg text-gray-600 mb-8">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          <!-- ... -->
         </p>
         <button
-          class="border-2 border-orange-400 text-orange-400 rounded-full font-bold py-3 px-8 hover:bg-orange-400 hover:text-white transition-colors"
+          class="border-2 border-campaign-orange text-campaign-orange rounded-full font-bold py-3 px-8 hover:bg-campaign-orange hover:text-white transition-colors"
           >Read More</button
         >
       </div>
     </section>
 
     <!-- Donation Section -->
-    <section class="bg-teal-700 text-white py-12 px-6">
+    <section class="bg-campaign-green text-white py-12 px-6">
       <h2 class="text-3xl font-bold text-center mb-10">
         Chip in to Elect a Marie Warner
       </h2>
       <div class="flex justify-center space-x-3 mb-8">
-        <!-- Donation Amount Buttons -->
-        <!-- Use a loop to generate these buttons if possible, to keep your code DRY -->
         <button
-          class="bg-teal-800 hover:bg-teal-900 transition-colors text-white font-bold py-3 px-6 rounded-full shadow"
-          >\$5</button
+          class="bg-campaign-dark-blue hover:bg-campaign-light-blue transition-colors text-white font-bold py-3 px-6 rounded-full shadow"
+          >$5</button
         >
-        <!-- ... more buttons ... -->
         <button
-          class="text-teal-700 bg-white hover:bg-gray-100 transition-colors font-bold py-3 px-6 rounded-full shadow"
+          class="bg-campaign-dark-blue hover:bg-campaign-light-blue transition-colors text-white font-bold py-3 px-6 rounded-full shadow"
+          >$25</button
+        >
+        <button
+          class="bg-campaign-dark-blue hover:bg-campaign-light-blue transition-colors text-white font-bold py-3 px-6 rounded-full shadow"
+          >$50</button
+        >
+        <button
+          class="bg-campaign-dark-blue hover:bg-campaign-light-blue transition-colors text-white font-bold py-3 px-6 rounded-full shadow"
+          >$100</button
+        >
+        <button
+          class="bg-campaign-dark-blue hover:bg-campaign-light-blue transition-colors text-white font-bold py-3 px-6 rounded-full shadow"
+          >$250</button
+        >
+        <button
+          class="text-campaign-green bg-white hover:bg-campaign-gray transition-colors font-bold py-3 px-6 rounded-full shadow"
           >Other Amount...</button
         >
       </div>
@@ -141,62 +166,73 @@
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-teal-900 text-white text-center p-10">
+    <footer class="bg-campaign-dark-blue text-white text-center p-10">
       <!-- Logo and Tagline -->
-      <div class="mb-4">
+      <div class="mb-8">
         <img
           src="https://via.placeholder.com/200x60?text=Logo"
           alt="Marie Warner Logo"
-          class="mx-auto h-12 mb-2"
+          class="mx-auto h-16 mb-2"
         />
         <p class="text-sm font-light uppercase">for U.S. Senate</p>
       </div>
 
       <!-- Navigation Links -->
-      <nav class="mb-4">
+      <nav aria-label="Footer navigation" class="mb-8">
         <ul class="inline-flex space-x-4 text-sm">
           <li>
-            <a href="#" class="hover:text-teal-300 transition-colors">Home</a>
+            <a href="#" class="hover:text-campaign-light-blue transition-colors"
+              >Home</a>
           </li>
           <li>
-            <a href="#" class="hover:text-teal-300 transition-colors"
+            <a href="#" class="hover:text-campaign-light-blue transition-colors"
               >Meet Marie</a>
           </li>
           <li>
-            <a href="#" class="hover:text-teal-300 transition-colors">Issues</a>
+            <a href="#" class="hover:text-campaign-light-blue transition-colors"
+              >Issues</a>
           </li>
           <li>
-            <a href="#" class="hover:text-teal-300 transition-colors">Media</a>
+            <a href="#" class="hover:text-campaign-light-blue transition-colors"
+              >Media</a>
           </li>
           <li>
-            <a href="#" class="hover:text-teal-300 transition-colors"
+            <a href="#" class="hover:text-campaign-light-blue transition-colors"
               >Volunteer</a>
           </li>
           <li>
-            <a href="#" class="hover:text-teal-300 transition-colors">Donate</a>
+            <a href="#" class="hover:text-campaign-light-blue transition-colors"
+              >Donate</a>
           </li>
         </ul>
       </nav>
 
       <!-- Address -->
-      <address class="text-sm font-light mb-4">
+      <address class="text-sm font-light mb-8">
         55555 Street Name, City State 55555
       </address>
 
       <!-- Social Media Icons -->
-      <div class="flex justify-center space-x-4 mb-4">
-        <!-- Insert actual icons here -->
-        <a href="#" class="hover:text-teal-300 transition-colors">FB</a>
-        <a href="#" class="hover:text-teal-300 transition-colors">TW</a>
-        <a href="#" class="hover:text-teal-300 transition-colors">IG</a>
-        <a href="#" class="hover:text-teal-300 transition-colors">YT</a>
+      <div class="flex justify-center space-x-4 mb-8">
+        <a href="#" class="hover:text-campaign-light-blue transition-colors"
+          >FB</a
+        >
+        <a href="#" class="hover:text-campaign-light-blue transition-colors"
+          >TW</a
+        >
+        <a href="#" class="hover:text-campaign-light-blue transition-colors"
+          >IG</a
+        >
+        <a href="#" class="hover:text-campaign-light-blue transition-colors"
+          >YT</a
+        >
       </div>
 
       <!-- Legal Text and Links -->
-      <div class="text-teal-300 text-xs font-light mb-4">
+      <div class="text-campaign-light-blue text-xs font-light mb-4">
         Paid for by Marie Warner for US Senate
       </div>
-      <div class="text-teal-300 text-xs font-light">
+      <div class="text-campaign-light-blue text-xs font-light mb-8">
         <a href="#" class="hover:underline">Privacy Policy</a>
         <span>|</span>
         <a href="#" class="hover:underline">Contact Us</a>
