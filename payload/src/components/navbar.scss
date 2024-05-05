@@ -25,6 +25,7 @@
             display: flex; // Use flex to align icon and text
             align-items: center; // Center items vertically
             width: 100%; // Ensure the nav-item takes full width
+            text-decoration: none !important;
 
             .material-icons {
                 font-size: 24px; // Icon size

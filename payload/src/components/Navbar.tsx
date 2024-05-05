@@ -24,7 +24,9 @@ const navItems: NavItem[] = [
 const CustomNavbar: React.FC = () => {
     const memoizedNavItems = useMemo(() => navItems.map(item => (
         <Link key={item.title} to={item.link} className="nav-item">
-            <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+            <div style={{
+                display: 'flex', alignItems: 'center', width: '100%', textDecoration: 'none'
+            }}>
                 {item.title}
             </div>
         </Link>

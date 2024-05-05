@@ -2,8 +2,7 @@
 // Component Imports
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
-import { Image } from "astro:assets";
-import rallyLogo from "../assets/images/rally-logo.png";
+import * as rallyLogo from "rally.png";
 ---
 
 <html lang="en">
@@ -236,6 +235,7 @@ import rallyLogo from "../assets/images/rally-logo.png";
         >
           FB
         </a>
+
         <!-- Twitter Icon -->
         <a
           href="https://twitter.com"
@@ -264,7 +264,7 @@ import rallyLogo from "../assets/images/rally-logo.png";
 
       <!-- Sponsor Logo -->
       <div class="mt-4">
-        <Image
+        <img
           src={rallyLogo}
           class="mx-auto h-6"
           alt="Rally Logo"
