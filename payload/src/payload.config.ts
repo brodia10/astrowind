@@ -56,7 +56,6 @@ import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
 import AccountNavItem from './components/AccountNavItem'
 import Analytics from './components/Analytics'
 import AnalyticsNavItem from './components/AnalyticsNavItem'
-import Icon from './components/Icon'
 import Logo from './components/Logo'
 import MySitesNavItem from './components/MySitesNavItem'
 import CustomNavbar from './components/Navbar'
@@ -135,7 +134,7 @@ export default buildConfig({
       Nav: CustomNavbar,
       graphics: {
         Logo: Logo,
-        Icon: Icon,
+        // Icon: Icon,
       },
       // afterDashboard: [],
       // afterLogin: [],
