@@ -56,7 +56,6 @@ import { TenantStripeConfigs } from './collections/Tenants/TenantStripeConfigs'
 import AccountNavItem from './components/AccountNavItem'
 import Analytics from './components/Analytics'
 import AnalyticsNavItem from './components/AnalyticsNavItem'
-import Logo from './components/Logo'
 import MySitesNavItem from './components/MySitesNavItem'
 import CustomNavbar from './components/Navbar'
 import PricingPage from './components/PricingPage'
@@ -132,10 +131,10 @@ export default buildConfig({
     components: {
       // beforeDashboard: [UpgradeButton],
       Nav: CustomNavbar,
-      graphics: {
-        Logo: Logo,
-        // Icon: Icon,
-      },
+      // graphics: {
+      //   Logo: Logo,
+      //   // Icon: Icon,
+      // },
       // afterDashboard: [],
       // afterLogin: [],
       // beforeDashboard: [],
